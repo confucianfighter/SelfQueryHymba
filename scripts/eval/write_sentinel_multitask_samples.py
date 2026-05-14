@@ -25,6 +25,9 @@ from scripts.eval.evaluate_addition_trace_lm import load_model, model_logits
 from scripts.eval.evaluate_regex_il_v5_trace_lm import expand_template, extract_il, extract_template
 
 
+SENTINEL = "<END>"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Write sample generations for the sentinel multitask corpus.")
     parser.add_argument("--checkpoint", required=True)
@@ -61,6 +64,12 @@ def generate_greedy(
     return vocab.decode(ids)
 
 
+def completion_from_generated(prompt: str, generated: str) -> str:
+    if not generated.startswith(prompt):
+        return generated
+    return generated[len(prompt) :]
+
+
 def split_math_trace(trace: str) -> tuple[str, str]:
     lines = trace.splitlines()
     return lines[0], "\n".join(lines[1:])
@@ -69,7 +78,7 @@ def split_math_trace(trace: str) -> tuple[str, str]:
 def math_prompt(task: str, trace: str) -> tuple[str, str]:
     input_line, output = split_math_trace(trace)
     prompt = f"Task: {task}\nInput:\n{input_line}\n\nOutput:\n"
-    expected = prompt + output + "\n<END>"
+    expected = output + f"\n{SENTINEL}"
     return prompt, expected
 
 
@@ -99,17 +108,36 @@ def write_regex_samples(lines: list[str], model, vocab, args: argparse.Namespace
         refs = example["refs"]
         if not isinstance(refs, list):
             raise TypeError("refs must be a list")
-        exact = expand_template(predicted_template, refs) == expand_template(str(example["template"]), refs)
+        expected_il = str(example["il"])
+        expected_template = str(example["template"])
+        expected_expanded = expand_template(expected_template, refs)
+        predicted_expanded = expand_template(predicted_template, refs)
+        exact = predicted_expanded == expected_expanded
+        expected_completion = "IL:\n" + rendered.split("\nIL:\n", 1)[1] + f"\n{SENTINEL}"
+        generated_completion = completion_from_generated(prompt, generated)
         lines.extend(
             [
                 f"### regex_v5 sample {idx} exact={exact}",
-                "Expected:",
+                "**Prompt given to model**",
                 "```text",
-                "Task: regex_v5\n" + rendered.replace("\nIL:\n", "\nOutput:\nIL:\n", 1) + "\n<END>",
+                prompt,
                 "```",
-                "Generated:",
+                "**Regex comparison**",
+                "",
+                f"- expected IL: `{expected_il}`",
+                f"- predicted IL: `{predicted_il}`",
+                f"- expected template: `{expected_template}`",
+                f"- predicted template: `{predicted_template}`",
+                f"- expected expanded regex: `{expected_expanded}`",
+                f"- predicted expanded regex: `{predicted_expanded}`",
+                "",
+                "**Expected completion**",
                 "```text",
-                generated,
+                expected_completion,
+                "```",
+                "**Generated completion**",
+                "```text",
+                generated_completion,
                 "```",
                 "",
             ]
@@ -139,17 +167,25 @@ def write_math_samples(
             device=device,
         )
         expected_answer = answer_from_text(expected)
-        predicted_answer = answer_from_text(generated)
+        generated_completion = completion_from_generated(prompt, generated)
+        predicted_answer = answer_from_text(generated_completion)
         lines.extend(
             [
                 f"### {title} sample {idx} answer_exact={predicted_answer == expected_answer}",
-                "Expected:",
+                f"- expected answer: `{expected_answer}`",
+                f"- predicted answer: `{predicted_answer}`",
+                "",
+                "**Prompt given to model**",
+                "```text",
+                prompt,
+                "```",
+                "**Expected completion**",
                 "```text",
                 expected,
                 "```",
-                "Generated:",
+                "**Generated completion**",
                 "```text",
-                generated,
+                generated_completion,
                 "```",
                 "",
             ]
