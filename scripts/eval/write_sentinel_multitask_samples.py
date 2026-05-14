@@ -87,6 +87,14 @@ def answer_from_text(text: str) -> str | None:
     return match.group(1).strip() if match else None
 
 
+def result_block(*, correct: bool, expected_answer: str | None) -> list[str]:
+    lines = ["**3. Correctness**", "", f"- correct: `{correct}`"]
+    if not correct:
+        lines.append(f"- expected answer: `{expected_answer}`")
+    lines.append("")
+    return lines
+
+
 def write_regex_samples(lines: list[str], model, vocab, args: argparse.Namespace, device: torch.device) -> None:
     rng = random.Random(args.seed)
     component_counts = parse_component_counts(args.component_counts)
@@ -113,35 +121,28 @@ def write_regex_samples(lines: list[str], model, vocab, args: argparse.Namespace
         expected_expanded = expand_template(expected_template, refs)
         predicted_expanded = expand_template(predicted_template, refs)
         exact = predicted_expanded == expected_expanded
-        expected_completion = "IL:\n" + rendered.split("\nIL:\n", 1)[1] + f"\n{SENTINEL}"
         generated_completion = completion_from_generated(prompt, generated)
         lines.extend(
             [
-                f"### regex_v5 sample {idx} exact={exact}",
-                "**Prompt given to model**",
+                f"### regex_v5 sample {idx}",
+                "**1. Input**",
                 "```text",
                 prompt,
                 "```",
-                "**Regex comparison**",
                 "",
-                f"- expected IL: `{expected_il}`",
-                f"- predicted IL: `{predicted_il}`",
-                f"- expected template: `{expected_template}`",
-                f"- predicted template: `{predicted_template}`",
-                f"- expected expanded regex: `{expected_expanded}`",
+                "**2. Model Answer**",
+                "",
                 f"- predicted expanded regex: `{predicted_expanded}`",
+                f"- predicted template: `{predicted_template}`",
+                f"- predicted IL: `{predicted_il}`",
                 "",
-                "**Expected completion**",
-                "```text",
-                expected_completion,
-                "```",
-                "**Generated completion**",
                 "```text",
                 generated_completion,
                 "```",
                 "",
             ]
         )
+        lines.extend(result_block(correct=exact, expected_answer=expected_expanded))
 
 
 def write_math_samples(
@@ -169,27 +170,26 @@ def write_math_samples(
         expected_answer = answer_from_text(expected)
         generated_completion = completion_from_generated(prompt, generated)
         predicted_answer = answer_from_text(generated_completion)
+        correct = predicted_answer == expected_answer
         lines.extend(
             [
-                f"### {title} sample {idx} answer_exact={predicted_answer == expected_answer}",
-                f"- expected answer: `{expected_answer}`",
-                f"- predicted answer: `{predicted_answer}`",
-                "",
-                "**Prompt given to model**",
+                f"### {title} sample {idx}",
+                "**1. Input**",
                 "```text",
                 prompt,
                 "```",
-                "**Expected completion**",
-                "```text",
-                expected,
-                "```",
-                "**Generated completion**",
+                "",
+                "**2. Model Answer**",
+                "",
+                f"- predicted answer: `{predicted_answer}`",
+                "",
                 "```text",
                 generated_completion,
                 "```",
                 "",
             ]
         )
+        lines.extend(result_block(correct=correct, expected_answer=expected_answer))
 
 
 def main() -> None:
