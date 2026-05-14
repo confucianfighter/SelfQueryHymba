@@ -1,0 +1,40 @@
+# Python/cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Generated training/eval artifacts
+/data/
+/experiments/
+/runs/
+/checkpoints/
+/outputs/
+/wandb/
+
+# Large model/checkpoint formats
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
+# Large generated corpora / numeric data
+*.npz
+*.npy
+*.csv
+*.parquet
+*.arrow
+
+# Local reference dumps
+/external_references/
+*.pdf
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
