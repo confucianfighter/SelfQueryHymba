@@ -90,6 +90,35 @@ class FastHybridHymbaBlock(nn.Module):
         return states
 
 
+class NoMLPFastHybridHymbaBlock(nn.Module):
+    """Fast Hymba-style attn+SSM block without the feed-forward MLP branch."""
+
+    def __init__(
+        self,
+        d_model: int,
+        num_heads: int,
+        *,
+        ssm_kernel_size: int = 3,
+    ) -> None:
+        super().__init__()
+        self.attn_norm = nn.LayerNorm(d_model)
+        self.self_attn = CausalTimeAttention(d_model=d_model, num_heads=num_heads)
+        self.ssm_norm = nn.LayerNorm(d_model)
+        self.ssm = FastCausalConvBranch(d_model=d_model, conv_kernel_size=ssm_kernel_size)
+
+    def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
+        attn_input = self.attn_norm(states)
+        attn_out = self.self_attn(
+            attn_input,
+            attn_input,
+            attn_input,
+            query_times=causal_times,
+            key_times=causal_times,
+        )
+        ssm_out = self.ssm(self.ssm_norm(states), causal_times=causal_times)
+        return states + 0.5 * (attn_out + ssm_out)
+
+
 class MultiStrideHybridHymbaBlock(nn.Module):
     """Hybrid block with half stride-1 and half stride-2 causal-conv channels."""
 

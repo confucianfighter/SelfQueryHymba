@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 from models.CST import (  # noqa: E402
     AlternatingClockTokenFastHymbaCharLM,
+    BranchedLossQueryFastHymbaCharLM,
     DEFAULT_CHAR_LM_DATA_PATH,
     CharVocabulary,
     ClockConditionedFastHymbaCharLM,
@@ -26,10 +27,13 @@ from models.CST import (  # noqa: E402
     FastHymbaCharLM,
     FastHymbaCharLMConfig,
     IsolatedAlternatingClockTokenFastHymbaCharLM,
+    LossContextInjectedFastHymbaCharLM,
     LossQueryFastHymbaCharLM,
     MSHymbaCharLM,
     MSHymbaCharLMConfig,
     PreviousClockConditionedFastHymbaCharLM,
+    PreviousLossScalarInjectedFastHymbaCharLM,
+    PreviousLossScalarConditionedFastHymbaCharLM,
     StrictAlternatingClockTokenFastHymbaCharLM,
     TypedIsolatedAlternatingClockTokenFastHymbaCharLM,
     TwoSideHymbaCharLM,
@@ -61,6 +65,13 @@ class TrainConfig:
     layers: int
     ssm_kernel_size: int
     state_branch: str
+    activation_type: str
+    basin_min_width: float
+    basin_max_width: float
+    basin_floor: float
+    basin_zag_amp: float
+    basin_sharpness: float
+    basin_eps: float
     num_scales: int
     scale_kernel_size: int
     scale_block_mlp: bool
@@ -69,6 +80,10 @@ class TrainConfig:
     digit_loss_weight: float
     nondigit_loss_weight: float
     loss_prediction_alpha: float
+    loss_prediction_alpha_start: float | None
+    loss_prediction_alpha_warmup_steps: int
+    example_batching: bool
+    example_sentinel: str
     set_clock_gate: float | None
     freeze_clock_gates: bool
     lr: float
@@ -87,6 +102,7 @@ class TrainConfig:
     sample_prompt_file: str | None
     sample_chars: int
     sample_temperature: float
+    sample_stop_token: str | None
     train_only_layers: str | None
     unfreeze_all_after_step: int | None
 
@@ -105,6 +121,8 @@ def parse_args() -> argparse.Namespace:
             "ms_hymba",
             "two_side_hymba",
             "loss_query_hymba",
+            "branched_loss_query_hymba",
+            "loss_context_injected_hymba",
             "current_clock_hymba",
             "ephemeral_clock_hymba",
             "clock_conditioned_hymba",
@@ -114,6 +132,8 @@ def parse_args() -> argparse.Namespace:
             "strict_alternating_clock_hymba",
             "efficient_strict_alternating_clock_hymba",
             "previous_clock_hymba",
+            "previous_loss_scalar_hymba",
+            "previous_loss_scalar_injected_hymba",
         ),
         default="fast_hymba",
     )
@@ -135,6 +155,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--layers", type=int, default=16)
     parser.add_argument("--ssm-kernel-size", type=int, default=3)
     parser.add_argument("--state-branch", choices=("conv", "multistride_1_2"), default="conv")
+    parser.add_argument(
+        "--activation-type",
+        choices=("identity", "gelu", "static_basin_zag", "dynamic_basin_zag"),
+        default="identity",
+        help="Optional loss-predict branch activation for ALPINE/previous-loss-scalar-injected models.",
+    )
+    parser.add_argument("--basin-min-width", type=float, default=0.35)
+    parser.add_argument("--basin-max-width", type=float, default=3.0)
+    parser.add_argument("--basin-floor", type=float, default=0.08)
+    parser.add_argument("--basin-zag-amp", type=float, default=0.12)
+    parser.add_argument("--basin-sharpness", type=float, default=2.0)
+    parser.add_argument("--basin-eps", type=float, default=1e-6)
     parser.add_argument("--num-scales", type=int, default=1)
     parser.add_argument("--scale-kernel-size", type=int, default=3)
     parser.add_argument("--scale-block-mlp", action=argparse.BooleanOptionalAction, default=True)
@@ -143,6 +175,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--digit-loss-weight", type=float, default=1.0)
     parser.add_argument("--nondigit-loss-weight", type=float, default=0.05)
     parser.add_argument("--loss-prediction-alpha", type=float, default=0.05)
+    parser.add_argument(
+        "--loss-prediction-alpha-start",
+        type=float,
+        default=None,
+        help="Optional starting alpha for linear loss-prediction pressure warmup.",
+    )
+    parser.add_argument("--loss-prediction-alpha-warmup-steps", type=int, default=0)
+    parser.add_argument(
+        "--example-batching",
+        action="store_true",
+        help="Batch independent sentinel-delimited examples and mask loss on padding after each example.",
+    )
+    parser.add_argument("--example-sentinel", default="<END>")
     parser.add_argument(
         "--set-clock-gate",
         type=float,
@@ -185,6 +230,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sample-chars", type=int, default=400)
     parser.add_argument("--sample-temperature", type=float, default=0.8)
     parser.add_argument(
+        "--sample-stop-token",
+        default=None,
+        help="Stop sample generation once this token appears in the generated suffix. Defaults to the example sentinel when example batching is enabled.",
+    )
+    parser.add_argument(
         "--train-only-layers",
         default=None,
         help="Comma-separated 1-indexed layer numbers to train initially; all other parameters are frozen.",
@@ -209,6 +259,76 @@ def make_batch(data: torch.Tensor, batch_size: int, seq_len: int, device: torch.
     starts = torch.randint(0, max_start, (batch_size,))
     batch = torch.stack([data[start : start + seq_len + 1] for start in starts])
     return batch.to(device)
+
+
+def split_sentinel_examples(text: str, *, sentinel: str) -> list[str]:
+    if not sentinel:
+        raise ValueError("sentinel must not be empty")
+    parts = text.split(sentinel)
+    examples = [part.strip() + "\n" + sentinel for part in parts[:-1] if part.strip()]
+    if not examples:
+        raise ValueError(f"no examples ending with sentinel {sentinel!r} found")
+    trailing = parts[-1].strip()
+    if trailing:
+        raise ValueError(f"corpus has trailing text after final sentinel: {trailing[:80]!r}")
+    return examples
+
+
+def make_example_batch(
+    examples: list[torch.Tensor],
+    batch_size: int,
+    seq_len: int,
+    device: torch.device,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    if not examples:
+        raise ValueError("examples must not be empty")
+    if seq_len < 1:
+        raise ValueError("seq_len must be positive")
+    indices = torch.randint(0, len(examples), (batch_size,))
+    max_len = seq_len + 1
+    pad_id = 0
+    batch = torch.full((batch_size, max_len), pad_id, dtype=torch.long)
+    target_mask = torch.zeros((batch_size, seq_len), dtype=torch.bool)
+    for row, index in enumerate(indices.tolist()):
+        example = examples[index]
+        if example.numel() < 2:
+            continue
+        if example.numel() > max_len:
+            start = int(torch.randint(0, example.numel() - max_len + 1, ()).item())
+            chunk = example[start : start + max_len]
+        else:
+            chunk = example
+        batch[row, : chunk.numel()] = chunk
+        valid_targets = max(0, chunk.numel() - 1)
+        target_mask[row, :valid_targets] = True
+    if not target_mask.any():
+        raise ValueError("example batch has no valid targets")
+    return batch.to(device), target_mask.to(device)
+
+
+def example_task_name(example: str) -> str:
+    first_line = example.splitlines()[0].strip() if example.splitlines() else ""
+    if first_line.startswith("Task: "):
+        return first_line.removeprefix("Task: ").strip() or "unknown"
+    if "addition" in example[:120].lower():
+        return "addition_prose"
+    if "subtract" in example[:120].lower():
+        return "subtraction_prose"
+    return "unknown"
+
+
+def metric_safe_name(name: str) -> str:
+    return "".join(ch if ch.isalnum() else "_" for ch in name.lower()).strip("_") or "unknown"
+
+
+def group_encoded_examples_by_task(
+    raw_examples: list[str],
+    encoded_examples: list[torch.Tensor],
+) -> dict[str, list[torch.Tensor]]:
+    grouped: dict[str, list[torch.Tensor]] = {}
+    for raw, encoded in zip(raw_examples, encoded_examples, strict=True):
+        grouped.setdefault(example_task_name(raw), []).append(encoded)
+    return grouped
 
 
 def parse_layer_numbers(value: str | None, *, num_layers: int) -> list[int] | None:
@@ -445,6 +565,65 @@ def load_resume_state(
             )
         return True, {"missing_keys": list(result.missing_keys), "unexpected_keys": unexpected, "expanded_keys": expanded_keys}
 
+    if checkpoint_architecture == "loss_query_hymba" and target_architecture == "previous_loss_scalar_hymba":
+        result = model.load_state_dict(checkpoint_state_dict, strict=False)
+        allowed_missing_prefixes = (
+            "previous_loss_adapter.",
+            "previous_loss_gate",
+        )
+        unexpected = list(result.unexpected_keys)
+        disallowed_missing = [
+            key
+            for key in result.missing_keys
+            if not any(key == prefix.rstrip(".") or key.startswith(prefix) for prefix in allowed_missing_prefixes)
+        ]
+        if unexpected or disallowed_missing:
+            raise RuntimeError(
+                "incompatible previous-loss-scalar graft: "
+                f"missing={disallowed_missing!r}, unexpected={unexpected!r}"
+            )
+        return True, {"missing_keys": list(result.missing_keys), "unexpected_keys": unexpected, "expanded_keys": expanded_keys}
+
+    if checkpoint_architecture == "loss_context_injected_hymba" and target_architecture == "previous_loss_scalar_injected_hymba":
+        result = model.load_state_dict(checkpoint_state_dict, strict=False)
+        allowed_missing_prefixes = (
+            "previous_loss_adapter.",
+            "previous_loss_gate",
+        )
+        unexpected = list(result.unexpected_keys)
+        disallowed_missing = [
+            key
+            for key in result.missing_keys
+            if not any(key == prefix.rstrip(".") or key.startswith(prefix) for prefix in allowed_missing_prefixes)
+        ]
+        if unexpected or disallowed_missing:
+            raise RuntimeError(
+                "incompatible previous-loss-scalar-injected graft: "
+                f"missing={disallowed_missing!r}, unexpected={unexpected!r}"
+            )
+        return True, {"missing_keys": list(result.missing_keys), "unexpected_keys": unexpected, "expanded_keys": expanded_keys}
+
+    if target_architecture == "previous_loss_scalar_injected_hymba" and any(
+        key.startswith("loss_activation.") or key.startswith("loss_branch.mlp.1.") for key in model.state_dict()
+    ):
+        result = model.load_state_dict(checkpoint_state_dict, strict=False)
+        unexpected = list(result.unexpected_keys)
+        disallowed_missing = [
+            key
+            for key in result.missing_keys
+            if not (
+                key.startswith("loss_activation.")
+                or key == "loss_activation"
+                or key.startswith("loss_branch.mlp.1.")
+            )
+        ]
+        if unexpected or disallowed_missing:
+            raise RuntimeError(
+                "incompatible dynamic activation graft: "
+                f"missing={disallowed_missing!r}, unexpected={unexpected!r}"
+            )
+        return True, {"missing_keys": list(result.missing_keys), "unexpected_keys": unexpected, "expanded_keys": expanded_keys}
+
     if checkpoint_architecture == "loss_query_hymba" and target_architecture == "alternating_clock_hymba":
         result = model.load_state_dict(checkpoint_state_dict, strict=False)
         allowed_missing_prefixes = (
@@ -519,6 +698,74 @@ def digit_target_weights(
     return weights
 
 
+def masked_cross_entropy(logits: torch.Tensor, targets: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+    losses = F.cross_entropy(
+        logits.reshape(-1, logits.shape[-1]),
+        targets.reshape(-1),
+        reduction="none",
+    ).view_as(targets)
+    mask_f = mask.to(dtype=losses.dtype)
+    weight_sum = mask_f.sum()
+    if weight_sum <= 0:
+        raise ValueError("target mask must select at least one target")
+    return (losses * mask_f).sum() / weight_sum
+
+
+def next_token_loss_with_mask(logits: torch.Tensor, batch: torch.Tensor, target_mask: torch.Tensor | None) -> torch.Tensor:
+    if target_mask is None:
+        return next_token_loss(logits, batch)
+    return masked_cross_entropy(logits[:, :-1], batch[:, 1:], target_mask)
+
+
+def weighted_next_token_loss_with_mask(
+    logits: torch.Tensor,
+    batch: torch.Tensor,
+    target_weights: torch.Tensor,
+    target_mask: torch.Tensor | None,
+) -> torch.Tensor:
+    if target_mask is None:
+        return weighted_next_token_loss(logits, batch, target_weights)
+    pred_logits = logits[:, :-1]
+    targets = batch[:, 1:]
+    if target_weights.shape != targets.shape:
+        raise ValueError("target_weights must match next-token target shape")
+    losses = F.cross_entropy(
+        pred_logits.reshape(-1, logits.shape[-1]),
+        targets.reshape(-1),
+        reduction="none",
+    ).view_as(targets)
+    weights = target_weights * target_mask.to(dtype=target_weights.dtype)
+    weight_sum = weights.sum()
+    if weight_sum <= 0:
+        raise ValueError("masked target weights must have positive sum")
+    return (losses * weights).sum() / weight_sum
+
+
+def next_token_accuracy_with_mask(logits: torch.Tensor, batch: torch.Tensor, target_mask: torch.Tensor | None) -> torch.Tensor:
+    if target_mask is None:
+        return next_token_accuracy(logits, batch)
+    predictions = logits[:, :-1].argmax(dim=-1)
+    targets = batch[:, 1:]
+    return (predictions[target_mask] == targets[target_mask]).float().mean()
+
+
+def loss_prediction_mse_with_mask(
+    loss_predictions: torch.Tensor,
+    token_ce: torch.Tensor,
+    target_mask: torch.Tensor | None,
+) -> torch.Tensor:
+    pred = loss_predictions[:, :-1]
+    target = token_ce.detach()
+    if target_mask is None:
+        return F.mse_loss(pred, target)
+    squared = (pred - target) ** 2
+    mask_f = target_mask.to(dtype=squared.dtype)
+    weight_sum = mask_f.sum()
+    if weight_sum <= 0:
+        raise ValueError("target mask must select at least one loss prediction")
+    return (squared * mask_f).sum() / weight_sum
+
+
 def model_loss(
     model: FastHymbaCharLM,
     batch: torch.Tensor,
@@ -528,11 +775,12 @@ def model_loss(
     digit_weight: float,
     nondigit_weight: float,
     loss_prediction_alpha: float,
+    target_mask: torch.Tensor | None = None,
 ) -> torch.Tensor:
     output = model(batch)
     logits = output.logits
     if loss_kind == "digit_weighted":
-        lm_loss = weighted_next_token_loss(
+        lm_loss = weighted_next_token_loss_with_mask(
             logits,
             batch,
             digit_target_weights(
@@ -541,9 +789,10 @@ def model_loss(
                 digit_weight=digit_weight,
                 nondigit_weight=nondigit_weight,
             ),
+            target_mask,
         )
     else:
-        lm_loss = next_token_loss(logits, batch)
+        lm_loss = next_token_loss_with_mask(logits, batch, target_mask)
     if output.loss_predictions is None:
         return lm_loss
     token_ce = F.cross_entropy(
@@ -552,8 +801,24 @@ def model_loss(
         reduction="none",
     ).view(batch.shape[0], -1)
     loss_pred = output.loss_predictions[:, :-1]
-    aux_loss = F.mse_loss(loss_pred, token_ce.detach())
+    aux_loss = loss_prediction_mse_with_mask(output.loss_predictions, token_ce, target_mask)
     return lm_loss + loss_prediction_alpha * aux_loss
+
+
+def loss_prediction_alpha_for_step(args: argparse.Namespace, step: int) -> float:
+    if args.loss_prediction_alpha_start is None or args.loss_prediction_alpha_warmup_steps <= 0:
+        return args.loss_prediction_alpha
+    progress = min(1.0, max(0.0, step / args.loss_prediction_alpha_warmup_steps))
+    return args.loss_prediction_alpha_start + progress * (args.loss_prediction_alpha - args.loss_prediction_alpha_start)
+
+
+def collect_aux_stats(model: torch.nn.Module, *, prefix: str = "") -> dict[str, float]:
+    stats: dict[str, float] = {}
+    for module in model.modules():
+        width_stats = getattr(module, "last_width_stats", None)
+        if width_stats:
+            stats.update({f"{prefix}{key}": float(value) for key, value in width_stats.items()})
+    return stats
 
 
 @torch.no_grad()
@@ -566,13 +831,14 @@ def evaluate(
     digit_weight: float,
     nondigit_weight: float,
     loss_prediction_alpha: float,
+    target_mask: torch.Tensor | None = None,
 ) -> dict[str, float]:
     was_training = model.training
 
     model.train()
     train_mode_output = model(held_batch)
     train_mode_lm_loss = (
-        weighted_next_token_loss(
+        weighted_next_token_loss_with_mask(
             train_mode_output.logits,
             held_batch,
             digit_target_weights(
@@ -581,9 +847,10 @@ def evaluate(
                 digit_weight=digit_weight,
                 nondigit_weight=nondigit_weight,
             ),
+            target_mask,
         )
         if loss_kind == "digit_weighted"
-        else next_token_loss(train_mode_output.logits, held_batch)
+        else next_token_loss_with_mask(train_mode_output.logits, held_batch, target_mask)
     )
     train_mode_loss = train_mode_lm_loss
     train_loss_pred_mse = None
@@ -593,13 +860,13 @@ def evaluate(
             held_batch[:, 1:].reshape(-1),
             reduction="none",
         ).view(held_batch.shape[0], -1)
-        train_loss_pred_mse = F.mse_loss(train_mode_output.loss_predictions[:, :-1], train_token_ce.detach())
+        train_loss_pred_mse = loss_prediction_mse_with_mask(train_mode_output.loss_predictions, train_token_ce, target_mask)
         train_mode_loss = train_mode_lm_loss + loss_prediction_alpha * train_loss_pred_mse
 
     model.eval()
     eval_mode_output = model(held_batch)
     eval_mode_lm_loss = (
-        weighted_next_token_loss(
+        weighted_next_token_loss_with_mask(
             eval_mode_output.logits,
             held_batch,
             digit_target_weights(
@@ -608,9 +875,10 @@ def evaluate(
                 digit_weight=digit_weight,
                 nondigit_weight=nondigit_weight,
             ),
+            target_mask,
         )
         if loss_kind == "digit_weighted"
-        else next_token_loss(eval_mode_output.logits, held_batch)
+        else next_token_loss_with_mask(eval_mode_output.logits, held_batch, target_mask)
     )
     eval_mode_loss = eval_mode_lm_loss
     eval_loss_pred_mse = None
@@ -620,10 +888,10 @@ def evaluate(
             held_batch[:, 1:].reshape(-1),
             reduction="none",
         ).view(held_batch.shape[0], -1)
-        eval_loss_pred_mse = F.mse_loss(eval_mode_output.loss_predictions[:, :-1], eval_token_ce.detach())
+        eval_loss_pred_mse = loss_prediction_mse_with_mask(eval_mode_output.loss_predictions, eval_token_ce, target_mask)
         eval_mode_loss = eval_mode_lm_loss + loss_prediction_alpha * eval_loss_pred_mse
-    eval_unweighted_loss = next_token_loss(eval_mode_output.logits, held_batch)
-    eval_acc = next_token_accuracy(eval_mode_output.logits, held_batch)
+    eval_unweighted_loss = next_token_loss_with_mask(eval_mode_output.logits, held_batch, target_mask)
+    eval_acc = next_token_accuracy_with_mask(eval_mode_output.logits, held_batch, target_mask)
 
     if was_training:
         model.train()
@@ -635,9 +903,45 @@ def evaluate(
         "loss_delta": float(abs(train_mode_loss.item() - eval_mode_loss.item())),
         "eval_next_char_accuracy": float(eval_acc.item()),
     }
+    if eval_mode_output.aux_stats:
+        result.update({f"eval_{key}": float(value) for key, value in eval_mode_output.aux_stats.items()})
     if eval_loss_pred_mse is not None and train_loss_pred_mse is not None:
         result["train_loss_prediction_mse"] = float(train_loss_pred_mse.item())
         result["eval_loss_prediction_mse"] = float(eval_loss_pred_mse.item())
+    return result
+
+
+def evaluate_per_task(
+    model: FastHymbaCharLM,
+    examples_by_task: dict[str, list[torch.Tensor]],
+    vocab: CharVocabulary,
+    *,
+    batch_size: int,
+    seq_len: int,
+    device: torch.device,
+    loss_kind: str,
+    digit_weight: float,
+    nondigit_weight: float,
+    loss_prediction_alpha: float,
+) -> dict[str, float]:
+    result: dict[str, float] = {}
+    for task, examples in sorted(examples_by_task.items()):
+        batch, target_mask = make_example_batch(examples, batch_size, seq_len, device)
+        metrics = evaluate(
+            model,
+            batch,
+            vocab,
+            loss_kind=loss_kind,
+            digit_weight=digit_weight,
+            nondigit_weight=nondigit_weight,
+            loss_prediction_alpha=loss_prediction_alpha,
+            target_mask=target_mask,
+        )
+        metric_task = metric_safe_name(task)
+        result[f"eval_task_{metric_task}_loss"] = metrics["eval_mode_loss"]
+        result[f"eval_task_{metric_task}_accuracy"] = metrics["eval_next_char_accuracy"]
+        if "eval_loss_prediction_mse" in metrics:
+            result[f"eval_task_{metric_task}_loss_prediction_mse"] = metrics["eval_loss_prediction_mse"]
     return result
 
 
@@ -650,6 +954,7 @@ def generate_sample(
     max_new_chars: int,
     seq_len: int,
     temperature: float,
+    stop_token: str | None,
     device: torch.device,
 ) -> str:
     if max_new_chars <= 0:
@@ -659,11 +964,14 @@ def generate_sample(
     was_training = model.training
     model.eval()
     ids = vocab.encode(prompt, device=device).tolist()
+    prompt_len = len(ids)
     for _ in range(max_new_chars):
         context = torch.tensor([ids[-seq_len:]], dtype=torch.long, device=device)
         logits = model(context, pad_to_length=seq_len).logits[:, -1, :] / temperature
         probs = torch.softmax(logits, dim=-1)
         ids.append(int(torch.multinomial(probs, num_samples=1).item()))
+        if stop_token is not None and stop_token in vocab.decode(ids[prompt_len:]):
+            break
     if was_training:
         model.train()
     return vocab.decode(ids)
@@ -677,6 +985,7 @@ def generate_samples(
     max_new_chars: int,
     seq_len: int,
     temperature: float,
+    stop_token: str | None,
     device: torch.device,
 ) -> str:
     parts = []
@@ -688,6 +997,7 @@ def generate_samples(
             max_new_chars=max_new_chars,
             seq_len=seq_len,
             temperature=temperature,
+            stop_token=stop_token,
             device=device,
         )
         parts.append(f"--- sample {index}: {prompt!r} ---\n{sample}")
@@ -747,6 +1057,13 @@ def main() -> None:
         layers=args.layers,
         ssm_kernel_size=args.ssm_kernel_size,
         state_branch=args.state_branch,
+        activation_type=args.activation_type,
+        basin_min_width=args.basin_min_width,
+        basin_max_width=args.basin_max_width,
+        basin_floor=args.basin_floor,
+        basin_zag_amp=args.basin_zag_amp,
+        basin_sharpness=args.basin_sharpness,
+        basin_eps=args.basin_eps,
         num_scales=args.num_scales,
         scale_kernel_size=args.scale_kernel_size,
         scale_block_mlp=args.scale_block_mlp,
@@ -755,6 +1072,10 @@ def main() -> None:
         digit_loss_weight=args.digit_loss_weight,
         nondigit_loss_weight=args.nondigit_loss_weight,
         loss_prediction_alpha=args.loss_prediction_alpha,
+        loss_prediction_alpha_start=args.loss_prediction_alpha_start,
+        loss_prediction_alpha_warmup_steps=args.loss_prediction_alpha_warmup_steps,
+        example_batching=args.example_batching,
+        example_sentinel=args.example_sentinel,
         set_clock_gate=args.set_clock_gate,
         freeze_clock_gates=args.freeze_clock_gates,
         lr=args.lr,
@@ -773,6 +1094,7 @@ def main() -> None:
         sample_prompt_file=args.sample_prompt_file,
         sample_chars=args.sample_chars,
         sample_temperature=args.sample_temperature,
+        sample_stop_token=args.sample_stop_token,
         train_only_layers=args.train_only_layers,
         unfreeze_all_after_step=args.unfreeze_all_after_step,
     )
@@ -788,6 +1110,8 @@ def main() -> None:
         raise ValueError("--plateau-max-lr must be >= --plateau-min-lr")
     if args.plateau_min_delta < 0:
         raise ValueError("--plateau-min-delta must be nonnegative")
+    if args.activation_type != "identity" and args.architecture != "previous_loss_scalar_injected_hymba":
+        raise ValueError("--activation-type is currently supported only for previous_loss_scalar_injected_hymba")
 
     text = (ROOT / args.data_path).read_text(encoding="utf-8")
     vocab_checkpoint = args.vocab_checkpoint or args.resume_checkpoint
@@ -822,12 +1146,40 @@ def main() -> None:
         config_payload["replaced_oov_chars"] = replaced_oov_chars
         config_payload["expanded_vocab_chars"] = expanded_vocab_chars
         write_json(run_dir / "run_config.json", config_payload)
-    encoded = vocab.encode(text)
-    split = int(0.9 * encoded.numel())
-    train_data = encoded[:split]
-    val_data = encoded[split:]
-    fallback_prompt = text[split : split + min(args.seq_len, 80)]
+    if args.example_batching:
+        raw_examples = split_sentinel_examples(text, sentinel=args.example_sentinel)
+        encoded_examples = [vocab.encode(example) for example in raw_examples]
+        split = int(0.9 * len(encoded_examples))
+        if split <= 0 or split >= len(encoded_examples):
+            raise ValueError("example-batched corpus must have enough examples for a train/val split")
+        raw_train_examples = raw_examples[:split]
+        raw_val_examples = raw_examples[split:]
+        train_examples = encoded_examples[:split]
+        val_examples = encoded_examples[split:]
+        val_examples_by_task = group_encoded_examples_by_task(raw_val_examples, val_examples)
+        train_data = None
+        val_data = None
+        fallback_prompt = raw_examples[split].split("\nOutput:\n", 1)[0] + "\nOutput:\n"
+    else:
+        encoded = vocab.encode(text)
+        split = int(0.9 * encoded.numel())
+        train_data = encoded[:split]
+        val_data = encoded[split:]
+        raw_train_examples = None
+        raw_val_examples = None
+        train_examples = None
+        val_examples = None
+        val_examples_by_task = {}
+        fallback_prompt = text[split : split + min(args.seq_len, 80)]
     sample_prompts = resolve_sample_prompts(args, fallback_prompt=fallback_prompt)
+    sample_stop_token = args.sample_stop_token
+    if sample_stop_token is None and args.example_batching:
+        sample_stop_token = args.example_sentinel
+    config_payload = asdict(config)
+    config_payload["sample_stop_token"] = sample_stop_token
+    config_payload["replaced_oov_chars"] = replaced_oov_chars
+    config_payload["expanded_vocab_chars"] = expanded_vocab_chars
+    write_json(run_dir / "run_config.json", config_payload)
     for prompt in sample_prompts:
         vocab.encode(prompt)
 
@@ -857,6 +1209,32 @@ def main() -> None:
             )
         ).to(device)
         model_source = "models/CST/lm.py:LossQueryFastHymbaCharLM"
+        inner_hymba_blocks = args.layers
+    elif args.architecture == "branched_loss_query_hymba":
+        model = BranchedLossQueryFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=args.d_model,
+                num_heads=args.num_heads,
+                num_layers=args.layers,
+                ssm_kernel_size=args.ssm_kernel_size,
+                state_branch=args.state_branch,
+            )
+        ).to(device)
+        model_source = "models/CST/lm.py:BranchedLossQueryFastHymbaCharLM"
+        inner_hymba_blocks = args.layers + 1
+    elif args.architecture == "loss_context_injected_hymba":
+        model = LossContextInjectedFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=args.d_model,
+                num_heads=args.num_heads,
+                num_layers=args.layers,
+                ssm_kernel_size=args.ssm_kernel_size,
+                state_branch=args.state_branch,
+            )
+        ).to(device)
+        model_source = "models/CST/lm.py:LossContextInjectedFastHymbaCharLM"
         inner_hymba_blocks = args.layers
     elif args.architecture == "current_clock_hymba":
         model = CurrentClockFusionFastHymbaCharLM(
@@ -897,6 +1275,39 @@ def main() -> None:
         ).to(device)
         model_source = "models/CST/lm.py:ClockConditionedFastHymbaCharLM"
         inner_hymba_blocks = args.layers
+    elif args.architecture == "previous_loss_scalar_hymba":
+        model = PreviousLossScalarConditionedFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=args.d_model,
+                num_heads=args.num_heads,
+                num_layers=args.layers,
+                ssm_kernel_size=args.ssm_kernel_size,
+                state_branch=args.state_branch,
+            )
+        ).to(device)
+        model_source = "models/CST/lm.py:PreviousLossScalarConditionedFastHymbaCharLM"
+        inner_hymba_blocks = args.layers * 2
+    elif args.architecture == "previous_loss_scalar_injected_hymba":
+        model = PreviousLossScalarInjectedFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=args.d_model,
+                num_heads=args.num_heads,
+                num_layers=args.layers,
+                ssm_kernel_size=args.ssm_kernel_size,
+                state_branch=args.state_branch,
+                activation_type=args.activation_type,
+                basin_min_width=args.basin_min_width,
+                basin_max_width=args.basin_max_width,
+                basin_floor=args.basin_floor,
+                basin_zag_amp=args.basin_zag_amp,
+                basin_sharpness=args.basin_sharpness,
+                basin_eps=args.basin_eps,
+            )
+        ).to(device)
+        model_source = "models/CST/lm.py:PreviousLossScalarInjectedFastHymbaCharLM"
+        inner_hymba_blocks = args.layers * 2
     elif args.architecture == "alternating_clock_hymba":
         model = AlternatingClockTokenFastHymbaCharLM(
             FastHymbaCharLMConfig(
@@ -1053,8 +1464,13 @@ def main() -> None:
         "status": "running",
         "run_dir": str(run_dir),
         "vocab_size": vocab.size,
-        "train_chars": int(train_data.numel()),
-        "val_chars": int(val_data.numel()),
+        "train_chars": int(sum(example.numel() for example in train_examples)) if args.example_batching else int(train_data.numel()),
+        "val_chars": int(sum(example.numel() for example in val_examples)) if args.example_batching else int(val_data.numel()),
+        "example_batching": args.example_batching,
+        "example_sentinel": args.example_sentinel if args.example_batching else None,
+        "train_examples": len(train_examples) if args.example_batching else None,
+        "val_examples": len(val_examples) if args.example_batching else None,
+        "val_tasks": {task: len(examples) for task, examples in sorted(val_examples_by_task.items())},
         "parameters": int(sum(p.numel() for p in model.parameters())),
         "model_source": model_source,
         "architecture": args.architecture,
@@ -1075,6 +1491,8 @@ def main() -> None:
         "digit_loss_weight": args.digit_loss_weight,
         "nondigit_loss_weight": args.nondigit_loss_weight,
         "loss_prediction_alpha": args.loss_prediction_alpha,
+        "loss_prediction_alpha_start": args.loss_prediction_alpha_start,
+        "loss_prediction_alpha_warmup_steps": args.loss_prediction_alpha_warmup_steps,
         "configured_clock_gates": configured_clock_gates,
         "freeze_clock_gates": args.freeze_clock_gates,
         "resumed_from": resumed_from,
@@ -1110,9 +1528,14 @@ def main() -> None:
     write_json(run_dir / "vocab_summary.json", {"vocab_size": vocab.size, "chars": list(vocab.chars)})
     (run_dir / "sample_prompts.txt").write_text("\n\n".join(sample_prompts), encoding="utf-8")
 
-    held_batch = make_batch(val_data, args.batch_size, args.seq_len, device)
+    if args.example_batching:
+        held_batch, held_target_mask = make_example_batch(val_examples, args.batch_size, args.seq_len, device)
+    else:
+        held_batch = make_batch(val_data, args.batch_size, args.seq_len, device)
+        held_target_mask = None
     metrics_path = run_dir / "metrics.jsonl"
     with metrics_path.open("w", encoding="utf-8") as metrics_file:
+        initial_alpha = loss_prediction_alpha_for_step(args, 0)
         initial_eval = evaluate(
             model,
             held_batch,
@@ -1120,9 +1543,25 @@ def main() -> None:
             loss_kind=args.loss_kind,
             digit_weight=args.digit_loss_weight,
             nondigit_weight=args.nondigit_loss_weight,
-            loss_prediction_alpha=args.loss_prediction_alpha,
+            loss_prediction_alpha=initial_alpha,
+            target_mask=held_target_mask,
         )
-        metrics_file.write(json.dumps({"step": 0, **initial_eval, "lr": optimizer_lr(optimizer)}) + "\n")
+        if args.example_batching:
+            initial_eval.update(
+                evaluate_per_task(
+                    model,
+                    val_examples_by_task,
+                    vocab,
+                    batch_size=args.batch_size,
+                    seq_len=args.seq_len,
+                    device=device,
+                    loss_kind=args.loss_kind,
+                    digit_weight=args.digit_loss_weight,
+                    nondigit_weight=args.nondigit_loss_weight,
+                    loss_prediction_alpha=initial_alpha,
+                )
+            )
+        metrics_file.write(json.dumps({"step": 0, **initial_eval, "lr": optimizer_lr(optimizer), "loss_prediction_alpha_active": initial_alpha}) + "\n")
         best_eval_loss = initial_eval["eval_mode_loss"]
         save_checkpoint(
             best_checkpoint,
@@ -1163,8 +1602,13 @@ def main() -> None:
                 )
                 write_json(run_dir / "run_status.json", status)
             model.train()
-            batch = make_batch(train_data, args.batch_size, args.seq_len, device)
+            if args.example_batching:
+                batch, target_mask = make_example_batch(train_examples, args.batch_size, args.seq_len, device)
+            else:
+                batch = make_batch(train_data, args.batch_size, args.seq_len, device)
+                target_mask = None
             optimizer.zero_grad(set_to_none=True)
+            active_loss_prediction_alpha = loss_prediction_alpha_for_step(args, step)
             loss = model_loss(
                 model,
                 batch,
@@ -1172,7 +1616,8 @@ def main() -> None:
                 loss_kind=args.loss_kind,
                 digit_weight=args.digit_loss_weight,
                 nondigit_weight=args.nondigit_loss_weight,
-                loss_prediction_alpha=args.loss_prediction_alpha,
+                loss_prediction_alpha=active_loss_prediction_alpha,
+                target_mask=target_mask,
             )
             loss.backward()
             grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip)
@@ -1183,7 +1628,9 @@ def main() -> None:
                 "train_loss": float(loss.item()),
                 "grad_norm": float(grad_norm.item()),
                 "lr": optimizer_lr(optimizer),
+                "loss_prediction_alpha_active": active_loss_prediction_alpha,
             }
+            row.update(collect_aux_stats(model, prefix="train_"))
             if step == args.steps or step % args.eval_every == 0:
                 row.update(
                     evaluate(
@@ -1193,9 +1640,25 @@ def main() -> None:
                         loss_kind=args.loss_kind,
                         digit_weight=args.digit_loss_weight,
                         nondigit_weight=args.nondigit_loss_weight,
-                        loss_prediction_alpha=args.loss_prediction_alpha,
+                        loss_prediction_alpha=active_loss_prediction_alpha,
+                        target_mask=held_target_mask,
                     )
                 )
+                if args.example_batching:
+                    row.update(
+                        evaluate_per_task(
+                            model,
+                            val_examples_by_task,
+                            vocab,
+                            batch_size=args.batch_size,
+                            seq_len=args.seq_len,
+                            device=device,
+                            loss_kind=args.loss_kind,
+                            digit_weight=args.digit_loss_weight,
+                            nondigit_weight=args.nondigit_loss_weight,
+                            loss_prediction_alpha=active_loss_prediction_alpha,
+                        )
+                    )
                 eval_loss = row["eval_mode_loss"]
                 improved = eval_loss < best_eval_loss - args.plateau_min_delta
                 if improved:
@@ -1216,6 +1679,11 @@ def main() -> None:
                                 "eval_unweighted_loss",
                                 "loss_delta",
                                 "eval_next_char_accuracy",
+                                "eval_loss_prediction_mse",
+                                "eval_basin_width_mean",
+                                "eval_basin_width_min",
+                                "eval_basin_width_max",
+                                "eval_basin_width_std",
                             )
                             if key in row
                         },
@@ -1289,6 +1757,11 @@ def main() -> None:
                         "eval_unweighted_loss",
                         "loss_delta",
                         "eval_next_char_accuracy",
+                        "eval_loss_prediction_mse",
+                        "eval_basin_width_mean",
+                        "eval_basin_width_min",
+                        "eval_basin_width_max",
+                        "eval_basin_width_std",
                     )
                     if key in row
                 }
@@ -1328,6 +1801,7 @@ def main() -> None:
                     max_new_chars=args.sample_chars,
                     seq_len=args.seq_len,
                     temperature=args.sample_temperature,
+                    stop_token=sample_stop_token,
                     device=device,
                 )
                 sample_path.write_text(sample, encoding="utf-8")
@@ -1348,7 +1822,8 @@ def main() -> None:
         loss_kind=args.loss_kind,
         digit_weight=args.digit_loss_weight,
         nondigit_weight=args.nondigit_loss_weight,
-        loss_prediction_alpha=args.loss_prediction_alpha,
+        loss_prediction_alpha=loss_prediction_alpha_for_step(args, args.steps),
+        target_mask=held_target_mask,
     )
     sample = generate_samples(
         model,
@@ -1357,6 +1832,7 @@ def main() -> None:
         max_new_chars=args.sample_chars,
         seq_len=args.seq_len,
         temperature=args.sample_temperature,
+        stop_token=sample_stop_token,
         device=device,
     )
     (run_dir / f"sample_step_{args.steps:04d}.txt").write_text(sample, encoding="utf-8")

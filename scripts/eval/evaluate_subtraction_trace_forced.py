@@ -28,6 +28,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--replace-oov-with", default=None)
     parser.add_argument("--task-prefix", default=None, help="Optional leading task line, e.g. 'Task: subtraction_prose'.")
     parser.add_argument("--shared-output-format", action="store_true")
+    parser.add_argument("--question-only", action="store_true", help="Evaluate the bare question-plus-trace math format.")
     parser.add_argument("--sentinel", default=None)
     return parser.parse_args()
 
@@ -37,9 +38,12 @@ def tag_trace(
     task_prefix: str | None,
     *,
     shared_output_format: bool = False,
+    question_only: bool = False,
     sentinel: str | None = None,
 ) -> str:
-    if task_prefix is None:
+    if question_only:
+        tagged = trace
+    elif task_prefix is None:
         tagged = trace
     else:
         lines = trace.splitlines()
@@ -106,6 +110,7 @@ def main() -> None:
             format_subtraction_trace(left, right),
             args.task_prefix,
             shared_output_format=args.shared_output_format,
+            question_only=args.question_only,
             sentinel=args.sentinel,
         )
         for left, right in pairs[: args.examples]

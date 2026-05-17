@@ -25,11 +25,12 @@ class TaggedMixConfig:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build a tagged example-level mix for regex and addition curricula.")
+    parser = argparse.ArgumentParser(description="Build a tagged example-level mix for regex, math, and LaTeX curricula.")
     parser.add_argument("--v5-input", type=Path, default=Path("data/regex_il_v5_clear_capture_120k.txt"))
     parser.add_argument("--v2-input", type=Path, default=Path("data/regex_quoted_ref_tokens_v2_easy_50k.txt"))
     parser.add_argument("--addition-input", type=Path, default=Path("data/addition_traces_1to3_digit.txt"))
     parser.add_argument("--subtraction-input", type=Path, default=Path("data/subtraction_traces_1to3_digit.txt"))
+    parser.add_argument("--latex-input", type=Path, default=Path("data/mathbridge_latex_il_train_50000.txt"))
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--metadata-output", type=Path, default=None)
     parser.add_argument("--examples-per-source", type=int, default=33333)
@@ -37,8 +38,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--v2-examples", type=int, default=None)
     parser.add_argument("--addition-examples", type=int, default=None)
     parser.add_argument("--subtraction-examples", type=int, default=0)
+    parser.add_argument("--latex-examples", type=int, default=0)
     parser.add_argument("--sentinel-format", action="store_true")
     parser.add_argument("--sentinel", default="<END>")
+    parser.add_argument(
+        "--math-format",
+        choices=("tagged", "question_only"),
+        default="tagged",
+        help="Use the normal task/input/output wrapper for math, or train math examples as bare question-plus-trace.",
+    )
     parser.add_argument("--seed", type=int, default=20260513)
     return parser.parse_args()
 
@@ -51,6 +59,8 @@ def read_examples(path: Path, task: str) -> list[str]:
     text = path.read_text(encoding="utf-8").strip()
     if not text:
         return []
+    if text.startswith("Task: "):
+        return [match.group(0).strip() for match in re.finditer(r"(?ms)^Task: .*?(?=^Task: |\Z)", text)]
     if task.startswith("regex_"):
         return [match.group(0).strip() for match in re.finditer(r"(?ms)^Input:\n.*?(?=^Input:\n|\Z)", text)]
     return [example.strip() for example in text.split("\n\n") if example.strip()]
@@ -70,10 +80,20 @@ def tag_regex_sentinel(example: str, task: str, sentinel: str) -> str:
     return f"Task: {task}\n{body}\n{sentinel}"
 
 
-def tag_math(example: str, task: str, *, sentinel_format: bool = False, sentinel: str = "<END>") -> str:
+def tag_math(
+    example: str,
+    task: str,
+    *,
+    sentinel_format: bool = False,
+    sentinel: str = "<END>",
+    math_format: str = "tagged",
+) -> str:
     lines = example.splitlines()
     if not lines:
         raise ValueError(f"empty {task} example")
+    if math_format == "question_only":
+        body = "\n".join(lines)
+        return body + (f"\n{sentinel}" if sentinel_format else "")
     if sentinel_format:
         return f"Task: {task}\nInput:\n" + lines[0] + "\n\nOutput:\n" + "\n".join(lines[1:]) + f"\n{sentinel}"
     return f"Task: {task}\nInput:\n" + lines[0] + "\nTrace:\n" + "\n".join(lines[1:])
@@ -87,13 +107,25 @@ def sample_tagged(
     task: str,
     sentinel_format: bool,
     sentinel: str,
+    math_format: str,
 ) -> tuple[list[str], dict[str, object]]:
     examples = read_examples(path, task)
     if count > len(examples):
         raise ValueError(f"{path} has only {len(examples)} examples; requested {count}")
     sampled = rng.sample(examples, count)
-    if task in {"addition_prose", "subtraction_prose"}:
-        tagged = [tag_math(example, task, sentinel_format=sentinel_format, sentinel=sentinel) for example in sampled]
+    if task == "mathbridge_latex":
+        tagged = sampled
+    elif task in {"addition_prose", "subtraction_prose"}:
+        tagged = [
+            tag_math(
+                example,
+                task,
+                sentinel_format=sentinel_format,
+                sentinel=sentinel,
+                math_format=math_format,
+            )
+            for example in sampled
+        ]
     elif sentinel_format:
         tagged = [tag_regex_sentinel(example, task, sentinel) for example in sampled]
     else:
@@ -103,6 +135,7 @@ def sample_tagged(
         "available_examples": len(examples),
         "used_examples": count,
         "task": task,
+        "format": math_format if task in {"addition_prose", "subtraction_prose"} else "tagged",
         "chars": path.stat().st_size,
     }
 
@@ -119,6 +152,7 @@ def main() -> None:
             args.addition_examples if args.addition_examples is not None else args.examples_per_source,
         ),
         (resolve_path(args.subtraction_input), "subtraction_prose", args.subtraction_examples),
+        (resolve_path(args.latex_input), "mathbridge_latex", args.latex_examples),
     ]
     mixed: list[str] = []
     metadata_sources = []
@@ -133,6 +167,7 @@ def main() -> None:
             task=task,
             sentinel_format=args.sentinel_format,
             sentinel=args.sentinel,
+            math_format=args.math_format,
         )
         mixed.extend(tagged)
         metadata_sources.append(metadata)
@@ -146,6 +181,9 @@ def main() -> None:
     output_path.write_text(corpus, encoding="utf-8")
     metadata = {
         "config": asdict(TaggedMixConfig(sources=config_sources, seed=args.seed)),
+        "math_format": args.math_format,
+        "sentinel_format": args.sentinel_format,
+        "sentinel": args.sentinel,
         "output": str(output_path.relative_to(ROOT)),
         "total_examples": len(mixed),
         "sources": metadata_sources,

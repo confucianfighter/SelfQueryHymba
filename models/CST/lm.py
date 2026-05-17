@@ -14,6 +14,7 @@ from .blocks import (
     HybridHymbaTXLBlock,
     MSHymbaBlock,
     MultiStrideHybridHymbaBlock,
+    NoMLPFastHybridHymbaBlock,
 )
 from .attention import CausalTimeAttention
 from .causality import (
@@ -80,6 +81,7 @@ class CausalLMOutput:
     pair_targets: Tensor | None = None
     pair_target_mask: Tensor | None = None
     loss_predictions: Tensor | None = None
+    aux_stats: dict[str, float] | None = None
 
 
 @dataclass(frozen=True)
@@ -147,6 +149,13 @@ class FastHymbaCharLMConfig:
     ssm_kernel_size: int = 3
     state_branch: str = "conv"
     tie_head: bool = True
+    activation_type: str = "identity"
+    basin_min_width: float = 0.35
+    basin_max_width: float = 3.0
+    basin_floor: float = 0.08
+    basin_zag_amp: float = 0.12
+    basin_sharpness: float = 2.0
+    basin_eps: float = 1e-6
 
     @property
     def total_hymba_blocks(self) -> int:
@@ -159,6 +168,144 @@ class FastHymbaCharLMConfig:
             raise ValueError("num_layers must be positive")
         if self.state_branch not in {"conv", "multistride_1_2"}:
             raise ValueError("state_branch must be 'conv' or 'multistride_1_2'")
+        if self.activation_type not in {"identity", "gelu", "static_basin_zag", "dynamic_basin_zag"}:
+            raise ValueError("activation_type must be 'identity', 'gelu', 'static_basin_zag', or 'dynamic_basin_zag'")
+        if self.basin_min_width <= 0 or self.basin_max_width <= self.basin_min_width:
+            raise ValueError("basin widths must satisfy 0 < min_width < max_width")
+        if not 0 <= self.basin_floor <= 1:
+            raise ValueError("basin_floor must be in [0, 1]")
+        if self.basin_eps <= 0:
+            raise ValueError("basin_eps must be positive")
+
+
+class DynamicBasinZagActivation(nn.Module):
+    """Per-token, per-channel dynamic BasinZag activation."""
+
+    def __init__(
+        self,
+        d_model: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        self.value_proj = nn.Linear(d_model, d_model)
+        self.width_proj = nn.Linear(d_model, d_model)
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+        self.reset_parameters()
+
+    def reset_parameters(self) -> None:
+        nn.init.normal_(self.value_proj.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.value_proj.bias)
+        nn.init.normal_(self.width_proj.weight, mean=0.0, std=0.02)
+        initial_fraction = 0.42
+        initial_logit = math.log(initial_fraction / (1.0 - initial_fraction))
+        nn.init.constant_(self.width_proj.bias, initial_logit)
+
+    def forward(self, x: Tensor) -> Tensor:
+        value = self.value_proj(x)
+        width_control = self.width_proj(x)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        if not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "basin_width_mean": float(detached.mean().item()),
+                "basin_width_min": float(detached.min().item()),
+                "basin_width_max": float(detached.max().item()),
+                "basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return y
+
+
+class StaticBasinZagActivation(nn.Module):
+    """BasinZag ablation with projected values and fixed scalar width."""
+
+    def __init__(
+        self,
+        d_model: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        self.value_proj = nn.Linear(d_model, d_model)
+        self.width = float(min_width + (max_width - min_width) * 0.42)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+        nn.init.normal_(self.value_proj.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.value_proj.bias)
+
+    def forward(self, x: Tensor) -> Tensor:
+        value = self.value_proj(x)
+        width = value.new_full(value.shape, self.width)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        self.last_width_stats = {
+            "basin_width_mean": self.width,
+            "basin_width_min": self.width,
+            "basin_width_max": self.width,
+            "basin_width_std": 0.0,
+        }
+        return y
+
+
+def _replace_loss_branch_mlp_activation(branch: nn.Module, config: FastHymbaCharLMConfig) -> nn.Module | None:
+    if config.activation_type in {"identity", "gelu"}:
+        return None
+    mlp = getattr(branch, "mlp", None)
+    if not isinstance(mlp, nn.Sequential) or len(mlp) < 3:
+        raise ValueError(f"activation_type={config.activation_type!r} requires a loss branch MLP to replace")
+    first = mlp[0]
+    if not isinstance(first, nn.Linear):
+        raise ValueError("loss branch MLP must start with a Linear layer")
+    hidden_dim = first.out_features
+    if config.activation_type == "static_basin_zag":
+        activation = StaticBasinZagActivation(
+            hidden_dim,
+            min_width=config.basin_min_width,
+            max_width=config.basin_max_width,
+            floor=config.basin_floor,
+            zag_amp=config.basin_zag_amp,
+            sharpness=config.basin_sharpness,
+            eps=config.basin_eps,
+        )
+    elif config.activation_type == "dynamic_basin_zag":
+        activation = DynamicBasinZagActivation(
+            hidden_dim,
+            min_width=config.basin_min_width,
+            max_width=config.basin_max_width,
+            floor=config.basin_floor,
+            zag_amp=config.basin_zag_amp,
+            sharpness=config.basin_sharpness,
+            eps=config.basin_eps,
+        )
+    else:
+        raise ValueError(f"unsupported activation_type: {config.activation_type!r}")
+    mlp[1] = activation
+    return activation
 
 
 @dataclass(frozen=True)
@@ -1016,6 +1163,293 @@ class LossQueryFastHymbaCharLM(nn.Module):
         )
 
 
+class BranchedLossQueryFastHymbaCharLM(nn.Module):
+    """Fast Hymba LM whose auxiliary loss predictor uses an attn+SSM branch."""
+
+    def __init__(self, config: FastHymbaCharLMConfig) -> None:
+        super().__init__()
+        if config.state_branch != "conv":
+            raise ValueError("BranchedLossQueryFastHymbaCharLM currently supports state_branch='conv'")
+        self.config = config
+        self.token_embedding = nn.Embedding(config.vocab_size, config.d_model)
+        self.layers = nn.ModuleList(
+            [
+                FastHybridHymbaBlock(
+                    d_model=config.d_model,
+                    num_heads=config.num_heads,
+                    ssm_kernel_size=config.ssm_kernel_size,
+                )
+                for _ in range(config.num_layers)
+            ]
+        )
+        self.final_norm = nn.LayerNorm(config.d_model)
+        self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
+        self.loss_branch = NoMLPFastHybridHymbaBlock(
+            d_model=config.d_model,
+            num_heads=config.num_heads,
+            ssm_kernel_size=config.ssm_kernel_size,
+        )
+        self.loss_branch_norm = nn.LayerNorm(config.d_model)
+        self.loss_head = nn.Linear(config.d_model, 1)
+        if config.tie_head:
+            self.lm_head.weight = self.token_embedding.weight
+        nn.init.normal_(self.token_embedding.weight, mean=0.0, std=0.02)
+        if not config.tie_head:
+            nn.init.normal_(self.lm_head.weight, mean=0.0, std=0.02)
+        nn.init.normal_(self.loss_head.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.loss_head.bias)
+
+    def forward(self, input_ids: Tensor, *, pad_to_length: int | None = None) -> CausalLMOutput:
+        if input_ids.ndim != 2:
+            raise ValueError(f"input_ids must be [batch, seq], got {tuple(input_ids.shape)}")
+        if input_ids.numel() == 0:
+            raise ValueError("input_ids must not be empty")
+        if pad_to_length is not None and pad_to_length < input_ids.shape[1]:
+            raise ValueError("pad_to_length must be at least the input sequence length")
+
+        batch, seq_len = input_ids.shape
+        model_len = pad_to_length or seq_len
+        model_times = source_causal_times(model_len, device=input_ids.device).unsqueeze(0).expand(batch, -1)
+        prediction_times = model_times[:, :seq_len]
+
+        states = self.token_embedding(input_ids)
+        if model_len > seq_len:
+            pad_states = states.new_zeros(batch, model_len - seq_len, states.shape[-1])
+            states = torch.cat([states, pad_states], dim=1)
+
+        for layer in self.layers:
+            states = layer(states, causal_times=model_times)
+        states = self.final_norm(states)
+        logits = self.lm_head(states[:, :seq_len])
+        if logits.shape != (batch, seq_len, self.config.vocab_size):
+            raise AssertionError("logits must be [batch, seq, vocab_size]")
+
+        loss_states = self.loss_branch(states, causal_times=model_times)
+        loss_states = self.loss_branch_norm(loss_states[:, :seq_len])
+        loss_predictions = torch.nn.functional.softplus(self.loss_head(loss_states).squeeze(-1))
+
+        readout_mask = build_causal_visibility_mask(prediction_times, model_times)
+        return CausalLMOutput(
+            logits=logits,
+            prediction_times=prediction_times,
+            memory_times=model_times,
+            readout_mask=readout_mask,
+            loss_predictions=loss_predictions,
+        )
+
+
+class LossContextInjectedFastHymbaCharLM(nn.Module):
+    """Fast Hymba LM with a normal loss branch injected before the final block."""
+
+    def __init__(self, config: FastHymbaCharLMConfig) -> None:
+        super().__init__()
+        if config.num_layers < 2:
+            raise ValueError("LossContextInjectedFastHymbaCharLM requires at least 2 layers")
+        self.config = config
+        self.token_embedding = nn.Embedding(config.vocab_size, config.d_model)
+        block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
+        self.layers = nn.ModuleList(
+            [
+                block_cls(
+                    d_model=config.d_model,
+                    num_heads=config.num_heads,
+                    ssm_kernel_size=config.ssm_kernel_size,
+                )
+                for _ in range(config.num_layers)
+            ]
+        )
+        self.final_norm = nn.LayerNorm(config.d_model)
+        self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
+        self.loss_branch = block_cls(
+            d_model=config.d_model,
+            num_heads=config.num_heads,
+            ssm_kernel_size=config.ssm_kernel_size,
+        )
+        self.loss_branch_norm = nn.LayerNorm(config.d_model)
+        self.loss_head = nn.Linear(config.d_model, 1)
+        if config.tie_head:
+            self.lm_head.weight = self.token_embedding.weight
+        nn.init.normal_(self.token_embedding.weight, mean=0.0, std=0.02)
+        if not config.tie_head:
+            nn.init.normal_(self.lm_head.weight, mean=0.0, std=0.02)
+        nn.init.normal_(self.loss_head.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.loss_head.bias)
+
+    def forward(self, input_ids: Tensor, *, pad_to_length: int | None = None) -> CausalLMOutput:
+        if input_ids.ndim != 2:
+            raise ValueError(f"input_ids must be [batch, seq], got {tuple(input_ids.shape)}")
+        if input_ids.numel() == 0:
+            raise ValueError("input_ids must not be empty")
+        if pad_to_length is not None and pad_to_length < input_ids.shape[1]:
+            raise ValueError("pad_to_length must be at least the input sequence length")
+
+        batch, seq_len = input_ids.shape
+        model_len = pad_to_length or seq_len
+        model_times = source_causal_times(model_len, device=input_ids.device).unsqueeze(0).expand(batch, -1)
+        prediction_times = model_times[:, :seq_len]
+
+        states = self.token_embedding(input_ids)
+        if model_len > seq_len:
+            pad_states = states.new_zeros(batch, model_len - seq_len, states.shape[-1])
+            states = torch.cat([states, pad_states], dim=1)
+
+        for layer in self.layers[:-1]:
+            states = layer(states, causal_times=model_times)
+
+        states_before_final = states
+        branch_output = self.loss_branch(states_before_final, causal_times=model_times)
+        branch_delta = branch_output - states_before_final
+        final_layer_input = states_before_final + branch_delta
+        loss_predictions = torch.nn.functional.softplus(
+            self.loss_head(self.loss_branch_norm(branch_output[:, :seq_len])).squeeze(-1)
+        )
+
+        states = self.layers[-1](final_layer_input, causal_times=model_times)
+        states = self.final_norm(states)
+        logits = self.lm_head(states[:, :seq_len])
+        if logits.shape != (batch, seq_len, self.config.vocab_size):
+            raise AssertionError("logits must be [batch, seq, vocab_size]")
+
+        readout_mask = build_causal_visibility_mask(prediction_times, model_times)
+        return CausalLMOutput(
+            logits=logits,
+            prediction_times=prediction_times,
+            memory_times=model_times,
+            readout_mask=readout_mask,
+            loss_predictions=loss_predictions,
+        )
+
+
+class PreviousLossScalarInjectedFastHymbaCharLM(nn.Module):
+    """Loss-branch-residual LM conditioned on previous predicted scalar loss."""
+
+    def __init__(self, config: FastHymbaCharLMConfig) -> None:
+        super().__init__()
+        if config.num_layers < 2:
+            raise ValueError("PreviousLossScalarInjectedFastHymbaCharLM requires at least 2 layers")
+        self.config = config
+        self.token_embedding = nn.Embedding(config.vocab_size, config.d_model)
+        block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
+        self.layers = nn.ModuleList(
+            [
+                block_cls(
+                    d_model=config.d_model,
+                    num_heads=config.num_heads,
+                    ssm_kernel_size=config.ssm_kernel_size,
+                )
+                for _ in range(config.num_layers)
+            ]
+        )
+        self.final_norm = nn.LayerNorm(config.d_model)
+        self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
+        self.loss_branch = block_cls(
+            d_model=config.d_model,
+            num_heads=config.num_heads,
+            ssm_kernel_size=config.ssm_kernel_size,
+        )
+        self.loss_activation = _replace_loss_branch_mlp_activation(self.loss_branch, config)
+        self.loss_branch_norm = nn.LayerNorm(config.d_model)
+        self.loss_head = nn.Linear(config.d_model, 1)
+        self.previous_loss_adapter = nn.Sequential(
+            nn.Linear(1, config.d_model),
+            nn.Tanh(),
+            nn.Linear(config.d_model, config.d_model),
+        )
+        self.previous_loss_gate = nn.Parameter(torch.tensor(0.05))
+        if config.tie_head:
+            self.lm_head.weight = self.token_embedding.weight
+        nn.init.normal_(self.token_embedding.weight, mean=0.0, std=0.02)
+        if not config.tie_head:
+            nn.init.normal_(self.lm_head.weight, mean=0.0, std=0.02)
+        nn.init.normal_(self.loss_head.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.loss_head.bias)
+        for module in self.previous_loss_adapter:
+            if isinstance(module, nn.Linear):
+                nn.init.normal_(module.weight, mean=0.0, std=0.02)
+                nn.init.zeros_(module.bias)
+
+    def _pad_embeddings(self, embeddings: Tensor, *, model_len: int) -> Tensor:
+        if model_len <= embeddings.shape[1]:
+            return embeddings
+        pad_states = embeddings.new_zeros(embeddings.shape[0], model_len - embeddings.shape[1], embeddings.shape[-1])
+        return torch.cat([embeddings, pad_states], dim=1)
+
+    def _shifted_feedback(self, loss_predictions: Tensor) -> Tensor:
+        feedback = loss_predictions.new_zeros(loss_predictions.shape)
+        if loss_predictions.shape[1] > 1:
+            feedback[:, 1:] = torch.log1p(loss_predictions[:, :-1].detach())
+        return feedback
+
+    def _loss_aux_stats(self) -> dict[str, float] | None:
+        stats = getattr(self.loss_activation, "last_width_stats", None) if self.loss_activation is not None else None
+        if not stats:
+            return None
+        return dict(stats)
+
+    def _run_conditioned(
+        self,
+        embeddings: Tensor,
+        *,
+        model_times: Tensor,
+        prediction_times: Tensor,
+        seq_len: int,
+    ) -> tuple[Tensor, Tensor, dict[str, float] | None]:
+        states = embeddings
+        for layer in self.layers[:-1]:
+            states = layer(states, causal_times=model_times)
+
+        branch_output = self.loss_branch(states, causal_times=model_times)
+        loss_features = self.loss_branch_norm(branch_output[:, :seq_len])
+        loss_predictions = torch.nn.functional.softplus(
+            self.loss_head(loss_features).squeeze(-1)
+        )
+        states = self.layers[-1](branch_output, causal_times=model_times)
+        states = self.final_norm(states)
+        logits = self.lm_head(states[:, :seq_len])
+        if logits.shape != (embeddings.shape[0], seq_len, self.config.vocab_size):
+            raise AssertionError("logits must be [batch, seq, vocab_size]")
+        return logits, loss_predictions, self._loss_aux_stats()
+
+    def forward(self, input_ids: Tensor, *, pad_to_length: int | None = None) -> CausalLMOutput:
+        if input_ids.ndim != 2:
+            raise ValueError(f"input_ids must be [batch, seq], got {tuple(input_ids.shape)}")
+        if input_ids.numel() == 0:
+            raise ValueError("input_ids must not be empty")
+        if pad_to_length is not None and pad_to_length < input_ids.shape[1]:
+            raise ValueError("pad_to_length must be at least the input sequence length")
+
+        batch, seq_len = input_ids.shape
+        model_len = pad_to_length or seq_len
+        model_times = source_causal_times(model_len, device=input_ids.device).unsqueeze(0).expand(batch, -1)
+        prediction_times = model_times[:, :seq_len]
+
+        base_embeddings = self.token_embedding(input_ids)
+        _provisional_logits, provisional_loss_predictions, _provisional_aux_stats = self._run_conditioned(
+            self._pad_embeddings(base_embeddings, model_len=model_len),
+            model_times=model_times,
+            prediction_times=prediction_times,
+            seq_len=seq_len,
+        )
+        feedback = self._shifted_feedback(provisional_loss_predictions).unsqueeze(-1)
+        conditioned_embeddings = base_embeddings + self.previous_loss_gate * self.previous_loss_adapter(feedback)
+        logits, loss_predictions, aux_stats = self._run_conditioned(
+            self._pad_embeddings(conditioned_embeddings, model_len=model_len),
+            model_times=model_times,
+            prediction_times=prediction_times,
+            seq_len=seq_len,
+        )
+
+        readout_mask = build_causal_visibility_mask(prediction_times, model_times)
+        return CausalLMOutput(
+            logits=logits,
+            prediction_times=prediction_times,
+            memory_times=model_times,
+            readout_mask=readout_mask,
+            loss_predictions=loss_predictions,
+            aux_stats=aux_stats,
+        )
+
+
 class CurrentClockFusionFastHymbaCharLM(nn.Module):
     """Fast Hymba LM whose current virtual loss clock conditions the current readout."""
 
@@ -1356,6 +1790,137 @@ class ClockConditionedFastHymbaCharLM(nn.Module):
             seq_len=seq_len,
         )
         loss_predictions = torch.nn.functional.softplus(self.loss_head(loss_context).squeeze(-1))
+        logits = self.lm_head(states[:, :seq_len])
+        if logits.shape != (batch, seq_len, self.config.vocab_size):
+            raise AssertionError("logits must be [batch, seq, vocab_size]")
+
+        readout_mask = build_causal_visibility_mask(prediction_times, model_times)
+        return CausalLMOutput(
+            logits=logits,
+            prediction_times=prediction_times,
+            memory_times=model_times,
+            readout_mask=readout_mask,
+            loss_predictions=loss_predictions,
+        )
+
+
+class PreviousLossScalarConditionedFastHymbaCharLM(nn.Module):
+    """Fast Hymba LM conditioned on the previous predicted scalar loss.
+
+    A provisional pass predicts scalar token losses. Those scalars are shifted
+    right, projected into d_model, and added to token embeddings for the real
+    pass. This matches runtime use: token t can receive only the model's loss
+    estimate from t-1, never the current token's true loss.
+    """
+
+    def __init__(self, config: FastHymbaCharLMConfig) -> None:
+        super().__init__()
+        self.config = config
+        self.token_embedding = nn.Embedding(config.vocab_size, config.d_model)
+        block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
+        self.layers = nn.ModuleList(
+            [
+                block_cls(
+                    d_model=config.d_model,
+                    num_heads=config.num_heads,
+                    ssm_kernel_size=config.ssm_kernel_size,
+                )
+                for _ in range(config.num_layers)
+            ]
+        )
+        self.final_norm = nn.LayerNorm(config.d_model)
+        self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
+        self.loss_query = nn.Parameter(torch.empty(config.d_model))
+        self.loss_query_attn = CausalTimeAttention(d_model=config.d_model, num_heads=config.num_heads)
+        self.loss_query_norm = nn.LayerNorm(config.d_model)
+        self.loss_memory_norm = nn.LayerNorm(config.d_model)
+        self.loss_head = nn.Linear(config.d_model, 1)
+        self.previous_loss_adapter = nn.Sequential(
+            nn.Linear(1, config.d_model),
+            nn.Tanh(),
+            nn.Linear(config.d_model, config.d_model),
+        )
+        self.previous_loss_gate = nn.Parameter(torch.tensor(0.05))
+        if config.tie_head:
+            self.lm_head.weight = self.token_embedding.weight
+        nn.init.normal_(self.token_embedding.weight, mean=0.0, std=0.02)
+        if not config.tie_head:
+            nn.init.normal_(self.lm_head.weight, mean=0.0, std=0.02)
+        nn.init.normal_(self.loss_query, mean=0.0, std=0.02)
+        nn.init.normal_(self.loss_head.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.loss_head.bias)
+        for module in self.previous_loss_adapter:
+            if isinstance(module, nn.Linear):
+                nn.init.normal_(module.weight, mean=0.0, std=0.02)
+                nn.init.zeros_(module.bias)
+
+    def _run_stack(self, embeddings: Tensor, *, model_times: Tensor) -> Tensor:
+        states = embeddings
+        for layer in self.layers:
+            states = layer(states, causal_times=model_times)
+        return self.final_norm(states)
+
+    def _loss_predictions(
+        self,
+        states: Tensor,
+        *,
+        prediction_times: Tensor,
+        model_times: Tensor,
+        seq_len: int,
+    ) -> Tensor:
+        query_states = self.loss_query.view(1, 1, -1).expand(states.shape[0], seq_len, -1)
+        loss_context = self.loss_query_attn(
+            self.loss_query_norm(query_states),
+            self.loss_memory_norm(states),
+            self.loss_memory_norm(states),
+            query_times=prediction_times,
+            key_times=model_times,
+        )
+        return torch.nn.functional.softplus(self.loss_head(loss_context).squeeze(-1))
+
+    def _pad_embeddings(self, embeddings: Tensor, *, model_len: int) -> Tensor:
+        if model_len <= embeddings.shape[1]:
+            return embeddings
+        pad_states = embeddings.new_zeros(embeddings.shape[0], model_len - embeddings.shape[1], embeddings.shape[-1])
+        return torch.cat([embeddings, pad_states], dim=1)
+
+    def _shifted_feedback(self, loss_predictions: Tensor) -> Tensor:
+        feedback = loss_predictions.new_zeros(loss_predictions.shape)
+        if loss_predictions.shape[1] > 1:
+            feedback[:, 1:] = torch.log1p(loss_predictions[:, :-1].detach())
+        return feedback
+
+    def forward(self, input_ids: Tensor, *, pad_to_length: int | None = None) -> CausalLMOutput:
+        if input_ids.ndim != 2:
+            raise ValueError(f"input_ids must be [batch, seq], got {tuple(input_ids.shape)}")
+        if input_ids.numel() == 0:
+            raise ValueError("input_ids must not be empty")
+        if pad_to_length is not None and pad_to_length < input_ids.shape[1]:
+            raise ValueError("pad_to_length must be at least the input sequence length")
+
+        batch, seq_len = input_ids.shape
+        model_len = pad_to_length or seq_len
+        model_times = source_causal_times(model_len, device=input_ids.device).unsqueeze(0).expand(batch, -1)
+        prediction_times = model_times[:, :seq_len]
+
+        base_embeddings = self.token_embedding(input_ids)
+        provisional_states = self._run_stack(self._pad_embeddings(base_embeddings, model_len=model_len), model_times=model_times)
+        provisional_loss_predictions = self._loss_predictions(
+            provisional_states,
+            prediction_times=prediction_times,
+            model_times=model_times,
+            seq_len=seq_len,
+        )
+
+        feedback = self._shifted_feedback(provisional_loss_predictions).unsqueeze(-1)
+        conditioned_embeddings = base_embeddings + self.previous_loss_gate * self.previous_loss_adapter(feedback)
+        states = self._run_stack(self._pad_embeddings(conditioned_embeddings, model_len=model_len), model_times=model_times)
+        loss_predictions = self._loss_predictions(
+            states,
+            prediction_times=prediction_times,
+            model_times=model_times,
+            seq_len=seq_len,
+        )
         logits = self.lm_head(states[:, :seq_len])
         if logits.shape != (batch, seq_len, self.config.vocab_size):
             raise AssertionError("logits must be [batch, seq, vocab_size]")

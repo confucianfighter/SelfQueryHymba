@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 
 from models.CST import (
     AlternatingClockTokenFastHymbaCharLM,
+    BranchedLossQueryFastHymbaCharLM,
     CharVocabulary,
     ClockConditionedFastHymbaCharLM,
     CurrentClockFusionFastHymbaCharLM,
@@ -27,12 +28,15 @@ from models.CST import (
     IsolatedAlternatingClockTokenFastHymbaCharLM,
     LayerCrossLogitConditionedFastHymbaCharLM,
     LayerCrossTokenLogitConditionedFastHymbaCharLM,
+    LossContextInjectedFastHymbaCharLM,
     LossQueryFastHymbaCharLM,
     LogitConditionedFastHymbaCharLM,
     LogitConditionedFastHymbaCharLMConfig,
     MSHymbaCharLM,
     MSHymbaCharLMConfig,
     PreviousClockConditionedFastHymbaCharLM,
+    PreviousLossScalarInjectedFastHymbaCharLM,
+    PreviousLossScalarConditionedFastHymbaCharLM,
     StrictAlternatingClockTokenFastHymbaCharLM,
     TypedIsolatedAlternatingClockTokenFastHymbaCharLM,
     TwoSideHymbaCharLM,
@@ -68,6 +72,15 @@ def load_model(checkpoint_path: Path, device: torch.device):
     config = checkpoint["config"]
     vocab = CharVocabulary.from_chars(checkpoint["vocab_chars"])
     architecture = config.get("architecture", "fast_hymba")
+    activation_kwargs = {
+        "activation_type": config.get("activation_type", "identity"),
+        "basin_min_width": config.get("basin_min_width", 0.35),
+        "basin_max_width": config.get("basin_max_width", 3.0),
+        "basin_floor": config.get("basin_floor", 0.08),
+        "basin_zag_amp": config.get("basin_zag_amp", 0.12),
+        "basin_sharpness": config.get("basin_sharpness", 2.0),
+        "basin_eps": config.get("basin_eps", 1e-6),
+    }
     if "teacher_checkpoint" in config:
         conditioning_mode = config.get("conditioning_mode", "concat")
         if conditioning_mode == "interleave":
@@ -111,6 +124,28 @@ def load_model(checkpoint_path: Path, device: torch.device):
         ).to(device)
     elif architecture == "loss_query_hymba":
         model = LossQueryFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=config["d_model"],
+                num_heads=config["num_heads"],
+                num_layers=config["layers"],
+                ssm_kernel_size=config.get("ssm_kernel_size", 3),
+                state_branch=config.get("state_branch", "conv"),
+            )
+        ).to(device)
+    elif architecture == "branched_loss_query_hymba":
+        model = BranchedLossQueryFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=config["d_model"],
+                num_heads=config["num_heads"],
+                num_layers=config["layers"],
+                ssm_kernel_size=config.get("ssm_kernel_size", 3),
+                state_branch=config.get("state_branch", "conv"),
+            )
+        ).to(device)
+    elif architecture == "loss_context_injected_hymba":
+        model = LossContextInjectedFastHymbaCharLM(
             FastHymbaCharLMConfig(
                 vocab_size=vocab.size,
                 d_model=config["d_model"],
@@ -217,6 +252,29 @@ def load_model(checkpoint_path: Path, device: torch.device):
                 num_layers=config["layers"],
                 ssm_kernel_size=config.get("ssm_kernel_size", 3),
                 state_branch=config.get("state_branch", "conv"),
+            )
+        ).to(device)
+    elif architecture == "previous_loss_scalar_hymba":
+        model = PreviousLossScalarConditionedFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=config["d_model"],
+                num_heads=config["num_heads"],
+                num_layers=config["layers"],
+                ssm_kernel_size=config.get("ssm_kernel_size", 3),
+                state_branch=config.get("state_branch", "conv"),
+            )
+        ).to(device)
+    elif architecture == "previous_loss_scalar_injected_hymba":
+        model = PreviousLossScalarInjectedFastHymbaCharLM(
+            FastHymbaCharLMConfig(
+                vocab_size=vocab.size,
+                d_model=config["d_model"],
+                num_heads=config["num_heads"],
+                num_layers=config["layers"],
+                ssm_kernel_size=config.get("ssm_kernel_size", 3),
+                state_branch=config.get("state_branch", "conv"),
+                **activation_kwargs,
             )
         ).to(device)
     elif architecture == "ms_hymba":

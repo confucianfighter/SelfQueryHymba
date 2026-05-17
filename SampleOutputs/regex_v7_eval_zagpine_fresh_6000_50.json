@@ -1,0 +1,81 @@
+{
+  "checkpoint": "C:\\Users\\daylan\\CompoundStreamingTransformer\\loss-query-hymba\\experiments\\mods\\001_first_pass_hymba_cst\\runs\\2026-05-17_zagpine_regex_v7_dream_fresh_6000_alpha02_seq384\\checkpoint_best.pt",
+  "data_path": "C:\\Users\\daylan\\CompoundStreamingTransformer\\loss-query-hymba\\data\\sentinel_regex_v7_dream_queries_120k.txt",
+  "split": "val",
+  "available_examples": 12000,
+  "examples": 50,
+  "exact_output": 45,
+  "exact_output_accuracy": 0.9,
+  "il_exact": 46,
+  "il_exact_accuracy": 0.92,
+  "template_exact": 47,
+  "template_exact_accuracy": 0.94,
+  "expanded_regex_exact": 47,
+  "expanded_regex_exact_accuracy": 0.94,
+  "parsed_il": 50,
+  "parsed_il_accuracy": 1.0,
+  "parsed_template": 50,
+  "parsed_template_accuracy": 1.0,
+  "failures_shown": [
+    {
+      "index": 3,
+      "prompt": "Task: regex_v5\nInput:\n/regex text: start select: from 9 through 13 word characters; end select, then at most 1 vowel\n\nOutput:\n",
+      "expected": "IL:\nFIND; SEQ(CAP1(WORD{9,13}),VOWEL{0,1}); SELECT(CAP1);\n\nTemplate:\n(\\w{9,13})[AEIOUaeiou]{0,1}",
+      "predicted": "IL:\nFIND; SEQ(CAP1(WORD{9,13}),VOWEL{0,13}); SELECT(CAP1);\n\nTemplate:\n(\\w{9,13})[AEIOUaeiou]{0,1}",
+      "expected_il": "FIND; SEQ(CAP1(WORD{9,13}),VOWEL{0,1}); SELECT(CAP1);",
+      "predicted_il": "FIND; SEQ(CAP1(WORD{9,13}),VOWEL{0,13}); SELECT(CAP1);",
+      "expected_template": "(\\w{9,13})[AEIOUaeiou]{0,1}",
+      "predicted_template": "(\\w{9,13})[AEIOUaeiou]{0,1}",
+      "expected_regex": "(\\w{9,13})[AEIOUaeiou]{0,1}",
+      "predicted_regex": "(\\w{9,13})[AEIOUaeiou]{0,1}"
+    },
+    {
+      "index": 26,
+      "prompt": "Task: regex_v5\nInput:\n/regex each line with one of \"n58ld0r\" or \"hplflm43\" followed by a dot followed by at most 6 digits\n\nOutput:\n",
+      "expected": "IL:\nFIND; SEQ(ALT(REF0,REF1),LIT(\".\"),DIGIT{0,6});\n\nTemplate:\n(?:<0>|<1>)\\.\\d{0,6}",
+      "predicted": "IL:\nFIND; SEQ(ALT(REF0,REF1),LIT(\".\"),LIT(\".\"));\n\nTemplate:\n(?:<0>|<1>)\\.\\d{0,6}",
+      "expected_il": "FIND; SEQ(ALT(REF0,REF1),LIT(\".\"),DIGIT{0,6});",
+      "predicted_il": "FIND; SEQ(ALT(REF0,REF1),LIT(\".\"),LIT(\".\"));",
+      "expected_template": "(?:<0>|<1>)\\.\\d{0,6}",
+      "predicted_template": "(?:<0>|<1>)\\.\\d{0,6}",
+      "expected_regex": "(?:n58ld0r|hplflm43)\\.\\d{0,6}",
+      "predicted_regex": "(?:n58ld0r|hplflm43)\\.\\d{0,6}"
+    },
+    {
+      "index": 36,
+      "prompt": "Task: regex_v5\nInput:\n/regex text containing a plus sign, from 5 through 7 lowercase letters, and then the text \"kca68\"\n\nOutput:\n",
+      "expected": "IL:\nFIND; SEQ(LIT(\"+\"),LOWER{5,7},REF0);\n\nTemplate:\n\\+[a-z]{5,7}<0>",
+      "predicted": "IL:\nFIND; SEQ(LOWER{5,7},LOWER{5},REF0);\n\nTemplate:\n[a-z]{5,7}[a-z]{5}<0>",
+      "expected_il": "FIND; SEQ(LIT(\"+\"),LOWER{5,7},REF0);",
+      "predicted_il": "FIND; SEQ(LOWER{5,7},LOWER{5},REF0);",
+      "expected_template": "\\+[a-z]{5,7}<0>",
+      "predicted_template": "[a-z]{5,7}[a-z]{5}<0>",
+      "expected_regex": "\\+[a-z]{5,7}kca68",
+      "predicted_regex": "[a-z]{5,7}[a-z]{5}kca68"
+    },
+    {
+      "index": 40,
+      "prompt": "Task: regex_v5\nInput:\n/regex a not followed by the text \"b3nw\" if possible\n\nOutput:\n",
+      "expected": "IL:\nNOT_FOLLOWED; LEFT(LIT(\"a\")); RIGHT(REF0);\n\nTemplate:\na(?!<0>)",
+      "predicted": "IL:\nNOT_FOLLOWED; LEFT(LIT(\"e\")); RIGHT(REF0);\n\nTemplate:\ns(?!<0>)",
+      "expected_il": "NOT_FOLLOWED; LEFT(LIT(\"a\")); RIGHT(REF0);",
+      "predicted_il": "NOT_FOLLOWED; LEFT(LIT(\"e\")); RIGHT(REF0);",
+      "expected_template": "a(?!<0>)",
+      "predicted_template": "s(?!<0>)",
+      "expected_regex": "a(?!b3nw)",
+      "predicted_regex": "s(?!b3nw)"
+    },
+    {
+      "index": 42,
+      "prompt": "Task: regex_v5\nInput:\n/regex in text: \"za\", 11 spaces, and then begin select: exactly 12 digits; end select\n\nOutput:\n",
+      "expected": "IL:\nFIND; SEQ(REF0,SPACE{11},CAP1(DIGIT{12})); SELECT(CAP1);\n\nTemplate:\n<0>\\s{11}(\\d{12})",
+      "predicted": "IL:\nFIND; SEQ(REF0,SPACE{11},CAP1(DIGIT{12})); SELECT(CAP1);\n\nTemplate:\n<0>\\s{11}(\\s{11})",
+      "expected_il": "FIND; SEQ(REF0,SPACE{11},CAP1(DIGIT{12})); SELECT(CAP1);",
+      "predicted_il": "FIND; SEQ(REF0,SPACE{11},CAP1(DIGIT{12})); SELECT(CAP1);",
+      "expected_template": "<0>\\s{11}(\\d{12})",
+      "predicted_template": "<0>\\s{11}(\\s{11})",
+      "expected_regex": "za\\s{11}(\\d{12})",
+      "predicted_regex": "za\\s{11}(\\s{11})"
+    }
+  ]
+}

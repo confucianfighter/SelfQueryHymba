@@ -9,7 +9,27 @@ The focus is a fast Hymba character language model with an auxiliary loss-query 
 - `scripts/data/`: regex, addition, subtraction, and sentinel multitask corpus generators
 - `scripts/eval/`: regex and math evaluators plus sample report writer
 
+`Alpine` refers to the `previous_loss_scalar_injected_hymba` architecture: a branched Hymba block predicts scalar next-token loss from the penultimate-layer representation, injects that predicted-loss signal back into the token stream, and reruns the branch-residual path so next-character prediction can condition on autoregressive loss-prediction context.
+
+`ZagPine` refers to Alpine with the corrected dynamic ZigZag activation in the loss-predict branch. The activation was originally called Dynamic BasinZag during exploration; in the implementation it replaces the loss-branch MLP `GELU` rather than adding an extra post-branch transform.
+
 Generated corpora, experiment logs, and checkpoints are intentionally excluded from Git. The `.gitignore` blocks `data/`, `experiments/`, `*.pt`, and other large artifacts.
+
+See `docs/EXPERIMENT_SUMMARY.md` for the current local findings, including the v7 dream-regex curriculum, Alpine versus FastHymba comparisons, mixed regex/math replay results, and training-time overhead.
+
+## Reggie CLI
+
+`reggie` is a grep-style wrapper around the Alpine regex model. It accepts a file or folder plus a plain-English regex request, prepends `/r` when needed, expands quoted refs from the model template, and highlights matches in the terminal.
+
+```powershell
+python reggie.py SampleOutputs\reggie_smoke.txt --show-regex
+python reggie.py . --max-matches 20
+python reggie.py app.log --context 40
+```
+
+Omit the query to use interactive mode, where quotes can be typed naturally. Run `python reggie.py --help` for more examples, including replacement previews.
+
+Interactive mode asks whether each result was correct. Answer `n` to save the query, generated IL/template/regex, and sampled matched lines to `SampleOutputs/reggie_failures.jsonl` for later curriculum fixes.
 
 ## Install
 
@@ -101,4 +121,3 @@ Held-out evals from that run:
 - addition forced answer exact: `95/100`
 - subtraction forced answer exact: `100/100`
 - old v2 quoted-ref: `57/100`
-
