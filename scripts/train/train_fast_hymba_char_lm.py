@@ -103,6 +103,7 @@ class TrainConfig:
     plateau_min_lr: float
     plateau_max_lr: float | None
     plateau_min_delta: float
+    plateau_reload_best: bool
     grad_clip: float
     eval_every: int
     checkpoint_every: int
@@ -271,6 +272,15 @@ def parse_args() -> argparse.Namespace:
         help="Maximum LR used by plateau recovery; defaults to the LR active when training starts.",
     )
     parser.add_argument("--plateau-min-delta", type=float, default=0.0)
+    parser.add_argument(
+        "--plateau-reload-best",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help=(
+            "If enabled, plateau recovery may reload checkpoint_best.pt after LR reduction and Adam reset fail. "
+            "Disabled by default so training never rewinds model weights."
+        ),
+    )
     parser.add_argument("--grad-clip", type=float, default=1.0)
     parser.add_argument("--eval-every", type=int, default=100)
     parser.add_argument("--checkpoint-every", type=int, default=250)
@@ -1152,6 +1162,7 @@ def main() -> None:
         plateau_min_lr=args.plateau_min_lr,
         plateau_max_lr=args.plateau_max_lr,
         plateau_min_delta=args.plateau_min_delta,
+        plateau_reload_best=args.plateau_reload_best,
         grad_clip=args.grad_clip,
         eval_every=args.eval_every,
         checkpoint_every=args.checkpoint_every,
@@ -1591,6 +1602,7 @@ def main() -> None:
             "min_lr": args.plateau_min_lr,
             "max_lr": plateau_max_lr,
             "min_delta": args.plateau_min_delta,
+            "reload_best": args.plateau_reload_best,
             "stage": plateau_stage,
             "stage_start_step": plateau_stage_start_step,
             "best_eval_loss": None,
@@ -1798,7 +1810,7 @@ def main() -> None:
                         plateau_stage_start_step = step
                         row["plateau_action"] = "reset_adam"
                         row["plateau_lr"] = optimizer_lr(optimizer)
-                    else:
+                    elif args.plateau_reload_best:
                         best_payload = torch.load(best_checkpoint, map_location=device, weights_only=False)
                         model.load_state_dict(best_payload["model_state_dict"])
                         optimizer = make_optimizer(model, lr=plateau_restore_lr)
@@ -1811,6 +1823,18 @@ def main() -> None:
                         row["plateau_action"] = "reload_best_fresh_adam"
                         row["plateau_lr"] = optimizer_lr(optimizer)
                         row["plateau_reloaded_best_step"] = best_eval_step
+                    else:
+                        reduced_lr = clamp_lr(
+                            optimizer_lr(optimizer) * args.plateau_lr_factor,
+                            min_lr=args.plateau_min_lr,
+                            max_lr=plateau_max_lr,
+                        )
+                        optimizer = make_optimizer(model, lr=reduced_lr)
+                        set_optimizer_lr(optimizer, reduced_lr)
+                        plateau_stage = "lr_reduced"
+                        plateau_stage_start_step = step
+                        row["plateau_action"] = "reduce_lr_reset_adam_no_reload"
+                        row["plateau_lr"] = reduced_lr
                 status["plateau_recovery"].update(
                     {
                         "stage": plateau_stage,
