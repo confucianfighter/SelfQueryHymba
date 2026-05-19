@@ -4,7 +4,385 @@ import torch
 from torch import Tensor, nn
 
 from .attention import CausalTimeAttention, RotaryCausalTimeAttention
+from .linear import make_linear
 from .ssm import CausalSSMBranch, FastCausalConvBranch, MultiScaleCausalDecomposition, MultiStrideCausalConvBranch
+
+
+class HalfDynamicBasinZagGELUMLPActivation(nn.Module):
+    """Split MLP activation: dynamic BasinZag on half the hidden channels, GELU on half."""
+
+    def __init__(
+        self,
+        hidden_dim: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        if hidden_dim < 2:
+            raise ValueError("half_dynamic_basin_zag_gelu MLP activation requires at least 2 hidden channels")
+        self.zag_channels = hidden_dim // 2
+        self.gelu_channels = hidden_dim - self.zag_channels
+        self.value_proj = nn.Linear(self.zag_channels, self.zag_channels)
+        self.width_proj = nn.Linear(self.zag_channels, self.zag_channels)
+        self.gelu = nn.GELU()
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+        self.reset_parameters()
+
+    def reset_parameters(self) -> None:
+        nn.init.normal_(self.value_proj.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.value_proj.bias)
+        nn.init.normal_(self.width_proj.weight, mean=0.0, std=0.02)
+        initial_fraction = 0.42
+        initial_logit = torch.logit(torch.tensor(initial_fraction)).item()
+        nn.init.constant_(self.width_proj.bias, initial_logit)
+
+    def forward(self, x: Tensor) -> Tensor:
+        zag_input, gelu_input = torch.split(x, [self.zag_channels, self.gelu_channels], dim=-1)
+        value = self.value_proj(zag_input)
+        width_control = self.width_proj(zag_input)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        zag_output = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "mlp_basin_width_mean": float(detached.mean().item()),
+                "mlp_basin_width_min": float(detached.min().item()),
+                "mlp_basin_width_max": float(detached.max().item()),
+                "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return torch.cat([zag_output, self.gelu(gelu_input)], dim=-1)
+
+
+class DynamicBasinZagMLPActivation(nn.Module):
+    """Full-width dynamic BasinZag activation for MLP hidden states."""
+
+    def __init__(
+        self,
+        hidden_dim: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        self.value_proj = nn.Linear(hidden_dim, hidden_dim)
+        self.width_proj = nn.Linear(hidden_dim, hidden_dim)
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+        self.reset_parameters()
+
+    def reset_parameters(self) -> None:
+        nn.init.normal_(self.value_proj.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.value_proj.bias)
+        nn.init.normal_(self.width_proj.weight, mean=0.0, std=0.02)
+        initial_fraction = 0.42
+        initial_logit = torch.logit(torch.tensor(initial_fraction)).item()
+        nn.init.constant_(self.width_proj.bias, initial_logit)
+
+    def forward(self, x: Tensor) -> Tensor:
+        value = self.value_proj(x)
+        width_control = self.width_proj(x)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "mlp_basin_width_mean": float(detached.mean().item()),
+                "mlp_basin_width_min": float(detached.min().item()),
+                "mlp_basin_width_max": float(detached.max().item()),
+                "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return y
+
+
+class UpSplitDynamicBasinZagMLPActivation(nn.Module):
+    """Parameter-free dynamic BasinZag using half of the up projection as value and half as width control."""
+
+    def __init__(
+        self,
+        hidden_dim: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        if hidden_dim < 2 or hidden_dim % 2 != 0:
+            raise ValueError("up_split_dynamic_basin_zag requires an even hidden dimension >= 2")
+        self.output_dim = hidden_dim // 2
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+
+    def forward(self, x: Tensor) -> Tensor:
+        value, width_control = x.chunk(2, dim=-1)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "mlp_basin_width_mean": float(detached.mean().item()),
+                "mlp_basin_width_min": float(detached.min().item()),
+                "mlp_basin_width_max": float(detached.max().item()),
+                "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return y
+
+
+class DualProjectionDynamicBasinZagMLP(nn.Module):
+    """MLP with separate dense value and width-control projections for BasinZag."""
+
+    def __init__(
+        self,
+        d_model: int,
+        hidden_dim: int,
+        *,
+        down_projection_type: str = "dense",
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        if hidden_dim < 2 or hidden_dim % 2 != 0:
+            raise ValueError("dual_projection_dynamic_basin_zag requires an even hidden dimension >= 2")
+        self.active_dim = hidden_dim // 2
+        self.value_proj = nn.Linear(d_model, self.active_dim)
+        self.width_proj = nn.Linear(d_model, self.active_dim)
+        self.down_proj = make_mlp_down_projection(down_projection_type, self.active_dim, d_model)
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+
+    def forward(self, x: Tensor) -> Tensor:
+        value = self.value_proj(x)
+        width_control = self.width_proj(x)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "mlp_basin_width_mean": float(detached.mean().item()),
+                "mlp_basin_width_min": float(detached.min().item()),
+                "mlp_basin_width_max": float(detached.max().item()),
+                "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return self.down_proj(y)
+
+
+class InputSplitDynamicBasinZagMLP(nn.Module):
+    """MLP that splits input channels into signal/control halves before BasinZag projections."""
+
+    def __init__(
+        self,
+        d_model: int,
+        hidden_dim: int,
+        *,
+        down_projection_type: str = "dense",
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        if d_model < 2 or d_model % 2 != 0:
+            raise ValueError("input_split_dynamic_basin_zag requires an even d_model >= 2")
+        if hidden_dim < 2 or hidden_dim % 2 != 0:
+            raise ValueError("input_split_dynamic_basin_zag requires an even hidden dimension >= 2")
+        self.input_half_dim = d_model // 2
+        self.active_dim = hidden_dim // 2
+        self.value_proj = nn.Linear(self.input_half_dim, self.active_dim)
+        self.width_proj = nn.Linear(self.input_half_dim, self.active_dim)
+        self.down_proj = make_mlp_down_projection(down_projection_type, self.active_dim, d_model)
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+
+    def forward(self, x: Tensor) -> Tensor:
+        value_input, width_input = x.chunk(2, dim=-1)
+        value = self.value_proj(value_input)
+        width_control = self.width_proj(width_input)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "mlp_basin_width_mean": float(detached.mean().item()),
+                "mlp_basin_width_min": float(detached.min().item()),
+                "mlp_basin_width_max": float(detached.max().item()),
+                "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return self.down_proj(y)
+
+
+def make_mlp_activation(
+    activation_type: str,
+    hidden_dim: int,
+    *,
+    basin_min_width: float = 0.35,
+    basin_max_width: float = 3.0,
+    basin_floor: float = 0.08,
+    basin_zag_amp: float = 0.12,
+    basin_sharpness: float = 2.0,
+    basin_eps: float = 1e-6,
+) -> nn.Module:
+    if activation_type == "gelu":
+        return nn.GELU()
+    if activation_type == "dynamic_basin_zag":
+        return DynamicBasinZagMLPActivation(
+            hidden_dim,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
+    if activation_type == "up_split_dynamic_basin_zag":
+        return UpSplitDynamicBasinZagMLPActivation(
+            hidden_dim,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
+    if activation_type == "half_dynamic_basin_zag_gelu":
+        return HalfDynamicBasinZagGELUMLPActivation(
+            hidden_dim,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
+    raise ValueError(
+        "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
+        "'up_split_dynamic_basin_zag', 'dual_projection_dynamic_basin_zag', "
+        "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
+    )
+
+
+def mlp_activation_output_dim(activation: nn.Module, hidden_dim: int) -> int:
+    return int(getattr(activation, "output_dim", hidden_dim))
+
+
+def make_mlp_up_projection(projection_type: str, d_model: int, hidden_dim: int) -> nn.Module:
+    return make_linear(projection_type, d_model, hidden_dim)
+
+
+def make_mlp_down_projection(projection_type: str, in_features: int, d_model: int) -> nn.Module:
+    return make_linear(projection_type, in_features, d_model)
+
+
+def make_hymba_mlp(
+    d_model: int,
+    hidden_dim: int,
+    *,
+    block_mlp_activation_type: str,
+    block_mlp_up_projection_type: str,
+    block_mlp_down_projection_type: str,
+    basin_min_width: float,
+    basin_max_width: float,
+    basin_floor: float,
+    basin_zag_amp: float,
+    basin_sharpness: float,
+    basin_eps: float,
+) -> nn.Module:
+    if block_mlp_activation_type == "dual_projection_dynamic_basin_zag":
+        return DualProjectionDynamicBasinZagMLP(
+            d_model,
+            hidden_dim,
+            down_projection_type=block_mlp_down_projection_type,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
+    if block_mlp_activation_type == "input_split_dynamic_basin_zag":
+        return InputSplitDynamicBasinZagMLP(
+            d_model,
+            hidden_dim,
+            down_projection_type=block_mlp_down_projection_type,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
+    activation = make_mlp_activation(
+        block_mlp_activation_type,
+        hidden_dim,
+        basin_min_width=basin_min_width,
+        basin_max_width=basin_max_width,
+        basin_floor=basin_floor,
+        basin_zag_amp=basin_zag_amp,
+        basin_sharpness=basin_sharpness,
+        basin_eps=basin_eps,
+    )
+    return nn.Sequential(
+        make_mlp_up_projection(block_mlp_up_projection_type, d_model, hidden_dim),
+        activation,
+        make_mlp_down_projection(block_mlp_down_projection_type, mlp_activation_output_dim(activation, hidden_dim), d_model),
+    )
 
 
 class HybridHymbaBlock(nn.Module):
@@ -22,18 +400,54 @@ class HybridHymbaBlock(nn.Module):
         *,
         ssm_kernel_size: int = 3,
         mlp_multiplier: int = 4,
+        ssm_activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
+        attention_qkv_projection_type: str | None = None,
+        block_mlp_activation_type: str = "gelu",
+        block_mlp_up_projection_type: str = "dense",
+        block_mlp_down_projection_type: str = "dense",
     ) -> None:
         super().__init__()
         self.attn_norm = nn.LayerNorm(d_model)
-        self.self_attn = CausalTimeAttention(d_model=d_model, num_heads=num_heads)
+        self.self_attn = CausalTimeAttention(
+            d_model=d_model,
+            num_heads=num_heads,
+            projection_type=projection_type,
+            qkv_projection_type=attention_qkv_projection_type,
+        )
         self.ssm_norm = nn.LayerNorm(d_model)
-        self.ssm = CausalSSMBranch(d_model=d_model, conv_kernel_size=ssm_kernel_size)
+        self.ssm = CausalSSMBranch(
+            d_model=d_model,
+            conv_kernel_size=ssm_kernel_size,
+            activation_type=ssm_activation_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
+            projection_type=projection_type,
+        )
         self.mlp_norm = nn.LayerNorm(d_model)
         hidden = d_model * mlp_multiplier
-        self.mlp = nn.Sequential(
-            nn.Linear(d_model, hidden),
-            nn.GELU(),
-            nn.Linear(hidden, d_model),
+        self.mlp = make_hymba_mlp(
+            d_model,
+            hidden,
+            block_mlp_activation_type=block_mlp_activation_type,
+            block_mlp_up_projection_type=block_mlp_up_projection_type,
+            block_mlp_down_projection_type=block_mlp_down_projection_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
         )
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
@@ -61,18 +475,54 @@ class FastHybridHymbaBlock(nn.Module):
         *,
         ssm_kernel_size: int = 3,
         mlp_multiplier: int = 4,
+        ssm_activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
+        attention_qkv_projection_type: str | None = None,
+        block_mlp_activation_type: str = "gelu",
+        block_mlp_up_projection_type: str = "dense",
+        block_mlp_down_projection_type: str = "dense",
     ) -> None:
         super().__init__()
         self.attn_norm = nn.LayerNorm(d_model)
-        self.self_attn = CausalTimeAttention(d_model=d_model, num_heads=num_heads)
+        self.self_attn = CausalTimeAttention(
+            d_model=d_model,
+            num_heads=num_heads,
+            projection_type=projection_type,
+            qkv_projection_type=attention_qkv_projection_type,
+        )
         self.ssm_norm = nn.LayerNorm(d_model)
-        self.ssm = FastCausalConvBranch(d_model=d_model, conv_kernel_size=ssm_kernel_size)
+        self.ssm = FastCausalConvBranch(
+            d_model=d_model,
+            conv_kernel_size=ssm_kernel_size,
+            activation_type=ssm_activation_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
+            projection_type=projection_type,
+        )
         self.mlp_norm = nn.LayerNorm(d_model)
         hidden = d_model * mlp_multiplier
-        self.mlp = nn.Sequential(
-            nn.Linear(d_model, hidden),
-            nn.GELU(),
-            nn.Linear(hidden, d_model),
+        self.mlp = make_hymba_mlp(
+            d_model,
+            hidden,
+            block_mlp_activation_type=block_mlp_activation_type,
+            block_mlp_up_projection_type=block_mlp_up_projection_type,
+            block_mlp_down_projection_type=block_mlp_down_projection_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
         )
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
@@ -99,12 +549,40 @@ class NoMLPFastHybridHymbaBlock(nn.Module):
         num_heads: int,
         *,
         ssm_kernel_size: int = 3,
+        ssm_activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
+        attention_qkv_projection_type: str | None = None,
+        block_mlp_activation_type: str = "gelu",
+        block_mlp_up_projection_type: str = "dense",
+        block_mlp_down_projection_type: str = "dense",
     ) -> None:
         super().__init__()
         self.attn_norm = nn.LayerNorm(d_model)
-        self.self_attn = CausalTimeAttention(d_model=d_model, num_heads=num_heads)
+        self.self_attn = CausalTimeAttention(
+            d_model=d_model,
+            num_heads=num_heads,
+            projection_type=projection_type,
+            qkv_projection_type=attention_qkv_projection_type,
+        )
         self.ssm_norm = nn.LayerNorm(d_model)
-        self.ssm = FastCausalConvBranch(d_model=d_model, conv_kernel_size=ssm_kernel_size)
+        self.ssm = FastCausalConvBranch(
+            d_model=d_model,
+            conv_kernel_size=ssm_kernel_size,
+            activation_type=ssm_activation_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
+            projection_type=projection_type,
+        )
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
         attn_input = self.attn_norm(states)
@@ -130,6 +608,18 @@ class MultiStrideHybridHymbaBlock(nn.Module):
         ssm_kernel_size: int = 3,
         mlp_multiplier: int = 4,
         stride_channels: tuple[tuple[int, int], ...] | None = None,
+        ssm_activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
+        attention_qkv_projection_type: str | None = None,
+        block_mlp_activation_type: str = "gelu",
+        block_mlp_up_projection_type: str = "dense",
+        block_mlp_down_projection_type: str = "dense",
     ) -> None:
         super().__init__()
         if stride_channels is None:
@@ -137,19 +627,40 @@ class MultiStrideHybridHymbaBlock(nn.Module):
                 raise ValueError("default multi-stride split requires even d_model")
             stride_channels = ((1, d_model // 2), (2, d_model // 2))
         self.attn_norm = nn.LayerNorm(d_model)
-        self.self_attn = CausalTimeAttention(d_model=d_model, num_heads=num_heads)
+        self.self_attn = CausalTimeAttention(
+            d_model=d_model,
+            num_heads=num_heads,
+            projection_type=projection_type,
+            qkv_projection_type=attention_qkv_projection_type,
+        )
         self.ssm_norm = nn.LayerNorm(d_model)
         self.ssm = MultiStrideCausalConvBranch(
             d_model=d_model,
             conv_kernel_size=ssm_kernel_size,
             stride_channels=stride_channels,
+            activation_type=ssm_activation_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
+            projection_type=projection_type,
         )
         self.mlp_norm = nn.LayerNorm(d_model)
         hidden = d_model * mlp_multiplier
-        self.mlp = nn.Sequential(
-            nn.Linear(d_model, hidden),
-            nn.GELU(),
-            nn.Linear(hidden, d_model),
+        self.mlp = make_hymba_mlp(
+            d_model,
+            hidden,
+            block_mlp_activation_type=block_mlp_activation_type,
+            block_mlp_up_projection_type=block_mlp_up_projection_type,
+            block_mlp_down_projection_type=block_mlp_down_projection_type,
+            basin_min_width=basin_min_width,
+            basin_max_width=basin_max_width,
+            basin_floor=basin_floor,
+            basin_zag_amp=basin_zag_amp,
+            basin_sharpness=basin_sharpness,
+            basin_eps=basin_eps,
         )
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:

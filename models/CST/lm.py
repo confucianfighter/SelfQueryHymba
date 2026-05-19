@@ -26,7 +26,11 @@ from .causality import (
     source_causal_times,
     upsample_additive,
 )
+from .linear import make_linear
 from .ssm import FastCausalConvBranch
+
+
+PROJECTION_TYPES = {"dense", "braided", "braided4", "masked_braided", "masked_braided4"}
 
 
 def _validate_prefix_token_counts(*, n_bos_tokens: int, n_meta_tokens: int, n_control_tokens: int) -> None:
@@ -148,6 +152,13 @@ class FastHymbaCharLMConfig:
     num_layers: int = 16
     ssm_kernel_size: int = 3
     state_branch: str = "conv"
+    projection_type: str = "dense"
+    attention_qkv_projection_type: str = "dense"
+    ssm_activation_type: str = "silu"
+    block_mlp_multiplier: int = 4
+    block_mlp_activation_type: str = "gelu"
+    block_mlp_up_projection_type: str = "dense"
+    block_mlp_down_projection_type: str = "dense"
     tie_head: bool = True
     activation_type: str = "identity"
     basin_min_width: float = 0.35
@@ -168,8 +179,36 @@ class FastHymbaCharLMConfig:
             raise ValueError("num_layers must be positive")
         if self.state_branch not in {"conv", "multistride_1_2"}:
             raise ValueError("state_branch must be 'conv' or 'multistride_1_2'")
-        if self.activation_type not in {"identity", "gelu", "static_basin_zag", "dynamic_basin_zag"}:
-            raise ValueError("activation_type must be 'identity', 'gelu', 'static_basin_zag', or 'dynamic_basin_zag'")
+        if self.projection_type not in PROJECTION_TYPES:
+            raise ValueError("projection_type must be a supported projection type")
+        if self.attention_qkv_projection_type not in PROJECTION_TYPES:
+            raise ValueError("attention_qkv_projection_type must be a supported projection type")
+        if self.ssm_activation_type not in {"silu", "dynamic_basin_zag"}:
+            raise ValueError("ssm_activation_type must be 'silu' or 'dynamic_basin_zag'")
+        if self.block_mlp_multiplier <= 0:
+            raise ValueError("block_mlp_multiplier must be positive")
+        if self.block_mlp_activation_type not in {
+            "gelu",
+            "dynamic_basin_zag",
+            "up_split_dynamic_basin_zag",
+            "dual_projection_dynamic_basin_zag",
+            "input_split_dynamic_basin_zag",
+            "half_dynamic_basin_zag_gelu",
+        }:
+            raise ValueError(
+                "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
+                "'up_split_dynamic_basin_zag', 'dual_projection_dynamic_basin_zag', "
+                "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
+            )
+        if self.block_mlp_up_projection_type not in PROJECTION_TYPES:
+            raise ValueError("block_mlp_up_projection_type must be a supported projection type")
+        if self.block_mlp_down_projection_type not in PROJECTION_TYPES:
+            raise ValueError("block_mlp_down_projection_type must be a supported projection type")
+        if self.activation_type not in {"identity", "gelu", "static_basin_zag", "dynamic_basin_zag", "half_dynamic_basin_zag_gelu"}:
+            raise ValueError(
+                "activation_type must be 'identity', 'gelu', 'static_basin_zag', "
+                "'dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
+            )
         if self.basin_min_width <= 0 or self.basin_max_width <= self.basin_min_width:
             raise ValueError("basin widths must satisfy 0 < min_width < max_width")
         if not 0 <= self.basin_floor <= 1:
@@ -220,7 +259,7 @@ class DynamicBasinZagActivation(nn.Module):
         envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
         zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
         y = value * envelope + width * zag
-        if not torch.jit.is_scripting():
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
             self.last_width_stats = {
                 "basin_width_mean": float(detached.mean().item()),
@@ -229,6 +268,45 @@ class DynamicBasinZagActivation(nn.Module):
                 "basin_width_std": float(detached.std(unbiased=False).item()),
             }
         return y
+
+
+class HalfDynamicBasinZagGELUActivation(nn.Module):
+    """Split activation: dynamic BasinZag on the first half, GELU on the second half."""
+
+    def __init__(
+        self,
+        d_model: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        if d_model < 2:
+            raise ValueError("half_dynamic_basin_zag_gelu requires at least 2 channels")
+        self.zag_channels = d_model // 2
+        self.gelu_channels = d_model - self.zag_channels
+        self.zag = DynamicBasinZagActivation(
+            self.zag_channels,
+            min_width=min_width,
+            max_width=max_width,
+            floor=floor,
+            zag_amp=zag_amp,
+            sharpness=sharpness,
+            eps=eps,
+        )
+        self.gelu = nn.GELU()
+
+    @property
+    def last_width_stats(self) -> dict[str, float]:
+        return self.zag.last_width_stats
+
+    def forward(self, x: Tensor) -> Tensor:
+        zag_input, gelu_input = torch.split(x, [self.zag_channels, self.gelu_channels], dim=-1)
+        return torch.cat([self.zag(zag_input), self.gelu(gelu_input)], dim=-1)
 
 
 class StaticBasinZagActivation(nn.Module):
@@ -302,10 +380,41 @@ def _replace_loss_branch_mlp_activation(branch: nn.Module, config: FastHymbaChar
             sharpness=config.basin_sharpness,
             eps=config.basin_eps,
         )
+    elif config.activation_type == "half_dynamic_basin_zag_gelu":
+        activation = HalfDynamicBasinZagGELUActivation(
+            hidden_dim,
+            min_width=config.basin_min_width,
+            max_width=config.basin_max_width,
+            floor=config.basin_floor,
+            zag_amp=config.basin_zag_amp,
+            sharpness=config.basin_sharpness,
+            eps=config.basin_eps,
+        )
     else:
         raise ValueError(f"unsupported activation_type: {config.activation_type!r}")
     mlp[1] = activation
     return activation
+
+
+def _block_kwargs(config: FastHymbaCharLMConfig) -> dict[str, object]:
+    return {
+        "d_model": config.d_model,
+        "num_heads": config.num_heads,
+        "ssm_kernel_size": config.ssm_kernel_size,
+        "projection_type": config.projection_type,
+        "attention_qkv_projection_type": config.attention_qkv_projection_type,
+        "ssm_activation_type": config.ssm_activation_type,
+        "mlp_multiplier": config.block_mlp_multiplier,
+        "block_mlp_activation_type": config.block_mlp_activation_type,
+        "block_mlp_up_projection_type": config.block_mlp_up_projection_type,
+        "block_mlp_down_projection_type": config.block_mlp_down_projection_type,
+        "basin_min_width": config.basin_min_width,
+        "basin_max_width": config.basin_max_width,
+        "basin_floor": config.basin_floor,
+        "basin_zag_amp": config.basin_zag_amp,
+        "basin_sharpness": config.basin_sharpness,
+        "basin_eps": config.basin_eps,
+    }
 
 
 @dataclass(frozen=True)
@@ -1035,11 +1144,7 @@ class FastHymbaCharLM(nn.Module):
         block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
         self.layers = nn.ModuleList(
             [
-                block_cls(
-                    d_model=config.d_model,
-                    num_heads=config.num_heads,
-                    ssm_kernel_size=config.ssm_kernel_size,
-                )
+                block_cls(**_block_kwargs(config))
                 for _ in range(config.num_layers)
             ]
         )
@@ -1094,11 +1199,7 @@ class LossQueryFastHymbaCharLM(nn.Module):
         block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
         self.layers = nn.ModuleList(
             [
-                block_cls(
-                    d_model=config.d_model,
-                    num_heads=config.num_heads,
-                    ssm_kernel_size=config.ssm_kernel_size,
-                )
+                block_cls(**_block_kwargs(config))
                 for _ in range(config.num_layers)
             ]
         )
@@ -1250,21 +1351,13 @@ class LossContextInjectedFastHymbaCharLM(nn.Module):
         block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
         self.layers = nn.ModuleList(
             [
-                block_cls(
-                    d_model=config.d_model,
-                    num_heads=config.num_heads,
-                    ssm_kernel_size=config.ssm_kernel_size,
-                )
+                block_cls(**_block_kwargs(config))
                 for _ in range(config.num_layers)
             ]
         )
         self.final_norm = nn.LayerNorm(config.d_model)
         self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
-        self.loss_branch = block_cls(
-            d_model=config.d_model,
-            num_heads=config.num_heads,
-            ssm_kernel_size=config.ssm_kernel_size,
-        )
+        self.loss_branch = block_cls(**_block_kwargs(config))
         self.loss_branch_norm = nn.LayerNorm(config.d_model)
         self.loss_head = nn.Linear(config.d_model, 1)
         if config.tie_head:
@@ -1332,28 +1425,20 @@ class PreviousLossScalarInjectedFastHymbaCharLM(nn.Module):
         block_cls = MultiStrideHybridHymbaBlock if config.state_branch == "multistride_1_2" else FastHybridHymbaBlock
         self.layers = nn.ModuleList(
             [
-                block_cls(
-                    d_model=config.d_model,
-                    num_heads=config.num_heads,
-                    ssm_kernel_size=config.ssm_kernel_size,
-                )
+                block_cls(**_block_kwargs(config))
                 for _ in range(config.num_layers)
             ]
         )
         self.final_norm = nn.LayerNorm(config.d_model)
         self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
-        self.loss_branch = block_cls(
-            d_model=config.d_model,
-            num_heads=config.num_heads,
-            ssm_kernel_size=config.ssm_kernel_size,
-        )
+        self.loss_branch = block_cls(**_block_kwargs(config))
         self.loss_activation = _replace_loss_branch_mlp_activation(self.loss_branch, config)
         self.loss_branch_norm = nn.LayerNorm(config.d_model)
         self.loss_head = nn.Linear(config.d_model, 1)
         self.previous_loss_adapter = nn.Sequential(
             nn.Linear(1, config.d_model),
             nn.Tanh(),
-            nn.Linear(config.d_model, config.d_model),
+            make_linear(config.projection_type, config.d_model, config.d_model),
         )
         self.previous_loss_gate = nn.Parameter(torch.tensor(0.05))
         if config.tie_head:
@@ -1363,7 +1448,7 @@ class PreviousLossScalarInjectedFastHymbaCharLM(nn.Module):
             nn.init.normal_(self.lm_head.weight, mean=0.0, std=0.02)
         nn.init.normal_(self.loss_head.weight, mean=0.0, std=0.02)
         nn.init.zeros_(self.loss_head.bias)
-        for module in self.previous_loss_adapter:
+        for module in self.previous_loss_adapter.modules():
             if isinstance(module, nn.Linear):
                 nn.init.normal_(module.weight, mean=0.0, std=0.02)
                 nn.init.zeros_(module.bias)

@@ -5,6 +5,94 @@ import torch.nn.functional as F
 from torch import Tensor, nn
 
 from .causality import validate_causal_order
+from .linear import make_linear
+
+
+class DynamicBasinZagSSMActivation(nn.Module):
+    """Dynamic BasinZag activation for SSM/state branches."""
+
+    def __init__(
+        self,
+        d_model: int,
+        *,
+        min_width: float = 0.35,
+        max_width: float = 3.0,
+        floor: float = 0.08,
+        zag_amp: float = 0.12,
+        sharpness: float = 2.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        self.value_proj = nn.Linear(d_model, d_model)
+        self.width_proj = nn.Linear(d_model, d_model)
+        self.min_width = float(min_width)
+        self.max_width = float(max_width)
+        self.floor = float(floor)
+        self.zag_amp = float(zag_amp)
+        self.sharpness = float(sharpness)
+        self.eps = float(eps)
+        self.last_width_stats: dict[str, float] = {}
+        self.reset_parameters()
+
+    def reset_parameters(self) -> None:
+        nn.init.normal_(self.value_proj.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.value_proj.bias)
+        nn.init.normal_(self.width_proj.weight, mean=0.0, std=0.02)
+        initial_fraction = 0.42
+        initial_logit = torch.logit(torch.tensor(initial_fraction)).item()
+        nn.init.constant_(self.width_proj.bias, initial_logit)
+
+    def forward(self, x: Tensor) -> Tensor:
+        value = self.value_proj(x)
+        width_control = self.width_proj(x)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        y = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "ssm_basin_width_mean": float(detached.mean().item()),
+                "ssm_basin_width_min": float(detached.min().item()),
+                "ssm_basin_width_max": float(detached.max().item()),
+                "ssm_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return y
+
+
+def make_ssm_activation(
+    activation_type: str,
+    d_model: int,
+    *,
+    min_width: float = 0.35,
+    max_width: float = 3.0,
+    floor: float = 0.08,
+    zag_amp: float = 0.12,
+    sharpness: float = 2.0,
+    eps: float = 1e-6,
+) -> nn.Module:
+    if activation_type == "silu":
+        return nn.SiLU()
+    if activation_type == "dynamic_basin_zag":
+        return DynamicBasinZagSSMActivation(
+            d_model,
+            min_width=min_width,
+            max_width=max_width,
+            floor=floor,
+            zag_amp=zag_amp,
+            sharpness=sharpness,
+            eps=eps,
+        )
+    raise ValueError("ssm_activation_type must be 'silu' or 'dynamic_basin_zag'")
+
+
+def _xavier_uniform_linear(module: nn.Module) -> None:
+    for child in module.modules():
+        if isinstance(child, nn.Linear):
+            nn.init.xavier_uniform_(child.weight)
+            if child.bias is not None:
+                nn.init.zeros_(child.bias)
 
 
 class CausalSSMBranch(nn.Module):
@@ -15,7 +103,20 @@ class CausalSSMBranch(nn.Module):
     stream order is nondecreasing in causal_time before scanning.
     """
 
-    def __init__(self, d_model: int, *, conv_kernel_size: int = 3) -> None:
+    def __init__(
+        self,
+        d_model: int,
+        *,
+        conv_kernel_size: int = 3,
+        activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
+    ) -> None:
         super().__init__()
         if conv_kernel_size <= 0:
             raise ValueError("conv_kernel_size must be positive")
@@ -23,19 +124,27 @@ class CausalSSMBranch(nn.Module):
         self.conv_kernel_size = conv_kernel_size
         self.conv_weight = nn.Parameter(torch.empty(d_model, 1, conv_kernel_size))
         self.conv_bias = nn.Parameter(torch.zeros(d_model))
-        self.in_proj = nn.Linear(d_model, d_model)
+        self.in_proj = make_linear(projection_type, d_model, d_model)
         self.state_proj = nn.Linear(d_model, d_model, bias=False)
-        self.out_proj = nn.Linear(d_model, d_model)
+        self.out_proj = make_linear(projection_type, d_model, d_model)
+        self.activation = make_ssm_activation(
+            activation_type,
+            d_model,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
         self.reset_parameters()
 
     def reset_parameters(self) -> None:
         nn.init.kaiming_uniform_(self.conv_weight, a=5**0.5)
         nn.init.zeros_(self.conv_bias)
-        nn.init.xavier_uniform_(self.in_proj.weight)
-        nn.init.zeros_(self.in_proj.bias)
+        _xavier_uniform_linear(self.in_proj)
         nn.init.orthogonal_(self.state_proj.weight)
-        nn.init.xavier_uniform_(self.out_proj.weight)
-        nn.init.zeros_(self.out_proj.bias)
+        _xavier_uniform_linear(self.out_proj)
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
         if states.ndim != 3:
@@ -57,7 +166,7 @@ class CausalSSMBranch(nn.Module):
         x = states.transpose(1, 2)
         x = F.pad(x, (self.conv_kernel_size - 1, 0))
         x = F.conv1d(x, self.conv_weight, self.conv_bias, groups=self.d_model)
-        x = torch.nn.functional.silu(self.in_proj(x.transpose(1, 2)))
+        x = self.activation(self.in_proj(x.transpose(1, 2)))
 
         recurrent = states.new_zeros(states.shape[0], self.d_model)
         outputs = []
@@ -72,7 +181,20 @@ class CausalSSMBranch(nn.Module):
 class FastCausalConvBranch(nn.Module):
     """Causal convolutional state branch without a Python recurrent scan."""
 
-    def __init__(self, d_model: int, *, conv_kernel_size: int = 3) -> None:
+    def __init__(
+        self,
+        d_model: int,
+        *,
+        conv_kernel_size: int = 3,
+        activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
+    ) -> None:
         super().__init__()
         if conv_kernel_size <= 0:
             raise ValueError("conv_kernel_size must be positive")
@@ -80,17 +202,25 @@ class FastCausalConvBranch(nn.Module):
         self.conv_kernel_size = conv_kernel_size
         self.conv_weight = nn.Parameter(torch.empty(d_model, 1, conv_kernel_size))
         self.conv_bias = nn.Parameter(torch.zeros(d_model))
-        self.in_proj = nn.Linear(d_model, d_model)
-        self.out_proj = nn.Linear(d_model, d_model)
+        self.in_proj = make_linear(projection_type, d_model, d_model)
+        self.out_proj = make_linear(projection_type, d_model, d_model)
+        self.activation = make_ssm_activation(
+            activation_type,
+            d_model,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
         self.reset_parameters()
 
     def reset_parameters(self) -> None:
         nn.init.kaiming_uniform_(self.conv_weight, a=5**0.5)
         nn.init.zeros_(self.conv_bias)
-        nn.init.xavier_uniform_(self.in_proj.weight)
-        nn.init.zeros_(self.in_proj.bias)
-        nn.init.xavier_uniform_(self.out_proj.weight)
-        nn.init.zeros_(self.out_proj.bias)
+        _xavier_uniform_linear(self.in_proj)
+        _xavier_uniform_linear(self.out_proj)
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
         if states.ndim != 3:
@@ -112,7 +242,7 @@ class FastCausalConvBranch(nn.Module):
         x = states.transpose(1, 2)
         x = F.pad(x, (self.conv_kernel_size - 1, 0))
         x = F.conv1d(x, self.conv_weight, self.conv_bias, groups=self.d_model)
-        x = torch.nn.functional.silu(self.in_proj(x.transpose(1, 2)))
+        x = self.activation(self.in_proj(x.transpose(1, 2)))
         return self.out_proj(x)
 
 
@@ -125,6 +255,14 @@ class MultiStrideCausalConvBranch(nn.Module):
         *,
         conv_kernel_size: int = 3,
         stride_channels: tuple[tuple[int, int], ...] = ((1, 16), (2, 16)),
+        activation_type: str = "silu",
+        basin_min_width: float = 0.35,
+        basin_max_width: float = 3.0,
+        basin_floor: float = 0.08,
+        basin_zag_amp: float = 0.12,
+        basin_sharpness: float = 2.0,
+        basin_eps: float = 1e-6,
+        projection_type: str = "dense",
     ) -> None:
         super().__init__()
         if conv_kernel_size <= 0:
@@ -140,23 +278,31 @@ class MultiStrideCausalConvBranch(nn.Module):
         self.d_model = d_model
         self.conv_kernel_size = conv_kernel_size
         self.stride_channels = tuple(stride_channels)
-        self.in_proj = nn.Linear(d_model, d_model)
+        self.in_proj = make_linear(projection_type, d_model, d_model)
+        self.activation = make_ssm_activation(
+            activation_type,
+            d_model,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+        )
         self.conv_weights = nn.ParameterList(
             [nn.Parameter(torch.empty(channels, 1, conv_kernel_size)) for _stride, channels in stride_channels]
         )
         self.conv_biases = nn.ParameterList([nn.Parameter(torch.zeros(channels)) for _stride, channels in stride_channels])
-        self.out_proj = nn.Linear(d_model, d_model)
+        self.out_proj = make_linear(projection_type, d_model, d_model)
         self.reset_parameters()
 
     def reset_parameters(self) -> None:
-        nn.init.xavier_uniform_(self.in_proj.weight)
-        nn.init.zeros_(self.in_proj.bias)
+        _xavier_uniform_linear(self.in_proj)
         for weight in self.conv_weights:
             nn.init.kaiming_uniform_(weight, a=5**0.5)
         for bias in self.conv_biases:
             nn.init.zeros_(bias)
-        nn.init.xavier_uniform_(self.out_proj.weight)
-        nn.init.zeros_(self.out_proj.bias)
+        _xavier_uniform_linear(self.out_proj)
 
     def forward(self, states: Tensor, *, causal_times: Tensor) -> Tensor:
         if states.ndim != 3:
@@ -175,7 +321,7 @@ class MultiStrideCausalConvBranch(nn.Module):
             raise ValueError("causal_times must be rank 1 or 2")
         validate_causal_order(causal_times)
 
-        mixed = torch.nn.functional.silu(self.in_proj(states))
+        mixed = self.activation(self.in_proj(states))
         chunks = torch.split(mixed, [channels for _stride, channels in self.stride_channels], dim=-1)
         outputs = []
         for chunk, (stride, channels), weight, bias in zip(

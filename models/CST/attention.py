@@ -6,20 +6,30 @@ import torch
 from torch import Tensor, nn
 
 from .causality import assert_causal_mask, build_causal_visibility_mask
+from .linear import make_linear
 
 
 class CausalTimeAttention(nn.Module):
-    def __init__(self, d_model: int, num_heads: int = 1, *, bias: bool = True) -> None:
+    def __init__(
+        self,
+        d_model: int,
+        num_heads: int = 1,
+        *,
+        bias: bool = True,
+        projection_type: str = "dense",
+        qkv_projection_type: str | None = None,
+    ) -> None:
         super().__init__()
         if d_model % num_heads != 0:
             raise ValueError("d_model must be divisible by num_heads")
         self.d_model = d_model
         self.num_heads = num_heads
         self.head_dim = d_model // num_heads
-        self.q_proj = nn.Linear(d_model, d_model, bias=bias)
-        self.k_proj = nn.Linear(d_model, d_model, bias=bias)
-        self.v_proj = nn.Linear(d_model, d_model, bias=bias)
-        self.out_proj = nn.Linear(d_model, d_model, bias=bias)
+        qkv_projection_type = qkv_projection_type or projection_type
+        self.q_proj = make_linear(qkv_projection_type, d_model, d_model, bias=bias)
+        self.k_proj = make_linear(qkv_projection_type, d_model, d_model, bias=bias)
+        self.v_proj = make_linear(qkv_projection_type, d_model, d_model, bias=bias)
+        self.out_proj = make_linear(projection_type, d_model, d_model, bias=bias)
         self.last_allowed_mask: Tensor | None = None
         self.last_attention_weights: Tensor | None = None
 
@@ -106,6 +116,8 @@ class RotaryCausalTimeAttention(nn.Module):
         *,
         bias: bool = True,
         rope_base: float = 10000.0,
+        projection_type: str = "dense",
+        qkv_projection_type: str | None = None,
     ) -> None:
         super().__init__()
         if d_model % num_heads != 0:
@@ -116,10 +128,11 @@ class RotaryCausalTimeAttention(nn.Module):
         if self.head_dim % 2 != 0:
             raise ValueError("rotary attention requires an even head_dim")
         self.rope_base = rope_base
-        self.q_proj = nn.Linear(d_model, d_model, bias=bias)
-        self.k_proj = nn.Linear(d_model, d_model, bias=bias)
-        self.v_proj = nn.Linear(d_model, d_model, bias=bias)
-        self.out_proj = nn.Linear(d_model, d_model, bias=bias)
+        qkv_projection_type = qkv_projection_type or projection_type
+        self.q_proj = make_linear(qkv_projection_type, d_model, d_model, bias=bias)
+        self.k_proj = make_linear(qkv_projection_type, d_model, d_model, bias=bias)
+        self.v_proj = make_linear(qkv_projection_type, d_model, d_model, bias=bias)
+        self.out_proj = make_linear(projection_type, d_model, d_model, bias=bias)
         self.last_allowed_mask: Tensor | None = None
         self.last_attention_weights: Tensor | None = None
         self.last_query_times: Tensor | None = None

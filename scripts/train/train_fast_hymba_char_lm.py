@@ -44,6 +44,9 @@ from models.CST import (  # noqa: E402
 )
 
 
+PROJECTION_TYPE_CHOICES = ("dense", "braided", "braided4", "masked_braided", "masked_braided4")
+
+
 @dataclass(frozen=True)
 class TrainConfig:
     data_path: str
@@ -65,6 +68,13 @@ class TrainConfig:
     layers: int
     ssm_kernel_size: int
     state_branch: str
+    projection_type: str
+    attention_qkv_projection_type: str
+    ssm_activation_type: str
+    block_mlp_multiplier: int
+    block_mlp_activation_type: str
+    block_mlp_up_projection_type: str
+    block_mlp_down_projection_type: str
     activation_type: str
     basin_min_width: float
     basin_max_width: float
@@ -156,8 +166,57 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ssm-kernel-size", type=int, default=3)
     parser.add_argument("--state-branch", choices=("conv", "multistride_1_2"), default="conv")
     parser.add_argument(
+        "--projection-type",
+        choices=PROJECTION_TYPE_CHOICES,
+        default="dense",
+        help="Projection type for internal d_model projections outside block MLP up/down paths.",
+    )
+    parser.add_argument(
+        "--attention-qkv-projection-type",
+        choices=PROJECTION_TYPE_CHOICES,
+        default="dense",
+        help="Projection type for attention Q/K/V only. Attention output projection uses --projection-type.",
+    )
+    parser.add_argument(
+        "--ssm-activation-type",
+        choices=("silu", "dynamic_basin_zag"),
+        default="silu",
+        help="Activation inside each SSM/state branch.",
+    )
+    parser.add_argument(
+        "--block-mlp-multiplier",
+        type=int,
+        default=4,
+        help="Hidden-width multiplier for each Hymba block MLP.",
+    )
+    parser.add_argument(
+        "--block-mlp-activation-type",
+        choices=(
+            "gelu",
+            "dynamic_basin_zag",
+            "up_split_dynamic_basin_zag",
+            "dual_projection_dynamic_basin_zag",
+            "input_split_dynamic_basin_zag",
+            "half_dynamic_basin_zag_gelu",
+        ),
+        default="gelu",
+        help="Activation inside each main Hymba block MLP.",
+    )
+    parser.add_argument(
+        "--block-mlp-up-projection-type",
+        choices=PROJECTION_TYPE_CHOICES,
+        default="dense",
+        help="Projection type for each main Hymba block MLP up projection.",
+    )
+    parser.add_argument(
+        "--block-mlp-down-projection-type",
+        choices=PROJECTION_TYPE_CHOICES,
+        default="dense",
+        help="Projection type for each main Hymba block MLP down projection.",
+    )
+    parser.add_argument(
         "--activation-type",
-        choices=("identity", "gelu", "static_basin_zag", "dynamic_basin_zag"),
+        choices=("identity", "gelu", "static_basin_zag", "dynamic_basin_zag", "half_dynamic_basin_zag_gelu"),
         default="identity",
         help="Optional loss-predict branch activation for ALPINE/previous-loss-scalar-injected models.",
     )
@@ -1057,6 +1116,13 @@ def main() -> None:
         layers=args.layers,
         ssm_kernel_size=args.ssm_kernel_size,
         state_branch=args.state_branch,
+        projection_type=args.projection_type,
+        attention_qkv_projection_type=args.attention_qkv_projection_type,
+        ssm_activation_type=args.ssm_activation_type,
+        block_mlp_multiplier=args.block_mlp_multiplier,
+        block_mlp_activation_type=args.block_mlp_activation_type,
+        block_mlp_up_projection_type=args.block_mlp_up_projection_type,
+        block_mlp_down_projection_type=args.block_mlp_down_projection_type,
         activation_type=args.activation_type,
         basin_min_width=args.basin_min_width,
         basin_max_width=args.basin_max_width,
@@ -1297,6 +1363,13 @@ def main() -> None:
                 num_layers=args.layers,
                 ssm_kernel_size=args.ssm_kernel_size,
                 state_branch=args.state_branch,
+                projection_type=args.projection_type,
+                attention_qkv_projection_type=args.attention_qkv_projection_type,
+                ssm_activation_type=args.ssm_activation_type,
+                block_mlp_multiplier=args.block_mlp_multiplier,
+                block_mlp_activation_type=args.block_mlp_activation_type,
+                block_mlp_up_projection_type=args.block_mlp_up_projection_type,
+                block_mlp_down_projection_type=args.block_mlp_down_projection_type,
                 activation_type=args.activation_type,
                 basin_min_width=args.basin_min_width,
                 basin_max_width=args.basin_max_width,
@@ -1478,6 +1551,11 @@ def main() -> None:
         "compression": False,
         "state_branch": "MSHymbaBlock" if args.architecture == "ms_hymba" else "FastCausalConvBranch",
         "state_branch_mode": args.state_branch,
+        "projection_type": args.projection_type,
+        "attention_qkv_projection_type": args.attention_qkv_projection_type,
+        "block_mlp_multiplier": args.block_mlp_multiplier,
+        "block_mlp_up_projection_type": args.block_mlp_up_projection_type,
+        "block_mlp_down_projection_type": args.block_mlp_down_projection_type,
         "stride_channels": [[1, args.d_model // 2], [2, args.d_model // 2]] if args.state_branch == "multistride_1_2" else [[1, args.d_model]],
         "num_scales": args.num_scales if args.architecture == "ms_hymba" else None,
         "scale_outputs": args.num_scales + 2 if args.architecture == "ms_hymba" else None,

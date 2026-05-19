@@ -17,6 +17,8 @@ Generated corpora, experiment logs, and checkpoints are intentionally excluded f
 
 See `docs/EXPERIMENT_SUMMARY.md` for the current local findings, including the v7 dream-regex curriculum, Alpine versus FastHymba comparisons, mixed regex/math replay results, and training-time overhead.
 
+Current local headline: dense up-split ZagPine reached `90%` exact output on a 50-example v7 regex eval after mixed replay, while also scoring `99.8%` addition, `97.8%` subtraction, `99.8%` multiplication, and `100%` division on 500-example forced-answer evals.
+
 ## Reggie CLI
 
 `reggie` is a grep-style wrapper around the Alpine regex model. It accepts a file or folder plus a plain-English regex request, prepends `/r` when needed, expands quoted refs from the model template, and highlights matches in the terminal.

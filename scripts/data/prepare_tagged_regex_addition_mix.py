@@ -30,6 +30,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--v2-input", type=Path, default=Path("data/regex_quoted_ref_tokens_v2_easy_50k.txt"))
     parser.add_argument("--addition-input", type=Path, default=Path("data/addition_traces_1to3_digit.txt"))
     parser.add_argument("--subtraction-input", type=Path, default=Path("data/subtraction_traces_1to3_digit.txt"))
+    parser.add_argument("--multiplication-input", type=Path, default=Path("data/multiplication_traces_2_digit.txt"))
+    parser.add_argument("--division-input", type=Path, default=Path("data/division_traces_2to3_by_1to2_digit.txt"))
     parser.add_argument("--latex-input", type=Path, default=Path("data/mathbridge_latex_il_train_50000.txt"))
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--metadata-output", type=Path, default=None)
@@ -38,6 +40,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--v2-examples", type=int, default=None)
     parser.add_argument("--addition-examples", type=int, default=None)
     parser.add_argument("--subtraction-examples", type=int, default=0)
+    parser.add_argument("--multiplication-examples", type=int, default=0)
+    parser.add_argument("--division-examples", type=int, default=0)
     parser.add_argument("--latex-examples", type=int, default=0)
     parser.add_argument("--sentinel-format", action="store_true")
     parser.add_argument("--sentinel", default="<END>")
@@ -115,7 +119,7 @@ def sample_tagged(
     sampled = rng.sample(examples, count)
     if task == "mathbridge_latex":
         tagged = sampled
-    elif task in {"addition_prose", "subtraction_prose"}:
+    elif task in {"addition_prose", "subtraction_prose", "multiplication_prose", "division_prose"}:
         tagged = [
             tag_math(
                 example,
@@ -135,7 +139,7 @@ def sample_tagged(
         "available_examples": len(examples),
         "used_examples": count,
         "task": task,
-        "format": math_format if task in {"addition_prose", "subtraction_prose"} else "tagged",
+        "format": math_format if task in {"addition_prose", "subtraction_prose", "multiplication_prose", "division_prose"} else "tagged",
         "chars": path.stat().st_size,
     }
 
@@ -152,6 +156,8 @@ def main() -> None:
             args.addition_examples if args.addition_examples is not None else args.examples_per_source,
         ),
         (resolve_path(args.subtraction_input), "subtraction_prose", args.subtraction_examples),
+        (resolve_path(args.multiplication_input), "multiplication_prose", args.multiplication_examples),
+        (resolve_path(args.division_input), "division_prose", args.division_examples),
         (resolve_path(args.latex_input), "mathbridge_latex", args.latex_examples),
     ]
     mixed: list[str] = []

@@ -73,6 +73,13 @@ def load_model(checkpoint_path: Path, device: torch.device):
     vocab = CharVocabulary.from_chars(checkpoint["vocab_chars"])
     architecture = config.get("architecture", "fast_hymba")
     activation_kwargs = {
+        "projection_type": config.get("projection_type", "dense"),
+        "attention_qkv_projection_type": config.get("attention_qkv_projection_type", "dense"),
+        "ssm_activation_type": config.get("ssm_activation_type", "silu"),
+        "block_mlp_multiplier": config.get("block_mlp_multiplier", 4),
+        "block_mlp_activation_type": config.get("block_mlp_activation_type", "gelu"),
+        "block_mlp_up_projection_type": config.get("block_mlp_up_projection_type", "dense"),
+        "block_mlp_down_projection_type": config.get("block_mlp_down_projection_type", "dense"),
         "activation_type": config.get("activation_type", "identity"),
         "basin_min_width": config.get("basin_min_width", 0.35),
         "basin_max_width": config.get("basin_max_width", 3.0),

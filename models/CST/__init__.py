@@ -1,6 +1,7 @@
 """Focused exports for the loss-query Hymba character-LM experiments."""
 
 from .data import DEFAULT_CHAR_LM_DATA_PATH, CharVocabulary
+from .ssm import DynamicBasinZagSSMActivation
 from .lm import (
     AlternatingClockTokenFastHymbaCharLM,
     BranchedLossQueryFastHymbaCharLM,
@@ -12,6 +13,7 @@ from .lm import (
     EphemeralClockSidecarFastHymbaCharLM,
     FastHymbaCharLM,
     FastHymbaCharLMConfig,
+    HalfDynamicBasinZagGELUActivation,
     InterleavedLogitConditionedFastHymbaCharLM,
     IsolatedAlternatingClockTokenFastHymbaCharLM,
     LayerCrossLogitConditionedFastHymbaCharLM,
@@ -47,10 +49,12 @@ __all__ = [
     "CurrentClockFusionFastHymbaCharLM",
     "DEFAULT_CHAR_LM_DATA_PATH",
     "DynamicBasinZagActivation",
+    "DynamicBasinZagSSMActivation",
     "EfficientStrictAlternatingClockTokenFastHymbaCharLM",
     "EphemeralClockSidecarFastHymbaCharLM",
     "FastHymbaCharLM",
     "FastHymbaCharLMConfig",
+    "HalfDynamicBasinZagGELUActivation",
     "InterleavedLogitConditionedFastHymbaCharLM",
     "IsolatedAlternatingClockTokenFastHymbaCharLM",
     "LayerCrossLogitConditionedFastHymbaCharLM",

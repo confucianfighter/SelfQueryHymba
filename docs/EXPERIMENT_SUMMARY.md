@@ -150,3 +150,65 @@ Same 50-example greedy v7 exactness eval:
 | ZagPine dynamic ZigZag | `90%` | `92%` | `94%` | `94%` | `100%` |
 
 On current v7, identity Alpine still had better next-character metrics, but ZagPine produced substantially better exact regex outputs and lower loss-prediction MSE.
+
+### Dense Up-Split MLP ZagPine
+
+The strongest practical ZagPine variant so far moves the dynamic ZigZag activation into every block MLP using an up-split design:
+
+```text
+up projection: 128 -> 512
+value channels: 256
+width-control channels: 256
+down projection: 256 -> 128
+```
+
+This keeps the projection shape comparable to the normal Alpine MLP while giving each active channel a paired dynamic width signal. Attempts to use braided or masked-braided projections reduced parameter count but were slower in full training on the GTX 980 Ti setup, so the current reference path is dense up-split ZagPine.
+
+Fresh v7 regex training for 6000 steps:
+
+| Model | Params | Eval loss | Next-char acc | Loss-pred MSE | Exact output | IL exact | Template exact | Expanded regex exact |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Current identity Alpine | 3.97M | `0.2273` | `93.57%` | `0.1032` | `78%` | `82%` | `82%` | `82%` |
+| Dense up-split ZagPine | 3.42M | `0.2425` | `93.09%` | `0.1342` | `84%` | `86%` | `92%` | `92%` |
+
+Dense up-split ZagPine had worse next-character loss than identity Alpine but better exact regex template/expanded-regex generation. Weight inspection did not show smaller weights; the effect appears more likely to come from the activation geometry than from simple weight shrinkage.
+
+### Regex And Four-Math Mixed Replay
+
+The mixed replay corpus uses a `50/12.5/12.5/12.5/12.5` split:
+
+- 50% v7 regex
+- 12.5% addition
+- 12.5% subtraction
+- 12.5% multiplication
+- 12.5% division
+
+Dense up-split ZagPine was continued from its 6000-step v7 checkpoint. After 2000 mixed steps, regex exactness temporarily dropped to `80%`, but math exactness was already high. Continuing another 2000 mixed steps recovered regex and improved math.
+
+Best checkpoint from the 8000-to-10000 continuation:
+
+| Metric | Result |
+|---|---:|
+| Mixed eval loss | `0.1605` |
+| Mixed next-char acc | `95.33%` |
+| Loss-pred MSE | `0.0514` |
+| Regex exact output | `45/50 = 90%` |
+| Regex IL exact | `46/50 = 92%` |
+| Regex template exact | `45/50 = 90%` |
+| Regex expanded exact | `45/50 = 90%` |
+| Addition answer exact | `499/500 = 99.8%` |
+| Subtraction answer exact | `489/500 = 97.8%` |
+| Multiplication answer exact | `499/500 = 99.8%` |
+| Division answer exact | `500/500 = 100%` |
+
+Subtraction remains the weakest exact-answer skill. The observed failures are mostly borrow chains and borrow-through-zero cases, which matches the earlier pattern that subtraction behaves more like comparison/control flow than addition or multiplication.
+
+### Open Activation Variant
+
+A plausible next ZagPine ablation is width-scaled ZigZag amplitude. The goal is to prevent wide basins from producing overly large additive zag terms while preserving sharper behavior for narrow basins. The gentlest proposed form is:
+
+```text
+effective_zag_amp = zag_amp / sqrt(width + eps)
+```
+
+This should be tested as a config-gated option against the existing dense up-split ZagPine on the math-only corpus before using it in mixed regex/math replay.
