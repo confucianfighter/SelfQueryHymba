@@ -1794,13 +1794,19 @@ def main() -> None:
                     )
                     row["plateau_best_improved"] = True
                     if args.plateau_recovery and plateau_stage == "lr_reduced":
-                        restored_lr = clamp_lr(plateau_restore_lr, min_lr=args.plateau_min_lr, max_lr=plateau_max_lr)
+                        current_lr = optimizer_lr(optimizer)
+                        restored_lr = clamp_lr(
+                            current_lr / args.plateau_lr_factor,
+                            min_lr=args.plateau_min_lr,
+                            max_lr=min(plateau_restore_lr, plateau_max_lr),
+                        )
                         set_optimizer_lr(optimizer, restored_lr)
                         plateau_stage = "tracking"
                         plateau_stage_start_step = step
-                        plateau_lr_reductions_since_adam_reset = 0
-                        row["plateau_action"] = "restore_lr"
+                        plateau_lr_reductions_since_adam_reset = max(0, plateau_lr_reductions_since_adam_reset - 1)
+                        row["plateau_action"] = "step_up_lr"
                         row["plateau_lr"] = restored_lr
+                        row["plateau_restore_lr"] = plateau_restore_lr
                     elif args.plateau_recovery:
                         plateau_stage = "tracking"
                         plateau_stage_start_step = step
