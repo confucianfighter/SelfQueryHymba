@@ -104,6 +104,7 @@ class TrainConfig:
     plateau_max_lr: float | None
     plateau_min_delta: float
     plateau_reload_best: bool
+    plateau_lr_reductions_before_adam_reset: int
     grad_clip: float
     eval_every: int
     checkpoint_every: int
@@ -280,6 +281,12 @@ def parse_args() -> argparse.Namespace:
             "If enabled, plateau recovery may reload checkpoint_best.pt after LR reduction and Adam reset fail. "
             "Disabled by default so training never rewinds model weights."
         ),
+    )
+    parser.add_argument(
+        "--plateau-lr-reductions-before-adam-reset",
+        type=int,
+        default=2,
+        help="Number of consecutive plateau LR reductions to try before resetting Adam state.",
     )
     parser.add_argument("--grad-clip", type=float, default=1.0)
     parser.add_argument("--eval-every", type=int, default=100)
@@ -1163,6 +1170,7 @@ def main() -> None:
         plateau_max_lr=args.plateau_max_lr,
         plateau_min_delta=args.plateau_min_delta,
         plateau_reload_best=args.plateau_reload_best,
+        plateau_lr_reductions_before_adam_reset=args.plateau_lr_reductions_before_adam_reset,
         grad_clip=args.grad_clip,
         eval_every=args.eval_every,
         checkpoint_every=args.checkpoint_every,
@@ -1188,6 +1196,8 @@ def main() -> None:
         raise ValueError("--plateau-max-lr must be >= --plateau-min-lr")
     if args.plateau_min_delta < 0:
         raise ValueError("--plateau-min-delta must be nonnegative")
+    if args.plateau_lr_reductions_before_adam_reset <= 0:
+        raise ValueError("--plateau-lr-reductions-before-adam-reset must be positive")
     if args.activation_type != "identity" and args.architecture != "previous_loss_scalar_injected_hymba":
         raise ValueError("--activation-type is currently supported only for previous_loss_scalar_injected_hymba")
 
@@ -1540,6 +1550,7 @@ def main() -> None:
     set_optimizer_lr(optimizer, plateau_restore_lr)
     plateau_stage = "tracking"
     plateau_stage_start_step = 0
+    plateau_lr_reductions_since_adam_reset = 0
     best_eval_loss = float("inf")
     best_eval_step = 0
     best_checkpoint = run_dir / "checkpoint_best.pt"
@@ -1603,6 +1614,8 @@ def main() -> None:
             "max_lr": plateau_max_lr,
             "min_delta": args.plateau_min_delta,
             "reload_best": args.plateau_reload_best,
+            "lr_reductions_before_adam_reset": args.plateau_lr_reductions_before_adam_reset,
+            "lr_reductions_since_adam_reset": plateau_lr_reductions_since_adam_reset,
             "stage": plateau_stage,
             "stage_start_step": plateau_stage_start_step,
             "best_eval_loss": None,
@@ -1785,11 +1798,13 @@ def main() -> None:
                         set_optimizer_lr(optimizer, restored_lr)
                         plateau_stage = "tracking"
                         plateau_stage_start_step = step
+                        plateau_lr_reductions_since_adam_reset = 0
                         row["plateau_action"] = "restore_lr"
                         row["plateau_lr"] = restored_lr
                     elif args.plateau_recovery:
                         plateau_stage = "tracking"
                         plateau_stage_start_step = step
+                        plateau_lr_reductions_since_adam_reset = 0
                 elif args.plateau_recovery and step - plateau_stage_start_step >= args.plateau_patience_steps:
                     plateau_event_count += 1
                     if plateau_stage == "tracking":
@@ -1802,14 +1817,29 @@ def main() -> None:
                         set_optimizer_lr(optimizer, reduced_lr)
                         plateau_stage = "lr_reduced"
                         plateau_stage_start_step = step
+                        plateau_lr_reductions_since_adam_reset = 1
                         row["plateau_action"] = "reduce_lr"
                         row["plateau_lr"] = reduced_lr
                     elif plateau_stage == "lr_reduced":
-                        optimizer = make_optimizer(model, lr=optimizer_lr(optimizer))
-                        plateau_stage = "adam_reset"
-                        plateau_stage_start_step = step
-                        row["plateau_action"] = "reset_adam"
-                        row["plateau_lr"] = optimizer_lr(optimizer)
+                        if plateau_lr_reductions_since_adam_reset < args.plateau_lr_reductions_before_adam_reset:
+                            reduced_lr = clamp_lr(
+                                optimizer_lr(optimizer) * args.plateau_lr_factor,
+                                min_lr=args.plateau_min_lr,
+                                max_lr=plateau_max_lr,
+                            )
+                            set_optimizer_lr(optimizer, reduced_lr)
+                            plateau_stage_start_step = step
+                            plateau_lr_reductions_since_adam_reset += 1
+                            row["plateau_action"] = "reduce_lr"
+                            row["plateau_lr"] = reduced_lr
+                            row["plateau_lr_reductions_since_adam_reset"] = plateau_lr_reductions_since_adam_reset
+                        else:
+                            optimizer = make_optimizer(model, lr=optimizer_lr(optimizer))
+                            plateau_stage = "adam_reset"
+                            plateau_stage_start_step = step
+                            plateau_lr_reductions_since_adam_reset = 0
+                            row["plateau_action"] = "reset_adam"
+                            row["plateau_lr"] = optimizer_lr(optimizer)
                     elif args.plateau_reload_best:
                         best_payload = torch.load(best_checkpoint, map_location=device, weights_only=False)
                         model.load_state_dict(best_payload["model_state_dict"])
@@ -1820,6 +1850,7 @@ def main() -> None:
                         )
                         plateau_stage = "tracking"
                         plateau_stage_start_step = step
+                        plateau_lr_reductions_since_adam_reset = 0
                         row["plateau_action"] = "reload_best_fresh_adam"
                         row["plateau_lr"] = optimizer_lr(optimizer)
                         row["plateau_reloaded_best_step"] = best_eval_step
@@ -1833,6 +1864,7 @@ def main() -> None:
                         set_optimizer_lr(optimizer, reduced_lr)
                         plateau_stage = "lr_reduced"
                         plateau_stage_start_step = step
+                        plateau_lr_reductions_since_adam_reset = 1
                         row["plateau_action"] = "reduce_lr_reset_adam_no_reload"
                         row["plateau_lr"] = reduced_lr
                 status["plateau_recovery"].update(
@@ -1844,6 +1876,7 @@ def main() -> None:
                         "best_checkpoint": str(best_checkpoint),
                         "current_lr": optimizer_lr(optimizer),
                         "event_count": plateau_event_count,
+                        "lr_reductions_since_adam_reset": plateau_lr_reductions_since_adam_reset,
                         "steps_since_best": step - best_eval_step,
                     }
                 )
