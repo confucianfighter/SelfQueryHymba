@@ -188,20 +188,47 @@ class UpSplitDynamicBasinZagMLPActivation(nn.Module):
         return y
 
 
-class UpSplitDynamicBasinZagConcatWidthMLPActivation(UpSplitDynamicBasinZagMLPActivation):
-    """Up-split BasinZag that passes both activated signal and dynamic width to the down projection."""
+class UpSplitFixedWaveBasinMLPActivation(UpSplitDynamicBasinZagMLPActivation):
+    """Up-split fixed waveform activation with dynamic per-channel width modulation."""
 
-    def __init__(self, hidden_dim: int, **kwargs) -> None:
+    def __init__(
+        self,
+        hidden_dim: int,
+        *,
+        inner: float = 1.3,
+        steep: float = 3.5,
+        wing_amp: float = 0.95,
+        center_amp: float = 0.50,
+        damping: float = 0.15,
+        wing_sharpness: float = 1.7,
+        abs_amp: float = 1.0,
+        polarity: float = -1.0,
+        **kwargs,
+    ) -> None:
         super().__init__(hidden_dim, **kwargs)
-        self.output_dim = hidden_dim
+        self.inner = float(inner)
+        self.steep = float(steep)
+        self.wing_amp = float(wing_amp)
+        self.center_amp = float(center_amp)
+        self.damping = float(damping)
+        self.wing_sharpness = float(wing_sharpness)
+        self.abs_amp = float(abs_amp)
+        self.polarity = float(polarity)
 
     def forward(self, x: Tensor) -> Tensor:
         value, width_control = x.chunk(2, dim=-1)
         width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
-        r = value / (width + self.eps)
-        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
-        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
-        y = value * envelope + width * zag
+        z = value / (width + self.eps)
+        mask = torch.sigmoid(self.steep * (z + self.inner)) * torch.sigmoid(self.steep * (self.inner - z))
+        wings = self.wing_amp * torch.tanh(self.wing_sharpness * z)
+        center = (
+            self.polarity
+            * self.center_amp
+            * torch.sin(torch.pi * z / self.inner)
+            * torch.exp(-self.damping * z * z)
+        )
+        f = self.abs_amp * (wings + mask * center)
+        y = value * f
         if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
             self.last_width_stats = {
@@ -210,7 +237,7 @@ class UpSplitDynamicBasinZagConcatWidthMLPActivation(UpSplitDynamicBasinZagMLPAc
                 "mlp_basin_width_max": float(detached.max().item()),
                 "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
             }
-        return torch.cat([y, width], dim=-1)
+        return y
 
 
 class DualProjectionDynamicBasinZagMLP(nn.Module):
@@ -357,8 +384,8 @@ def make_mlp_activation(
             eps=basin_eps,
             zag_scale_mode="inverse_sqrt_width" if activation_type == "up_split_dynamic_basin_zag_scaled" else basin_zag_scale_mode,
         )
-    if activation_type == "up_split_dynamic_basin_zag_concat_width":
-        return UpSplitDynamicBasinZagConcatWidthMLPActivation(
+    if activation_type == "up_split_fixed_wave_basin":
+        return UpSplitFixedWaveBasinMLPActivation(
             hidden_dim,
             min_width=basin_min_width,
             max_width=basin_max_width,
@@ -382,7 +409,7 @@ def make_mlp_activation(
     raise ValueError(
         "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
         "'up_split_dynamic_basin_zag', 'up_split_dynamic_basin_zag_scaled', "
-        "'up_split_dynamic_basin_zag_concat_width', "
+        "'up_split_fixed_wave_basin', "
         "'dual_projection_dynamic_basin_zag', "
         "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
     )
