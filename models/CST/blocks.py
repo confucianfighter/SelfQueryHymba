@@ -188,6 +188,31 @@ class UpSplitDynamicBasinZagMLPActivation(nn.Module):
         return y
 
 
+class UpSplitDynamicBasinZagConcatWidthMLPActivation(UpSplitDynamicBasinZagMLPActivation):
+    """Up-split BasinZag that passes both activated signal and dynamic width to the down projection."""
+
+    def __init__(self, hidden_dim: int, **kwargs) -> None:
+        super().__init__(hidden_dim, **kwargs)
+        self.output_dim = hidden_dim
+
+    def forward(self, x: Tensor) -> Tensor:
+        value, width_control = x.chunk(2, dim=-1)
+        width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
+        r = value / (width + self.eps)
+        envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
+        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
+        y = value * envelope + width * zag
+        if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
+            detached = width.detach()
+            self.last_width_stats = {
+                "mlp_basin_width_mean": float(detached.mean().item()),
+                "mlp_basin_width_min": float(detached.min().item()),
+                "mlp_basin_width_max": float(detached.max().item()),
+                "mlp_basin_width_std": float(detached.std(unbiased=False).item()),
+            }
+        return torch.cat([y, width], dim=-1)
+
+
 class DualProjectionDynamicBasinZagMLP(nn.Module):
     """MLP with separate dense value and width-control projections for BasinZag."""
 
@@ -332,6 +357,17 @@ def make_mlp_activation(
             eps=basin_eps,
             zag_scale_mode="inverse_sqrt_width" if activation_type == "up_split_dynamic_basin_zag_scaled" else basin_zag_scale_mode,
         )
+    if activation_type == "up_split_dynamic_basin_zag_concat_width":
+        return UpSplitDynamicBasinZagConcatWidthMLPActivation(
+            hidden_dim,
+            min_width=basin_min_width,
+            max_width=basin_max_width,
+            floor=basin_floor,
+            zag_amp=basin_zag_amp,
+            sharpness=basin_sharpness,
+            eps=basin_eps,
+            zag_scale_mode=basin_zag_scale_mode,
+        )
     if activation_type == "half_dynamic_basin_zag_gelu":
         return HalfDynamicBasinZagGELUMLPActivation(
             hidden_dim,
@@ -346,6 +382,7 @@ def make_mlp_activation(
     raise ValueError(
         "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
         "'up_split_dynamic_basin_zag', 'up_split_dynamic_basin_zag_scaled', "
+        "'up_split_dynamic_basin_zag_concat_width', "
         "'dual_projection_dynamic_basin_zag', "
         "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
     )

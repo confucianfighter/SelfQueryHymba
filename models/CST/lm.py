@@ -192,6 +192,7 @@ class FastHymbaCharLMConfig:
             "dynamic_basin_zag",
             "up_split_dynamic_basin_zag",
             "up_split_dynamic_basin_zag_scaled",
+            "up_split_dynamic_basin_zag_concat_width",
             "dual_projection_dynamic_basin_zag",
             "input_split_dynamic_basin_zag",
             "half_dynamic_basin_zag_gelu",
@@ -199,6 +200,7 @@ class FastHymbaCharLMConfig:
             raise ValueError(
                 "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
                 "'up_split_dynamic_basin_zag', 'up_split_dynamic_basin_zag_scaled', "
+                "'up_split_dynamic_basin_zag_concat_width', "
                 "'dual_projection_dynamic_basin_zag', "
                 "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
             )
