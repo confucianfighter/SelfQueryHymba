@@ -203,12 +203,19 @@ Best checkpoint from the 8000-to-10000 continuation:
 
 Subtraction remains the weakest exact-answer skill. The observed failures are mostly borrow chains and borrow-through-zero cases, which matches the earlier pattern that subtraction behaves more like comparison/control flow than addition or multiplication.
 
-### Open Activation Variant
+### Width-Scaled ZigZag Ablation
 
-A plausible next ZagPine ablation is width-scaled ZigZag amplitude. The goal is to prevent wide basins from producing overly large additive zag terms while preserving sharper behavior for narrow basins. The gentlest proposed form is:
+The width-scaled ZigZag ablation was added as `up_split_dynamic_basin_zag_scaled`. The goal was to prevent wide basins from producing overly large additive zag terms while preserving sharper behavior for narrow basins. The tested form was:
 
 ```text
 effective_zag_amp = zag_amp / sqrt(width + eps)
 ```
 
-This should be tested as a config-gated option against the existing dense up-split ZagPine on the math-only corpus before using it in mixed regex/math replay.
+Fresh 2000-step four-math training used the same setup as dense up-split ZagPine: `seq_len=384`, `batch_size=8`, `d_model=128`, `layers=16`, `lr=0.0002`, and Alpine loss prediction pressure `0.2`.
+
+| Model | Eval loss | Next-char acc | Loss-pred MSE | Addition exact | Subtraction exact | Multiplication exact | Division exact |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Dense up-split ZagPine | `0.1380` | `95.98%` | `0.0560` | `467/500 = 93.4%` | `452/500 = 90.4%` | `461/500 = 92.2%` | `419/500 = 83.8%` |
+| Width-scaled up-split ZagPine | `0.1554` | `95.01%` | `0.0476` | `279/500 = 55.8%` | `279/500 = 55.8%` | `306/500 = 61.2%` | `377/500 = 75.4%` |
+
+The scaled variant improved loss-prediction MSE but hurt exact arithmetic badly. The failure mode is mostly near-miss final answers, which suggests the scaled zag term may be smoothing or weakening decisive digit-state transitions even when token-level loss remains acceptable. This variant is not a current winner.

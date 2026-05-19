@@ -8,6 +8,24 @@ from .linear import make_linear
 from .ssm import CausalSSMBranch, FastCausalConvBranch, MultiScaleCausalDecomposition, MultiStrideCausalConvBranch
 
 
+def _dynamic_zag(
+    r: Tensor,
+    width: Tensor,
+    *,
+    zag_amp: float,
+    eps: float,
+    scale_mode: str = "none",
+) -> Tensor:
+    base = torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+    if scale_mode == "none":
+        effective_amp = zag_amp
+    elif scale_mode == "inverse_sqrt_width":
+        effective_amp = zag_amp * torch.rsqrt(width + eps)
+    else:
+        raise ValueError("basin_zag_scale_mode must be 'none' or 'inverse_sqrt_width'")
+    return effective_amp * base
+
+
 class HalfDynamicBasinZagGELUMLPActivation(nn.Module):
     """Split MLP activation: dynamic BasinZag on half the hidden channels, GELU on half."""
 
@@ -21,6 +39,7 @@ class HalfDynamicBasinZagGELUMLPActivation(nn.Module):
         zag_amp: float = 0.12,
         sharpness: float = 2.0,
         eps: float = 1e-6,
+        zag_scale_mode: str = "none",
     ) -> None:
         super().__init__()
         if hidden_dim < 2:
@@ -36,6 +55,7 @@ class HalfDynamicBasinZagGELUMLPActivation(nn.Module):
         self.zag_amp = float(zag_amp)
         self.sharpness = float(sharpness)
         self.eps = float(eps)
+        self.zag_scale_mode = zag_scale_mode
         self.last_width_stats: dict[str, float] = {}
         self.reset_parameters()
 
@@ -54,7 +74,7 @@ class HalfDynamicBasinZagGELUMLPActivation(nn.Module):
         width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
         r = value / (width + self.eps)
         envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
-        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
         zag_output = value * envelope + width * zag
         if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
@@ -80,6 +100,7 @@ class DynamicBasinZagMLPActivation(nn.Module):
         zag_amp: float = 0.12,
         sharpness: float = 2.0,
         eps: float = 1e-6,
+        zag_scale_mode: str = "none",
     ) -> None:
         super().__init__()
         self.value_proj = nn.Linear(hidden_dim, hidden_dim)
@@ -90,6 +111,7 @@ class DynamicBasinZagMLPActivation(nn.Module):
         self.zag_amp = float(zag_amp)
         self.sharpness = float(sharpness)
         self.eps = float(eps)
+        self.zag_scale_mode = zag_scale_mode
         self.last_width_stats: dict[str, float] = {}
         self.reset_parameters()
 
@@ -107,7 +129,7 @@ class DynamicBasinZagMLPActivation(nn.Module):
         width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
         r = value / (width + self.eps)
         envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
-        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
         y = value * envelope + width * zag
         if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
@@ -133,6 +155,7 @@ class UpSplitDynamicBasinZagMLPActivation(nn.Module):
         zag_amp: float = 0.12,
         sharpness: float = 2.0,
         eps: float = 1e-6,
+        zag_scale_mode: str = "none",
     ) -> None:
         super().__init__()
         if hidden_dim < 2 or hidden_dim % 2 != 0:
@@ -144,6 +167,7 @@ class UpSplitDynamicBasinZagMLPActivation(nn.Module):
         self.zag_amp = float(zag_amp)
         self.sharpness = float(sharpness)
         self.eps = float(eps)
+        self.zag_scale_mode = zag_scale_mode
         self.last_width_stats: dict[str, float] = {}
 
     def forward(self, x: Tensor) -> Tensor:
@@ -151,7 +175,7 @@ class UpSplitDynamicBasinZagMLPActivation(nn.Module):
         width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
         r = value / (width + self.eps)
         envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
-        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
         y = value * envelope + width * zag
         if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
@@ -179,6 +203,7 @@ class DualProjectionDynamicBasinZagMLP(nn.Module):
         zag_amp: float = 0.12,
         sharpness: float = 2.0,
         eps: float = 1e-6,
+        zag_scale_mode: str = "none",
     ) -> None:
         super().__init__()
         if hidden_dim < 2 or hidden_dim % 2 != 0:
@@ -193,6 +218,7 @@ class DualProjectionDynamicBasinZagMLP(nn.Module):
         self.zag_amp = float(zag_amp)
         self.sharpness = float(sharpness)
         self.eps = float(eps)
+        self.zag_scale_mode = zag_scale_mode
         self.last_width_stats: dict[str, float] = {}
 
     def forward(self, x: Tensor) -> Tensor:
@@ -201,7 +227,7 @@ class DualProjectionDynamicBasinZagMLP(nn.Module):
         width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
         r = value / (width + self.eps)
         envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
-        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
         y = value * envelope + width * zag
         if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
@@ -229,6 +255,7 @@ class InputSplitDynamicBasinZagMLP(nn.Module):
         zag_amp: float = 0.12,
         sharpness: float = 2.0,
         eps: float = 1e-6,
+        zag_scale_mode: str = "none",
     ) -> None:
         super().__init__()
         if d_model < 2 or d_model % 2 != 0:
@@ -246,6 +273,7 @@ class InputSplitDynamicBasinZagMLP(nn.Module):
         self.zag_amp = float(zag_amp)
         self.sharpness = float(sharpness)
         self.eps = float(eps)
+        self.zag_scale_mode = zag_scale_mode
         self.last_width_stats: dict[str, float] = {}
 
     def forward(self, x: Tensor) -> Tensor:
@@ -255,7 +283,7 @@ class InputSplitDynamicBasinZagMLP(nn.Module):
         width = self.min_width + (self.max_width - self.min_width) * torch.sigmoid(width_control)
         r = value / (width + self.eps)
         envelope = self.floor + (1.0 - self.floor) / (1.0 + torch.abs(r).pow(2.0 * self.sharpness))
-        zag = self.zag_amp * torch.tanh(3.0 * r) * torch.exp(-0.5 * r * r)
+        zag = _dynamic_zag(r, width, zag_amp=self.zag_amp, eps=self.eps, scale_mode=self.zag_scale_mode)
         y = value * envelope + width * zag
         if getattr(self, "track_width_stats", False) and not torch.jit.is_scripting():
             detached = width.detach()
@@ -278,6 +306,7 @@ def make_mlp_activation(
     basin_zag_amp: float = 0.12,
     basin_sharpness: float = 2.0,
     basin_eps: float = 1e-6,
+    basin_zag_scale_mode: str = "none",
 ) -> nn.Module:
     if activation_type == "gelu":
         return nn.GELU()
@@ -290,8 +319,9 @@ def make_mlp_activation(
             zag_amp=basin_zag_amp,
             sharpness=basin_sharpness,
             eps=basin_eps,
+            zag_scale_mode=basin_zag_scale_mode,
         )
-    if activation_type == "up_split_dynamic_basin_zag":
+    if activation_type in {"up_split_dynamic_basin_zag", "up_split_dynamic_basin_zag_scaled"}:
         return UpSplitDynamicBasinZagMLPActivation(
             hidden_dim,
             min_width=basin_min_width,
@@ -300,6 +330,7 @@ def make_mlp_activation(
             zag_amp=basin_zag_amp,
             sharpness=basin_sharpness,
             eps=basin_eps,
+            zag_scale_mode="inverse_sqrt_width" if activation_type == "up_split_dynamic_basin_zag_scaled" else basin_zag_scale_mode,
         )
     if activation_type == "half_dynamic_basin_zag_gelu":
         return HalfDynamicBasinZagGELUMLPActivation(
@@ -310,10 +341,12 @@ def make_mlp_activation(
             zag_amp=basin_zag_amp,
             sharpness=basin_sharpness,
             eps=basin_eps,
+            zag_scale_mode=basin_zag_scale_mode,
         )
     raise ValueError(
         "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
-        "'up_split_dynamic_basin_zag', 'dual_projection_dynamic_basin_zag', "
+        "'up_split_dynamic_basin_zag', 'up_split_dynamic_basin_zag_scaled', "
+        "'dual_projection_dynamic_basin_zag', "
         "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
     )
 
@@ -343,6 +376,7 @@ def make_hymba_mlp(
     basin_zag_amp: float,
     basin_sharpness: float,
     basin_eps: float,
+    basin_zag_scale_mode: str = "none",
 ) -> nn.Module:
     if block_mlp_activation_type == "dual_projection_dynamic_basin_zag":
         return DualProjectionDynamicBasinZagMLP(
@@ -355,6 +389,7 @@ def make_hymba_mlp(
             zag_amp=basin_zag_amp,
             sharpness=basin_sharpness,
             eps=basin_eps,
+            zag_scale_mode=basin_zag_scale_mode,
         )
     if block_mlp_activation_type == "input_split_dynamic_basin_zag":
         return InputSplitDynamicBasinZagMLP(
@@ -367,6 +402,7 @@ def make_hymba_mlp(
             zag_amp=basin_zag_amp,
             sharpness=basin_sharpness,
             eps=basin_eps,
+            zag_scale_mode=basin_zag_scale_mode,
         )
     activation = make_mlp_activation(
         block_mlp_activation_type,
@@ -377,6 +413,7 @@ def make_hymba_mlp(
         basin_zag_amp=basin_zag_amp,
         basin_sharpness=basin_sharpness,
         basin_eps=basin_eps,
+        basin_zag_scale_mode=basin_zag_scale_mode,
     )
     return nn.Sequential(
         make_mlp_up_projection(block_mlp_up_projection_type, d_model, hidden_dim),
