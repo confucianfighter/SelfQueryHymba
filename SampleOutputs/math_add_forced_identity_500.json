@@ -1,0 +1,1695 @@
+{
+  "summary": {
+    "checkpoint": "C:\\Users\\daylan\\CompoundStreamingTransformer\\loss-query-hymba\\experiments\\mods\\001_first_pass_hymba_cst\\runs\\2026-05-17_alpine_identity_math50_50_500\\checkpoint_best.pt",
+    "examples": 200,
+    "answer_exact": 2,
+    "answer_exact_accuracy": 0.01,
+    "full_exact": 0,
+    "full_exact_accuracy": 0.0,
+    "mean_token_accuracy": 0.8967242267727852,
+    "failures_shown": [
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 347 + 586\n\nOutput:\nones: 7 + 6 = 13, write 3 carry 1\ntens: 4 + 8 + carry 1 = 13, write 3 carry 1\nhundreds: 3 + 5 + carry 1 = 9, write 9\nanswer: 933\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8810811042785645,
+        "answer": "933",
+        "predicted_answer": "111"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 741 + 99\n\nOutput:\nones: 1 + 9 = 10, write 0 carry 1\ntens: 4 + 9 + carry 1 = 14, write 4 carry 1\nhundreds: 7 + 0 + carry 1 = 8, write 8\nanswer: 840\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8913043737411499,
+        "answer": "840",
+        "predicted_answer": "101"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 82 + 47\n\nOutput:\nones: 2 + 7 = 9, write 9\ntens: 8 + 4 = 12, write 2 carry 1\nhundreds: carry 1, write 1\nanswer: 129\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9013158082962036,
+        "answer": "129",
+        "predicted_answer": "101"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 9 + 4\n\nOutput:\nones: 9 + 4 = 13, write 3 carry 1\ntens: carry 1, write 1\nanswer: 13\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.925000011920929,
+        "answer": "13",
+        "predicted_answer": "11"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 532 + 192\n\nOutput:\nones: 2 + 2 = 4, write 4\ntens: 3 + 9 = 12, write 2 carry 1\nhundreds: 5 + 1 + carry 1 = 7, write 7\nanswer: 724\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8674699068069458,
+        "answer": "724",
+        "predicted_answer": "111"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 15 + 92\n\nOutput:\nones: 5 + 2 = 7, write 7\ntens: 1 + 9 = 10, write 0 carry 1\nhundreds: carry 1, write 1\nanswer: 107\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9078947305679321,
+        "answer": "107",
+        "predicted_answer": "101"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 465 + 58\n\nOutput:\nones: 5 + 8 = 13, write 3 carry 1\ntens: 6 + 5 + carry 1 = 12, write 2 carry 1\nhundreds: 4 + 0 + carry 1 = 5, write 5\nanswer: 523\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.885869562625885,
+        "answer": "523",
+        "predicted_answer": "111"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 2 + 80\n\nOutput:\nones: 2 + 0 = 2, write 2\ntens: 0 + 8 = 8, write 8\nanswer: 82\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8859649300575256,
+        "answer": "82",
+        "predicted_answer": "11"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 52 + 396\n\nOutput:\nones: 2 + 6 = 8, write 8\ntens: 5 + 9 = 14, write 4 carry 1\nhundreds: 0 + 3 + carry 1 = 4, write 4\nanswer: 448\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9090909361839294,
+        "answer": "448",
+        "predicted_answer": "444"
+      },
+      {
+        "trace": "Task: addition_prose\nInput:\nadd 46 + 8\n\nOutput:\nones: 6 + 8 = 14, write 4 carry 1\ntens: 4 + 0 + carry 1 = 5, write 5\nanswer: 54\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9097744226455688,
+        "answer": "54",
+        "predicted_answer": "14"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 347 + 586\n\nOutput:\nones: 7 + 6 = 13, write 3 carry 1\ntens: 4 + 8 + carry 1 = 13, write 3 carry 1\nhundreds: 3 + 5 + carry 1 = 9, write 9\nanswer: 933\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8810811042785645,
+      "answer": "933",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 741 + 99\n\nOutput:\nones: 1 + 9 = 10, write 0 carry 1\ntens: 4 + 9 + carry 1 = 14, write 4 carry 1\nhundreds: 7 + 0 + carry 1 = 8, write 8\nanswer: 840\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8913043737411499,
+      "answer": "840",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 82 + 47\n\nOutput:\nones: 2 + 7 = 9, write 9\ntens: 8 + 4 = 12, write 2 carry 1\nhundreds: carry 1, write 1\nanswer: 129\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9013158082962036,
+      "answer": "129",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 4\n\nOutput:\nones: 9 + 4 = 13, write 3 carry 1\ntens: carry 1, write 1\nanswer: 13\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.925000011920929,
+      "answer": "13",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 532 + 192\n\nOutput:\nones: 2 + 2 = 4, write 4\ntens: 3 + 9 = 12, write 2 carry 1\nhundreds: 5 + 1 + carry 1 = 7, write 7\nanswer: 724\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8674699068069458,
+      "answer": "724",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 15 + 92\n\nOutput:\nones: 5 + 2 = 7, write 7\ntens: 1 + 9 = 10, write 0 carry 1\nhundreds: carry 1, write 1\nanswer: 107\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9078947305679321,
+      "answer": "107",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 465 + 58\n\nOutput:\nones: 5 + 8 = 13, write 3 carry 1\ntens: 6 + 5 + carry 1 = 12, write 2 carry 1\nhundreds: 4 + 0 + carry 1 = 5, write 5\nanswer: 523\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.885869562625885,
+      "answer": "523",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 80\n\nOutput:\nones: 2 + 0 = 2, write 2\ntens: 0 + 8 = 8, write 8\nanswer: 82\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8859649300575256,
+      "answer": "82",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 52 + 396\n\nOutput:\nones: 2 + 6 = 8, write 8\ntens: 5 + 9 = 14, write 4 carry 1\nhundreds: 0 + 3 + carry 1 = 4, write 4\nanswer: 448\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "448",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 46 + 8\n\nOutput:\nones: 6 + 8 = 14, write 4 carry 1\ntens: 4 + 0 + carry 1 = 5, write 5\nanswer: 54\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9097744226455688,
+      "answer": "54",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 89\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 0 + 8 + carry 1 = 9, write 9\nanswer: 91\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "91",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 7 + 618\n\nOutput:\nones: 7 + 8 = 15, write 5 carry 1\ntens: 0 + 1 + carry 1 = 2, write 2\nhundreds: 0 + 6 = 6, write 6\nanswer: 625\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8841463327407837,
+      "answer": "625",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 29\n\nOutput:\nones: 1 + 9 = 10, write 0 carry 1\ntens: 0 + 2 + carry 1 = 3, write 3\nanswer: 30\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "30",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 67 + 11\n\nOutput:\nones: 7 + 1 = 8, write 8\ntens: 6 + 1 = 7, write 7\nanswer: 78\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8695651888847351,
+      "answer": "78",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 472 + 69\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 7 + 6 + carry 1 = 14, write 4 carry 1\nhundreds: 4 + 0 + carry 1 = 5, write 5\nanswer: 541\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9021739363670349,
+      "answer": "541",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 31 + 257\n\nOutput:\nones: 1 + 7 = 8, write 8\ntens: 3 + 5 = 8, write 8\nhundreds: 0 + 2 = 2, write 2\nanswer: 288\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8630136847496033,
+      "answer": "288",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 8\n\nOutput:\nones: 5 + 8 = 13, write 3 carry 1\ntens: carry 1, write 1\nanswer: 13\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.925000011920929,
+      "answer": "13",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 76 + 8\n\nOutput:\nones: 6 + 8 = 14, write 4 carry 1\ntens: 7 + 0 + carry 1 = 8, write 8\nanswer: 84\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9097744226455688,
+      "answer": "84",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 11 + 17\n\nOutput:\nones: 1 + 7 = 8, write 8\ntens: 1 + 1 = 2, write 2\nanswer: 28\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.886956512928009,
+      "answer": "28",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 524 + 2\n\nOutput:\nones: 4 + 2 = 6, write 6\ntens: 2 + 0 = 2, write 2\nhundreds: 5 + 0 = 5, write 5\nanswer: 526\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8689655065536499,
+      "answer": "526",
+      "predicted_answer": "440"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 42 + 7\n\nOutput:\nones: 2 + 7 = 9, write 9\ntens: 4 + 0 = 4, write 4\nanswer: 49\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9035087823867798,
+      "answer": "49",
+      "predicted_answer": "48"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 1\n\nOutput:\nones: 9 + 1 = 10, write 0 carry 1\ntens: carry 1, write 1\nanswer: 10\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9333333373069763,
+      "answer": "10",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 357 + 6\n\nOutput:\nones: 7 + 6 = 13, write 3 carry 1\ntens: 5 + 0 + carry 1 = 6, write 6\nhundreds: 3 + 0 = 3, write 3\nanswer: 363\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8841463327407837,
+      "answer": "363",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 241\n\nOutput:\nones: 9 + 1 = 10, write 0 carry 1\ntens: 0 + 4 + carry 1 = 5, write 5\nhundreds: 0 + 2 = 2, write 2\nanswer: 250\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9085366129875183,
+      "answer": "250",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 86 + 9\n\nOutput:\nones: 6 + 9 = 15, write 5 carry 1\ntens: 8 + 0 + carry 1 = 9, write 9\nanswer: 95\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "95",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 404 + 63\n\nOutput:\nones: 4 + 3 = 7, write 7\ntens: 0 + 6 = 6, write 6\nhundreds: 4 + 0 = 4, write 4\nanswer: 467\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8835616707801819,
+      "answer": "467",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 50\n\nOutput:\nones: 5 + 0 = 5, write 5\ntens: 0 + 5 = 5, write 5\nanswer: 55\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "55",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 30 + 3\n\nOutput:\nones: 0 + 3 = 3, write 3\ntens: 3 + 0 = 3, write 3\nanswer: 33\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8859649300575256,
+      "answer": "33",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 46 + 98\n\nOutput:\nones: 6 + 8 = 14, write 4 carry 1\ntens: 4 + 9 + carry 1 = 14, write 4 carry 1\nhundreds: carry 1, write 1\nanswer: 144\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9064327478408813,
+      "answer": "144",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 513\n\nOutput:\nones: 1 + 3 = 4, write 4\ntens: 0 + 1 = 1, write 1\nhundreds: 0 + 5 = 5, write 5\nanswer: 514\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9034482836723328,
+      "answer": "514",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 4\n\nOutput:\nones: 2 + 4 = 6, write 6\nanswer: 6\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9195402264595032,
+      "answer": "6",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 848 + 8\n\nOutput:\nones: 8 + 8 = 16, write 6 carry 1\ntens: 4 + 0 + carry 1 = 5, write 5\nhundreds: 8 + 0 = 8, write 8\nanswer: 856\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8963414430618286,
+      "answer": "856",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 73 + 8\n\nOutput:\nones: 3 + 8 = 11, write 1 carry 1\ntens: 7 + 0 + carry 1 = 8, write 8\nanswer: 81\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "81",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 401 + 951\n\nOutput:\nones: 1 + 1 = 2, write 2\ntens: 0 + 5 = 5, write 5\nhundreds: 4 + 9 = 13, write 3 carry 1\nthousands: carry 1, write 1\nanswer: 1352\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8864864706993103,
+      "answer": "1352",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 291 + 452\n\nOutput:\nones: 1 + 2 = 3, write 3\ntens: 9 + 5 = 14, write 4 carry 1\nhundreds: 2 + 4 + carry 1 = 7, write 7\nanswer: 743\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8795180916786194,
+      "answer": "743",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 83 + 416\n\nOutput:\nones: 3 + 6 = 9, write 9\ntens: 8 + 1 = 9, write 9\nhundreds: 0 + 4 = 4, write 4\nanswer: 499\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8904109597206116,
+      "answer": "499",
+      "predicted_answer": "484"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 7 + 394\n\nOutput:\nones: 7 + 4 = 11, write 1 carry 1\ntens: 0 + 9 + carry 1 = 10, write 0 carry 1\nhundreds: 0 + 3 + carry 1 = 4, write 4\nanswer: 401\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9344262480735779,
+      "answer": "401",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 3 + 5\n\nOutput:\nones: 3 + 5 = 8, write 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 421 + 5\n\nOutput:\nones: 1 + 5 = 6, write 6\ntens: 2 + 0 = 2, write 2\nhundreds: 4 + 0 = 4, write 4\nanswer: 426\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.882758617401123,
+      "answer": "426",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 567 + 790\n\nOutput:\nones: 7 + 0 = 7, write 7\ntens: 6 + 9 = 15, write 5 carry 1\nhundreds: 5 + 7 + carry 1 = 13, write 3 carry 1\nthousands: carry 1, write 1\nanswer: 1357\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8872548937797546,
+      "answer": "1357",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 988 + 92\n\nOutput:\nones: 8 + 2 = 10, write 0 carry 1\ntens: 8 + 9 + carry 1 = 18, write 8 carry 1\nhundreds: 9 + 0 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1080\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9234234094619751,
+      "answer": "1080",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 87\n\nOutput:\nones: 8 + 7 = 15, write 5 carry 1\ntens: 0 + 8 + carry 1 = 9, write 9\nanswer: 95\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "95",
+      "predicted_answer": "41"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 7 + 134\n\nOutput:\nones: 7 + 4 = 11, write 1 carry 1\ntens: 0 + 3 + carry 1 = 4, write 4\nhundreds: 0 + 1 = 1, write 1\nanswer: 141\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9268292784690857,
+      "answer": "141",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 956 + 20\n\nOutput:\nones: 6 + 0 = 6, write 6\ntens: 5 + 2 = 7, write 7\nhundreds: 9 + 0 = 9, write 9\nanswer: 976\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8561643958091736,
+      "answer": "976",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 560\n\nOutput:\nones: 2 + 0 = 2, write 2\ntens: 0 + 6 = 6, write 6\nhundreds: 0 + 5 = 5, write 5\nanswer: 562\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8758620619773865,
+      "answer": "562",
+      "predicted_answer": "440"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 75\n\nOutput:\nones: 9 + 5 = 14, write 4 carry 1\ntens: 0 + 7 + carry 1 = 8, write 8\nanswer: 84\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "84",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 165 + 764\n\nOutput:\nones: 5 + 4 = 9, write 9\ntens: 6 + 6 = 12, write 2 carry 1\nhundreds: 1 + 7 + carry 1 = 9, write 9\nanswer: 929\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734939694404602,
+      "answer": "929",
+      "predicted_answer": "144"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 398 + 422\n\nOutput:\nones: 8 + 2 = 10, write 0 carry 1\ntens: 9 + 2 + carry 1 = 12, write 2 carry 1\nhundreds: 3 + 4 + carry 1 = 8, write 8\nanswer: 820\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8756756782531738,
+      "answer": "820",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 62 + 3\n\nOutput:\nones: 2 + 3 = 5, write 5\ntens: 6 + 0 = 6, write 6\nanswer: 65\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "65",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 625 + 76\n\nOutput:\nones: 5 + 6 = 11, write 1 carry 1\ntens: 2 + 7 + carry 1 = 10, write 0 carry 1\nhundreds: 6 + 0 + carry 1 = 7, write 7\nanswer: 701\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.907608687877655,
+      "answer": "701",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 79 + 5\n\nOutput:\nones: 9 + 5 = 14, write 4 carry 1\ntens: 7 + 0 + carry 1 = 8, write 8\nanswer: 84\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "84",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 6 + 224\n\nOutput:\nones: 6 + 4 = 10, write 0 carry 1\ntens: 0 + 2 + carry 1 = 3, write 3\nhundreds: 0 + 2 = 2, write 2\nanswer: 230\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9024389982223511,
+      "answer": "230",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 73\n\nOutput:\nones: 8 + 3 = 11, write 1 carry 1\ntens: 0 + 7 + carry 1 = 8, write 8\nanswer: 81\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "81",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 65 + 1\n\nOutput:\nones: 5 + 1 = 6, write 6\ntens: 6 + 0 = 6, write 6\nanswer: 66\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "66",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 844 + 2\n\nOutput:\nones: 4 + 2 = 6, write 6\ntens: 4 + 0 = 4, write 4\nhundreds: 8 + 0 = 8, write 8\nanswer: 846\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9034482836723328,
+      "answer": "846",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 902 + 85\n\nOutput:\nones: 2 + 5 = 7, write 7\ntens: 0 + 8 = 8, write 8\nhundreds: 9 + 0 = 9, write 9\nanswer: 987\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8767123222351074,
+      "answer": "987",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 1\n\nOutput:\nones: 5 + 1 = 6, write 6\nanswer: 6\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "6",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 67\n\nOutput:\nones: 5 + 7 = 12, write 2 carry 1\ntens: 0 + 6 + carry 1 = 7, write 7\nanswer: 72\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "72",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 70 + 28\n\nOutput:\nones: 0 + 8 = 8, write 8\ntens: 7 + 2 = 9, write 9\nanswer: 98\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8782608509063721,
+      "answer": "98",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 22 + 340\n\nOutput:\nones: 2 + 0 = 2, write 2\ntens: 2 + 4 = 6, write 6\nhundreds: 0 + 3 = 3, write 3\nanswer: 362\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8630136847496033,
+      "answer": "362",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 981 + 613\n\nOutput:\nones: 1 + 3 = 4, write 4\ntens: 8 + 1 = 9, write 9\nhundreds: 9 + 6 = 15, write 5 carry 1\nthousands: carry 1, write 1\nanswer: 1594\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8918918967247009,
+      "answer": "1594",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 999\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 0 + 9 + carry 1 = 10, write 0 carry 1\nhundreds: 0 + 9 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1001\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9502262473106384,
+      "answer": "1001",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 551 + 345\n\nOutput:\nones: 1 + 5 = 6, write 6\ntens: 5 + 4 = 9, write 9\nhundreds: 5 + 3 = 8, write 8\nanswer: 896\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8639456033706665,
+      "answer": "896",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 7 + 7\n\nOutput:\nones: 7 + 7 = 14, write 4 carry 1\ntens: carry 1, write 1\nanswer: 14\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "14",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 4 + 3\n\nOutput:\nones: 4 + 3 = 7, write 7\nanswer: 7\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "7",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 426 + 699\n\nOutput:\nones: 6 + 9 = 15, write 5 carry 1\ntens: 2 + 9 + carry 1 = 12, write 2 carry 1\nhundreds: 4 + 6 + carry 1 = 11, write 1 carry 1\nthousands: carry 1, write 1\nanswer: 1125\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9058296084403992,
+      "answer": "1125",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 3 + 23\n\nOutput:\nones: 3 + 3 = 6, write 6\ntens: 0 + 2 = 2, write 2\nanswer: 26\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "26",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 562 + 9\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 6 + 0 + carry 1 = 7, write 7\nhundreds: 5 + 0 = 5, write 5\nanswer: 571\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9024389982223511,
+      "answer": "571",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 311 + 65\n\nOutput:\nones: 1 + 5 = 6, write 6\ntens: 1 + 6 = 7, write 7\nhundreds: 3 + 0 = 3, write 3\nanswer: 376\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8630136847496033,
+      "answer": "376",
+      "predicted_answer": "141"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 869\n\nOutput:\nones: 1 + 9 = 10, write 0 carry 1\ntens: 0 + 6 + carry 1 = 7, write 7\nhundreds: 0 + 8 = 8, write 8\nanswer: 870\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9024389982223511,
+      "answer": "870",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 95 + 91\n\nOutput:\nones: 5 + 1 = 6, write 6\ntens: 9 + 9 = 18, write 8 carry 1\nhundreds: carry 1, write 1\nanswer: 186\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8881579041481018,
+      "answer": "186",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 47 + 20\n\nOutput:\nones: 7 + 0 = 7, write 7\ntens: 4 + 2 = 6, write 6\nanswer: 67\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8608695864677429,
+      "answer": "67",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 149 + 8\n\nOutput:\nones: 9 + 8 = 17, write 7 carry 1\ntens: 4 + 0 + carry 1 = 5, write 5\nhundreds: 1 + 0 = 1, write 1\nanswer: 157\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9146341681480408,
+      "answer": "157",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 970 + 2\n\nOutput:\nones: 0 + 2 = 2, write 2\ntens: 7 + 0 = 7, write 7\nhundreds: 9 + 0 = 9, write 9\nanswer: 972\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.882758617401123,
+      "answer": "972",
+      "predicted_answer": "440"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 92 + 74\n\nOutput:\nones: 2 + 4 = 6, write 6\ntens: 9 + 7 = 16, write 6 carry 1\nhundreds: carry 1, write 1\nanswer: 166\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "166",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 6\n\nOutput:\nones: 2 + 6 = 8, write 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 123 + 5\n\nOutput:\nones: 3 + 5 = 8, write 8\ntens: 2 + 0 = 2, write 2\nhundreds: 1 + 0 = 1, write 1\nanswer: 128\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "128",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 96 + 50\n\nOutput:\nones: 6 + 0 = 6, write 6\ntens: 9 + 5 = 14, write 4 carry 1\nhundreds: carry 1, write 1\nanswer: 146\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "146",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 877\n\nOutput:\nones: 1 + 7 = 8, write 8\ntens: 0 + 7 = 7, write 7\nhundreds: 0 + 8 = 8, write 8\nanswer: 878\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9034482836723328,
+      "answer": "878",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 51 + 76\n\nOutput:\nones: 1 + 6 = 7, write 7\ntens: 5 + 7 = 12, write 2 carry 1\nhundreds: carry 1, write 1\nanswer: 127\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "127",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 455 + 6\n\nOutput:\nones: 5 + 6 = 11, write 1 carry 1\ntens: 5 + 0 + carry 1 = 6, write 6\nhundreds: 4 + 0 = 4, write 4\nanswer: 461\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9085366129875183,
+      "answer": "461",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 780 + 84\n\nOutput:\nones: 0 + 4 = 4, write 4\ntens: 8 + 8 = 16, write 6 carry 1\nhundreds: 7 + 0 + carry 1 = 8, write 8\nanswer: 864\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8969696760177612,
+      "answer": "864",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 49 + 9\n\nOutput:\nones: 9 + 9 = 18, write 8 carry 1\ntens: 4 + 0 + carry 1 = 5, write 5\nanswer: 58\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "58",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 99 + 590\n\nOutput:\nones: 9 + 0 = 9, write 9\ntens: 9 + 9 = 18, write 8 carry 1\nhundreds: 0 + 5 + carry 1 = 6, write 6\nanswer: 689\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8787878751754761,
+      "answer": "689",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 900 + 370\n\nOutput:\nones: 0 + 0 = 0, write 0\ntens: 0 + 7 = 7, write 7\nhundreds: 9 + 3 = 12, write 2 carry 1\nthousands: carry 1, write 1\nanswer: 1270\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8864864706993103,
+      "answer": "1270",
+      "predicted_answer": "1001"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 6 + 22\n\nOutput:\nones: 6 + 2 = 8, write 8\ntens: 0 + 2 = 2, write 2\nanswer: 28\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8859649300575256,
+      "answer": "28",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 738 + 444\n\nOutput:\nones: 8 + 4 = 12, write 2 carry 1\ntens: 3 + 4 + carry 1 = 8, write 8\nhundreds: 7 + 4 = 11, write 1 carry 1\nthousands: carry 1, write 1\nanswer: 1182\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "1182",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 4\n\nOutput:\nones: 8 + 4 = 12, write 2 carry 1\ntens: carry 1, write 1\nanswer: 12\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.925000011920929,
+      "answer": "12",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 7 + 9\n\nOutput:\nones: 7 + 9 = 16, write 6 carry 1\ntens: carry 1, write 1\nanswer: 16\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "16",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 43 + 563\n\nOutput:\nones: 3 + 3 = 6, write 6\ntens: 4 + 6 = 10, write 0 carry 1\nhundreds: 0 + 5 + carry 1 = 6, write 6\nanswer: 606\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8787878751754761,
+      "answer": "606",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 95 + 286\n\nOutput:\nones: 5 + 6 = 11, write 1 carry 1\ntens: 9 + 8 + carry 1 = 18, write 8 carry 1\nhundreds: 0 + 2 + carry 1 = 3, write 3\nanswer: 381\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9021739363670349,
+      "answer": "381",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 11 + 8\n\nOutput:\nones: 1 + 8 = 9, write 9\ntens: 1 + 0 = 1, write 1\nanswer: 19\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9210526347160339,
+      "answer": "19",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 37\n\nOutput:\nones: 9 + 7 = 16, write 6 carry 1\ntens: 0 + 3 + carry 1 = 4, write 4\nanswer: 46\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9097744226455688,
+      "answer": "46",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 863 + 625\n\nOutput:\nones: 3 + 5 = 8, write 8\ntens: 6 + 2 = 8, write 8\nhundreds: 8 + 6 = 14, write 4 carry 1\nthousands: carry 1, write 1\nanswer: 1488\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8972973227500916,
+      "answer": "1488",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 530 + 8\n\nOutput:\nones: 0 + 8 = 8, write 8\ntens: 3 + 0 = 3, write 3\nhundreds: 5 + 0 = 5, write 5\nanswer: 538\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8758620619773865,
+      "answer": "538",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 26 + 9\n\nOutput:\nones: 6 + 9 = 15, write 5 carry 1\ntens: 2 + 0 + carry 1 = 3, write 3\nanswer: 35\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "35",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 287 + 7\n\nOutput:\nones: 7 + 7 = 14, write 4 carry 1\ntens: 8 + 0 + carry 1 = 9, write 9\nhundreds: 2 + 0 = 2, write 2\nanswer: 294\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8841463327407837,
+      "answer": "294",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 7 + 785\n\nOutput:\nones: 7 + 5 = 12, write 2 carry 1\ntens: 0 + 8 + carry 1 = 9, write 9\nhundreds: 0 + 7 = 7, write 7\nanswer: 792\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8902438879013062,
+      "answer": "792",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 3 + 5\n\nOutput:\nones: 3 + 5 = 8, write 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 46\n\nOutput:\nones: 2 + 6 = 8, write 8\ntens: 0 + 4 = 4, write 4\nanswer: 48\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9210526347160339,
+      "answer": "48",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 802 + 57\n\nOutput:\nones: 2 + 7 = 9, write 9\ntens: 0 + 5 = 5, write 5\nhundreds: 8 + 0 = 8, write 8\nanswer: 859\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8767123222351074,
+      "answer": "859",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 293 + 595\n\nOutput:\nones: 3 + 5 = 8, write 8\ntens: 9 + 9 = 18, write 8 carry 1\nhundreds: 2 + 5 + carry 1 = 8, write 8\nanswer: 888\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8795180916786194,
+      "answer": "888",
+      "predicted_answer": "844"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 235 + 22\n\nOutput:\nones: 5 + 2 = 7, write 7\ntens: 3 + 2 = 5, write 5\nhundreds: 2 + 0 = 2, write 2\nanswer: 257\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8561643958091736,
+      "answer": "257",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 999 + 2\n\nOutput:\nones: 9 + 2 = 11, write 1 carry 1\ntens: 9 + 0 + carry 1 = 10, write 0 carry 1\nhundreds: 9 + 0 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1001\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9502262473106384,
+      "answer": "1001",
+      "predicted_answer": "1001"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 83 + 89\n\nOutput:\nones: 3 + 9 = 12, write 2 carry 1\ntens: 8 + 8 + carry 1 = 17, write 7 carry 1\nhundreds: carry 1, write 1\nanswer: 172\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9005848169326782,
+      "answer": "172",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 688 + 887\n\nOutput:\nones: 8 + 7 = 15, write 5 carry 1\ntens: 8 + 8 + carry 1 = 17, write 7 carry 1\nhundreds: 6 + 8 + carry 1 = 15, write 5 carry 1\nthousands: carry 1, write 1\nanswer: 1575\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9013453125953674,
+      "answer": "1575",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 22 + 8\n\nOutput:\nones: 2 + 8 = 10, write 0 carry 1\ntens: 2 + 0 + carry 1 = 3, write 3\nanswer: 30\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "30",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 82 + 4\n\nOutput:\nones: 2 + 4 = 6, write 6\ntens: 8 + 0 = 8, write 8\nanswer: 86\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9122806787490845,
+      "answer": "86",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 16 + 953\n\nOutput:\nones: 6 + 3 = 9, write 9\ntens: 1 + 5 = 6, write 6\nhundreds: 0 + 9 = 9, write 9\nanswer: 969\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8630136847496033,
+      "answer": "969",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 127 + 6\n\nOutput:\nones: 7 + 6 = 13, write 3 carry 1\ntens: 2 + 0 + carry 1 = 3, write 3\nhundreds: 1 + 0 = 1, write 1\nanswer: 133\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9085366129875183,
+      "answer": "133",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 6\n\nOutput:\nones: 2 + 6 = 8, write 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 71 + 555\n\nOutput:\nones: 1 + 5 = 6, write 6\ntens: 7 + 5 = 12, write 2 carry 1\nhundreds: 0 + 5 + carry 1 = 6, write 6\nanswer: 626\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8787878751754761,
+      "answer": "626",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 81\n\nOutput:\nones: 2 + 1 = 3, write 3\ntens: 0 + 8 = 8, write 8\nanswer: 83\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "83",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 543 + 35\n\nOutput:\nones: 3 + 5 = 8, write 8\ntens: 4 + 3 = 7, write 7\nhundreds: 5 + 0 = 5, write 5\nanswer: 578\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8561643958091736,
+      "answer": "578",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 89\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 0 + 8 + carry 1 = 9, write 9\nanswer: 91\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "91",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 399\n\nOutput:\nones: 9 + 9 = 18, write 8 carry 1\ntens: 0 + 9 + carry 1 = 10, write 0 carry 1\nhundreds: 0 + 3 + carry 1 = 4, write 4\nanswer: 408\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9125683307647705,
+      "answer": "408",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 125 + 6\n\nOutput:\nones: 5 + 6 = 11, write 1 carry 1\ntens: 2 + 0 + carry 1 = 3, write 3\nhundreds: 1 + 0 = 1, write 1\nanswer: 131\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9207317233085632,
+      "answer": "131",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 89 + 7\n\nOutput:\nones: 9 + 7 = 16, write 6 carry 1\ntens: 8 + 0 + carry 1 = 9, write 9\nanswer: 96\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "96",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 4 + 865\n\nOutput:\nones: 4 + 5 = 9, write 9\ntens: 0 + 6 = 6, write 6\nhundreds: 0 + 8 = 8, write 8\nanswer: 869\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9034482836723328,
+      "answer": "869",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 55 + 258\n\nOutput:\nones: 5 + 8 = 13, write 3 carry 1\ntens: 5 + 5 + carry 1 = 11, write 1 carry 1\nhundreds: 0 + 2 + carry 1 = 3, write 3\nanswer: 313\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8913043737411499,
+      "answer": "313",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 3 + 76\n\nOutput:\nones: 3 + 6 = 9, write 9\ntens: 0 + 7 = 7, write 7\nanswer: 79\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "79",
+      "predicted_answer": "48"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 705 + 9\n\nOutput:\nones: 5 + 9 = 14, write 4 carry 1\ntens: 0 + 0 + carry 1 = 1, write 1\nhundreds: 7 + 0 = 7, write 7\nanswer: 714\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8902438879013062,
+      "answer": "714",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 597 + 8\n\nOutput:\nones: 7 + 8 = 15, write 5 carry 1\ntens: 9 + 0 + carry 1 = 10, write 0 carry 1\nhundreds: 5 + 0 + carry 1 = 6, write 6\nanswer: 605\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9125683307647705,
+      "answer": "605",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 59 + 19\n\nOutput:\nones: 9 + 9 = 18, write 8 carry 1\ntens: 5 + 1 + carry 1 = 7, write 7\nanswer: 78\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8805969953536987,
+      "answer": "78",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 68 + 6\n\nOutput:\nones: 8 + 6 = 14, write 4 carry 1\ntens: 6 + 0 + carry 1 = 7, write 7\nanswer: 74\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "74",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 3\n\nOutput:\nones: 1 + 3 = 4, write 4\nanswer: 4\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9080459475517273,
+      "answer": "4",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 6 + 35\n\nOutput:\nones: 6 + 5 = 11, write 1 carry 1\ntens: 0 + 3 + carry 1 = 4, write 4\nanswer: 41\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "41",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 7\n\nOutput:\nones: 2 + 7 = 9, write 9\nanswer: 9\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "9",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 802 + 674\n\nOutput:\nones: 2 + 4 = 6, write 6\ntens: 0 + 7 = 7, write 7\nhundreds: 8 + 6 = 14, write 4 carry 1\nthousands: carry 1, write 1\nanswer: 1476\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8918918967247009,
+      "answer": "1476",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 63 + 784\n\nOutput:\nones: 3 + 4 = 7, write 7\ntens: 6 + 8 = 14, write 4 carry 1\nhundreds: 0 + 7 + carry 1 = 8, write 8\nanswer: 847\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.903030276298523,
+      "answer": "847",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 924 + 7\n\nOutput:\nones: 4 + 7 = 11, write 1 carry 1\ntens: 2 + 0 + carry 1 = 3, write 3\nhundreds: 9 + 0 = 9, write 9\nanswer: 931\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9085366129875183,
+      "answer": "931",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 4 + 10\n\nOutput:\nones: 4 + 0 = 4, write 4\ntens: 0 + 1 = 1, write 1\nanswer: 14\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9035087823867798,
+      "answer": "14",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 786 + 9\n\nOutput:\nones: 6 + 9 = 15, write 5 carry 1\ntens: 8 + 0 + carry 1 = 9, write 9\nhundreds: 7 + 0 = 7, write 7\nanswer: 795\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8841463327407837,
+      "answer": "795",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 43 + 809\n\nOutput:\nones: 3 + 9 = 12, write 2 carry 1\ntens: 4 + 0 + carry 1 = 5, write 5\nhundreds: 0 + 8 = 8, write 8\nanswer: 852\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8727272748947144,
+      "answer": "852",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 702\n\nOutput:\nones: 8 + 2 = 10, write 0 carry 1\ntens: 0 + 0 + carry 1 = 1, write 1\nhundreds: 0 + 7 = 7, write 7\nanswer: 710\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8963414430618286,
+      "answer": "710",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 11 + 2\n\nOutput:\nones: 1 + 2 = 3, write 3\ntens: 1 + 0 = 1, write 1\nanswer: 13\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9210526347160339,
+      "answer": "13",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 834\n\nOutput:\nones: 2 + 4 = 6, write 6\ntens: 0 + 3 = 3, write 3\nhundreds: 0 + 8 = 8, write 8\nanswer: 836\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8758620619773865,
+      "answer": "836",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 59 + 44\n\nOutput:\nones: 9 + 4 = 13, write 3 carry 1\ntens: 5 + 4 + carry 1 = 10, write 0 carry 1\nhundreds: carry 1, write 1\nanswer: 103\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9181286692619324,
+      "answer": "103",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 18\n\nOutput:\nones: 5 + 8 = 13, write 3 carry 1\ntens: 0 + 1 + carry 1 = 2, write 2\nanswer: 23\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "23",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 92 + 90\n\nOutput:\nones: 2 + 0 = 2, write 2\ntens: 9 + 9 = 18, write 8 carry 1\nhundreds: carry 1, write 1\nanswer: 182\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8881579041481018,
+      "answer": "182",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 35 + 3\n\nOutput:\nones: 5 + 3 = 8, write 8\ntens: 3 + 0 = 3, write 3\nanswer: 38\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "38",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 927 + 544\n\nOutput:\nones: 7 + 4 = 11, write 1 carry 1\ntens: 2 + 4 + carry 1 = 7, write 7\nhundreds: 9 + 5 = 14, write 4 carry 1\nthousands: carry 1, write 1\nanswer: 1471\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9117646813392639,
+      "answer": "1471",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 2 + 328\n\nOutput:\nones: 2 + 8 = 10, write 0 carry 1\ntens: 0 + 2 + carry 1 = 3, write 3\nhundreds: 0 + 3 = 3, write 3\nanswer: 330\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8902438879013062,
+      "answer": "330",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 9\n\nOutput:\nones: 1 + 9 = 10, write 0 carry 1\ntens: carry 1, write 1\nanswer: 10\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9333333373069763,
+      "answer": "10",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 4 + 4\n\nOutput:\nones: 4 + 4 = 8, write 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9195402264595032,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 7\n\nOutput:\nones: 5 + 7 = 12, write 2 carry 1\ntens: carry 1, write 1\nanswer: 12\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "12",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 105 + 6\n\nOutput:\nones: 5 + 6 = 11, write 1 carry 1\ntens: 0 + 0 + carry 1 = 1, write 1\nhundreds: 1 + 0 = 1, write 1\nanswer: 111\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9268292784690857,
+      "answer": "111",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 669\n\nOutput:\nones: 5 + 9 = 14, write 4 carry 1\ntens: 0 + 6 + carry 1 = 7, write 7\nhundreds: 0 + 6 = 6, write 6\nanswer: 674\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8841463327407837,
+      "answer": "674",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 64 + 645\n\nOutput:\nones: 4 + 5 = 9, write 9\ntens: 6 + 4 = 10, write 0 carry 1\nhundreds: 0 + 6 + carry 1 = 7, write 7\nanswer: 709\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8969696760177612,
+      "answer": "709",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 853\n\nOutput:\nones: 1 + 3 = 4, write 4\ntens: 0 + 5 = 5, write 5\nhundreds: 0 + 8 = 8, write 8\nanswer: 854\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.882758617401123,
+      "answer": "854",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 222 + 9\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 2 + 0 + carry 1 = 3, write 3\nhundreds: 2 + 0 = 2, write 2\nanswer: 231\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9024389982223511,
+      "answer": "231",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 9\n\nOutput:\nones: 8 + 9 = 17, write 7 carry 1\ntens: carry 1, write 1\nanswer: 17\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "17",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 28 + 92\n\nOutput:\nones: 8 + 2 = 10, write 0 carry 1\ntens: 2 + 9 + carry 1 = 12, write 2 carry 1\nhundreds: carry 1, write 1\nanswer: 120\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9064327478408813,
+      "answer": "120",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 966 + 30\n\nOutput:\nones: 6 + 0 = 6, write 6\ntens: 6 + 3 = 9, write 9\nhundreds: 9 + 0 = 9, write 9\nanswer: 996\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8561643958091736,
+      "answer": "996",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 924 + 125\n\nOutput:\nones: 4 + 5 = 9, write 9\ntens: 2 + 2 = 4, write 4\nhundreds: 9 + 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1049\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8918918967247009,
+      "answer": "1049",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 724 + 912\n\nOutput:\nones: 4 + 2 = 6, write 6\ntens: 2 + 1 = 3, write 3\nhundreds: 7 + 9 = 16, write 6 carry 1\nthousands: carry 1, write 1\nanswer: 1636\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8756756782531738,
+      "answer": "1636",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 98 + 75\n\nOutput:\nones: 8 + 5 = 13, write 3 carry 1\ntens: 9 + 7 + carry 1 = 17, write 7 carry 1\nhundreds: carry 1, write 1\nanswer: 173\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9005848169326782,
+      "answer": "173",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 225 + 22\n\nOutput:\nones: 5 + 2 = 7, write 7\ntens: 2 + 2 = 4, write 4\nhundreds: 2 + 0 = 2, write 2\nanswer: 247\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8767123222351074,
+      "answer": "247",
+      "predicted_answer": "141"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 79 + 959\n\nOutput:\nones: 9 + 9 = 18, write 8 carry 1\ntens: 7 + 5 + carry 1 = 13, write 3 carry 1\nhundreds: 0 + 9 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1038\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9189189076423645,
+      "answer": "1038",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 64 + 792\n\nOutput:\nones: 4 + 2 = 6, write 6\ntens: 6 + 9 = 15, write 5 carry 1\nhundreds: 0 + 7 + carry 1 = 8, write 8\nanswer: 856\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8848484754562378,
+      "answer": "856",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 962 + 71\n\nOutput:\nones: 2 + 1 = 3, write 3\ntens: 6 + 7 = 13, write 3 carry 1\nhundreds: 9 + 0 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1033\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113300442695618,
+      "answer": "1033",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 63 + 83\n\nOutput:\nones: 3 + 3 = 6, write 6\ntens: 6 + 8 = 14, write 4 carry 1\nhundreds: carry 1, write 1\nanswer: 146\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "146",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 80 + 962\n\nOutput:\nones: 0 + 2 = 2, write 2\ntens: 8 + 6 = 14, write 4 carry 1\nhundreds: 0 + 9 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1042\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113300442695618,
+      "answer": "1042",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 56 + 35\n\nOutput:\nones: 6 + 5 = 11, write 1 carry 1\ntens: 5 + 3 + carry 1 = 9, write 9\nanswer: 91\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9029850959777832,
+      "answer": "91",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 76\n\nOutput:\nones: 1 + 6 = 7, write 7\ntens: 0 + 7 = 7, write 7\nanswer: 77\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "77",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 931\n\nOutput:\nones: 8 + 1 = 9, write 9\ntens: 0 + 3 = 3, write 3\nhundreds: 0 + 9 = 9, write 9\nanswer: 939\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8689655065536499,
+      "answer": "939",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 4 + 485\n\nOutput:\nones: 4 + 5 = 9, write 9\ntens: 0 + 8 = 8, write 8\nhundreds: 0 + 4 = 4, write 4\nanswer: 489\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9379310607910156,
+      "answer": "489",
+      "predicted_answer": "484"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 915 + 77\n\nOutput:\nones: 5 + 7 = 12, write 2 carry 1\ntens: 1 + 7 + carry 1 = 9, write 9\nhundreds: 9 + 0 = 9, write 9\nanswer: 992\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8727272748947144,
+      "answer": "992",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 521\n\nOutput:\nones: 1 + 1 = 2, write 2\ntens: 0 + 2 = 2, write 2\nhundreds: 0 + 5 = 5, write 5\nanswer: 522\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8965517282485962,
+      "answer": "522",
+      "predicted_answer": "110"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 50 + 4\n\nOutput:\nones: 0 + 4 = 4, write 4\ntens: 5 + 0 = 5, write 5\nanswer: 54\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9210526347160339,
+      "answer": "54",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 69 + 3\n\nOutput:\nones: 9 + 3 = 12, write 2 carry 1\ntens: 6 + 0 + carry 1 = 7, write 7\nanswer: 72\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "72",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 81\n\nOutput:\nones: 5 + 1 = 6, write 6\ntens: 0 + 8 = 8, write 8\nanswer: 86\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "86",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 6 + 6\n\nOutput:\nones: 6 + 6 = 12, write 2 carry 1\ntens: carry 1, write 1\nanswer: 12\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "12",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 922\n\nOutput:\nones: 8 + 2 = 10, write 0 carry 1\ntens: 0 + 2 + carry 1 = 3, write 3\nhundreds: 0 + 9 = 9, write 9\nanswer: 930\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8902438879013062,
+      "answer": "930",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 702 + 18\n\nOutput:\nones: 2 + 8 = 10, write 0 carry 1\ntens: 0 + 1 + carry 1 = 2, write 2\nhundreds: 7 + 0 = 7, write 7\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8848484754562378,
+      "answer": "720",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 126 + 622\n\nOutput:\nones: 6 + 2 = 8, write 8\ntens: 2 + 2 = 4, write 4\nhundreds: 1 + 6 = 7, write 7\nanswer: 748\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8707482814788818,
+      "answer": "748",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 623 + 73\n\nOutput:\nones: 3 + 3 = 6, write 6\ntens: 2 + 7 = 9, write 9\nhundreds: 6 + 0 = 6, write 6\nanswer: 696\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8561643958091736,
+      "answer": "696",
+      "predicted_answer": "444"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 263 + 3\n\nOutput:\nones: 3 + 3 = 6, write 6\ntens: 6 + 0 = 6, write 6\nhundreds: 2 + 0 = 2, write 2\nanswer: 266\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8689655065536499,
+      "answer": "266",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 413 + 619\n\nOutput:\nones: 3 + 9 = 12, write 2 carry 1\ntens: 1 + 1 + carry 1 = 3, write 3\nhundreds: 4 + 6 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1032\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8921568393707275,
+      "answer": "1032",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 888 + 13\n\nOutput:\nones: 8 + 3 = 11, write 1 carry 1\ntens: 8 + 1 + carry 1 = 10, write 0 carry 1\nhundreds: 8 + 0 + carry 1 = 9, write 9\nanswer: 901\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.91847825050354,
+      "answer": "901",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 9 + 38\n\nOutput:\nones: 9 + 8 = 17, write 7 carry 1\ntens: 0 + 3 + carry 1 = 4, write 4\nanswer: 47\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9172932505607605,
+      "answer": "47",
+      "predicted_answer": "14"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 5 + 55\n\nOutput:\nones: 5 + 5 = 10, write 0 carry 1\ntens: 0 + 5 + carry 1 = 6, write 6\nanswer: 60\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "60",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 62 + 79\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 6 + 7 + carry 1 = 14, write 4 carry 1\nhundreds: carry 1, write 1\nanswer: 141\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9122806787490845,
+      "answer": "141",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 6\n\nOutput:\nones: 8 + 6 = 14, write 4 carry 1\ntens: carry 1, write 1\nanswer: 14\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "14",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 869 + 85\n\nOutput:\nones: 9 + 5 = 14, write 4 carry 1\ntens: 6 + 8 + carry 1 = 15, write 5 carry 1\nhundreds: 8 + 0 + carry 1 = 9, write 9\nanswer: 954\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8913043737411499,
+      "answer": "954",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 21 + 100\n\nOutput:\nones: 1 + 0 = 1, write 1\ntens: 2 + 0 = 2, write 2\nhundreds: 0 + 1 = 1, write 1\nanswer: 121\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9178082346916199,
+      "answer": "121",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 23 + 618\n\nOutput:\nones: 3 + 8 = 11, write 1 carry 1\ntens: 2 + 1 + carry 1 = 4, write 4\nhundreds: 0 + 6 = 6, write 6\nanswer: 641\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8909090757369995,
+      "answer": "641",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 55 + 3\n\nOutput:\nones: 5 + 3 = 8, write 8\ntens: 5 + 0 = 5, write 5\nanswer: 58\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "58",
+      "predicted_answer": "44"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 460 + 675\n\nOutput:\nones: 0 + 5 = 5, write 5\ntens: 6 + 7 = 13, write 3 carry 1\nhundreds: 4 + 6 + carry 1 = 11, write 1 carry 1\nthousands: carry 1, write 1\nanswer: 1135\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8970588445663452,
+      "answer": "1135",
+      "predicted_answer": "1111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 3\n\nOutput:\nones: 8 + 3 = 11, write 1 carry 1\ntens: carry 1, write 1\nanswer: 11\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9333333373069763,
+      "answer": "11",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 492 + 49\n\nOutput:\nones: 2 + 9 = 11, write 1 carry 1\ntens: 9 + 4 + carry 1 = 14, write 4 carry 1\nhundreds: 4 + 0 + carry 1 = 5, write 5\nanswer: 541\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9130434989929199,
+      "answer": "541",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 43 + 964\n\nOutput:\nones: 3 + 4 = 7, write 7\ntens: 4 + 6 = 10, write 0 carry 1\nhundreds: 0 + 9 + carry 1 = 10, write 0 carry 1\nthousands: carry 1, write 1\nanswer: 1007\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9211822748184204,
+      "answer": "1007",
+      "predicted_answer": "1011"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 1 + 2\n\nOutput:\nones: 1 + 2 = 3, write 3\nanswer: 3\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9080459475517273,
+      "answer": "3",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 86 + 8\n\nOutput:\nones: 6 + 8 = 14, write 4 carry 1\ntens: 8 + 0 + carry 1 = 9, write 9\nanswer: 94\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "94",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 60 + 77\n\nOutput:\nones: 0 + 7 = 7, write 7\ntens: 6 + 7 = 13, write 3 carry 1\nhundreds: carry 1, write 1\nanswer: 137\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8881579041481018,
+      "answer": "137",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 82 + 374\n\nOutput:\nones: 2 + 4 = 6, write 6\ntens: 8 + 7 = 15, write 5 carry 1\nhundreds: 0 + 3 + carry 1 = 4, write 4\nanswer: 456\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8969696760177612,
+      "answer": "456",
+      "predicted_answer": "441"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 71 + 334\n\nOutput:\nones: 1 + 4 = 5, write 5\ntens: 7 + 3 = 10, write 0 carry 1\nhundreds: 0 + 3 + carry 1 = 4, write 4\nanswer: 405\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8909090757369995,
+      "answer": "405",
+      "predicted_answer": "111"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 8 + 24\n\nOutput:\nones: 8 + 4 = 12, write 2 carry 1\ntens: 0 + 2 + carry 1 = 3, write 3\nanswer: 32\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.902255654335022,
+      "answer": "32",
+      "predicted_answer": "11"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 86 + 69\n\nOutput:\nones: 6 + 9 = 15, write 5 carry 1\ntens: 8 + 6 + carry 1 = 15, write 5 carry 1\nhundreds: carry 1, write 1\nanswer: 155\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9005848169326782,
+      "answer": "155",
+      "predicted_answer": "101"
+    },
+    {
+      "trace": "Task: addition_prose\nInput:\nadd 36 + 506\n\nOutput:\nones: 6 + 6 = 12, write 2 carry 1\ntens: 3 + 0 + carry 1 = 4, write 4\nhundreds: 0 + 5 = 5, write 5\nanswer: 542\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8787878751754761,
+      "answer": "542",
+      "predicted_answer": "111"
+    }
+  ]
+}

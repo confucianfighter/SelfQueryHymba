@@ -1,0 +1,4095 @@
+{
+  "summary": {
+    "checkpoint": "C:\\Users\\daylan\\CompoundStreamingTransformer\\loss-query-hymba\\experiments\\mods\\001_first_pass_hymba_cst\\runs\\2026-05-18_zagpine_half_zag_gelu_add_sub_mul_33_33_33_fresh_2000\\checkpoint_best.pt",
+    "examples": 500,
+    "answer_exact": 2,
+    "answer_exact_accuracy": 0.004,
+    "full_exact": 0,
+    "full_exact_accuracy": 0.0,
+    "mean_token_accuracy": 0.8917351536750794,
+    "failures_shown": [
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 59\n\nOutput:\nanswer: 2478\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8860759735107422,
+        "answer": "2478",
+        "predicted_answer": "2220"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 70 * 73\n\nOutput:\nanswer: 5110\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9113923907279968,
+        "answer": "5110",
+        "predicted_answer": "5000"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 17 * 65\n\nOutput:\nanswer: 1105\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9113923907279968,
+        "answer": "1105",
+        "predicted_answer": "1525"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 87\n\nOutput:\nanswer: 4350\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9113923907279968,
+        "answer": "4350",
+        "predicted_answer": "4000"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 53\n\nOutput:\nanswer: 2279\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8987341523170471,
+        "answer": "2279",
+        "predicted_answer": "2222"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 71\n\nOutput:\nanswer: 6532\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8987341523170471,
+        "answer": "6532",
+        "predicted_answer": "6920"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 73 * 49\n\nOutput:\nanswer: 3577\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8987341523170471,
+        "answer": "3577",
+        "predicted_answer": "3820"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 84 * 80\n\nOutput:\nanswer: 6720\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8860759735107422,
+        "answer": "6720",
+        "predicted_answer": "7000"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 47\n\nOutput:\nanswer: 1410\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8860759735107422,
+        "answer": "1410",
+        "predicted_answer": "2000"
+      },
+      {
+        "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 61\n\nOutput:\nanswer: 4331\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8734177350997925,
+        "answer": "4331",
+        "predicted_answer": "5428"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 59\n\nOutput:\nanswer: 2478\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2478",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 70 * 73\n\nOutput:\nanswer: 5110\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5110",
+      "predicted_answer": "5000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 17 * 65\n\nOutput:\nanswer: 1105\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1105",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 87\n\nOutput:\nanswer: 4350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4350",
+      "predicted_answer": "4000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 53\n\nOutput:\nanswer: 2279\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2279",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 71\n\nOutput:\nanswer: 6532\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6532",
+      "predicted_answer": "6920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 73 * 49\n\nOutput:\nanswer: 3577\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3577",
+      "predicted_answer": "3820"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 84 * 80\n\nOutput:\nanswer: 6720\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6720",
+      "predicted_answer": "7000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 47\n\nOutput:\nanswer: 1410\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1410",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 61\n\nOutput:\nanswer: 4331\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4331",
+      "predicted_answer": "5428"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 21 * 69\n\nOutput:\nanswer: 1449\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1449",
+      "predicted_answer": "1520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 95\n\nOutput:\nanswer: 4180\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4180",
+      "predicted_answer": "2924"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 73 * 24\n\nOutput:\nanswer: 1752\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1752",
+      "predicted_answer": "2524"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 76\n\nOutput:\nanswer: 5700\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "5700",
+      "predicted_answer": "5525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 84\n\nOutput:\nanswer: 4368\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4368",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 91 * 95\n\nOutput:\nanswer: 8645\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8645",
+      "predicted_answer": "8222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 83 * 17\n\nOutput:\nanswer: 1411\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1411",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 62 * 79\n\nOutput:\nanswer: 4898\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4898",
+      "predicted_answer": "5622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 83 * 54\n\nOutput:\nanswer: 4482\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4482",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 45 * 47\n\nOutput:\nanswer: 2115\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2115",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 67 * 33\n\nOutput:\nanswer: 2211\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2211",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 86 * 72\n\nOutput:\nanswer: 6192\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6192",
+      "predicted_answer": "6520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 44\n\nOutput:\nanswer: 2200\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "2200",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 34 * 64\n\nOutput:\nanswer: 2176\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2176",
+      "predicted_answer": "2425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 18 * 80\n\nOutput:\nanswer: 1440\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1440",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 26\n\nOutput:\nanswer: 988\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "988",
+      "predicted_answer": "225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 23 * 74\n\nOutput:\nanswer: 1702\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1702",
+      "predicted_answer": "1425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 44\n\nOutput:\nanswer: 484\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "484",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 99 * 62\n\nOutput:\nanswer: 6138\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6138",
+      "predicted_answer": "5528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 74 * 75\n\nOutput:\nanswer: 5550\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5550",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 67\n\nOutput:\nanswer: 1876\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1876",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 21 * 68\n\nOutput:\nanswer: 1428\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1428",
+      "predicted_answer": "1522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 26\n\nOutput:\nanswer: 988\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "988",
+      "predicted_answer": "225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 74 * 47\n\nOutput:\nanswer: 3478\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3478",
+      "predicted_answer": "3520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 80\n\nOutput:\nanswer: 960\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "960",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 77\n\nOutput:\nanswer: 1925\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1925",
+      "predicted_answer": "2502"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 78\n\nOutput:\nanswer: 6318\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6318",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 63\n\nOutput:\nanswer: 2772\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2772",
+      "predicted_answer": "2420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 20 * 81\n\nOutput:\nanswer: 1620\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1620",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 24 * 75\n\nOutput:\nanswer: 1800\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1800",
+      "predicted_answer": "2505"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 80 * 14\n\nOutput:\nanswer: 1120\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1120",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 97\n\nOutput:\nanswer: 4074\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4074",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 99 * 95\n\nOutput:\nanswer: 9405\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "9405",
+      "predicted_answer": "8228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 91\n\nOutput:\nanswer: 3458\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3458",
+      "predicted_answer": "1928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 57 * 22\n\nOutput:\nanswer: 1254\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1254",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 60 * 58\n\nOutput:\nanswer: 3480\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3480",
+      "predicted_answer": "4200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 71\n\nOutput:\nanswer: 4544\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4544",
+      "predicted_answer": "5622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 59\n\nOutput:\nanswer: 3717\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3717",
+      "predicted_answer": "4522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 30\n\nOutput:\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "390",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 58\n\nOutput:\nanswer: 4930\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4930",
+      "predicted_answer": "4500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 50\n\nOutput:\nanswer: 2350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2350",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 51 * 25\n\nOutput:\nanswer: 1275\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1275",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 51 * 42\n\nOutput:\nanswer: 2142\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2142",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 29\n\nOutput:\nanswer: 638\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "638",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 26\n\nOutput:\nanswer: 1092\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1092",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 56 * 79\n\nOutput:\nanswer: 4424\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4424",
+      "predicted_answer": "4622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 89 * 45\n\nOutput:\nanswer: 4005\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4005",
+      "predicted_answer": "3928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 76\n\nOutput:\nanswer: 5396\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5396",
+      "predicted_answer": "6522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 79\n\nOutput:\nanswer: 3713\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3713",
+      "predicted_answer": "4624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 34 * 29\n\nOutput:\nanswer: 986\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "986",
+      "predicted_answer": "255"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 35 * 41\n\nOutput:\nanswer: 1435\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1435",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 89 * 81\n\nOutput:\nanswer: 7209\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "7209",
+      "predicted_answer": "7228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 98 * 34\n\nOutput:\nanswer: 3332\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3332",
+      "predicted_answer": "2828"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 39 * 12\n\nOutput:\nanswer: 468\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "468",
+      "predicted_answer": "120"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 26\n\nOutput:\nanswer: 2210\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2210",
+      "predicted_answer": "2925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 87 * 96\n\nOutput:\nanswer: 8352\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "8352",
+      "predicted_answer": "8220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 80 * 72\n\nOutput:\nanswer: 5760\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5760",
+      "predicted_answer": "6500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 97 * 17\n\nOutput:\nanswer: 1649\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1649",
+      "predicted_answer": "1505"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 91\n\nOutput:\nanswer: 6188\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "6188",
+      "predicted_answer": "8922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 73\n\nOutput:\nanswer: 6862\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6862",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 17\n\nOutput:\nanswer: 187\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "187",
+      "predicted_answer": "190"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 30\n\nOutput:\nanswer: 810\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "810",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 14\n\nOutput:\nanswer: 1316\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1316",
+      "predicted_answer": "1225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 76\n\nOutput:\nanswer: 4180\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4180",
+      "predicted_answer": "4524"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 51 * 97\n\nOutput:\nanswer: 4947\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4947",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 17\n\nOutput:\nanswer: 850\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "850",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 65 * 44\n\nOutput:\nanswer: 2860\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2860",
+      "predicted_answer": "3520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 90 * 44\n\nOutput:\nanswer: 3960\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "3960",
+      "predicted_answer": "3500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 94\n\nOutput:\nanswer: 4700\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4700",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 36 * 64\n\nOutput:\nanswer: 2304\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2304",
+      "predicted_answer": "2425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 29 * 62\n\nOutput:\nanswer: 1798\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1798",
+      "predicted_answer": "1422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 90 * 66\n\nOutput:\nanswer: 5940\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5940",
+      "predicted_answer": "5500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 35\n\nOutput:\nanswer: 1295\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1295",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 41 * 26\n\nOutput:\nanswer: 1066\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1066",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 94\n\nOutput:\nanswer: 8648\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8648",
+      "predicted_answer": "8222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 91 * 44\n\nOutput:\nanswer: 4004\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4004",
+      "predicted_answer": "3928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 45\n\nOutput:\nanswer: 2250\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2250",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 61 * 14\n\nOutput:\nanswer: 854\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "854",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 67\n\nOutput:\nanswer: 1474\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1474",
+      "predicted_answer": "1422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 59 * 49\n\nOutput:\nanswer: 2891\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2891",
+      "predicted_answer": "3220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 14 * 20\n\nOutput:\nanswer: 280\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "280",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 35 * 92\n\nOutput:\nanswer: 3220\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3220",
+      "predicted_answer": "1922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 20 * 82\n\nOutput:\nanswer: 1640\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1640",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 39 * 10\n\nOutput:\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "390",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 90\n\nOutput:\nanswer: 2700\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2700",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 80 * 75\n\nOutput:\nanswer: 6000\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "6000",
+      "predicted_answer": "6000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 31 * 33\n\nOutput:\nanswer: 1023\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1023",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 95\n\nOutput:\nanswer: 4180\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4180",
+      "predicted_answer": "2924"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 15 * 33\n\nOutput:\nanswer: 495\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "495",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 43\n\nOutput:\nanswer: 2709\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2709",
+      "predicted_answer": "3522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 61 * 56\n\nOutput:\nanswer: 3416\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3416",
+      "predicted_answer": "3422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 90 * 41\n\nOutput:\nanswer: 3690\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "3690",
+      "predicted_answer": "3000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 53 * 21\n\nOutput:\nanswer: 1113\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1113",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 44\n\nOutput:\nanswer: 1100\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1100",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 87 * 90\n\nOutput:\nanswer: 7830\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "7830",
+      "predicted_answer": "8000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 33 * 97\n\nOutput:\nanswer: 3201\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3201",
+      "predicted_answer": "2928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 74 * 34\n\nOutput:\nanswer: 2516\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2516",
+      "predicted_answer": "2525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 36\n\nOutput:\nanswer: 2484\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2484",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 40 * 38\n\nOutput:\nanswer: 1520\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1520",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 95 * 23\n\nOutput:\nanswer: 2185\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "2185",
+      "predicted_answer": "2520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 70 * 28\n\nOutput:\nanswer: 1960\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1960",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 74\n\nOutput:\nanswer: 4736\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4736",
+      "predicted_answer": "5522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 79\n\nOutput:\nanswer: 5609\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5609",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 77\n\nOutput:\nanswer: 7084\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7084",
+      "predicted_answer": "6522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 61\n\nOutput:\nanswer: 4575\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4575",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 55\n\nOutput:\nanswer: 1210\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1210",
+      "predicted_answer": "1222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 54 * 62\n\nOutput:\nanswer: 3348\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3348",
+      "predicted_answer": "3422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 99\n\nOutput:\nanswer: 8019\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "8019",
+      "predicted_answer": "9225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 48\n\nOutput:\nanswer: 624\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "624",
+      "predicted_answer": "102"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 44\n\nOutput:\nanswer: 2992\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2992",
+      "predicted_answer": "3420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 80\n\nOutput:\nanswer: 4160\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4160",
+      "predicted_answer": "4020"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 94\n\nOutput:\nanswer: 8648\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8648",
+      "predicted_answer": "8222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 14 * 61\n\nOutput:\nanswer: 854\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "854",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 51 * 76\n\nOutput:\nanswer: 3876\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3876",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 31\n\nOutput:\nanswer: 1178\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1178",
+      "predicted_answer": "2125"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 97\n\nOutput:\nanswer: 1067\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1067",
+      "predicted_answer": "1920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 43\n\nOutput:\nanswer: 1376\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1376",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 24 * 20\n\nOutput:\nanswer: 480\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "480",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 79\n\nOutput:\nanswer: 948\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "948",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 85\n\nOutput:\nanswer: 2295\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2295",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 95 * 49\n\nOutput:\nanswer: 4655\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "4655",
+      "predicted_answer": "3500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 89\n\nOutput:\nanswer: 8188\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "8188",
+      "predicted_answer": "7222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 89 * 64\n\nOutput:\nanswer: 5696\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5696",
+      "predicted_answer": "5522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 98 * 16\n\nOutput:\nanswer: 1568\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1568",
+      "predicted_answer": "1220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 87 * 37\n\nOutput:\nanswer: 3219\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3219",
+      "predicted_answer": "2925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 84 * 16\n\nOutput:\nanswer: 1344\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1344",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 26 * 94\n\nOutput:\nanswer: 2444\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2444",
+      "predicted_answer": "1028"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 29 * 93\n\nOutput:\nanswer: 2697\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2697",
+      "predicted_answer": "1225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 69\n\nOutput:\nanswer: 4968\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4968",
+      "predicted_answer": "5620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 70\n\nOutput:\nanswer: 4410\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4410",
+      "predicted_answer": "5000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 27\n\nOutput:\nanswer: 1350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1350",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 18 * 57\n\nOutput:\nanswer: 1026\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1026",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 75\n\nOutput:\nanswer: 5100\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5100",
+      "predicted_answer": "5525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 14\n\nOutput:\nanswer: 350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "350",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 29\n\nOutput:\nanswer: 2175\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2175",
+      "predicted_answer": "2920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 20 * 63\n\nOutput:\nanswer: 1260\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1260",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 75\n\nOutput:\nanswer: 4800\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4800",
+      "predicted_answer": "5522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 73 * 69\n\nOutput:\nanswer: 5037\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5037",
+      "predicted_answer": "5522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 18\n\nOutput:\nanswer: 1530\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1530",
+      "predicted_answer": "1920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 67\n\nOutput:\nanswer: 3216\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3216",
+      "predicted_answer": "3528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 62 * 18\n\nOutput:\nanswer: 1116\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1116",
+      "predicted_answer": "1222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 72\n\nOutput:\nanswer: 3168\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3168",
+      "predicted_answer": "2520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 76 * 59\n\nOutput:\nanswer: 4484\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4484",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 35 * 58\n\nOutput:\nanswer: 2030\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2030",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 81\n\nOutput:\nanswer: 2268\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2268",
+      "predicted_answer": "1828"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 90 * 57\n\nOutput:\nanswer: 5130\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "5130",
+      "predicted_answer": "4500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 38\n\nOutput:\nanswer: 2622\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2622",
+      "predicted_answer": "2828"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 53 * 35\n\nOutput:\nanswer: 1855\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1855",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 34 * 62\n\nOutput:\nanswer: 2108\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2108",
+      "predicted_answer": "2428"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 96 * 25\n\nOutput:\nanswer: 2400\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "2400",
+      "predicted_answer": "2920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 53 * 56\n\nOutput:\nanswer: 2968\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2968",
+      "predicted_answer": "3420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 65\n\nOutput:\nanswer: 1430\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1430",
+      "predicted_answer": "1422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 94\n\nOutput:\nanswer: 1222\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "1222",
+      "predicted_answer": "1222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 70 * 17\n\nOutput:\nanswer: 1190\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1190",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 28\n\nOutput:\nanswer: 1176\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1176",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 37\n\nOutput:\nanswer: 814\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "814",
+      "predicted_answer": "250"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 25\n\nOutput:\nanswer: 1300\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1300",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 78\n\nOutput:\nanswer: 4992\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4992",
+      "predicted_answer": "5625"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 83 * 78\n\nOutput:\nanswer: 6474\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6474",
+      "predicted_answer": "6620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 86\n\nOutput:\nanswer: 3182\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3182",
+      "predicted_answer": "2525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 55\n\nOutput:\nanswer: 2090\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2090",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 96\n\nOutput:\nanswer: 4992\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4992",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 60 * 42\n\nOutput:\nanswer: 2520\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2520",
+      "predicted_answer": "3000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 60 * 11\n\nOutput:\nanswer: 660\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "660",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 31 * 23\n\nOutput:\nanswer: 713\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "713",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 60\n\nOutput:\nanswer: 4860\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4860",
+      "predicted_answer": "5500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 61 * 50\n\nOutput:\nanswer: 3050\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "3050",
+      "predicted_answer": "3000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 93\n\nOutput:\nanswer: 8556\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8556",
+      "predicted_answer": "8222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 95 * 33\n\nOutput:\nanswer: 3135\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3135",
+      "predicted_answer": "2500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 87 * 91\n\nOutput:\nanswer: 7917\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7917",
+      "predicted_answer": "8925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 83 * 89\n\nOutput:\nanswer: 7387\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7387",
+      "predicted_answer": "7620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 23 * 59\n\nOutput:\nanswer: 1357\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1357",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 75\n\nOutput:\nanswer: 2100\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2100",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 74 * 99\n\nOutput:\nanswer: 7326\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7326",
+      "predicted_answer": "8922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 76 * 13\n\nOutput:\nanswer: 988\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "988",
+      "predicted_answer": "150"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 66 * 82\n\nOutput:\nanswer: 5412\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5412",
+      "predicted_answer": "6624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 73 * 96\n\nOutput:\nanswer: 7008\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7008",
+      "predicted_answer": "7222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 76 * 86\n\nOutput:\nanswer: 6536\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6536",
+      "predicted_answer": "6625"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 17\n\nOutput:\nanswer: 884\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "884",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 99\n\nOutput:\nanswer: 3663\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3663",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 86\n\nOutput:\nanswer: 5848\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5848",
+      "predicted_answer": "6624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 79\n\nOutput:\nanswer: 2133\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2133",
+      "predicted_answer": "1528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 43\n\nOutput:\nanswer: 3225\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "3225",
+      "predicted_answer": "3525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 94\n\nOutput:\nanswer: 2350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2350",
+      "predicted_answer": "1025"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 56\n\nOutput:\nanswer: 3808\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3808",
+      "predicted_answer": "4425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 89 * 25\n\nOutput:\nanswer: 2225\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2225",
+      "predicted_answer": "2928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 32\n\nOutput:\nanswer: 2208\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2208",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 78 * 76\n\nOutput:\nanswer: 5928\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5928",
+      "predicted_answer": "6624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 36 * 49\n\nOutput:\nanswer: 1764\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1764",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 96\n\nOutput:\nanswer: 2112\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2112",
+      "predicted_answer": "1225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 29\n\nOutput:\nanswer: 348\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "348",
+      "predicted_answer": "190"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 59 * 19\n\nOutput:\nanswer: 1121\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1121",
+      "predicted_answer": "1228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 46\n\nOutput:\nanswer: 2898\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2898",
+      "predicted_answer": "3520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 98 * 55\n\nOutput:\nanswer: 5390\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "5390",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 27\n\nOutput:\nanswer: 1944\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1944",
+      "predicted_answer": "2822"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 24\n\nOutput:\nanswer: 888\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "888",
+      "predicted_answer": "255"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 60 * 77\n\nOutput:\nanswer: 4620\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4620",
+      "predicted_answer": "5200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 65\n\nOutput:\nanswer: 6110\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6110",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 97\n\nOutput:\nanswer: 5335\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5335",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 57 * 56\n\nOutput:\nanswer: 3192\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3192",
+      "predicted_answer": "3425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 72\n\nOutput:\nanswer: 3024\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3024",
+      "predicted_answer": "2522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 88\n\nOutput:\nanswer: 3784\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3784",
+      "predicted_answer": "2820"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 57\n\nOutput:\nanswer: 2736\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2736",
+      "predicted_answer": "3228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 43\n\nOutput:\nanswer: 1290\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1290",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 22\n\nOutput:\nanswer: 550\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "550",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 45 * 48\n\nOutput:\nanswer: 2160\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2160",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 55\n\nOutput:\nanswer: 5060\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "5060",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 57\n\nOutput:\nanswer: 2109\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2109",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 92\n\nOutput:\nanswer: 4416\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4416",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 11\n\nOutput:\nanswer: 1034\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1034",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 97 * 81\n\nOutput:\nanswer: 7857\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "7857",
+      "predicted_answer": "7220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 37\n\nOutput:\nanswer: 2775\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2775",
+      "predicted_answer": "2820"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 65 * 35\n\nOutput:\nanswer: 2275\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2275",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 76\n\nOutput:\nanswer: 6004\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6004",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 66\n\nOutput:\nanswer: 4686\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4686",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 82\n\nOutput:\nanswer: 3034\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3034",
+      "predicted_answer": "2822"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 90 * 23\n\nOutput:\nanswer: 2070\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "2070",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 51 * 72\n\nOutput:\nanswer: 3672\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3672",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 26 * 55\n\nOutput:\nanswer: 1430\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1430",
+      "predicted_answer": "2425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 89\n\nOutput:\nanswer: 2225\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2225",
+      "predicted_answer": "1028"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 45\n\nOutput:\nanswer: 540\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "540",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 79\n\nOutput:\nanswer: 3476\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3476",
+      "predicted_answer": "2522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 15\n\nOutput:\nanswer: 480\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "480",
+      "predicted_answer": "120"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 70\n\nOutput:\nanswer: 5250\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "5250",
+      "predicted_answer": "5620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 15 * 85\n\nOutput:\nanswer: 1275\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1275",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 74 * 97\n\nOutput:\nanswer: 7178\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7178",
+      "predicted_answer": "7224"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 89 * 53\n\nOutput:\nanswer: 4717\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4717",
+      "predicted_answer": "4525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 50\n\nOutput:\nanswer: 2350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2350",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 73\n\nOutput:\nanswer: 6862\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6862",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 51 * 65\n\nOutput:\nanswer: 3315\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3315",
+      "predicted_answer": "3422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 68\n\nOutput:\nanswer: 3740\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3740",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 64\n\nOutput:\nanswer: 4416\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4416",
+      "predicted_answer": "4528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 20\n\nOutput:\nanswer: 640\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "640",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 99\n\nOutput:\nanswer: 8415\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "8415",
+      "predicted_answer": "8925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 76\n\nOutput:\nanswer: 6460\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6460",
+      "predicted_answer": "5620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 18 * 93\n\nOutput:\nanswer: 1674\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1674",
+      "predicted_answer": "1025"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 60 * 78\n\nOutput:\nanswer: 4680\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4680",
+      "predicted_answer": "5200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 29 * 76\n\nOutput:\nanswer: 2204\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2204",
+      "predicted_answer": "1528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 97\n\nOutput:\nanswer: 7663\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "7663",
+      "predicted_answer": "8225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 87 * 71\n\nOutput:\nanswer: 6177\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6177",
+      "predicted_answer": "6620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 81\n\nOutput:\nanswer: 2187\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2187",
+      "predicted_answer": "1825"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 36 * 65\n\nOutput:\nanswer: 2340\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2340",
+      "predicted_answer": "2428"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 91 * 55\n\nOutput:\nanswer: 5005\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5005",
+      "predicted_answer": "4522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 77 * 26\n\nOutput:\nanswer: 2002\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2002",
+      "predicted_answer": "2925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 78\n\nOutput:\nanswer: 2340\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2340",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 88\n\nOutput:\nanswer: 8096\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "8096",
+      "predicted_answer": "7222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 95 * 14\n\nOutput:\nanswer: 1330\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "1330",
+      "predicted_answer": "1220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 54\n\nOutput:\nanswer: 1350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1350",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 33 * 19\n\nOutput:\nanswer: 627\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "627",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 35 * 31\n\nOutput:\nanswer: 1085\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1085",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 84 * 79\n\nOutput:\nanswer: 6636\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6636",
+      "predicted_answer": "6620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 97\n\nOutput:\nanswer: 7857\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "7857",
+      "predicted_answer": "8222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 93 * 75\n\nOutput:\nanswer: 6975\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "6975",
+      "predicted_answer": "6520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 19 * 58\n\nOutput:\nanswer: 1102\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1102",
+      "predicted_answer": "1528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 23\n\nOutput:\nanswer: 1656\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1656",
+      "predicted_answer": "2520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 84\n\nOutput:\nanswer: 5376\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5376",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 21\n\nOutput:\nanswer: 231\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "231",
+      "predicted_answer": "190"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 26\n\nOutput:\nanswer: 2106\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2106",
+      "predicted_answer": "2928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 40 * 36\n\nOutput:\nanswer: 1440\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1440",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 22\n\nOutput:\nanswer: 1496\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1496",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 82 * 71\n\nOutput:\nanswer: 5822\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5822",
+      "predicted_answer": "6920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 76 * 72\n\nOutput:\nanswer: 5472\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5472",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 49 * 34\n\nOutput:\nanswer: 1666\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1666",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 84 * 49\n\nOutput:\nanswer: 4116\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4116",
+      "predicted_answer": "3525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 15 * 79\n\nOutput:\nanswer: 1185\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1185",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 78 * 11\n\nOutput:\nanswer: 858\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "858",
+      "predicted_answer": "190"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 35\n\nOutput:\nanswer: 1120\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1120",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 80 * 92\n\nOutput:\nanswer: 7360\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7360",
+      "predicted_answer": "8000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 29 * 28\n\nOutput:\nanswer: 812\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "812",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 74 * 81\n\nOutput:\nanswer: 5994\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5994",
+      "predicted_answer": "7622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 40\n\nOutput:\nanswer: 880\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "880",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 36\n\nOutput:\nanswer: 1800\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1800",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 83\n\nOutput:\nanswer: 5229\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5229",
+      "predicted_answer": "6522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 59\n\nOutput:\nanswer: 1593\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1593",
+      "predicted_answer": "2525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 81\n\nOutput:\nanswer: 2268\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2268",
+      "predicted_answer": "1828"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 97\n\nOutput:\nanswer: 7275\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "7275",
+      "predicted_answer": "7224"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 82\n\nOutput:\nanswer: 6642\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6642",
+      "predicted_answer": "7620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 69\n\nOutput:\nanswer: 897\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "897",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 46\n\nOutput:\nanswer: 598\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "598",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 87\n\nOutput:\nanswer: 7047\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7047",
+      "predicted_answer": "7222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 83\n\nOutput:\nanswer: 3901\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3901",
+      "predicted_answer": "4624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 33\n\nOutput:\nanswer: 3102\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3102",
+      "predicted_answer": "2525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 24 * 46\n\nOutput:\nanswer: 1104\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1104",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 39\n\nOutput:\nanswer: 2769\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2769",
+      "predicted_answer": "2820"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 71\n\nOutput:\nanswer: 852\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "852",
+      "predicted_answer": "150"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 75\n\nOutput:\nanswer: 2250\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2250",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 63\n\nOutput:\nanswer: 2646\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2646",
+      "predicted_answer": "2422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 98 * 54\n\nOutput:\nanswer: 5292\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5292",
+      "predicted_answer": "4525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 96\n\nOutput:\nanswer: 5280\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5280",
+      "predicted_answer": "2924"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 22\n\nOutput:\nanswer: 594\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "594",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 27\n\nOutput:\nanswer: 2187\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2187",
+      "predicted_answer": "2920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 98 * 52\n\nOutput:\nanswer: 5096\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5096",
+      "predicted_answer": "4522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 50\n\nOutput:\nanswer: 1250\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1250",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 97 * 62\n\nOutput:\nanswer: 6014\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6014",
+      "predicted_answer": "5525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 37\n\nOutput:\nanswer: 1776\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1776",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 77\n\nOutput:\nanswer: 6083\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6083",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 53\n\nOutput:\nanswer: 3763\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3763",
+      "predicted_answer": "4420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 70\n\nOutput:\nanswer: 2660\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2660",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 90\n\nOutput:\nanswer: 8280\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "8280",
+      "predicted_answer": "9020"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 10 * 67\n\nOutput:\nanswer: 670\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "670",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 80 * 70\n\nOutput:\nanswer: 5600\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5600",
+      "predicted_answer": "6000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 92\n\nOutput:\nanswer: 5060\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5060",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 51\n\nOutput:\nanswer: 2244\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2244",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 23 * 51\n\nOutput:\nanswer: 1173\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1173",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 66 * 98\n\nOutput:\nanswer: 6468\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6468",
+      "predicted_answer": "6920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 88 * 79\n\nOutput:\nanswer: 6952\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6952",
+      "predicted_answer": "6625"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 49\n\nOutput:\nanswer: 588\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "588",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 15\n\nOutput:\nanswer: 1275\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1275",
+      "predicted_answer": "1520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 88\n\nOutput:\nanswer: 5984\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5984",
+      "predicted_answer": "6824"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 14 * 92\n\nOutput:\nanswer: 1288\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1288",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 23 * 13\n\nOutput:\nanswer: 299\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "299",
+      "predicted_answer": "120"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 76\n\nOutput:\nanswer: 4788\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4788",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 80\n\nOutput:\nanswer: 1040\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1040",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 62\n\nOutput:\nanswer: 682\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "682",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 83 * 15\n\nOutput:\nanswer: 1245\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1245",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 16 * 54\n\nOutput:\nanswer: 864\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "864",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 37\n\nOutput:\nanswer: 1776\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1776",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 29 * 10\n\nOutput:\nanswer: 290\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "290",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 14\n\nOutput:\nanswer: 154\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "154",
+      "predicted_answer": "110"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 56 * 93\n\nOutput:\nanswer: 5208\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5208",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 86 * 98\n\nOutput:\nanswer: 8428\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8428",
+      "predicted_answer": "8225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 26\n\nOutput:\nanswer: 2444\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2444",
+      "predicted_answer": "2920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 21 * 32\n\nOutput:\nanswer: 672\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "672",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 96 * 70\n\nOutput:\nanswer: 6720\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "6720",
+      "predicted_answer": "6000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 10 * 57\n\nOutput:\nanswer: 570\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "570",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 84\n\nOutput:\nanswer: 4200\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "4200",
+      "predicted_answer": "4000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 58 * 40\n\nOutput:\nanswer: 2320\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2320",
+      "predicted_answer": "3900"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 66\n\nOutput:\nanswer: 5610\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5610",
+      "predicted_answer": "5500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 54 * 55\n\nOutput:\nanswer: 2970\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2970",
+      "predicted_answer": "3420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 92\n\nOutput:\nanswer: 2576\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2576",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 99 * 68\n\nOutput:\nanswer: 6732\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6732",
+      "predicted_answer": "5528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 39 * 81\n\nOutput:\nanswer: 3159\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3159",
+      "predicted_answer": "2828"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 24 * 30\n\nOutput:\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "720",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 87\n\nOutput:\nanswer: 957\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "957",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 39 * 96\n\nOutput:\nanswer: 3744\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3744",
+      "predicted_answer": "1922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 26 * 68\n\nOutput:\nanswer: 1768\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1768",
+      "predicted_answer": "2505"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 78 * 31\n\nOutput:\nanswer: 2418\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2418",
+      "predicted_answer": "2928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 21 * 61\n\nOutput:\nanswer: 1281\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1281",
+      "predicted_answer": "1228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 43\n\nOutput:\nanswer: 3397\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3397",
+      "predicted_answer": "3595"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 79\n\nOutput:\nanswer: 7268\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7268",
+      "predicted_answer": "6620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 55\n\nOutput:\nanswer: 3520\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3520",
+      "predicted_answer": "3422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 76 * 41\n\nOutput:\nanswer: 3116\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3116",
+      "predicted_answer": "3925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 59\n\nOutput:\nanswer: 1652\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1652",
+      "predicted_answer": "1228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 39 * 52\n\nOutput:\nanswer: 2028\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2028",
+      "predicted_answer": "1222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 28\n\nOutput:\nanswer: 2212\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2212",
+      "predicted_answer": "2928"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 21 * 75\n\nOutput:\nanswer: 1575\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1575",
+      "predicted_answer": "1520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 50\n\nOutput:\nanswer: 1600\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1600",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 77 * 22\n\nOutput:\nanswer: 1694\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1694",
+      "predicted_answer": "2200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 20\n\nOutput:\nanswer: 1260\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1260",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 27 * 23\n\nOutput:\nanswer: 621\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "621",
+      "predicted_answer": "202"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 28\n\nOutput:\nanswer: 1904\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1904",
+      "predicted_answer": "2925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 61 * 61\n\nOutput:\nanswer: 3721\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3721",
+      "predicted_answer": "4420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 29\n\nOutput:\nanswer: 1073\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1073",
+      "predicted_answer": "2125"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 52\n\nOutput:\nanswer: 4784\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4784",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 86\n\nOutput:\nanswer: 3268\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3268",
+      "predicted_answer": "2825"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 13\n\nOutput:\nanswer: 169\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "169",
+      "predicted_answer": "120"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 77 * 45\n\nOutput:\nanswer: 3465\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3465",
+      "predicted_answer": "3520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 63\n\nOutput:\nanswer: 2709\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2709",
+      "predicted_answer": "2422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 94\n\nOutput:\nanswer: 8836\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8836",
+      "predicted_answer": "8524"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 32\n\nOutput:\nanswer: 2592\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2592",
+      "predicted_answer": "2820"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 42\n\nOutput:\nanswer: 3318\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3318",
+      "predicted_answer": "3998"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 55\n\nOutput:\nanswer: 715\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "715",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 49 * 13\n\nOutput:\nanswer: 637\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "637",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 62 * 29\n\nOutput:\nanswer: 1798\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1798",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 51\n\nOutput:\nanswer: 4131\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4131",
+      "predicted_answer": "4910"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 62 * 53\n\nOutput:\nanswer: 3286\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3286",
+      "predicted_answer": "3420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 62 * 59\n\nOutput:\nanswer: 3658\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3658",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 10 * 17\n\nOutput:\nanswer: 170\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "170",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 66 * 43\n\nOutput:\nanswer: 2838\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2838",
+      "predicted_answer": "3525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 65\n\nOutput:\nanswer: 5980\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5980",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 46 * 56\n\nOutput:\nanswer: 2576\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2576",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 45 * 89\n\nOutput:\nanswer: 4005\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4005",
+      "predicted_answer": "2822"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 93 * 88\n\nOutput:\nanswer: 8184\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8184",
+      "predicted_answer": "7624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 64 * 64\n\nOutput:\nanswer: 4096\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4096",
+      "predicted_answer": "4425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 61 * 32\n\nOutput:\nanswer: 1952\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1952",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 13\n\nOutput:\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "390",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 91 * 76\n\nOutput:\nanswer: 6916\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6916",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 98\n\nOutput:\nanswer: 4214\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4214",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 78 * 29\n\nOutput:\nanswer: 2262\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2262",
+      "predicted_answer": "2920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 31 * 49\n\nOutput:\nanswer: 1519\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1519",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 28 * 79\n\nOutput:\nanswer: 2212\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2212",
+      "predicted_answer": "1528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 38\n\nOutput:\nanswer: 1976\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1976",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 87 * 80\n\nOutput:\nanswer: 6960\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6960",
+      "predicted_answer": "7000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 91 * 19\n\nOutput:\nanswer: 1729\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "1729",
+      "predicted_answer": "1920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 27\n\nOutput:\nanswer: 864\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "864",
+      "predicted_answer": "250"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 18 * 77\n\nOutput:\nanswer: 1386\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1386",
+      "predicted_answer": "1528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 90\n\nOutput:\nanswer: 2250\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2250",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 55\n\nOutput:\nanswer: 2585\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2585",
+      "predicted_answer": "3420"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 79\n\nOutput:\nanswer: 5688\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5688",
+      "predicted_answer": "6620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 94 * 34\n\nOutput:\nanswer: 3196\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3196",
+      "predicted_answer": "2520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 83\n\nOutput:\nanswer: 7636\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "7636",
+      "predicted_answer": "7220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 35\n\nOutput:\nanswer: 2415\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2415",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 33 * 54\n\nOutput:\nanswer: 1782\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1782",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 64\n\nOutput:\nanswer: 4416\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4416",
+      "predicted_answer": "4528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 23\n\nOutput:\nanswer: 253\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "253",
+      "predicted_answer": "290"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 26\n\nOutput:\nanswer: 312\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "312",
+      "predicted_answer": "190"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 23\n\nOutput:\nanswer: 2116\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "2116",
+      "predicted_answer": "2925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 86\n\nOutput:\nanswer: 4730\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4730",
+      "predicted_answer": "4622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 63 * 94\n\nOutput:\nanswer: 5922\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5922",
+      "predicted_answer": "4922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 11 * 14\n\nOutput:\nanswer: 154\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9102563858032227,
+      "answer": "154",
+      "predicted_answer": "110"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 86 * 68\n\nOutput:\nanswer: 5848\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5848",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 13\n\nOutput:\nanswer: 624\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "624",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 96\n\nOutput:\nanswer: 3648\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3648",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 98\n\nOutput:\nanswer: 7056\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "7056",
+      "predicted_answer": "8222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 95 * 92\n\nOutput:\nanswer: 8740\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "8740",
+      "predicted_answer": "8224"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 16 * 76\n\nOutput:\nanswer: 1216\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1216",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 84\n\nOutput:\nanswer: 5712\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5712",
+      "predicted_answer": "6624"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 52\n\nOutput:\nanswer: 2184\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2184",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 96 * 51\n\nOutput:\nanswer: 4896\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4896",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 97 * 57\n\nOutput:\nanswer: 5529\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "5529",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 86 * 88\n\nOutput:\nanswer: 7568\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "7568",
+      "predicted_answer": "7620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 65 * 81\n\nOutput:\nanswer: 5265\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5265",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 32 * 36\n\nOutput:\nanswer: 1152\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1152",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 95\n\nOutput:\nanswer: 4750\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4750",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 24\n\nOutput:\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "720",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 54\n\nOutput:\nanswer: 3726\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3726",
+      "predicted_answer": "4422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 68\n\nOutput:\nanswer: 3400\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "3400",
+      "predicted_answer": "3000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 50 * 27\n\nOutput:\nanswer: 1350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1350",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 25 * 81\n\nOutput:\nanswer: 2025\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2025",
+      "predicted_answer": "1528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 54 * 50\n\nOutput:\nanswer: 2700\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2700",
+      "predicted_answer": "3500"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 79 * 71\n\nOutput:\nanswer: 5609\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5609",
+      "predicted_answer": "6628"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 78 * 48\n\nOutput:\nanswer: 3744\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3744",
+      "predicted_answer": "3820"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 69 * 73\n\nOutput:\nanswer: 5037\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "5037",
+      "predicted_answer": "5522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 85 * 16\n\nOutput:\nanswer: 1360\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1360",
+      "predicted_answer": "1520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 20 * 69\n\nOutput:\nanswer: 1380\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1380",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 72\n\nOutput:\nanswer: 3960\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3960",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 30 * 55\n\nOutput:\nanswer: 1650\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1650",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 44 * 73\n\nOutput:\nanswer: 3212\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3212",
+      "predicted_answer": "2422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 77\n\nOutput:\nanswer: 3234\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3234",
+      "predicted_answer": "2528"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 45 * 53\n\nOutput:\nanswer: 2385\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2385",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 21 * 64\n\nOutput:\nanswer: 1344\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1344",
+      "predicted_answer": "1220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 58 * 75\n\nOutput:\nanswer: 4350\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "4350",
+      "predicted_answer": "4520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 39 * 70\n\nOutput:\nanswer: 2730\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2730",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 48 * 63\n\nOutput:\nanswer: 3024\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3024",
+      "predicted_answer": "3422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 31 * 29\n\nOutput:\nanswer: 899\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "899",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 78\n\nOutput:\nanswer: 936\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8717948794364929,
+      "answer": "936",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 40 * 10\n\nOutput:\nanswer: 400\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "400",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 46 * 55\n\nOutput:\nanswer: 2530\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2530",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 10\n\nOutput:\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "720",
+      "predicted_answer": "100"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 25\n\nOutput:\nanswer: 1175\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1175",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 18 * 21\n\nOutput:\nanswer: 378\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "378",
+      "predicted_answer": "190"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 96 * 84\n\nOutput:\nanswer: 8064\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8064",
+      "predicted_answer": "6524"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 54 * 20\n\nOutput:\nanswer: 1080\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1080",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 56 * 35\n\nOutput:\nanswer: 1960\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1960",
+      "predicted_answer": "2224"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 88\n\nOutput:\nanswer: 6248\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6248",
+      "predicted_answer": "7222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 49 * 74\n\nOutput:\nanswer: 3626\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3626",
+      "predicted_answer": "4522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 90 * 85\n\nOutput:\nanswer: 7650\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "7650",
+      "predicted_answer": "6000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 95 * 30\n\nOutput:\nanswer: 2850\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "2850",
+      "predicted_answer": "2900"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 94\n\nOutput:\nanswer: 4042\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "4042",
+      "predicted_answer": "2222"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 37 * 76\n\nOutput:\nanswer: 2812\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2812",
+      "predicted_answer": "2524"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 14 * 91\n\nOutput:\nanswer: 1274\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1274",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 46\n\nOutput:\nanswer: 2162\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2162",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 33 * 79\n\nOutput:\nanswer: 2607\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2607",
+      "predicted_answer": "2522"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 22 * 43\n\nOutput:\nanswer: 946\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "946",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 38 * 75\n\nOutput:\nanswer: 2850\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2850",
+      "predicted_answer": "2525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 67 * 82\n\nOutput:\nanswer: 5494\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "5494",
+      "predicted_answer": "6622"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 23 * 20\n\nOutput:\nanswer: 460\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8974359035491943,
+      "answer": "460",
+      "predicted_answer": "200"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 16 * 67\n\nOutput:\nanswer: 1072\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1072",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 26 * 76\n\nOutput:\nanswer: 1976\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1976",
+      "predicted_answer": "2504"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 96\n\nOutput:\nanswer: 6816\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "6816",
+      "predicted_answer": "8922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 12 * 36\n\nOutput:\nanswer: 432\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "432",
+      "predicted_answer": "290"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 35 * 57\n\nOutput:\nanswer: 1995\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1995",
+      "predicted_answer": "2424"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 71 * 21\n\nOutput:\nanswer: 1491\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1491",
+      "predicted_answer": "2922"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 68 * 58\n\nOutput:\nanswer: 3944\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "3944",
+      "predicted_answer": "4425"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 55 * 33\n\nOutput:\nanswer: 1815\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "1815",
+      "predicted_answer": "2224"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 34\n\nOutput:\nanswer: 3128\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3128",
+      "predicted_answer": "2920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 91 * 68\n\nOutput:\nanswer: 6188\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6188",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 82\n\nOutput:\nanswer: 3854\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "3854",
+      "predicted_answer": "4822"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 20 * 88\n\nOutput:\nanswer: 1760\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1760",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 97 * 85\n\nOutput:\nanswer: 8245\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "8245",
+      "predicted_answer": "7520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 42 * 18\n\nOutput:\nanswer: 756\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "756",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 89 * 98\n\nOutput:\nanswer: 8722\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "8722",
+      "predicted_answer": "8228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 29 * 51\n\nOutput:\nanswer: 1479\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1479",
+      "predicted_answer": "1228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 53 * 53\n\nOutput:\nanswer: 2809\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2809",
+      "predicted_answer": "3422"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 75 * 73\n\nOutput:\nanswer: 5475\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "5475",
+      "predicted_answer": "5520"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 43 * 49\n\nOutput:\nanswer: 2107\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "2107",
+      "predicted_answer": "2228"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 52 * 51\n\nOutput:\nanswer: 2652\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2652",
+      "predicted_answer": "2220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 57 * 45\n\nOutput:\nanswer: 2565\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2565",
+      "predicted_answer": "3220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 13 * 83\n\nOutput:\nanswer: 1079\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1079",
+      "predicted_answer": "1525"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 56 * 42\n\nOutput:\nanswer: 2352\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2352",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 92 * 83\n\nOutput:\nanswer: 7636\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "7636",
+      "predicted_answer": "7220"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 88 * 20\n\nOutput:\nanswer: 1760\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "1760",
+      "predicted_answer": "2000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 59 * 44\n\nOutput:\nanswer: 2596\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "2596",
+      "predicted_answer": "3225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 15 * 70\n\nOutput:\nanswer: 1050\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9113923907279968,
+      "answer": "1050",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 34 * 90\n\nOutput:\nanswer: 3060\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "3060",
+      "predicted_answer": "1000"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 84 * 83\n\nOutput:\nanswer: 6972\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "6972",
+      "predicted_answer": "6620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 61\n\nOutput:\nanswer: 4941\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8734177350997925,
+      "answer": "4941",
+      "predicted_answer": "5620"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 81 * 17\n\nOutput:\nanswer: 1377\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "1377",
+      "predicted_answer": "1920"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 47 * 44\n\nOutput:\nanswer: 2068\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8860759735107422,
+      "answer": "2068",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_answer\nInput:\nmultiply 72 * 96\n\nOutput:\nanswer: 6912\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8987341523170471,
+      "answer": "6912",
+      "predicted_answer": "8922"
+    }
+  ]
+}

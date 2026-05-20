@@ -1,0 +1,1695 @@
+{
+  "summary": {
+    "checkpoint": "C:\\Users\\daylan\\CompoundStreamingTransformer\\loss-query-hymba\\experiments\\mods\\001_first_pass_hymba_cst\\runs\\2026-05-17_alpine_static_basin_zag_math50_50_500\\checkpoint_best.pt",
+    "examples": 200,
+    "answer_exact": 9,
+    "answer_exact_accuracy": 0.045,
+    "full_exact": 0,
+    "full_exact_accuracy": 0.0,
+    "mean_token_accuracy": 0.9041154536604882,
+    "failures_shown": [
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 741 - 99\n\nOutput:\nones: 1 - 9 needs borrow, take 1 from tens, 11 - 9 = 2\ntens: 3 - 9 needs borrow, take 1 from hundreds, 13 - 9 = 4\nhundreds: 6 - 0 = 6\nanswer: 642\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9090909361839294,
+        "answer": "642",
+        "predicted_answer": "166"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 82 - 47\n\nOutput:\nones: 2 - 7 needs borrow, take 1 from tens, 12 - 7 = 5\ntens: 7 - 4 = 3\nanswer: 35\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9097222089767456,
+        "answer": "35",
+        "predicted_answer": "26"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 9 - 4\n\nOutput:\nones: 9 - 4 = 5\nanswer: 5\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9069767594337463,
+        "answer": "5",
+        "predicted_answer": "1"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 532 - 192\n\nOutput:\nones: 2 - 2 = 0\ntens: 3 - 9 needs borrow, take 1 from hundreds, 13 - 9 = 4\nhundreds: 4 - 1 = 3\nanswer: 340\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8830409646034241,
+        "answer": "340",
+        "predicted_answer": "166"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 92 - 15\n\nOutput:\nones: 2 - 5 needs borrow, take 1 from tens, 12 - 5 = 7\ntens: 8 - 1 = 7\nanswer: 77\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9027777910232544,
+        "answer": "77",
+        "predicted_answer": "1\n"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 465 - 58\n\nOutput:\nones: 5 - 8 needs borrow, take 1 from tens, 15 - 8 = 7\ntens: 5 - 5 = 0\nhundreds: 4 - 0 = 4\nanswer: 407\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.891566276550293,
+        "answer": "407",
+        "predicted_answer": "469"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 80 - 2\n\nOutput:\nones: 0 - 2 needs borrow, take 1 from tens, 10 - 2 = 8\ntens: 7 - 0 = 7\nanswer: 78\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9090909361839294,
+        "answer": "78",
+        "predicted_answer": "2\n"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 396 - 52\n\nOutput:\nones: 6 - 2 = 4\ntens: 9 - 5 = 4\nhundreds: 3 - 0 = 3\nanswer: 344\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.8661417365074158,
+        "answer": "344",
+        "predicted_answer": "266"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 46 - 8\n\nOutput:\nones: 6 - 8 needs borrow, take 1 from tens, 16 - 8 = 8\ntens: 3 - 0 = 3\nanswer: 38\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9160839319229126,
+        "answer": "38",
+        "predicted_answer": "48"
+      },
+      {
+        "trace": "Task: subtraction_prose\nInput:\nsubtract 89 - 2\n\nOutput:\nones: 9 - 2 = 7\ntens: 8 - 0 = 8\nanswer: 87\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9038461446762085,
+        "answer": "87",
+        "predicted_answer": "6\n"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 741 - 99\n\nOutput:\nones: 1 - 9 needs borrow, take 1 from tens, 11 - 9 = 2\ntens: 3 - 9 needs borrow, take 1 from hundreds, 13 - 9 = 4\nhundreds: 6 - 0 = 6\nanswer: 642\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "642",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 82 - 47\n\nOutput:\nones: 2 - 7 needs borrow, take 1 from tens, 12 - 7 = 5\ntens: 7 - 4 = 3\nanswer: 35\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9097222089767456,
+      "answer": "35",
+      "predicted_answer": "26"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 9 - 4\n\nOutput:\nones: 9 - 4 = 5\nanswer: 5\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9069767594337463,
+      "answer": "5",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 532 - 192\n\nOutput:\nones: 2 - 2 = 0\ntens: 3 - 9 needs borrow, take 1 from hundreds, 13 - 9 = 4\nhundreds: 4 - 1 = 3\nanswer: 340\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8830409646034241,
+      "answer": "340",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 92 - 15\n\nOutput:\nones: 2 - 5 needs borrow, take 1 from tens, 12 - 5 = 7\ntens: 8 - 1 = 7\nanswer: 77\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9027777910232544,
+      "answer": "77",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 465 - 58\n\nOutput:\nones: 5 - 8 needs borrow, take 1 from tens, 15 - 8 = 7\ntens: 5 - 5 = 0\nhundreds: 4 - 0 = 4\nanswer: 407\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.891566276550293,
+      "answer": "407",
+      "predicted_answer": "469"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 80 - 2\n\nOutput:\nones: 0 - 2 needs borrow, take 1 from tens, 10 - 2 = 8\ntens: 7 - 0 = 7\nanswer: 78\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "78",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 396 - 52\n\nOutput:\nones: 6 - 2 = 4\ntens: 9 - 5 = 4\nhundreds: 3 - 0 = 3\nanswer: 344\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8661417365074158,
+      "answer": "344",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 46 - 8\n\nOutput:\nones: 6 - 8 needs borrow, take 1 from tens, 16 - 8 = 8\ntens: 3 - 0 = 3\nanswer: 38\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9160839319229126,
+      "answer": "38",
+      "predicted_answer": "48"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 89 - 2\n\nOutput:\nones: 9 - 2 = 7\ntens: 8 - 0 = 8\nanswer: 87\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9038461446762085,
+      "answer": "87",
+      "predicted_answer": "6\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 618 - 7\n\nOutput:\nones: 8 - 7 = 1\ntens: 1 - 0 = 1\nhundreds: 6 - 0 = 6\nanswer: 611\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "611",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 29 - 1\n\nOutput:\nones: 9 - 1 = 8\ntens: 2 - 0 = 2\nanswer: 28\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "28",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 67 - 11\n\nOutput:\nones: 7 - 1 = 6\ntens: 6 - 1 = 5\nanswer: 56\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8857142925262451,
+      "answer": "56",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 472 - 69\n\nOutput:\nones: 2 - 9 needs borrow, take 1 from tens, 12 - 9 = 3\ntens: 6 - 6 = 0\nhundreds: 4 - 0 = 4\nanswer: 403\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.891566276550293,
+      "answer": "403",
+      "predicted_answer": "269"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 257 - 31\n\nOutput:\nones: 7 - 1 = 6\ntens: 5 - 3 = 2\nhundreds: 2 - 0 = 2\nanswer: 226\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.913385808467865,
+      "answer": "226",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 8 - 5\n\nOutput:\nones: 8 - 5 = 3\nanswer: 3\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9069767594337463,
+      "answer": "3",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 76 - 8\n\nOutput:\nones: 6 - 8 needs borrow, take 1 from tens, 16 - 8 = 8\ntens: 6 - 0 = 6\nanswer: 68\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9160839319229126,
+      "answer": "68",
+      "predicted_answer": "88"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 17 - 11\n\nOutput:\nones: 7 - 1 = 6\ntens: 1 - 1 = 0\nanswer: 6\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9038461446762085,
+      "answer": "6",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 524 - 2\n\nOutput:\nones: 4 - 2 = 2\ntens: 2 - 0 = 2\nhundreds: 5 - 0 = 5\nanswer: 522\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9285714030265808,
+      "answer": "522",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 42 - 7\n\nOutput:\nones: 2 - 7 needs borrow, take 1 from tens, 12 - 7 = 5\ntens: 3 - 0 = 3\nanswer: 35\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "35",
+      "predicted_answer": "22"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 9 - 1\n\nOutput:\nones: 9 - 1 = 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9418604373931885,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 357 - 6\n\nOutput:\nones: 7 - 6 = 1\ntens: 5 - 0 = 5\nhundreds: 3 - 0 = 3\nanswer: 351\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.89682537317276,
+      "answer": "351",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 241 - 9\n\nOutput:\nones: 1 - 9 needs borrow, take 1 from tens, 11 - 9 = 2\ntens: 3 - 0 = 3\nhundreds: 2 - 0 = 2\nanswer: 232\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9151515364646912,
+      "answer": "232",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 86 - 9\n\nOutput:\nones: 6 - 9 needs borrow, take 1 from tens, 16 - 9 = 7\ntens: 7 - 0 = 7\nanswer: 77\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "77",
+      "predicted_answer": "86"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 404 - 63\n\nOutput:\nones: 4 - 3 = 1\ntens: 0 - 6 needs borrow, take 1 from hundreds, 10 - 6 = 4\nhundreds: 3 - 0 = 3\nanswer: 341\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8882352709770203,
+      "answer": "341",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 50 - 5\n\nOutput:\nones: 0 - 5 needs borrow, take 1 from tens, 10 - 5 = 5\ntens: 4 - 0 = 4\nanswer: 45\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9020978808403015,
+      "answer": "45",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 30 - 3\n\nOutput:\nones: 0 - 3 needs borrow, take 1 from tens, 10 - 3 = 7\ntens: 2 - 0 = 2\nanswer: 27\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "27",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 98 - 46\n\nOutput:\nones: 8 - 6 = 2\ntens: 9 - 4 = 5\nanswer: 52\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "52",
+      "predicted_answer": "6\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 513 - 1\n\nOutput:\nones: 3 - 1 = 2\ntens: 1 - 0 = 1\nhundreds: 5 - 0 = 5\nanswer: 512\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9126983880996704,
+      "answer": "512",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 4 - 2\n\nOutput:\nones: 4 - 2 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.930232584476471,
+      "answer": "2",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 848 - 8\n\nOutput:\nones: 8 - 8 = 0\ntens: 4 - 0 = 4\nhundreds: 8 - 0 = 8\nanswer: 840\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.89682537317276,
+      "answer": "840",
+      "predicted_answer": "666"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 73 - 8\n\nOutput:\nones: 3 - 8 needs borrow, take 1 from tens, 13 - 8 = 5\ntens: 6 - 0 = 6\nanswer: 65\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9160839319229126,
+      "answer": "65",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 951 - 401\n\nOutput:\nones: 1 - 1 = 0\ntens: 5 - 0 = 5\nhundreds: 9 - 4 = 5\nanswer: 550\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.859375,
+      "answer": "550",
+      "predicted_answer": "121"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 452 - 291\n\nOutput:\nones: 2 - 1 = 1\ntens: 5 - 9 needs borrow, take 1 from hundreds, 15 - 9 = 6\nhundreds: 3 - 2 = 1\nanswer: 161\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9064327478408813,
+      "answer": "161",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 416 - 83\n\nOutput:\nones: 6 - 3 = 3\ntens: 1 - 8 needs borrow, take 1 from hundreds, 11 - 8 = 3\nhundreds: 3 - 0 = 3\nanswer: 333\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8999999761581421,
+      "answer": "333",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 394 - 7\n\nOutput:\nones: 4 - 7 needs borrow, take 1 from tens, 14 - 7 = 7\ntens: 8 - 0 = 8\nhundreds: 3 - 0 = 3\nanswer: 387\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.903030276298523,
+      "answer": "387",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 5 - 3\n\nOutput:\nones: 5 - 3 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "2",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 421 - 5\n\nOutput:\nones: 1 - 5 needs borrow, take 1 from tens, 11 - 5 = 6\ntens: 1 - 0 = 1\nhundreds: 4 - 0 = 4\nanswer: 416\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9212121367454529,
+      "answer": "416",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 790 - 567\n\nOutput:\nones: 0 - 7 needs borrow, take 1 from tens, 10 - 7 = 3\ntens: 8 - 6 = 2\nhundreds: 7 - 5 = 2\nanswer: 223\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.886227548122406,
+      "answer": "223",
+      "predicted_answer": "489"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 988 - 92\n\nOutput:\nones: 8 - 2 = 6\ntens: 8 - 9 needs borrow, take 1 from hundreds, 18 - 9 = 9\nhundreds: 8 - 0 = 8\nanswer: 896\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.929411768913269,
+      "answer": "896",
+      "predicted_answer": "989"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 87 - 8\n\nOutput:\nones: 7 - 8 needs borrow, take 1 from tens, 17 - 8 = 9\ntens: 7 - 0 = 7\nanswer: 79\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8951048851013184,
+      "answer": "79",
+      "predicted_answer": "86"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 134 - 7\n\nOutput:\nones: 4 - 7 needs borrow, take 1 from tens, 14 - 7 = 7\ntens: 2 - 0 = 2\nhundreds: 1 - 0 = 1\nanswer: 127\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9151515364646912,
+      "answer": "127",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 956 - 20\n\nOutput:\nones: 6 - 0 = 6\ntens: 5 - 2 = 3\nhundreds: 9 - 0 = 9\nanswer: 936\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8897637724876404,
+      "answer": "936",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 560 - 2\n\nOutput:\nones: 0 - 2 needs borrow, take 1 from tens, 10 - 2 = 8\ntens: 5 - 0 = 5\nhundreds: 5 - 0 = 5\nanswer: 558\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8969696760177612,
+      "answer": "558",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 75 - 9\n\nOutput:\nones: 5 - 9 needs borrow, take 1 from tens, 15 - 9 = 6\ntens: 6 - 0 = 6\nanswer: 66\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9160839319229126,
+      "answer": "66",
+      "predicted_answer": "8\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 764 - 165\n\nOutput:\nones: 4 - 5 needs borrow, take 1 from tens, 14 - 5 = 9\ntens: 5 - 6 needs borrow, take 1 from hundreds, 15 - 6 = 9\nhundreds: 6 - 1 = 5\nanswer: 599\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8952381014823914,
+      "answer": "599",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 422 - 398\n\nOutput:\nones: 2 - 8 needs borrow, take 1 from tens, 12 - 8 = 4\ntens: 1 - 9 needs borrow, take 1 from hundreds, 11 - 9 = 2\nhundreds: 3 - 3 = 0\nanswer: 24\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "24",
+      "predicted_answer": "16"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 62 - 3\n\nOutput:\nones: 2 - 3 needs borrow, take 1 from tens, 12 - 3 = 9\ntens: 5 - 0 = 5\nanswer: 59\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "59",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 625 - 76\n\nOutput:\nones: 5 - 6 needs borrow, take 1 from tens, 15 - 6 = 9\ntens: 1 - 7 needs borrow, take 1 from hundreds, 11 - 7 = 4\nhundreds: 5 - 0 = 5\nanswer: 549\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "549",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 79 - 5\n\nOutput:\nones: 9 - 5 = 4\ntens: 7 - 0 = 7\nanswer: 74\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "74",
+      "predicted_answer": "66"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 224 - 6\n\nOutput:\nones: 4 - 6 needs borrow, take 1 from tens, 14 - 6 = 8\ntens: 1 - 0 = 1\nhundreds: 2 - 0 = 2\nanswer: 218\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "218",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 73 - 8\n\nOutput:\nones: 3 - 8 needs borrow, take 1 from tens, 13 - 8 = 5\ntens: 6 - 0 = 6\nanswer: 65\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9160839319229126,
+      "answer": "65",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 65 - 1\n\nOutput:\nones: 5 - 1 = 4\ntens: 6 - 0 = 6\nanswer: 64\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9038461446762085,
+      "answer": "64",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 844 - 2\n\nOutput:\nones: 4 - 2 = 2\ntens: 4 - 0 = 4\nhundreds: 8 - 0 = 8\nanswer: 842\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "842",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 902 - 85\n\nOutput:\nones: 2 - 5 needs borrow, borrow through tens from hundreds, 12 - 5 = 7\ntens: 9 - 8 = 1\nhundreds: 8 - 0 = 8\nanswer: 817\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9180327653884888,
+      "answer": "817",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 5 - 1\n\nOutput:\nones: 5 - 1 = 4\nanswer: 4\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "4",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 67 - 5\n\nOutput:\nones: 7 - 5 = 2\ntens: 6 - 0 = 6\nanswer: 62\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8942307829856873,
+      "answer": "62",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 70 - 28\n\nOutput:\nones: 0 - 8 needs borrow, take 1 from tens, 10 - 8 = 2\ntens: 6 - 2 = 4\nanswer: 42\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "42",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 340 - 22\n\nOutput:\nones: 0 - 2 needs borrow, take 1 from tens, 10 - 2 = 8\ntens: 3 - 2 = 1\nhundreds: 3 - 0 = 3\nanswer: 318\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.891566276550293,
+      "answer": "318",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 981 - 613\n\nOutput:\nones: 1 - 3 needs borrow, take 1 from tens, 11 - 3 = 8\ntens: 7 - 1 = 6\nhundreds: 9 - 6 = 3\nanswer: 368\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8982036113739014,
+      "answer": "368",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 999 - 2\n\nOutput:\nones: 9 - 2 = 7\ntens: 9 - 0 = 9\nhundreds: 9 - 0 = 9\nanswer: 997\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8888888955116272,
+      "answer": "997",
+      "predicted_answer": "866"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 551 - 345\n\nOutput:\nones: 1 - 5 needs borrow, take 1 from tens, 11 - 5 = 6\ntens: 4 - 4 = 0\nhundreds: 5 - 3 = 2\nanswer: 206\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8742514848709106,
+      "answer": "206",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 7 - 7\n\nOutput:\nones: 7 - 7 = 0\nanswer: 0\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.895348846912384,
+      "answer": "0",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 4 - 3\n\nOutput:\nones: 4 - 3 = 1\nanswer: 1\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "1",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 699 - 426\n\nOutput:\nones: 9 - 6 = 3\ntens: 9 - 2 = 7\nhundreds: 6 - 4 = 2\nanswer: 273\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8515625,
+      "answer": "273",
+      "predicted_answer": "689"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 23 - 3\n\nOutput:\nones: 3 - 3 = 0\ntens: 2 - 0 = 2\nanswer: 20\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9134615659713745,
+      "answer": "20",
+      "predicted_answer": "22"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 562 - 9\n\nOutput:\nones: 2 - 9 needs borrow, take 1 from tens, 12 - 9 = 3\ntens: 5 - 0 = 5\nhundreds: 5 - 0 = 5\nanswer: 553\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.903030276298523,
+      "answer": "553",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 311 - 65\n\nOutput:\nones: 1 - 5 needs borrow, take 1 from tens, 11 - 5 = 6\ntens: 0 - 6 needs borrow, take 1 from hundreds, 10 - 6 = 4\nhundreds: 2 - 0 = 2\nanswer: 246\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9186602830886841,
+      "answer": "246",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 869 - 1\n\nOutput:\nones: 9 - 1 = 8\ntens: 6 - 0 = 6\nhundreds: 8 - 0 = 8\nanswer: 868\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.920634925365448,
+      "answer": "868",
+      "predicted_answer": "866"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 95 - 91\n\nOutput:\nones: 5 - 1 = 4\ntens: 9 - 9 = 0\nanswer: 4\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8942307829856873,
+      "answer": "4",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 47 - 20\n\nOutput:\nones: 7 - 0 = 7\ntens: 4 - 2 = 2\nanswer: 27\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8952381014823914,
+      "answer": "27",
+      "predicted_answer": "22"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 149 - 8\n\nOutput:\nones: 9 - 8 = 1\ntens: 4 - 0 = 4\nhundreds: 1 - 0 = 1\nanswer: 141\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "141",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 970 - 2\n\nOutput:\nones: 0 - 2 needs borrow, take 1 from tens, 10 - 2 = 8\ntens: 6 - 0 = 6\nhundreds: 9 - 0 = 9\nanswer: 968\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "968",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 92 - 74\n\nOutput:\nones: 2 - 4 needs borrow, take 1 from tens, 12 - 4 = 8\ntens: 8 - 7 = 1\nanswer: 18\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9236111044883728,
+      "answer": "18",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 6 - 2\n\nOutput:\nones: 6 - 2 = 4\nanswer: 4\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.930232584476471,
+      "answer": "4",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 123 - 5\n\nOutput:\nones: 3 - 5 needs borrow, take 1 from tens, 13 - 5 = 8\ntens: 1 - 0 = 1\nhundreds: 1 - 0 = 1\nanswer: 118\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9272727370262146,
+      "answer": "118",
+      "predicted_answer": "124"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 96 - 50\n\nOutput:\nones: 6 - 0 = 6\ntens: 9 - 5 = 4\nanswer: 46\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8857142925262451,
+      "answer": "46",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 877 - 1\n\nOutput:\nones: 7 - 1 = 6\ntens: 7 - 0 = 7\nhundreds: 8 - 0 = 8\nanswer: 876\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "876",
+      "predicted_answer": "666"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 76 - 51\n\nOutput:\nones: 6 - 1 = 5\ntens: 7 - 5 = 2\nanswer: 25\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8761904835700989,
+      "answer": "25",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 455 - 6\n\nOutput:\nones: 5 - 6 needs borrow, take 1 from tens, 15 - 6 = 9\ntens: 4 - 0 = 4\nhundreds: 4 - 0 = 4\nanswer: 449\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.903030276298523,
+      "answer": "449",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 780 - 84\n\nOutput:\nones: 0 - 4 needs borrow, take 1 from tens, 10 - 4 = 6\ntens: 7 - 8 needs borrow, take 1 from hundreds, 17 - 8 = 9\nhundreds: 6 - 0 = 6\nanswer: 696\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.89952152967453,
+      "answer": "696",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 49 - 9\n\nOutput:\nones: 9 - 9 = 0\ntens: 4 - 0 = 4\nanswer: 40\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "40",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 590 - 99\n\nOutput:\nones: 0 - 9 needs borrow, take 1 from tens, 10 - 9 = 1\ntens: 8 - 9 needs borrow, take 1 from hundreds, 18 - 9 = 9\nhundreds: 4 - 0 = 4\nanswer: 491\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8947368264198303,
+      "answer": "491",
+      "predicted_answer": "189"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 900 - 370\n\nOutput:\nones: 0 - 0 = 0\ntens: 0 - 7 needs borrow, take 1 from hundreds, 10 - 7 = 3\nhundreds: 8 - 3 = 5\nanswer: 530\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8771929740905762,
+      "answer": "530",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 22 - 6\n\nOutput:\nones: 2 - 6 needs borrow, take 1 from tens, 12 - 6 = 6\ntens: 1 - 0 = 1\nanswer: 16\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9370629191398621,
+      "answer": "16",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 738 - 444\n\nOutput:\nones: 8 - 4 = 4\ntens: 3 - 4 needs borrow, take 1 from hundreds, 13 - 4 = 9\nhundreds: 6 - 4 = 2\nanswer: 294\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8830409646034241,
+      "answer": "294",
+      "predicted_answer": "269"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 8 - 4\n\nOutput:\nones: 8 - 4 = 4\nanswer: 4\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9069767594337463,
+      "answer": "4",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 9 - 7\n\nOutput:\nones: 9 - 7 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "2",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 563 - 43\n\nOutput:\nones: 3 - 3 = 0\ntens: 6 - 4 = 2\nhundreds: 5 - 0 = 5\nanswer: 520\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.874015748500824,
+      "answer": "520",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 286 - 95\n\nOutput:\nones: 6 - 5 = 1\ntens: 8 - 9 needs borrow, take 1 from hundreds, 18 - 9 = 9\nhundreds: 1 - 0 = 1\nanswer: 191\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9058823585510254,
+      "answer": "191",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 11 - 8\n\nOutput:\nones: 1 - 8 needs borrow, take 1 from tens, 11 - 8 = 3\ntens: 0 - 0 = 0\nanswer: 3\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.922535240650177,
+      "answer": "3",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 37 - 9\n\nOutput:\nones: 7 - 9 needs borrow, take 1 from tens, 17 - 9 = 8\ntens: 2 - 0 = 2\nanswer: 28\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "28",
+      "predicted_answer": "4\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 863 - 625\n\nOutput:\nones: 3 - 5 needs borrow, take 1 from tens, 13 - 5 = 8\ntens: 5 - 2 = 3\nhundreds: 8 - 6 = 2\nanswer: 238\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8802395462989807,
+      "answer": "238",
+      "predicted_answer": "489"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 530 - 8\n\nOutput:\nones: 0 - 8 needs borrow, take 1 from tens, 10 - 8 = 2\ntens: 2 - 0 = 2\nhundreds: 5 - 0 = 5\nanswer: 522\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9333333373069763,
+      "answer": "522",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 26 - 9\n\nOutput:\nones: 6 - 9 needs borrow, take 1 from tens, 16 - 9 = 7\ntens: 1 - 0 = 1\nanswer: 17\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9300699234008789,
+      "answer": "17",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 287 - 7\n\nOutput:\nones: 7 - 7 = 0\ntens: 8 - 0 = 8\nhundreds: 2 - 0 = 2\nanswer: 280\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "280",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 785 - 7\n\nOutput:\nones: 5 - 7 needs borrow, take 1 from tens, 15 - 7 = 8\ntens: 7 - 0 = 7\nhundreds: 7 - 0 = 7\nanswer: 778\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8969696760177612,
+      "answer": "778",
+      "predicted_answer": "866"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 5 - 3\n\nOutput:\nones: 5 - 3 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "2",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 46 - 2\n\nOutput:\nones: 6 - 2 = 4\ntens: 4 - 0 = 4\nanswer: 44\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9134615659713745,
+      "answer": "44",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 802 - 57\n\nOutput:\nones: 2 - 7 needs borrow, borrow through tens from hundreds, 12 - 7 = 5\ntens: 9 - 5 = 4\nhundreds: 7 - 0 = 7\nanswer: 745\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8961748480796814,
+      "answer": "745",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 595 - 293\n\nOutput:\nones: 5 - 3 = 2\ntens: 9 - 9 = 0\nhundreds: 5 - 2 = 3\nanswer: 302\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8515625,
+      "answer": "302",
+      "predicted_answer": "469"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 235 - 22\n\nOutput:\nones: 5 - 2 = 3\ntens: 3 - 2 = 1\nhundreds: 2 - 0 = 2\nanswer: 213\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9055117964744568,
+      "answer": "213",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 999 - 2\n\nOutput:\nones: 9 - 2 = 7\ntens: 9 - 0 = 9\nhundreds: 9 - 0 = 9\nanswer: 997\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8888888955116272,
+      "answer": "997",
+      "predicted_answer": "866"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 89 - 83\n\nOutput:\nones: 9 - 3 = 6\ntens: 8 - 8 = 0\nanswer: 6\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "6",
+      "predicted_answer": "8"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 887 - 688\n\nOutput:\nones: 7 - 8 needs borrow, take 1 from tens, 17 - 8 = 9\ntens: 7 - 8 needs borrow, take 1 from hundreds, 17 - 8 = 9\nhundreds: 7 - 6 = 1\nanswer: 199\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9190475940704346,
+      "answer": "199",
+      "predicted_answer": "199"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 22 - 8\n\nOutput:\nones: 2 - 8 needs borrow, take 1 from tens, 12 - 8 = 4\ntens: 1 - 0 = 1\nanswer: 14\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9370629191398621,
+      "answer": "14",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 82 - 4\n\nOutput:\nones: 2 - 4 needs borrow, take 1 from tens, 12 - 4 = 8\ntens: 7 - 0 = 7\nanswer: 78\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "78",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 953 - 16\n\nOutput:\nones: 3 - 6 needs borrow, take 1 from tens, 13 - 6 = 7\ntens: 4 - 1 = 3\nhundreds: 9 - 0 = 9\nanswer: 937\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8855421543121338,
+      "answer": "937",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 127 - 6\n\nOutput:\nones: 7 - 6 = 1\ntens: 2 - 0 = 2\nhundreds: 1 - 0 = 1\nanswer: 121\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.920634925365448,
+      "answer": "121",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 6 - 2\n\nOutput:\nones: 6 - 2 = 4\nanswer: 4\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.930232584476471,
+      "answer": "4",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 555 - 71\n\nOutput:\nones: 5 - 1 = 4\ntens: 5 - 7 needs borrow, take 1 from hundreds, 15 - 7 = 8\nhundreds: 4 - 0 = 4\nanswer: 484\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8882352709770203,
+      "answer": "484",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 81 - 2\n\nOutput:\nones: 1 - 2 needs borrow, take 1 from tens, 11 - 2 = 9\ntens: 7 - 0 = 7\nanswer: 79\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "79",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 543 - 35\n\nOutput:\nones: 3 - 5 needs borrow, take 1 from tens, 13 - 5 = 8\ntens: 3 - 3 = 0\nhundreds: 5 - 0 = 5\nanswer: 508\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.891566276550293,
+      "answer": "508",
+      "predicted_answer": "226"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 89 - 2\n\nOutput:\nones: 9 - 2 = 7\ntens: 8 - 0 = 8\nanswer: 87\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9038461446762085,
+      "answer": "87",
+      "predicted_answer": "6\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 399 - 9\n\nOutput:\nones: 9 - 9 = 0\ntens: 9 - 0 = 9\nhundreds: 3 - 0 = 3\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.89682537317276,
+      "answer": "390",
+      "predicted_answer": "686"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 125 - 6\n\nOutput:\nones: 5 - 6 needs borrow, take 1 from tens, 15 - 6 = 9\ntens: 1 - 0 = 1\nhundreds: 1 - 0 = 1\nanswer: 119\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9212121367454529,
+      "answer": "119",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 89 - 7\n\nOutput:\nones: 9 - 7 = 2\ntens: 8 - 0 = 8\nanswer: 82\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "82",
+      "predicted_answer": "8\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 865 - 4\n\nOutput:\nones: 5 - 4 = 1\ntens: 6 - 0 = 6\nhundreds: 8 - 0 = 8\nanswer: 861\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.89682537317276,
+      "answer": "861",
+      "predicted_answer": "462"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 258 - 55\n\nOutput:\nones: 8 - 5 = 3\ntens: 5 - 5 = 0\nhundreds: 2 - 0 = 2\nanswer: 203\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8897637724876404,
+      "answer": "203",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 76 - 3\n\nOutput:\nones: 6 - 3 = 3\ntens: 7 - 0 = 7\nanswer: 73\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "73",
+      "predicted_answer": "22"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 705 - 9\n\nOutput:\nones: 5 - 9 needs borrow, borrow through tens from hundreds, 15 - 9 = 6\ntens: 9 - 0 = 9\nhundreds: 6 - 0 = 6\nanswer: 696\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "696",
+      "predicted_answer": "686"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 597 - 8\n\nOutput:\nones: 7 - 8 needs borrow, take 1 from tens, 17 - 8 = 9\ntens: 8 - 0 = 8\nhundreds: 5 - 0 = 5\nanswer: 589\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9212121367454529,
+      "answer": "589",
+      "predicted_answer": "889"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 59 - 19\n\nOutput:\nones: 9 - 9 = 0\ntens: 5 - 1 = 4\nanswer: 40\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8761904835700989,
+      "answer": "40",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 68 - 6\n\nOutput:\nones: 8 - 6 = 2\ntens: 6 - 0 = 6\nanswer: 62\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9134615659713745,
+      "answer": "62",
+      "predicted_answer": "26"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 3 - 1\n\nOutput:\nones: 3 - 1 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "2",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 35 - 6\n\nOutput:\nones: 5 - 6 needs borrow, take 1 from tens, 15 - 6 = 9\ntens: 2 - 0 = 2\nanswer: 29\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "29",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 7 - 2\n\nOutput:\nones: 7 - 2 = 5\nanswer: 5\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9069767594337463,
+      "answer": "5",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 802 - 674\n\nOutput:\nones: 2 - 4 needs borrow, borrow through tens from hundreds, 12 - 4 = 8\ntens: 9 - 7 = 2\nhundreds: 7 - 6 = 1\nanswer: 128\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9021739363670349,
+      "answer": "128",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 784 - 63\n\nOutput:\nones: 4 - 3 = 1\ntens: 8 - 6 = 2\nhundreds: 7 - 0 = 7\nanswer: 721\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8818897604942322,
+      "answer": "721",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 924 - 7\n\nOutput:\nones: 4 - 7 needs borrow, take 1 from tens, 14 - 7 = 7\ntens: 1 - 0 = 1\nhundreds: 9 - 0 = 9\nanswer: 917\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.903030276298523,
+      "answer": "917",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 10 - 4\n\nOutput:\nones: 0 - 4 needs borrow, take 1 from tens, 10 - 4 = 6\ntens: 0 - 0 = 0\nanswer: 6\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.908450722694397,
+      "answer": "6",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 786 - 9\n\nOutput:\nones: 6 - 9 needs borrow, take 1 from tens, 16 - 9 = 7\ntens: 7 - 0 = 7\nhundreds: 7 - 0 = 7\nanswer: 777\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "777",
+      "predicted_answer": "866"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 809 - 43\n\nOutput:\nones: 9 - 3 = 6\ntens: 0 - 4 needs borrow, take 1 from hundreds, 10 - 4 = 6\nhundreds: 7 - 0 = 7\nanswer: 766\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9058823585510254,
+      "answer": "766",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 702 - 8\n\nOutput:\nones: 2 - 8 needs borrow, borrow through tens from hundreds, 12 - 8 = 4\ntens: 9 - 0 = 9\nhundreds: 6 - 0 = 6\nanswer: 694\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9120879173278809,
+      "answer": "694",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 11 - 2\n\nOutput:\nones: 1 - 2 needs borrow, take 1 from tens, 11 - 2 = 9\ntens: 0 - 0 = 0\nanswer: 9\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.922535240650177,
+      "answer": "9",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 834 - 2\n\nOutput:\nones: 4 - 2 = 2\ntens: 3 - 0 = 3\nhundreds: 8 - 0 = 8\nanswer: 832\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "832",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 59 - 44\n\nOutput:\nones: 9 - 4 = 5\ntens: 5 - 4 = 1\nanswer: 15\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8857142925262451,
+      "answer": "15",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 18 - 5\n\nOutput:\nones: 8 - 5 = 3\ntens: 1 - 0 = 1\nanswer: 13\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9134615659713745,
+      "answer": "13",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 92 - 90\n\nOutput:\nones: 2 - 0 = 2\ntens: 9 - 9 = 0\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9134615659713745,
+      "answer": "2",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 35 - 3\n\nOutput:\nones: 5 - 3 = 2\ntens: 3 - 0 = 3\nanswer: 32\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9038461446762085,
+      "answer": "32",
+      "predicted_answer": "22"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 927 - 544\n\nOutput:\nones: 7 - 4 = 3\ntens: 2 - 4 needs borrow, take 1 from hundreds, 12 - 4 = 8\nhundreds: 8 - 5 = 3\nanswer: 383\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8888888955116272,
+      "answer": "383",
+      "predicted_answer": "466"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 328 - 2\n\nOutput:\nones: 8 - 2 = 6\ntens: 2 - 0 = 2\nhundreds: 3 - 0 = 3\nanswer: 326\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.89682537317276,
+      "answer": "326",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 9 - 1\n\nOutput:\nones: 9 - 1 = 8\nanswer: 8\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9418604373931885,
+      "answer": "8",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 4 - 4\n\nOutput:\nones: 4 - 4 = 0\nanswer: 0\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.895348846912384,
+      "answer": "0",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 7 - 5\n\nOutput:\nones: 7 - 5 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9069767594337463,
+      "answer": "2",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 105 - 6\n\nOutput:\nones: 5 - 6 needs borrow, borrow through tens from hundreds, 15 - 6 = 9\ntens: 9 - 0 = 9\nhundreds: 0 - 0 = 0\nanswer: 99\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.889502763748169,
+      "answer": "99",
+      "predicted_answer": "12"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 669 - 5\n\nOutput:\nones: 9 - 5 = 4\ntens: 6 - 0 = 6\nhundreds: 6 - 0 = 6\nanswer: 664\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8888888955116272,
+      "answer": "664",
+      "predicted_answer": "666"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 645 - 64\n\nOutput:\nones: 5 - 4 = 1\ntens: 4 - 6 needs borrow, take 1 from hundreds, 14 - 6 = 8\nhundreds: 5 - 0 = 5\nanswer: 581\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8882352709770203,
+      "answer": "581",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 853 - 1\n\nOutput:\nones: 3 - 1 = 2\ntens: 5 - 0 = 5\nhundreds: 8 - 0 = 8\nanswer: 852\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "852",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 222 - 9\n\nOutput:\nones: 2 - 9 needs borrow, take 1 from tens, 12 - 9 = 3\ntens: 1 - 0 = 1\nhundreds: 2 - 0 = 2\nanswer: 213\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9212121367454529,
+      "answer": "213",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 9 - 8\n\nOutput:\nones: 9 - 8 = 1\nanswer: 1\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.930232584476471,
+      "answer": "1",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 92 - 28\n\nOutput:\nones: 2 - 8 needs borrow, take 1 from tens, 12 - 8 = 4\ntens: 8 - 2 = 6\nanswer: 64\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "64",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 966 - 30\n\nOutput:\nones: 6 - 0 = 6\ntens: 6 - 3 = 3\nhundreds: 9 - 0 = 9\nanswer: 936\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8976377844810486,
+      "answer": "936",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 924 - 125\n\nOutput:\nones: 4 - 5 needs borrow, take 1 from tens, 14 - 5 = 9\ntens: 1 - 2 needs borrow, take 1 from hundreds, 11 - 2 = 9\nhundreds: 8 - 1 = 7\nanswer: 799\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8952381014823914,
+      "answer": "799",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 912 - 724\n\nOutput:\nones: 2 - 4 needs borrow, take 1 from tens, 12 - 4 = 8\ntens: 0 - 2 needs borrow, take 1 from hundreds, 10 - 2 = 8\nhundreds: 8 - 7 = 1\nanswer: 188\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "188",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 98 - 75\n\nOutput:\nones: 8 - 5 = 3\ntens: 9 - 7 = 2\nanswer: 23\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "23",
+      "predicted_answer": "88"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 225 - 22\n\nOutput:\nones: 5 - 2 = 3\ntens: 2 - 2 = 0\nhundreds: 2 - 0 = 2\nanswer: 203\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9055117964744568,
+      "answer": "203",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 959 - 79\n\nOutput:\nones: 9 - 9 = 0\ntens: 5 - 7 needs borrow, take 1 from hundreds, 15 - 7 = 8\nhundreds: 8 - 0 = 8\nanswer: 880\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9176470637321472,
+      "answer": "880",
+      "predicted_answer": "989"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 792 - 64\n\nOutput:\nones: 2 - 4 needs borrow, take 1 from tens, 12 - 4 = 8\ntens: 8 - 6 = 2\nhundreds: 7 - 0 = 7\nanswer: 728\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9036144614219666,
+      "answer": "728",
+      "predicted_answer": "466"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 962 - 71\n\nOutput:\nones: 2 - 1 = 1\ntens: 6 - 7 needs borrow, take 1 from hundreds, 16 - 7 = 9\nhundreds: 8 - 0 = 8\nanswer: 891\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8999999761581421,
+      "answer": "891",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 83 - 63\n\nOutput:\nones: 3 - 3 = 0\ntens: 8 - 6 = 2\nanswer: 20\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8857142925262451,
+      "answer": "20",
+      "predicted_answer": "26"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 962 - 80\n\nOutput:\nones: 2 - 0 = 2\ntens: 6 - 8 needs borrow, take 1 from hundreds, 16 - 8 = 8\nhundreds: 8 - 0 = 8\nanswer: 882\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9176470637321472,
+      "answer": "882",
+      "predicted_answer": "466"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 56 - 35\n\nOutput:\nones: 6 - 5 = 1\ntens: 5 - 3 = 2\nanswer: 21\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "21",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 76 - 1\n\nOutput:\nones: 6 - 1 = 5\ntens: 7 - 0 = 7\nanswer: 75\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8942307829856873,
+      "answer": "75",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 931 - 8\n\nOutput:\nones: 1 - 8 needs borrow, take 1 from tens, 11 - 8 = 3\ntens: 2 - 0 = 2\nhundreds: 9 - 0 = 9\nanswer: 923\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "923",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 485 - 4\n\nOutput:\nones: 5 - 4 = 1\ntens: 8 - 0 = 8\nhundreds: 4 - 0 = 4\nanswer: 481\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8888888955116272,
+      "answer": "481",
+      "predicted_answer": "262"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 915 - 77\n\nOutput:\nones: 5 - 7 needs borrow, take 1 from tens, 15 - 7 = 8\ntens: 0 - 7 needs borrow, take 1 from hundreds, 10 - 7 = 3\nhundreds: 8 - 0 = 8\nanswer: 838\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9138755798339844,
+      "answer": "838",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 521 - 1\n\nOutput:\nones: 1 - 1 = 0\ntens: 2 - 0 = 2\nhundreds: 5 - 0 = 5\nanswer: 520\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9047619104385376,
+      "answer": "520",
+      "predicted_answer": "122"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 50 - 4\n\nOutput:\nones: 0 - 4 needs borrow, take 1 from tens, 10 - 4 = 6\ntens: 4 - 0 = 4\nanswer: 46\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9020978808403015,
+      "answer": "46",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 69 - 3\n\nOutput:\nones: 9 - 3 = 6\ntens: 6 - 0 = 6\nanswer: 66\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "66",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 81 - 5\n\nOutput:\nones: 1 - 5 needs borrow, take 1 from tens, 11 - 5 = 6\ntens: 7 - 0 = 7\nanswer: 76\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "76",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 6 - 6\n\nOutput:\nones: 6 - 6 = 0\nanswer: 0\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.895348846912384,
+      "answer": "0",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 922 - 8\n\nOutput:\nones: 2 - 8 needs borrow, take 1 from tens, 12 - 8 = 4\ntens: 1 - 0 = 1\nhundreds: 9 - 0 = 9\nanswer: 914\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9212121367454529,
+      "answer": "914",
+      "predicted_answer": "126"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 702 - 18\n\nOutput:\nones: 2 - 8 needs borrow, borrow through tens from hundreds, 12 - 8 = 4\ntens: 9 - 1 = 8\nhundreds: 6 - 0 = 6\nanswer: 684\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9016393423080444,
+      "answer": "684",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 622 - 126\n\nOutput:\nones: 2 - 6 needs borrow, take 1 from tens, 12 - 6 = 6\ntens: 1 - 2 needs borrow, take 1 from hundreds, 11 - 2 = 9\nhundreds: 5 - 1 = 4\nanswer: 496\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9142857193946838,
+      "answer": "496",
+      "predicted_answer": "166"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 623 - 73\n\nOutput:\nones: 3 - 3 = 0\ntens: 2 - 7 needs borrow, take 1 from hundreds, 12 - 7 = 5\nhundreds: 5 - 0 = 5\nanswer: 550\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8999999761581421,
+      "answer": "550",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 263 - 3\n\nOutput:\nones: 3 - 3 = 0\ntens: 6 - 0 = 6\nhundreds: 2 - 0 = 2\nanswer: 260\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9126983880996704,
+      "answer": "260",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 619 - 413\n\nOutput:\nones: 9 - 3 = 6\ntens: 1 - 1 = 0\nhundreds: 6 - 4 = 2\nanswer: 206\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.859375,
+      "answer": "206",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 888 - 13\n\nOutput:\nones: 8 - 3 = 5\ntens: 8 - 1 = 7\nhundreds: 8 - 0 = 8\nanswer: 875\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8976377844810486,
+      "answer": "875",
+      "predicted_answer": "869"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 38 - 9\n\nOutput:\nones: 8 - 9 needs borrow, take 1 from tens, 18 - 9 = 9\ntens: 2 - 0 = 2\nanswer: 29\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "29",
+      "predicted_answer": "8\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 55 - 5\n\nOutput:\nones: 5 - 5 = 0\ntens: 5 - 0 = 5\nanswer: 50\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8942307829856873,
+      "answer": "50",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 79 - 62\n\nOutput:\nones: 9 - 2 = 7\ntens: 7 - 6 = 1\nanswer: 17\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8952381014823914,
+      "answer": "17",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 8 - 6\n\nOutput:\nones: 8 - 6 = 2\nanswer: 2\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.930232584476471,
+      "answer": "2",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 869 - 85\n\nOutput:\nones: 9 - 5 = 4\ntens: 6 - 8 needs borrow, take 1 from hundreds, 16 - 8 = 8\nhundreds: 7 - 0 = 7\nanswer: 784\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9058823585510254,
+      "answer": "784",
+      "predicted_answer": "989"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 100 - 21\n\nOutput:\nones: 0 - 1 needs borrow, borrow through tens from hundreds, 10 - 1 = 9\ntens: 9 - 2 = 7\nhundreds: 0 - 0 = 0\nanswer: 79\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8846153616905212,
+      "answer": "79",
+      "predicted_answer": "12"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 618 - 23\n\nOutput:\nones: 8 - 3 = 5\ntens: 1 - 2 needs borrow, take 1 from hundreds, 11 - 2 = 9\nhundreds: 5 - 0 = 5\nanswer: 595\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8882352709770203,
+      "answer": "595",
+      "predicted_answer": "162"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 55 - 3\n\nOutput:\nones: 5 - 3 = 2\ntens: 5 - 0 = 5\nanswer: 52\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8942307829856873,
+      "answer": "52",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 675 - 460\n\nOutput:\nones: 5 - 0 = 5\ntens: 7 - 6 = 1\nhundreds: 6 - 4 = 2\nanswer: 215\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8671875,
+      "answer": "215",
+      "predicted_answer": "269"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 8 - 3\n\nOutput:\nones: 8 - 3 = 5\nanswer: 5\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9069767594337463,
+      "answer": "5",
+      "predicted_answer": "2"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 492 - 49\n\nOutput:\nones: 2 - 9 needs borrow, take 1 from tens, 12 - 9 = 3\ntens: 8 - 4 = 4\nhundreds: 4 - 0 = 4\nanswer: 443\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.891566276550293,
+      "answer": "443",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 964 - 43\n\nOutput:\nones: 4 - 3 = 1\ntens: 6 - 4 = 2\nhundreds: 9 - 0 = 9\nanswer: 921\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8897637724876404,
+      "answer": "921",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 2 - 1\n\nOutput:\nones: 2 - 1 = 1\nanswer: 1\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9186046719551086,
+      "answer": "1",
+      "predicted_answer": "1"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 86 - 8\n\nOutput:\nones: 6 - 8 needs borrow, take 1 from tens, 16 - 8 = 8\ntens: 7 - 0 = 7\nanswer: 78\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9090909361839294,
+      "answer": "78",
+      "predicted_answer": "86"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 77 - 60\n\nOutput:\nones: 7 - 0 = 7\ntens: 7 - 6 = 1\nanswer: 17\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8761904835700989,
+      "answer": "17",
+      "predicted_answer": "2\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 374 - 82\n\nOutput:\nones: 4 - 2 = 2\ntens: 7 - 8 needs borrow, take 1 from hundreds, 17 - 8 = 9\nhundreds: 2 - 0 = 2\nanswer: 292\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9058823585510254,
+      "answer": "292",
+      "predicted_answer": "266"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 334 - 71\n\nOutput:\nones: 4 - 1 = 3\ntens: 3 - 7 needs borrow, take 1 from hundreds, 13 - 7 = 6\nhundreds: 2 - 0 = 2\nanswer: 263\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9058823585510254,
+      "answer": "263",
+      "predicted_answer": "162"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 24 - 8\n\nOutput:\nones: 4 - 8 needs borrow, take 1 from tens, 14 - 8 = 6\ntens: 1 - 0 = 1\nanswer: 16\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9300699234008789,
+      "answer": "16",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 86 - 69\n\nOutput:\nones: 6 - 9 needs borrow, take 1 from tens, 16 - 9 = 7\ntens: 7 - 6 = 1\nanswer: 17\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9236111044883728,
+      "answer": "17",
+      "predicted_answer": "1\n"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 506 - 36\n\nOutput:\nones: 6 - 6 = 0\ntens: 0 - 3 needs borrow, take 1 from hundreds, 10 - 3 = 7\nhundreds: 4 - 0 = 4\nanswer: 470\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8823529481887817,
+      "answer": "470",
+      "predicted_answer": "222"
+    },
+    {
+      "trace": "Task: subtraction_prose\nInput:\nsubtract 915 - 380\n\nOutput:\nones: 5 - 0 = 5\ntens: 1 - 8 needs borrow, take 1 from hundreds, 11 - 8 = 3\nhundreds: 8 - 3 = 5\nanswer: 535\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.8830409646034241,
+      "answer": "535",
+      "predicted_answer": "169"
+    }
+  ]
+}

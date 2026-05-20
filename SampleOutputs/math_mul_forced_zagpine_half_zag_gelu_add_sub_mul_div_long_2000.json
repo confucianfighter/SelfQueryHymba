@@ -1,0 +1,4023 @@
+{
+  "summary": {
+    "checkpoint": "C:\\Users\\daylan\\CompoundStreamingTransformer\\loss-query-hymba\\experiments\\mods\\001_first_pass_hymba_cst\\runs\\2026-05-18_zagpine_half_zag_gelu_add_sub_mul_div_long_25_each_fresh_2000\\checkpoint_best.pt",
+    "examples": 500,
+    "answer_exact": 499,
+    "answer_exact_accuracy": 0.998,
+    "full_exact": 0,
+    "full_exact_accuracy": 0.0,
+    "mean_token_accuracy": 0.9353799141645431,
+    "failures_shown": [
+      {
+        "trace": "Task: multiplication_prose\nInput:\nmultiply 31 * 33\n\nOutput:\nones: 31 * 3 = 93\ntens: 31 * 3 = 93, shift 1 place = 930\nsum: 93 + 930 = 1023\nanswer: 1023\n<END>",
+        "full_exact": false,
+        "answer_exact": false,
+        "token_accuracy": 0.9294871687889099,
+        "answer": "1023",
+        "predicted_answer": "1024"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 59\n\nOutput:\nones: 42 * 9 = 378\ntens: 42 * 5 = 210, shift 1 place = 2100\nsum: 378 + 2100 = 2478\nanswer: 2478\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2478",
+      "predicted_answer": "2478"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 70 * 73\n\nOutput:\nones: 70 * 3 = 210\ntens: 70 * 7 = 490, shift 1 place = 4900\nsum: 210 + 4900 = 5110\nanswer: 5110\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5110",
+      "predicted_answer": "5110"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 17 * 65\n\nOutput:\nones: 17 * 5 = 85\ntens: 17 * 6 = 102, shift 1 place = 1020\nsum: 85 + 1020 = 1105\nanswer: 1105\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1105",
+      "predicted_answer": "1105"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 87\n\nOutput:\nones: 50 * 7 = 350\ntens: 50 * 8 = 400, shift 1 place = 4000\nsum: 350 + 4000 = 4350\nanswer: 4350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "4350",
+      "predicted_answer": "4350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 43 * 53\n\nOutput:\nones: 43 * 3 = 129\ntens: 43 * 5 = 215, shift 1 place = 2150\nsum: 129 + 2150 = 2279\nanswer: 2279\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2279",
+      "predicted_answer": "2279"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 71\n\nOutput:\nones: 92 * 1 = 92\ntens: 92 * 7 = 644, shift 1 place = 6440\nsum: 92 + 6440 = 6532\nanswer: 6532\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "6532",
+      "predicted_answer": "6532"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 73 * 49\n\nOutput:\nones: 73 * 9 = 657\ntens: 73 * 4 = 292, shift 1 place = 2920\nsum: 657 + 2920 = 3577\nanswer: 3577\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3577",
+      "predicted_answer": "3577"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 84 * 80\n\nOutput:\nones: 84 * 0 = 0\ntens: 84 * 8 = 672, shift 1 place = 6720\nsum: 0 + 6720 = 6720\nanswer: 6720\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "6720",
+      "predicted_answer": "6720"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 47\n\nOutput:\nones: 30 * 7 = 210\ntens: 30 * 4 = 120, shift 1 place = 1200\nsum: 210 + 1200 = 1410\nanswer: 1410\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1410",
+      "predicted_answer": "1410"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 61\n\nOutput:\nones: 71 * 1 = 71\ntens: 71 * 6 = 426, shift 1 place = 4260\nsum: 71 + 4260 = 4331\nanswer: 4331\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "4331",
+      "predicted_answer": "4331"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 21 * 69\n\nOutput:\nones: 21 * 9 = 189\ntens: 21 * 6 = 126, shift 1 place = 1260\nsum: 189 + 1260 = 1449\nanswer: 1449\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1449",
+      "predicted_answer": "1449"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 95\n\nOutput:\nones: 44 * 5 = 220\ntens: 44 * 9 = 396, shift 1 place = 3960\nsum: 220 + 3960 = 4180\nanswer: 4180\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "4180",
+      "predicted_answer": "4180"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 73 * 24\n\nOutput:\nones: 73 * 4 = 292\ntens: 73 * 2 = 146, shift 1 place = 1460\nsum: 292 + 1460 = 1752\nanswer: 1752\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1752",
+      "predicted_answer": "1752"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 76\n\nOutput:\nones: 75 * 6 = 450\ntens: 75 * 7 = 525, shift 1 place = 5250\nsum: 450 + 5250 = 5700\nanswer: 5700\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5700",
+      "predicted_answer": "5700"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 84\n\nOutput:\nones: 52 * 4 = 208\ntens: 52 * 8 = 416, shift 1 place = 4160\nsum: 208 + 4160 = 4368\nanswer: 4368\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4368",
+      "predicted_answer": "4368"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 91 * 95\n\nOutput:\nones: 91 * 5 = 455\ntens: 91 * 9 = 819, shift 1 place = 8190\nsum: 455 + 8190 = 8645\nanswer: 8645\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "8645",
+      "predicted_answer": "8645"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 83 * 17\n\nOutput:\nones: 83 * 7 = 581\ntens: 83 * 1 = 83, shift 1 place = 830\nsum: 581 + 830 = 1411\nanswer: 1411\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1411",
+      "predicted_answer": "1411"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 62 * 79\n\nOutput:\nones: 62 * 9 = 558\ntens: 62 * 7 = 434, shift 1 place = 4340\nsum: 558 + 4340 = 4898\nanswer: 4898\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4898",
+      "predicted_answer": "4898"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 83 * 54\n\nOutput:\nones: 83 * 4 = 332\ntens: 83 * 5 = 415, shift 1 place = 4150\nsum: 332 + 4150 = 4482\nanswer: 4482\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4482",
+      "predicted_answer": "4482"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 45 * 47\n\nOutput:\nones: 45 * 7 = 315\ntens: 45 * 4 = 180, shift 1 place = 1800\nsum: 315 + 1800 = 2115\nanswer: 2115\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2115",
+      "predicted_answer": "2115"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 67 * 33\n\nOutput:\nones: 67 * 3 = 201\ntens: 67 * 3 = 201, shift 1 place = 2010\nsum: 201 + 2010 = 2211\nanswer: 2211\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2211",
+      "predicted_answer": "2211"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 86 * 72\n\nOutput:\nones: 86 * 2 = 172\ntens: 86 * 7 = 602, shift 1 place = 6020\nsum: 172 + 6020 = 6192\nanswer: 6192\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "6192",
+      "predicted_answer": "6192"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 44\n\nOutput:\nones: 50 * 4 = 200\ntens: 50 * 4 = 200, shift 1 place = 2000\nsum: 200 + 2000 = 2200\nanswer: 2200\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2200",
+      "predicted_answer": "2200"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 34 * 64\n\nOutput:\nones: 34 * 4 = 136\ntens: 34 * 6 = 204, shift 1 place = 2040\nsum: 136 + 2040 = 2176\nanswer: 2176\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2176",
+      "predicted_answer": "2176"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 18 * 80\n\nOutput:\nones: 18 * 0 = 0\ntens: 18 * 8 = 144, shift 1 place = 1440\nsum: 0 + 1440 = 1440\nanswer: 1440\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "1440",
+      "predicted_answer": "1440"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 26\n\nOutput:\nones: 38 * 6 = 228\ntens: 38 * 2 = 76, shift 1 place = 760\nsum: 228 + 760 = 988\nanswer: 988\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "988",
+      "predicted_answer": "988"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 23 * 74\n\nOutput:\nones: 23 * 4 = 92\ntens: 23 * 7 = 161, shift 1 place = 1610\nsum: 92 + 1610 = 1702\nanswer: 1702\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1702",
+      "predicted_answer": "1702"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 44\n\nOutput:\nones: 11 * 4 = 44\ntens: 11 * 4 = 44, shift 1 place = 440\nsum: 44 + 440 = 484\nanswer: 484\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9415584206581116,
+      "answer": "484",
+      "predicted_answer": "484"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 99 * 62\n\nOutput:\nones: 99 * 2 = 198\ntens: 99 * 6 = 594, shift 1 place = 5940\nsum: 198 + 5940 = 6138\nanswer: 6138\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6138",
+      "predicted_answer": "6138"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 74 * 75\n\nOutput:\nones: 74 * 5 = 370\ntens: 74 * 7 = 518, shift 1 place = 5180\nsum: 370 + 5180 = 5550\nanswer: 5550\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5550",
+      "predicted_answer": "5550"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 67\n\nOutput:\nones: 28 * 7 = 196\ntens: 28 * 6 = 168, shift 1 place = 1680\nsum: 196 + 1680 = 1876\nanswer: 1876\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1876",
+      "predicted_answer": "1876"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 21 * 68\n\nOutput:\nones: 21 * 8 = 168\ntens: 21 * 6 = 126, shift 1 place = 1260\nsum: 168 + 1260 = 1428\nanswer: 1428\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1428",
+      "predicted_answer": "1428"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 26\n\nOutput:\nones: 38 * 6 = 228\ntens: 38 * 2 = 76, shift 1 place = 760\nsum: 228 + 760 = 988\nanswer: 988\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "988",
+      "predicted_answer": "988"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 74 * 47\n\nOutput:\nones: 74 * 7 = 518\ntens: 74 * 4 = 296, shift 1 place = 2960\nsum: 518 + 2960 = 3478\nanswer: 3478\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9068322777748108,
+      "answer": "3478",
+      "predicted_answer": "3478"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 80\n\nOutput:\nones: 12 * 0 = 0\ntens: 12 * 8 = 96, shift 1 place = 960\nsum: 0 + 960 = 960\nanswer: 960\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9473684430122375,
+      "answer": "960",
+      "predicted_answer": "960"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 77\n\nOutput:\nones: 25 * 7 = 175\ntens: 25 * 7 = 175, shift 1 place = 1750\nsum: 175 + 1750 = 1925\nanswer: 1925\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1925",
+      "predicted_answer": "1925"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 78\n\nOutput:\nones: 81 * 8 = 648\ntens: 81 * 7 = 567, shift 1 place = 5670\nsum: 648 + 5670 = 6318\nanswer: 6318\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "6318",
+      "predicted_answer": "6318"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 63\n\nOutput:\nones: 44 * 3 = 132\ntens: 44 * 6 = 264, shift 1 place = 2640\nsum: 132 + 2640 = 2772\nanswer: 2772\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2772",
+      "predicted_answer": "2772"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 20 * 81\n\nOutput:\nones: 20 * 1 = 20\ntens: 20 * 8 = 160, shift 1 place = 1600\nsum: 20 + 1600 = 1620\nanswer: 1620\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "1620",
+      "predicted_answer": "1620"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 24 * 75\n\nOutput:\nones: 24 * 5 = 120\ntens: 24 * 7 = 168, shift 1 place = 1680\nsum: 120 + 1680 = 1800\nanswer: 1800\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1800",
+      "predicted_answer": "1800"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 80 * 14\n\nOutput:\nones: 80 * 4 = 320\ntens: 80 * 1 = 80, shift 1 place = 800\nsum: 320 + 800 = 1120\nanswer: 1120\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1120",
+      "predicted_answer": "1120"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 97\n\nOutput:\nones: 42 * 7 = 294\ntens: 42 * 9 = 378, shift 1 place = 3780\nsum: 294 + 3780 = 4074\nanswer: 4074\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4074",
+      "predicted_answer": "4074"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 99 * 95\n\nOutput:\nones: 99 * 5 = 495\ntens: 99 * 9 = 891, shift 1 place = 8910\nsum: 495 + 8910 = 9405\nanswer: 9405\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "9405",
+      "predicted_answer": "9405"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 91\n\nOutput:\nones: 38 * 1 = 38\ntens: 38 * 9 = 342, shift 1 place = 3420\nsum: 38 + 3420 = 3458\nanswer: 3458\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "3458",
+      "predicted_answer": "3458"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 57 * 22\n\nOutput:\nones: 57 * 2 = 114\ntens: 57 * 2 = 114, shift 1 place = 1140\nsum: 114 + 1140 = 1254\nanswer: 1254\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1254",
+      "predicted_answer": "1254"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 60 * 58\n\nOutput:\nones: 60 * 8 = 480\ntens: 60 * 5 = 300, shift 1 place = 3000\nsum: 480 + 3000 = 3480\nanswer: 3480\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "3480",
+      "predicted_answer": "3480"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 71\n\nOutput:\nones: 64 * 1 = 64\ntens: 64 * 7 = 448, shift 1 place = 4480\nsum: 64 + 4480 = 4544\nanswer: 4544\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "4544",
+      "predicted_answer": "4544"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 59\n\nOutput:\nones: 63 * 9 = 567\ntens: 63 * 5 = 315, shift 1 place = 3150\nsum: 567 + 3150 = 3717\nanswer: 3717\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3717",
+      "predicted_answer": "3717"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 30\n\nOutput:\nones: 13 * 0 = 0\ntens: 13 * 3 = 39, shift 1 place = 390\nsum: 0 + 390 = 390\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9473684430122375,
+      "answer": "390",
+      "predicted_answer": "390"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 58\n\nOutput:\nones: 85 * 8 = 680\ntens: 85 * 5 = 425, shift 1 place = 4250\nsum: 680 + 4250 = 4930\nanswer: 4930\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4930",
+      "predicted_answer": "4930"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 50\n\nOutput:\nones: 47 * 0 = 0\ntens: 47 * 5 = 235, shift 1 place = 2350\nsum: 0 + 2350 = 2350\nanswer: 2350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "2350",
+      "predicted_answer": "2350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 51 * 25\n\nOutput:\nones: 51 * 5 = 255\ntens: 51 * 2 = 102, shift 1 place = 1020\nsum: 255 + 1020 = 1275\nanswer: 1275\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1275",
+      "predicted_answer": "1275"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 51 * 42\n\nOutput:\nones: 51 * 2 = 102\ntens: 51 * 4 = 204, shift 1 place = 2040\nsum: 102 + 2040 = 2142\nanswer: 2142\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2142",
+      "predicted_answer": "2142"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 29\n\nOutput:\nones: 22 * 9 = 198\ntens: 22 * 2 = 44, shift 1 place = 440\nsum: 198 + 440 = 638\nanswer: 638\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.942307710647583,
+      "answer": "638",
+      "predicted_answer": "638"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 26\n\nOutput:\nones: 42 * 6 = 252\ntens: 42 * 2 = 84, shift 1 place = 840\nsum: 252 + 840 = 1092\nanswer: 1092\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9177215099334717,
+      "answer": "1092",
+      "predicted_answer": "1092"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 56 * 79\n\nOutput:\nones: 56 * 9 = 504\ntens: 56 * 7 = 392, shift 1 place = 3920\nsum: 504 + 3920 = 4424\nanswer: 4424\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4424",
+      "predicted_answer": "4424"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 89 * 45\n\nOutput:\nones: 89 * 5 = 445\ntens: 89 * 4 = 356, shift 1 place = 3560\nsum: 445 + 3560 = 4005\nanswer: 4005\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4005",
+      "predicted_answer": "4005"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 76\n\nOutput:\nones: 71 * 6 = 426\ntens: 71 * 7 = 497, shift 1 place = 4970\nsum: 426 + 4970 = 5396\nanswer: 5396\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5396",
+      "predicted_answer": "5396"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 79\n\nOutput:\nones: 47 * 9 = 423\ntens: 47 * 7 = 329, shift 1 place = 3290\nsum: 423 + 3290 = 3713\nanswer: 3713\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3713",
+      "predicted_answer": "3713"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 34 * 29\n\nOutput:\nones: 34 * 9 = 306\ntens: 34 * 2 = 68, shift 1 place = 680\nsum: 306 + 680 = 986\nanswer: 986\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "986",
+      "predicted_answer": "986"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 35 * 41\n\nOutput:\nones: 35 * 1 = 35\ntens: 35 * 4 = 140, shift 1 place = 1400\nsum: 35 + 1400 = 1435\nanswer: 1435\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "1435",
+      "predicted_answer": "1435"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 89 * 81\n\nOutput:\nones: 89 * 1 = 89\ntens: 89 * 8 = 712, shift 1 place = 7120\nsum: 89 + 7120 = 7209\nanswer: 7209\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "7209",
+      "predicted_answer": "7209"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 98 * 34\n\nOutput:\nones: 98 * 4 = 392\ntens: 98 * 3 = 294, shift 1 place = 2940\nsum: 392 + 2940 = 3332\nanswer: 3332\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.95652174949646,
+      "answer": "3332",
+      "predicted_answer": "3332"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 39 * 12\n\nOutput:\nones: 39 * 2 = 78\ntens: 39 * 1 = 39, shift 1 place = 390\nsum: 78 + 390 = 468\nanswer: 468\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "468",
+      "predicted_answer": "468"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 26\n\nOutput:\nones: 85 * 6 = 510\ntens: 85 * 2 = 170, shift 1 place = 1700\nsum: 510 + 1700 = 2210\nanswer: 2210\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2210",
+      "predicted_answer": "2210"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 87 * 96\n\nOutput:\nones: 87 * 6 = 522\ntens: 87 * 9 = 783, shift 1 place = 7830\nsum: 522 + 7830 = 8352\nanswer: 8352\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "8352",
+      "predicted_answer": "8352"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 80 * 72\n\nOutput:\nones: 80 * 2 = 160\ntens: 80 * 7 = 560, shift 1 place = 5600\nsum: 160 + 5600 = 5760\nanswer: 5760\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5760",
+      "predicted_answer": "5760"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 97 * 17\n\nOutput:\nones: 97 * 7 = 679\ntens: 97 * 1 = 97, shift 1 place = 970\nsum: 679 + 970 = 1649\nanswer: 1649\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "1649",
+      "predicted_answer": "1649"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 91\n\nOutput:\nones: 68 * 1 = 68\ntens: 68 * 9 = 612, shift 1 place = 6120\nsum: 68 + 6120 = 6188\nanswer: 6188\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "6188",
+      "predicted_answer": "6188"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 73\n\nOutput:\nones: 94 * 3 = 282\ntens: 94 * 7 = 658, shift 1 place = 6580\nsum: 282 + 6580 = 6862\nanswer: 6862\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6862",
+      "predicted_answer": "6862"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 17\n\nOutput:\nones: 11 * 7 = 77\ntens: 11 * 1 = 11, shift 1 place = 110\nsum: 77 + 110 = 187\nanswer: 187\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9415584206581116,
+      "answer": "187",
+      "predicted_answer": "187"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 30\n\nOutput:\nones: 27 * 0 = 0\ntens: 27 * 3 = 81, shift 1 place = 810\nsum: 0 + 810 = 810\nanswer: 810\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9539473652839661,
+      "answer": "810",
+      "predicted_answer": "810"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 14\n\nOutput:\nones: 94 * 4 = 376\ntens: 94 * 1 = 94, shift 1 place = 940\nsum: 376 + 940 = 1316\nanswer: 1316\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9430379867553711,
+      "answer": "1316",
+      "predicted_answer": "1316"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 76\n\nOutput:\nones: 55 * 6 = 330\ntens: 55 * 7 = 385, shift 1 place = 3850\nsum: 330 + 3850 = 4180\nanswer: 4180\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4180",
+      "predicted_answer": "4180"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 51 * 97\n\nOutput:\nones: 51 * 7 = 357\ntens: 51 * 9 = 459, shift 1 place = 4590\nsum: 357 + 4590 = 4947\nanswer: 4947\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4947",
+      "predicted_answer": "4947"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 17\n\nOutput:\nones: 50 * 7 = 350\ntens: 50 * 1 = 50, shift 1 place = 500\nsum: 350 + 500 = 850\nanswer: 850\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9358974099159241,
+      "answer": "850",
+      "predicted_answer": "850"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 65 * 44\n\nOutput:\nones: 65 * 4 = 260\ntens: 65 * 4 = 260, shift 1 place = 2600\nsum: 260 + 2600 = 2860\nanswer: 2860\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2860",
+      "predicted_answer": "2860"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 90 * 44\n\nOutput:\nones: 90 * 4 = 360\ntens: 90 * 4 = 360, shift 1 place = 3600\nsum: 360 + 3600 = 3960\nanswer: 3960\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3960",
+      "predicted_answer": "3960"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 94\n\nOutput:\nones: 50 * 4 = 200\ntens: 50 * 9 = 450, shift 1 place = 4500\nsum: 200 + 4500 = 4700\nanswer: 4700\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4700",
+      "predicted_answer": "4700"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 36 * 64\n\nOutput:\nones: 36 * 4 = 144\ntens: 36 * 6 = 216, shift 1 place = 2160\nsum: 144 + 2160 = 2304\nanswer: 2304\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2304",
+      "predicted_answer": "2304"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 29 * 62\n\nOutput:\nones: 29 * 2 = 58\ntens: 29 * 6 = 174, shift 1 place = 1740\nsum: 58 + 1740 = 1798\nanswer: 1798\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1798",
+      "predicted_answer": "1798"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 90 * 66\n\nOutput:\nones: 90 * 6 = 540\ntens: 90 * 6 = 540, shift 1 place = 5400\nsum: 540 + 5400 = 5940\nanswer: 5940\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5940",
+      "predicted_answer": "5940"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 35\n\nOutput:\nones: 37 * 5 = 185\ntens: 37 * 3 = 111, shift 1 place = 1110\nsum: 185 + 1110 = 1295\nanswer: 1295\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1295",
+      "predicted_answer": "1295"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 41 * 26\n\nOutput:\nones: 41 * 6 = 246\ntens: 41 * 2 = 82, shift 1 place = 820\nsum: 246 + 820 = 1066\nanswer: 1066\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "1066",
+      "predicted_answer": "1066"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 94\n\nOutput:\nones: 92 * 4 = 368\ntens: 92 * 9 = 828, shift 1 place = 8280\nsum: 368 + 8280 = 8648\nanswer: 8648\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "8648",
+      "predicted_answer": "8648"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 91 * 44\n\nOutput:\nones: 91 * 4 = 364\ntens: 91 * 4 = 364, shift 1 place = 3640\nsum: 364 + 3640 = 4004\nanswer: 4004\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4004",
+      "predicted_answer": "4004"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 45\n\nOutput:\nones: 50 * 5 = 250\ntens: 50 * 4 = 200, shift 1 place = 2000\nsum: 250 + 2000 = 2250\nanswer: 2250\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2250",
+      "predicted_answer": "2250"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 61 * 14\n\nOutput:\nones: 61 * 4 = 244\ntens: 61 * 1 = 61, shift 1 place = 610\nsum: 244 + 610 = 854\nanswer: 854\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.942307710647583,
+      "answer": "854",
+      "predicted_answer": "854"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 67\n\nOutput:\nones: 22 * 7 = 154\ntens: 22 * 6 = 132, shift 1 place = 1320\nsum: 154 + 1320 = 1474\nanswer: 1474\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1474",
+      "predicted_answer": "1474"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 59 * 49\n\nOutput:\nones: 59 * 9 = 531\ntens: 59 * 4 = 236, shift 1 place = 2360\nsum: 531 + 2360 = 2891\nanswer: 2891\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2891",
+      "predicted_answer": "2891"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 14 * 20\n\nOutput:\nones: 14 * 0 = 0\ntens: 14 * 2 = 28, shift 1 place = 280\nsum: 0 + 280 = 280\nanswer: 280\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9407894611358643,
+      "answer": "280",
+      "predicted_answer": "280"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 35 * 92\n\nOutput:\nones: 35 * 2 = 70\ntens: 35 * 9 = 315, shift 1 place = 3150\nsum: 70 + 3150 = 3220\nanswer: 3220\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9308176040649414,
+      "answer": "3220",
+      "predicted_answer": "3220"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 20 * 82\n\nOutput:\nones: 20 * 2 = 40\ntens: 20 * 8 = 160, shift 1 place = 1600\nsum: 40 + 1600 = 1640\nanswer: 1640\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "1640",
+      "predicted_answer": "1640"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 39 * 10\n\nOutput:\nones: 39 * 0 = 0\ntens: 39 * 1 = 39, shift 1 place = 390\nsum: 0 + 390 = 390\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9605262875556946,
+      "answer": "390",
+      "predicted_answer": "390"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 90\n\nOutput:\nones: 30 * 0 = 0\ntens: 30 * 9 = 270, shift 1 place = 2700\nsum: 0 + 2700 = 2700\nanswer: 2700\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "2700",
+      "predicted_answer": "2700"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 80 * 75\n\nOutput:\nones: 80 * 5 = 400\ntens: 80 * 7 = 560, shift 1 place = 5600\nsum: 400 + 5600 = 6000\nanswer: 6000\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6000",
+      "predicted_answer": "6000"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 31 * 33\n\nOutput:\nones: 31 * 3 = 93\ntens: 31 * 3 = 93, shift 1 place = 930\nsum: 93 + 930 = 1023\nanswer: 1023\n<END>",
+      "full_exact": false,
+      "answer_exact": false,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "1023",
+      "predicted_answer": "1024"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 95\n\nOutput:\nones: 44 * 5 = 220\ntens: 44 * 9 = 396, shift 1 place = 3960\nsum: 220 + 3960 = 4180\nanswer: 4180\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "4180",
+      "predicted_answer": "4180"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 15 * 33\n\nOutput:\nones: 15 * 3 = 45\ntens: 15 * 3 = 45, shift 1 place = 450\nsum: 45 + 450 = 495\nanswer: 495\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9415584206581116,
+      "answer": "495",
+      "predicted_answer": "495"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 43\n\nOutput:\nones: 63 * 3 = 189\ntens: 63 * 4 = 252, shift 1 place = 2520\nsum: 189 + 2520 = 2709\nanswer: 2709\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2709",
+      "predicted_answer": "2709"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 61 * 56\n\nOutput:\nones: 61 * 6 = 366\ntens: 61 * 5 = 305, shift 1 place = 3050\nsum: 366 + 3050 = 3416\nanswer: 3416\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3416",
+      "predicted_answer": "3416"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 90 * 41\n\nOutput:\nones: 90 * 1 = 90\ntens: 90 * 4 = 360, shift 1 place = 3600\nsum: 90 + 3600 = 3690\nanswer: 3690\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "3690",
+      "predicted_answer": "3690"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 53 * 21\n\nOutput:\nones: 53 * 1 = 53\ntens: 53 * 2 = 106, shift 1 place = 1060\nsum: 53 + 1060 = 1113\nanswer: 1113\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "1113",
+      "predicted_answer": "1113"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 44\n\nOutput:\nones: 25 * 4 = 100\ntens: 25 * 4 = 100, shift 1 place = 1000\nsum: 100 + 1000 = 1100\nanswer: 1100\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1100",
+      "predicted_answer": "1100"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 87 * 90\n\nOutput:\nones: 87 * 0 = 0\ntens: 87 * 9 = 783, shift 1 place = 7830\nsum: 0 + 7830 = 7830\nanswer: 7830\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "7830",
+      "predicted_answer": "7830"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 33 * 97\n\nOutput:\nones: 33 * 7 = 231\ntens: 33 * 9 = 297, shift 1 place = 2970\nsum: 231 + 2970 = 3201\nanswer: 3201\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3201",
+      "predicted_answer": "3201"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 74 * 34\n\nOutput:\nones: 74 * 4 = 296\ntens: 74 * 3 = 222, shift 1 place = 2220\nsum: 296 + 2220 = 2516\nanswer: 2516\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2516",
+      "predicted_answer": "2516"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 36\n\nOutput:\nones: 69 * 6 = 414\ntens: 69 * 3 = 207, shift 1 place = 2070\nsum: 414 + 2070 = 2484\nanswer: 2484\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2484",
+      "predicted_answer": "2484"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 40 * 38\n\nOutput:\nones: 40 * 8 = 320\ntens: 40 * 3 = 120, shift 1 place = 1200\nsum: 320 + 1200 = 1520\nanswer: 1520\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1520",
+      "predicted_answer": "1520"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 95 * 23\n\nOutput:\nones: 95 * 3 = 285\ntens: 95 * 2 = 190, shift 1 place = 1900\nsum: 285 + 1900 = 2185\nanswer: 2185\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "2185",
+      "predicted_answer": "2185"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 70 * 28\n\nOutput:\nones: 70 * 8 = 560\ntens: 70 * 2 = 140, shift 1 place = 1400\nsum: 560 + 1400 = 1960\nanswer: 1960\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1960",
+      "predicted_answer": "1960"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 74\n\nOutput:\nones: 64 * 4 = 256\ntens: 64 * 7 = 448, shift 1 place = 4480\nsum: 256 + 4480 = 4736\nanswer: 4736\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4736",
+      "predicted_answer": "4736"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 79\n\nOutput:\nones: 71 * 9 = 639\ntens: 71 * 7 = 497, shift 1 place = 4970\nsum: 639 + 4970 = 5609\nanswer: 5609\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5609",
+      "predicted_answer": "5609"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 77\n\nOutput:\nones: 92 * 7 = 644\ntens: 92 * 7 = 644, shift 1 place = 6440\nsum: 644 + 6440 = 7084\nanswer: 7084\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "7084",
+      "predicted_answer": "7084"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 61\n\nOutput:\nones: 75 * 1 = 75\ntens: 75 * 6 = 450, shift 1 place = 4500\nsum: 75 + 4500 = 4575\nanswer: 4575\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "4575",
+      "predicted_answer": "4575"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 55\n\nOutput:\nones: 22 * 5 = 110\ntens: 22 * 5 = 110, shift 1 place = 1100\nsum: 110 + 1100 = 1210\nanswer: 1210\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1210",
+      "predicted_answer": "1210"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 54 * 62\n\nOutput:\nones: 54 * 2 = 108\ntens: 54 * 6 = 324, shift 1 place = 3240\nsum: 108 + 3240 = 3348\nanswer: 3348\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3348",
+      "predicted_answer": "3348"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 99\n\nOutput:\nones: 81 * 9 = 729\ntens: 81 * 9 = 729, shift 1 place = 7290\nsum: 729 + 7290 = 8019\nanswer: 8019\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "8019",
+      "predicted_answer": "8019"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 48\n\nOutput:\nones: 13 * 8 = 104\ntens: 13 * 4 = 52, shift 1 place = 520\nsum: 104 + 520 = 624\nanswer: 624\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9358974099159241,
+      "answer": "624",
+      "predicted_answer": "624"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 44\n\nOutput:\nones: 68 * 4 = 272\ntens: 68 * 4 = 272, shift 1 place = 2720\nsum: 272 + 2720 = 2992\nanswer: 2992\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2992",
+      "predicted_answer": "2992"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 80\n\nOutput:\nones: 52 * 0 = 0\ntens: 52 * 8 = 416, shift 1 place = 4160\nsum: 0 + 4160 = 4160\nanswer: 4160\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "4160",
+      "predicted_answer": "4160"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 94\n\nOutput:\nones: 92 * 4 = 368\ntens: 92 * 9 = 828, shift 1 place = 8280\nsum: 368 + 8280 = 8648\nanswer: 8648\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "8648",
+      "predicted_answer": "8648"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 14 * 61\n\nOutput:\nones: 14 * 1 = 14\ntens: 14 * 6 = 84, shift 1 place = 840\nsum: 14 + 840 = 854\nanswer: 854\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9415584206581116,
+      "answer": "854",
+      "predicted_answer": "854"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 51 * 76\n\nOutput:\nones: 51 * 6 = 306\ntens: 51 * 7 = 357, shift 1 place = 3570\nsum: 306 + 3570 = 3876\nanswer: 3876\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3876",
+      "predicted_answer": "3876"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 31\n\nOutput:\nones: 38 * 1 = 38\ntens: 38 * 3 = 114, shift 1 place = 1140\nsum: 38 + 1140 = 1178\nanswer: 1178\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.955974817276001,
+      "answer": "1178",
+      "predicted_answer": "1178"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 97\n\nOutput:\nones: 11 * 7 = 77\ntens: 11 * 9 = 99, shift 1 place = 990\nsum: 77 + 990 = 1067\nanswer: 1067\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9166666865348816,
+      "answer": "1067",
+      "predicted_answer": "1067"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 43\n\nOutput:\nones: 32 * 3 = 96\ntens: 32 * 4 = 128, shift 1 place = 1280\nsum: 96 + 1280 = 1376\nanswer: 1376\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9308176040649414,
+      "answer": "1376",
+      "predicted_answer": "1376"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 24 * 20\n\nOutput:\nones: 24 * 0 = 0\ntens: 24 * 2 = 48, shift 1 place = 480\nsum: 0 + 480 = 480\nanswer: 480\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9539473652839661,
+      "answer": "480",
+      "predicted_answer": "480"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 79\n\nOutput:\nones: 12 * 9 = 108\ntens: 12 * 7 = 84, shift 1 place = 840\nsum: 108 + 840 = 948\nanswer: 948\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "948",
+      "predicted_answer": "948"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 85\n\nOutput:\nones: 27 * 5 = 135\ntens: 27 * 8 = 216, shift 1 place = 2160\nsum: 135 + 2160 = 2295\nanswer: 2295\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "2295",
+      "predicted_answer": "2295"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 95 * 49\n\nOutput:\nones: 95 * 9 = 855\ntens: 95 * 4 = 380, shift 1 place = 3800\nsum: 855 + 3800 = 4655\nanswer: 4655\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "4655",
+      "predicted_answer": "4655"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 89\n\nOutput:\nones: 92 * 9 = 828\ntens: 92 * 8 = 736, shift 1 place = 7360\nsum: 828 + 7360 = 8188\nanswer: 8188\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "8188",
+      "predicted_answer": "8188"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 89 * 64\n\nOutput:\nones: 89 * 4 = 356\ntens: 89 * 6 = 534, shift 1 place = 5340\nsum: 356 + 5340 = 5696\nanswer: 5696\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5696",
+      "predicted_answer": "5696"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 98 * 16\n\nOutput:\nones: 98 * 6 = 588\ntens: 98 * 1 = 98, shift 1 place = 980\nsum: 588 + 980 = 1568\nanswer: 1568\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9430379867553711,
+      "answer": "1568",
+      "predicted_answer": "1568"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 87 * 37\n\nOutput:\nones: 87 * 7 = 609\ntens: 87 * 3 = 261, shift 1 place = 2610\nsum: 609 + 2610 = 3219\nanswer: 3219\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3219",
+      "predicted_answer": "3219"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 84 * 16\n\nOutput:\nones: 84 * 6 = 504\ntens: 84 * 1 = 84, shift 1 place = 840\nsum: 504 + 840 = 1344\nanswer: 1344\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "1344",
+      "predicted_answer": "1344"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 26 * 94\n\nOutput:\nones: 26 * 4 = 104\ntens: 26 * 9 = 234, shift 1 place = 2340\nsum: 104 + 2340 = 2444\nanswer: 2444\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2444",
+      "predicted_answer": "2444"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 29 * 93\n\nOutput:\nones: 29 * 3 = 87\ntens: 29 * 9 = 261, shift 1 place = 2610\nsum: 87 + 2610 = 2697\nanswer: 2697\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "2697",
+      "predicted_answer": "2697"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 69\n\nOutput:\nones: 72 * 9 = 648\ntens: 72 * 6 = 432, shift 1 place = 4320\nsum: 648 + 4320 = 4968\nanswer: 4968\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4968",
+      "predicted_answer": "4968"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 70\n\nOutput:\nones: 63 * 0 = 0\ntens: 63 * 7 = 441, shift 1 place = 4410\nsum: 0 + 4410 = 4410\nanswer: 4410\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "4410",
+      "predicted_answer": "4410"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 27\n\nOutput:\nones: 50 * 7 = 350\ntens: 50 * 2 = 100, shift 1 place = 1000\nsum: 350 + 1000 = 1350\nanswer: 1350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1350",
+      "predicted_answer": "1350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 18 * 57\n\nOutput:\nones: 18 * 7 = 126\ntens: 18 * 5 = 90, shift 1 place = 900\nsum: 126 + 900 = 1026\nanswer: 1026\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9240506291389465,
+      "answer": "1026",
+      "predicted_answer": "1026"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 75\n\nOutput:\nones: 68 * 5 = 340\ntens: 68 * 7 = 476, shift 1 place = 4760\nsum: 340 + 4760 = 5100\nanswer: 5100\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5100",
+      "predicted_answer": "5100"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 14\n\nOutput:\nones: 25 * 4 = 100\ntens: 25 * 1 = 25, shift 1 place = 250\nsum: 100 + 250 = 350\nanswer: 350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.942307710647583,
+      "answer": "350",
+      "predicted_answer": "350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 29\n\nOutput:\nones: 75 * 9 = 675\ntens: 75 * 2 = 150, shift 1 place = 1500\nsum: 675 + 1500 = 2175\nanswer: 2175\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2175",
+      "predicted_answer": "2175"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 20 * 63\n\nOutput:\nones: 20 * 3 = 60\ntens: 20 * 6 = 120, shift 1 place = 1200\nsum: 60 + 1200 = 1260\nanswer: 1260\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "1260",
+      "predicted_answer": "1260"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 75\n\nOutput:\nones: 64 * 5 = 320\ntens: 64 * 7 = 448, shift 1 place = 4480\nsum: 320 + 4480 = 4800\nanswer: 4800\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4800",
+      "predicted_answer": "4800"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 73 * 69\n\nOutput:\nones: 73 * 9 = 657\ntens: 73 * 6 = 438, shift 1 place = 4380\nsum: 657 + 4380 = 5037\nanswer: 5037\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5037",
+      "predicted_answer": "5037"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 18\n\nOutput:\nones: 85 * 8 = 680\ntens: 85 * 1 = 85, shift 1 place = 850\nsum: 680 + 850 = 1530\nanswer: 1530\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "1530",
+      "predicted_answer": "1530"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 67\n\nOutput:\nones: 48 * 7 = 336\ntens: 48 * 6 = 288, shift 1 place = 2880\nsum: 336 + 2880 = 3216\nanswer: 3216\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3216",
+      "predicted_answer": "3216"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 62 * 18\n\nOutput:\nones: 62 * 8 = 496\ntens: 62 * 1 = 62, shift 1 place = 620\nsum: 496 + 620 = 1116\nanswer: 1116\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "1116",
+      "predicted_answer": "1116"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 72\n\nOutput:\nones: 44 * 2 = 88\ntens: 44 * 7 = 308, shift 1 place = 3080\nsum: 88 + 3080 = 3168\nanswer: 3168\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9182389974594116,
+      "answer": "3168",
+      "predicted_answer": "3168"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 76 * 59\n\nOutput:\nones: 76 * 9 = 684\ntens: 76 * 5 = 380, shift 1 place = 3800\nsum: 684 + 3800 = 4484\nanswer: 4484\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4484",
+      "predicted_answer": "4484"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 35 * 58\n\nOutput:\nones: 35 * 8 = 280\ntens: 35 * 5 = 175, shift 1 place = 1750\nsum: 280 + 1750 = 2030\nanswer: 2030\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2030",
+      "predicted_answer": "2030"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 81\n\nOutput:\nones: 28 * 1 = 28\ntens: 28 * 8 = 224, shift 1 place = 2240\nsum: 28 + 2240 = 2268\nanswer: 2268\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "2268",
+      "predicted_answer": "2268"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 90 * 57\n\nOutput:\nones: 90 * 7 = 630\ntens: 90 * 5 = 450, shift 1 place = 4500\nsum: 630 + 4500 = 5130\nanswer: 5130\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5130",
+      "predicted_answer": "5130"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 38\n\nOutput:\nones: 69 * 8 = 552\ntens: 69 * 3 = 207, shift 1 place = 2070\nsum: 552 + 2070 = 2622\nanswer: 2622\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2622",
+      "predicted_answer": "2622"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 53 * 35\n\nOutput:\nones: 53 * 5 = 265\ntens: 53 * 3 = 159, shift 1 place = 1590\nsum: 265 + 1590 = 1855\nanswer: 1855\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1855",
+      "predicted_answer": "1855"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 34 * 62\n\nOutput:\nones: 34 * 2 = 68\ntens: 34 * 6 = 204, shift 1 place = 2040\nsum: 68 + 2040 = 2108\nanswer: 2108\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9182389974594116,
+      "answer": "2108",
+      "predicted_answer": "2108"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 96 * 25\n\nOutput:\nones: 96 * 5 = 480\ntens: 96 * 2 = 192, shift 1 place = 1920\nsum: 480 + 1920 = 2400\nanswer: 2400\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2400",
+      "predicted_answer": "2400"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 53 * 56\n\nOutput:\nones: 53 * 6 = 318\ntens: 53 * 5 = 265, shift 1 place = 2650\nsum: 318 + 2650 = 2968\nanswer: 2968\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2968",
+      "predicted_answer": "2968"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 65\n\nOutput:\nones: 22 * 5 = 110\ntens: 22 * 6 = 132, shift 1 place = 1320\nsum: 110 + 1320 = 1430\nanswer: 1430\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1430",
+      "predicted_answer": "1430"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 94\n\nOutput:\nones: 13 * 4 = 52\ntens: 13 * 9 = 117, shift 1 place = 1170\nsum: 52 + 1170 = 1222\nanswer: 1222\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1222",
+      "predicted_answer": "1222"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 70 * 17\n\nOutput:\nones: 70 * 7 = 490\ntens: 70 * 1 = 70, shift 1 place = 700\nsum: 490 + 700 = 1190\nanswer: 1190\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1190",
+      "predicted_answer": "1190"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 28\n\nOutput:\nones: 42 * 8 = 336\ntens: 42 * 2 = 84, shift 1 place = 840\nsum: 336 + 840 = 1176\nanswer: 1176\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9177215099334717,
+      "answer": "1176",
+      "predicted_answer": "1176"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 37\n\nOutput:\nones: 22 * 7 = 154\ntens: 22 * 3 = 66, shift 1 place = 660\nsum: 154 + 660 = 814\nanswer: 814\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "814",
+      "predicted_answer": "814"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 25\n\nOutput:\nones: 52 * 5 = 260\ntens: 52 * 2 = 104, shift 1 place = 1040\nsum: 260 + 1040 = 1300\nanswer: 1300\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1300",
+      "predicted_answer": "1300"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 78\n\nOutput:\nones: 64 * 8 = 512\ntens: 64 * 7 = 448, shift 1 place = 4480\nsum: 512 + 4480 = 4992\nanswer: 4992\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4992",
+      "predicted_answer": "4992"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 83 * 78\n\nOutput:\nones: 83 * 8 = 664\ntens: 83 * 7 = 581, shift 1 place = 5810\nsum: 664 + 5810 = 6474\nanswer: 6474\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "6474",
+      "predicted_answer": "6474"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 86\n\nOutput:\nones: 37 * 6 = 222\ntens: 37 * 8 = 296, shift 1 place = 2960\nsum: 222 + 2960 = 3182\nanswer: 3182\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3182",
+      "predicted_answer": "3182"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 55\n\nOutput:\nones: 38 * 5 = 190\ntens: 38 * 5 = 190, shift 1 place = 1900\nsum: 190 + 1900 = 2090\nanswer: 2090\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2090",
+      "predicted_answer": "2090"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 96\n\nOutput:\nones: 52 * 6 = 312\ntens: 52 * 9 = 468, shift 1 place = 4680\nsum: 312 + 4680 = 4992\nanswer: 4992\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4992",
+      "predicted_answer": "4992"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 60 * 42\n\nOutput:\nones: 60 * 2 = 120\ntens: 60 * 4 = 240, shift 1 place = 2400\nsum: 120 + 2400 = 2520\nanswer: 2520\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2520",
+      "predicted_answer": "2520"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 60 * 11\n\nOutput:\nones: 60 * 1 = 60\ntens: 60 * 1 = 60, shift 1 place = 600\nsum: 60 + 600 = 660\nanswer: 660\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9545454382896423,
+      "answer": "660",
+      "predicted_answer": "660"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 31 * 23\n\nOutput:\nones: 31 * 3 = 93\ntens: 31 * 2 = 62, shift 1 place = 620\nsum: 93 + 620 = 713\nanswer: 713\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "713",
+      "predicted_answer": "713"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 60\n\nOutput:\nones: 81 * 0 = 0\ntens: 81 * 6 = 486, shift 1 place = 4860\nsum: 0 + 4860 = 4860\nanswer: 4860\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "4860",
+      "predicted_answer": "4860"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 61 * 50\n\nOutput:\nones: 61 * 0 = 0\ntens: 61 * 5 = 305, shift 1 place = 3050\nsum: 0 + 3050 = 3050\nanswer: 3050\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "3050",
+      "predicted_answer": "3050"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 93\n\nOutput:\nones: 92 * 3 = 276\ntens: 92 * 9 = 828, shift 1 place = 8280\nsum: 276 + 8280 = 8556\nanswer: 8556\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "8556",
+      "predicted_answer": "8556"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 95 * 33\n\nOutput:\nones: 95 * 3 = 285\ntens: 95 * 3 = 285, shift 1 place = 2850\nsum: 285 + 2850 = 3135\nanswer: 3135\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.95652174949646,
+      "answer": "3135",
+      "predicted_answer": "3135"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 87 * 91\n\nOutput:\nones: 87 * 1 = 87\ntens: 87 * 9 = 783, shift 1 place = 7830\nsum: 87 + 7830 = 7917\nanswer: 7917\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "7917",
+      "predicted_answer": "7917"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 83 * 89\n\nOutput:\nones: 83 * 9 = 747\ntens: 83 * 8 = 664, shift 1 place = 6640\nsum: 747 + 6640 = 7387\nanswer: 7387\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9130434989929199,
+      "answer": "7387",
+      "predicted_answer": "7387"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 23 * 59\n\nOutput:\nones: 23 * 9 = 207\ntens: 23 * 5 = 115, shift 1 place = 1150\nsum: 207 + 1150 = 1357\nanswer: 1357\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "1357",
+      "predicted_answer": "1357"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 75\n\nOutput:\nones: 28 * 5 = 140\ntens: 28 * 7 = 196, shift 1 place = 1960\nsum: 140 + 1960 = 2100\nanswer: 2100\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2100",
+      "predicted_answer": "2100"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 74 * 99\n\nOutput:\nones: 74 * 9 = 666\ntens: 74 * 9 = 666, shift 1 place = 6660\nsum: 666 + 6660 = 7326\nanswer: 7326\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "7326",
+      "predicted_answer": "7326"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 76 * 13\n\nOutput:\nones: 76 * 3 = 228\ntens: 76 * 1 = 76, shift 1 place = 760\nsum: 228 + 760 = 988\nanswer: 988\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9358974099159241,
+      "answer": "988",
+      "predicted_answer": "988"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 66 * 82\n\nOutput:\nones: 66 * 2 = 132\ntens: 66 * 8 = 528, shift 1 place = 5280\nsum: 132 + 5280 = 5412\nanswer: 5412\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5412",
+      "predicted_answer": "5412"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 73 * 96\n\nOutput:\nones: 73 * 6 = 438\ntens: 73 * 9 = 657, shift 1 place = 6570\nsum: 438 + 6570 = 7008\nanswer: 7008\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "7008",
+      "predicted_answer": "7008"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 76 * 86\n\nOutput:\nones: 76 * 6 = 456\ntens: 76 * 8 = 608, shift 1 place = 6080\nsum: 456 + 6080 = 6536\nanswer: 6536\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "6536",
+      "predicted_answer": "6536"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 17\n\nOutput:\nones: 52 * 7 = 364\ntens: 52 * 1 = 52, shift 1 place = 520\nsum: 364 + 520 = 884\nanswer: 884\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "884",
+      "predicted_answer": "884"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 99\n\nOutput:\nones: 37 * 9 = 333\ntens: 37 * 9 = 333, shift 1 place = 3330\nsum: 333 + 3330 = 3663\nanswer: 3663\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3663",
+      "predicted_answer": "3663"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 86\n\nOutput:\nones: 68 * 6 = 408\ntens: 68 * 8 = 544, shift 1 place = 5440\nsum: 408 + 5440 = 5848\nanswer: 5848\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5848",
+      "predicted_answer": "5848"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 79\n\nOutput:\nones: 27 * 9 = 243\ntens: 27 * 7 = 189, shift 1 place = 1890\nsum: 243 + 1890 = 2133\nanswer: 2133\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "2133",
+      "predicted_answer": "2133"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 43\n\nOutput:\nones: 75 * 3 = 225\ntens: 75 * 4 = 300, shift 1 place = 3000\nsum: 225 + 3000 = 3225\nanswer: 3225\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "3225",
+      "predicted_answer": "3225"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 94\n\nOutput:\nones: 25 * 4 = 100\ntens: 25 * 9 = 225, shift 1 place = 2250\nsum: 100 + 2250 = 2350\nanswer: 2350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2350",
+      "predicted_answer": "2350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 56\n\nOutput:\nones: 68 * 6 = 408\ntens: 68 * 5 = 340, shift 1 place = 3400\nsum: 408 + 3400 = 3808\nanswer: 3808\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3808",
+      "predicted_answer": "3808"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 89 * 25\n\nOutput:\nones: 89 * 5 = 445\ntens: 89 * 2 = 178, shift 1 place = 1780\nsum: 445 + 1780 = 2225\nanswer: 2225\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2225",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 32\n\nOutput:\nones: 69 * 2 = 138\ntens: 69 * 3 = 207, shift 1 place = 2070\nsum: 138 + 2070 = 2208\nanswer: 2208\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2208",
+      "predicted_answer": "2208"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 78 * 76\n\nOutput:\nones: 78 * 6 = 468\ntens: 78 * 7 = 546, shift 1 place = 5460\nsum: 468 + 5460 = 5928\nanswer: 5928\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5928",
+      "predicted_answer": "5928"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 36 * 49\n\nOutput:\nones: 36 * 9 = 324\ntens: 36 * 4 = 144, shift 1 place = 1440\nsum: 324 + 1440 = 1764\nanswer: 1764\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "1764",
+      "predicted_answer": "1764"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 96\n\nOutput:\nones: 22 * 6 = 132\ntens: 22 * 9 = 198, shift 1 place = 1980\nsum: 132 + 1980 = 2112\nanswer: 2112\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2112",
+      "predicted_answer": "2112"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 29\n\nOutput:\nones: 12 * 9 = 108\ntens: 12 * 2 = 24, shift 1 place = 240\nsum: 108 + 240 = 348\nanswer: 348\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "348",
+      "predicted_answer": "348"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 59 * 19\n\nOutput:\nones: 59 * 9 = 531\ntens: 59 * 1 = 59, shift 1 place = 590\nsum: 531 + 590 = 1121\nanswer: 1121\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "1121",
+      "predicted_answer": "1121"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 46\n\nOutput:\nones: 63 * 6 = 378\ntens: 63 * 4 = 252, shift 1 place = 2520\nsum: 378 + 2520 = 2898\nanswer: 2898\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2898",
+      "predicted_answer": "2898"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 98 * 55\n\nOutput:\nones: 98 * 5 = 490\ntens: 98 * 5 = 490, shift 1 place = 4900\nsum: 490 + 4900 = 5390\nanswer: 5390\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "5390",
+      "predicted_answer": "5390"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 27\n\nOutput:\nones: 72 * 7 = 504\ntens: 72 * 2 = 144, shift 1 place = 1440\nsum: 504 + 1440 = 1944\nanswer: 1944\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "1944",
+      "predicted_answer": "1944"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 24\n\nOutput:\nones: 37 * 4 = 148\ntens: 37 * 2 = 74, shift 1 place = 740\nsum: 148 + 740 = 888\nanswer: 888\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "888",
+      "predicted_answer": "888"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 60 * 77\n\nOutput:\nones: 60 * 7 = 420\ntens: 60 * 7 = 420, shift 1 place = 4200\nsum: 420 + 4200 = 4620\nanswer: 4620\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4620",
+      "predicted_answer": "4620"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 65\n\nOutput:\nones: 94 * 5 = 470\ntens: 94 * 6 = 564, shift 1 place = 5640\nsum: 470 + 5640 = 6110\nanswer: 6110\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "6110",
+      "predicted_answer": "6110"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 97\n\nOutput:\nones: 55 * 7 = 385\ntens: 55 * 9 = 495, shift 1 place = 4950\nsum: 385 + 4950 = 5335\nanswer: 5335\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "5335",
+      "predicted_answer": "5335"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 57 * 56\n\nOutput:\nones: 57 * 6 = 342\ntens: 57 * 5 = 285, shift 1 place = 2850\nsum: 342 + 2850 = 3192\nanswer: 3192\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3192",
+      "predicted_answer": "3192"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 72\n\nOutput:\nones: 42 * 2 = 84\ntens: 42 * 7 = 294, shift 1 place = 2940\nsum: 84 + 2940 = 3024\nanswer: 3024\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9182389974594116,
+      "answer": "3024",
+      "predicted_answer": "3024"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 43 * 88\n\nOutput:\nones: 43 * 8 = 344\ntens: 43 * 8 = 344, shift 1 place = 3440\nsum: 344 + 3440 = 3784\nanswer: 3784\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3784",
+      "predicted_answer": "3784"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 57\n\nOutput:\nones: 48 * 7 = 336\ntens: 48 * 5 = 240, shift 1 place = 2400\nsum: 336 + 2400 = 2736\nanswer: 2736\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2736",
+      "predicted_answer": "2736"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 43\n\nOutput:\nones: 30 * 3 = 90\ntens: 30 * 4 = 120, shift 1 place = 1200\nsum: 90 + 1200 = 1290\nanswer: 1290\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "1290",
+      "predicted_answer": "1290"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 22\n\nOutput:\nones: 25 * 2 = 50\ntens: 25 * 2 = 50, shift 1 place = 500\nsum: 50 + 500 = 550\nanswer: 550\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "550",
+      "predicted_answer": "550"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 45 * 48\n\nOutput:\nones: 45 * 8 = 360\ntens: 45 * 4 = 180, shift 1 place = 1800\nsum: 360 + 1800 = 2160\nanswer: 2160\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2160",
+      "predicted_answer": "2160"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 55\n\nOutput:\nones: 92 * 5 = 460\ntens: 92 * 5 = 460, shift 1 place = 4600\nsum: 460 + 4600 = 5060\nanswer: 5060\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "5060",
+      "predicted_answer": "5060"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 57\n\nOutput:\nones: 37 * 7 = 259\ntens: 37 * 5 = 185, shift 1 place = 1850\nsum: 259 + 1850 = 2109\nanswer: 2109\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2109",
+      "predicted_answer": "2109"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 92\n\nOutput:\nones: 48 * 2 = 96\ntens: 48 * 9 = 432, shift 1 place = 4320\nsum: 96 + 4320 = 4416\nanswer: 4416\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9308176040649414,
+      "answer": "4416",
+      "predicted_answer": "4416"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 11\n\nOutput:\nones: 94 * 1 = 94\ntens: 94 * 1 = 94, shift 1 place = 940\nsum: 94 + 940 = 1034\nanswer: 1034\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9487179517745972,
+      "answer": "1034",
+      "predicted_answer": "1034"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 97 * 81\n\nOutput:\nones: 97 * 1 = 97\ntens: 97 * 8 = 776, shift 1 place = 7760\nsum: 97 + 7760 = 7857\nanswer: 7857\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "7857",
+      "predicted_answer": "7857"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 37\n\nOutput:\nones: 75 * 7 = 525\ntens: 75 * 3 = 225, shift 1 place = 2250\nsum: 525 + 2250 = 2775\nanswer: 2775\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2775",
+      "predicted_answer": "2775"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 65 * 35\n\nOutput:\nones: 65 * 5 = 325\ntens: 65 * 3 = 195, shift 1 place = 1950\nsum: 325 + 1950 = 2275\nanswer: 2275\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2275",
+      "predicted_answer": "2275"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 76\n\nOutput:\nones: 79 * 6 = 474\ntens: 79 * 7 = 553, shift 1 place = 5530\nsum: 474 + 5530 = 6004\nanswer: 6004\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "6004",
+      "predicted_answer": "6004"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 66\n\nOutput:\nones: 71 * 6 = 426\ntens: 71 * 6 = 426, shift 1 place = 4260\nsum: 426 + 4260 = 4686\nanswer: 4686\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4686",
+      "predicted_answer": "4686"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 82\n\nOutput:\nones: 37 * 2 = 74\ntens: 37 * 8 = 296, shift 1 place = 2960\nsum: 74 + 2960 = 3034\nanswer: 3034\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9182389974594116,
+      "answer": "3034",
+      "predicted_answer": "3034"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 90 * 23\n\nOutput:\nones: 90 * 3 = 270\ntens: 90 * 2 = 180, shift 1 place = 1800\nsum: 270 + 1800 = 2070\nanswer: 2070\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2070",
+      "predicted_answer": "2070"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 51 * 72\n\nOutput:\nones: 51 * 2 = 102\ntens: 51 * 7 = 357, shift 1 place = 3570\nsum: 102 + 3570 = 3672\nanswer: 3672\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "3672",
+      "predicted_answer": "3672"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 26 * 55\n\nOutput:\nones: 26 * 5 = 130\ntens: 26 * 5 = 130, shift 1 place = 1300\nsum: 130 + 1300 = 1430\nanswer: 1430\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1430",
+      "predicted_answer": "1430"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 89\n\nOutput:\nones: 25 * 9 = 225\ntens: 25 * 8 = 200, shift 1 place = 2000\nsum: 225 + 2000 = 2225\nanswer: 2225\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2225",
+      "predicted_answer": "2225"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 45\n\nOutput:\nones: 12 * 5 = 60\ntens: 12 * 4 = 48, shift 1 place = 480\nsum: 60 + 480 = 540\nanswer: 540\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9220778942108154,
+      "answer": "540",
+      "predicted_answer": "540"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 79\n\nOutput:\nones: 44 * 9 = 396\ntens: 44 * 7 = 308, shift 1 place = 3080\nsum: 396 + 3080 = 3476\nanswer: 3476\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9068322777748108,
+      "answer": "3476",
+      "predicted_answer": "3476"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 15\n\nOutput:\nones: 32 * 5 = 160\ntens: 32 * 1 = 32, shift 1 place = 320\nsum: 160 + 320 = 480\nanswer: 480\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.942307710647583,
+      "answer": "480",
+      "predicted_answer": "480"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 70\n\nOutput:\nones: 75 * 0 = 0\ntens: 75 * 7 = 525, shift 1 place = 5250\nsum: 0 + 5250 = 5250\nanswer: 5250\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "5250",
+      "predicted_answer": "5250"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 15 * 85\n\nOutput:\nones: 15 * 5 = 75\ntens: 15 * 8 = 120, shift 1 place = 1200\nsum: 75 + 1200 = 1275\nanswer: 1275\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1275",
+      "predicted_answer": "1275"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 74 * 97\n\nOutput:\nones: 74 * 7 = 518\ntens: 74 * 9 = 666, shift 1 place = 6660\nsum: 518 + 6660 = 7178\nanswer: 7178\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "7178",
+      "predicted_answer": "7178"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 89 * 53\n\nOutput:\nones: 89 * 3 = 267\ntens: 89 * 5 = 445, shift 1 place = 4450\nsum: 267 + 4450 = 4717\nanswer: 4717\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "4717",
+      "predicted_answer": "4717"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 50\n\nOutput:\nones: 47 * 0 = 0\ntens: 47 * 5 = 235, shift 1 place = 2350\nsum: 0 + 2350 = 2350\nanswer: 2350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "2350",
+      "predicted_answer": "2350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 73\n\nOutput:\nones: 94 * 3 = 282\ntens: 94 * 7 = 658, shift 1 place = 6580\nsum: 282 + 6580 = 6862\nanswer: 6862\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6862",
+      "predicted_answer": "6862"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 51 * 65\n\nOutput:\nones: 51 * 5 = 255\ntens: 51 * 6 = 306, shift 1 place = 3060\nsum: 255 + 3060 = 3315\nanswer: 3315\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3315",
+      "predicted_answer": "3315"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 68\n\nOutput:\nones: 55 * 8 = 440\ntens: 55 * 6 = 330, shift 1 place = 3300\nsum: 440 + 3300 = 3740\nanswer: 3740\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3740",
+      "predicted_answer": "3740"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 64\n\nOutput:\nones: 69 * 4 = 276\ntens: 69 * 6 = 414, shift 1 place = 4140\nsum: 276 + 4140 = 4416\nanswer: 4416\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4416",
+      "predicted_answer": "4416"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 20\n\nOutput:\nones: 32 * 0 = 0\ntens: 32 * 2 = 64, shift 1 place = 640\nsum: 0 + 640 = 640\nanswer: 640\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9473684430122375,
+      "answer": "640",
+      "predicted_answer": "640"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 99\n\nOutput:\nones: 85 * 9 = 765\ntens: 85 * 9 = 765, shift 1 place = 7650\nsum: 765 + 7650 = 8415\nanswer: 8415\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "8415",
+      "predicted_answer": "8415"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 76\n\nOutput:\nones: 85 * 6 = 510\ntens: 85 * 7 = 595, shift 1 place = 5950\nsum: 510 + 5950 = 6460\nanswer: 6460\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "6460",
+      "predicted_answer": "6460"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 18 * 93\n\nOutput:\nones: 18 * 3 = 54\ntens: 18 * 9 = 162, shift 1 place = 1620\nsum: 54 + 1620 = 1674\nanswer: 1674\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "1674",
+      "predicted_answer": "1674"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 60 * 78\n\nOutput:\nones: 60 * 8 = 480\ntens: 60 * 7 = 420, shift 1 place = 4200\nsum: 480 + 4200 = 4680\nanswer: 4680\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "4680",
+      "predicted_answer": "4680"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 29 * 76\n\nOutput:\nones: 29 * 6 = 174\ntens: 29 * 7 = 203, shift 1 place = 2030\nsum: 174 + 2030 = 2204\nanswer: 2204\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "2204",
+      "predicted_answer": "2204"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 97\n\nOutput:\nones: 79 * 7 = 553\ntens: 79 * 9 = 711, shift 1 place = 7110\nsum: 553 + 7110 = 7663\nanswer: 7663\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "7663",
+      "predicted_answer": "7663"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 87 * 71\n\nOutput:\nones: 87 * 1 = 87\ntens: 87 * 7 = 609, shift 1 place = 6090\nsum: 87 + 6090 = 6177\nanswer: 6177\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9308176040649414,
+      "answer": "6177",
+      "predicted_answer": "6177"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 81\n\nOutput:\nones: 27 * 1 = 27\ntens: 27 * 8 = 216, shift 1 place = 2160\nsum: 27 + 2160 = 2187\nanswer: 2187\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "2187",
+      "predicted_answer": "2187"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 36 * 65\n\nOutput:\nones: 36 * 5 = 180\ntens: 36 * 6 = 216, shift 1 place = 2160\nsum: 180 + 2160 = 2340\nanswer: 2340\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2340",
+      "predicted_answer": "2340"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 91 * 55\n\nOutput:\nones: 91 * 5 = 455\ntens: 91 * 5 = 455, shift 1 place = 4550\nsum: 455 + 4550 = 5005\nanswer: 5005\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "5005",
+      "predicted_answer": "5005"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 77 * 26\n\nOutput:\nones: 77 * 6 = 462\ntens: 77 * 2 = 154, shift 1 place = 1540\nsum: 462 + 1540 = 2002\nanswer: 2002\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2002",
+      "predicted_answer": "2002"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 78\n\nOutput:\nones: 30 * 8 = 240\ntens: 30 * 7 = 210, shift 1 place = 2100\nsum: 240 + 2100 = 2340\nanswer: 2340\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2340",
+      "predicted_answer": "2340"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 88\n\nOutput:\nones: 92 * 8 = 736\ntens: 92 * 8 = 736, shift 1 place = 7360\nsum: 736 + 7360 = 8096\nanswer: 8096\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "8096",
+      "predicted_answer": "8096"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 95 * 14\n\nOutput:\nones: 95 * 4 = 380\ntens: 95 * 1 = 95, shift 1 place = 950\nsum: 380 + 950 = 1330\nanswer: 1330\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9556962251663208,
+      "answer": "1330",
+      "predicted_answer": "1330"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 54\n\nOutput:\nones: 25 * 4 = 100\ntens: 25 * 5 = 125, shift 1 place = 1250\nsum: 100 + 1250 = 1350\nanswer: 1350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1350",
+      "predicted_answer": "1350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 33 * 19\n\nOutput:\nones: 33 * 9 = 297\ntens: 33 * 1 = 33, shift 1 place = 330\nsum: 297 + 330 = 627\nanswer: 627\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.942307710647583,
+      "answer": "627",
+      "predicted_answer": "627"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 35 * 31\n\nOutput:\nones: 35 * 1 = 35\ntens: 35 * 3 = 105, shift 1 place = 1050\nsum: 35 + 1050 = 1085\nanswer: 1085\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "1085",
+      "predicted_answer": "1085"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 84 * 79\n\nOutput:\nones: 84 * 9 = 756\ntens: 84 * 7 = 588, shift 1 place = 5880\nsum: 756 + 5880 = 6636\nanswer: 6636\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "6636",
+      "predicted_answer": "6636"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 97\n\nOutput:\nones: 81 * 7 = 567\ntens: 81 * 9 = 729, shift 1 place = 7290\nsum: 567 + 7290 = 7857\nanswer: 7857\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "7857",
+      "predicted_answer": "7857"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 93 * 75\n\nOutput:\nones: 93 * 5 = 465\ntens: 93 * 7 = 651, shift 1 place = 6510\nsum: 465 + 6510 = 6975\nanswer: 6975\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "6975",
+      "predicted_answer": "6975"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 19 * 58\n\nOutput:\nones: 19 * 8 = 152\ntens: 19 * 5 = 95, shift 1 place = 950\nsum: 152 + 950 = 1102\nanswer: 1102\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1102",
+      "predicted_answer": "1102"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 23\n\nOutput:\nones: 72 * 3 = 216\ntens: 72 * 2 = 144, shift 1 place = 1440\nsum: 216 + 1440 = 1656\nanswer: 1656\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1656",
+      "predicted_answer": "1656"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 84\n\nOutput:\nones: 64 * 4 = 256\ntens: 64 * 8 = 512, shift 1 place = 5120\nsum: 256 + 5120 = 5376\nanswer: 5376\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5376",
+      "predicted_answer": "5376"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 21\n\nOutput:\nones: 11 * 1 = 11\ntens: 11 * 2 = 22, shift 1 place = 220\nsum: 11 + 220 = 231\nanswer: 231\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "231",
+      "predicted_answer": "231"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 26\n\nOutput:\nones: 81 * 6 = 486\ntens: 81 * 2 = 162, shift 1 place = 1620\nsum: 486 + 1620 = 2106\nanswer: 2106\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2106",
+      "predicted_answer": "2106"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 40 * 36\n\nOutput:\nones: 40 * 6 = 240\ntens: 40 * 3 = 120, shift 1 place = 1200\nsum: 240 + 1200 = 1440\nanswer: 1440\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1440",
+      "predicted_answer": "1440"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 22\n\nOutput:\nones: 68 * 2 = 136\ntens: 68 * 2 = 136, shift 1 place = 1360\nsum: 136 + 1360 = 1496\nanswer: 1496\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1496",
+      "predicted_answer": "1496"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 82 * 71\n\nOutput:\nones: 82 * 1 = 82\ntens: 82 * 7 = 574, shift 1 place = 5740\nsum: 82 + 5740 = 5822\nanswer: 5822\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "5822",
+      "predicted_answer": "5822"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 76 * 72\n\nOutput:\nones: 76 * 2 = 152\ntens: 76 * 7 = 532, shift 1 place = 5320\nsum: 152 + 5320 = 5472\nanswer: 5472\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5472",
+      "predicted_answer": "5472"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 49 * 34\n\nOutput:\nones: 49 * 4 = 196\ntens: 49 * 3 = 147, shift 1 place = 1470\nsum: 196 + 1470 = 1666\nanswer: 1666\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1666",
+      "predicted_answer": "1666"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 84 * 49\n\nOutput:\nones: 84 * 9 = 756\ntens: 84 * 4 = 336, shift 1 place = 3360\nsum: 756 + 3360 = 4116\nanswer: 4116\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "4116",
+      "predicted_answer": "4116"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 15 * 79\n\nOutput:\nones: 15 * 9 = 135\ntens: 15 * 7 = 105, shift 1 place = 1050\nsum: 135 + 1050 = 1185\nanswer: 1185\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1185",
+      "predicted_answer": "1185"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 78 * 11\n\nOutput:\nones: 78 * 1 = 78\ntens: 78 * 1 = 78, shift 1 place = 780\nsum: 78 + 780 = 858\nanswer: 858\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "858",
+      "predicted_answer": "858"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 35\n\nOutput:\nones: 32 * 5 = 160\ntens: 32 * 3 = 96, shift 1 place = 960\nsum: 160 + 960 = 1120\nanswer: 1120\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9430379867553711,
+      "answer": "1120",
+      "predicted_answer": "1120"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 80 * 92\n\nOutput:\nones: 80 * 2 = 160\ntens: 80 * 9 = 720, shift 1 place = 7200\nsum: 160 + 7200 = 7360\nanswer: 7360\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "7360",
+      "predicted_answer": "7360"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 29 * 28\n\nOutput:\nones: 29 * 8 = 232\ntens: 29 * 2 = 58, shift 1 place = 580\nsum: 232 + 580 = 812\nanswer: 812\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "812",
+      "predicted_answer": "812"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 74 * 81\n\nOutput:\nones: 74 * 1 = 74\ntens: 74 * 8 = 592, shift 1 place = 5920\nsum: 74 + 5920 = 5994\nanswer: 5994\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "5994",
+      "predicted_answer": "5994"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 40\n\nOutput:\nones: 22 * 0 = 0\ntens: 22 * 4 = 88, shift 1 place = 880\nsum: 0 + 880 = 880\nanswer: 880\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9539473652839661,
+      "answer": "880",
+      "predicted_answer": "880"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 36\n\nOutput:\nones: 50 * 6 = 300\ntens: 50 * 3 = 150, shift 1 place = 1500\nsum: 300 + 1500 = 1800\nanswer: 1800\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.95652174949646,
+      "answer": "1800",
+      "predicted_answer": "1800"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 83\n\nOutput:\nones: 63 * 3 = 189\ntens: 63 * 8 = 504, shift 1 place = 5040\nsum: 189 + 5040 = 5229\nanswer: 5229\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5229",
+      "predicted_answer": "5229"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 59\n\nOutput:\nones: 27 * 9 = 243\ntens: 27 * 5 = 135, shift 1 place = 1350\nsum: 243 + 1350 = 1593\nanswer: 1593\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "1593",
+      "predicted_answer": "1593"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 81\n\nOutput:\nones: 28 * 1 = 28\ntens: 28 * 8 = 224, shift 1 place = 2240\nsum: 28 + 2240 = 2268\nanswer: 2268\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "2268",
+      "predicted_answer": "2268"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 97\n\nOutput:\nones: 75 * 7 = 525\ntens: 75 * 9 = 675, shift 1 place = 6750\nsum: 525 + 6750 = 7275\nanswer: 7275\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "7275",
+      "predicted_answer": "7275"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 82\n\nOutput:\nones: 81 * 2 = 162\ntens: 81 * 8 = 648, shift 1 place = 6480\nsum: 162 + 6480 = 6642\nanswer: 6642\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6642",
+      "predicted_answer": "6642"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 69\n\nOutput:\nones: 13 * 9 = 117\ntens: 13 * 6 = 78, shift 1 place = 780\nsum: 117 + 780 = 897\nanswer: 897\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "897",
+      "predicted_answer": "897"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 46\n\nOutput:\nones: 13 * 6 = 78\ntens: 13 * 4 = 52, shift 1 place = 520\nsum: 78 + 520 = 598\nanswer: 598\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "598",
+      "predicted_answer": "598"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 87\n\nOutput:\nones: 81 * 7 = 567\ntens: 81 * 8 = 648, shift 1 place = 6480\nsum: 567 + 6480 = 7047\nanswer: 7047\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "7047",
+      "predicted_answer": "7047"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 83\n\nOutput:\nones: 47 * 3 = 141\ntens: 47 * 8 = 376, shift 1 place = 3760\nsum: 141 + 3760 = 3901\nanswer: 3901\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3901",
+      "predicted_answer": "3901"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 33\n\nOutput:\nones: 94 * 3 = 282\ntens: 94 * 3 = 282, shift 1 place = 2820\nsum: 282 + 2820 = 3102\nanswer: 3102\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "3102",
+      "predicted_answer": "3102"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 24 * 46\n\nOutput:\nones: 24 * 6 = 144\ntens: 24 * 4 = 96, shift 1 place = 960\nsum: 144 + 960 = 1104\nanswer: 1104\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1104",
+      "predicted_answer": "1104"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 39\n\nOutput:\nones: 71 * 9 = 639\ntens: 71 * 3 = 213, shift 1 place = 2130\nsum: 639 + 2130 = 2769\nanswer: 2769\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2769",
+      "predicted_answer": "2769"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 71\n\nOutput:\nones: 12 * 1 = 12\ntens: 12 * 7 = 84, shift 1 place = 840\nsum: 12 + 840 = 852\nanswer: 852\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9415584206581116,
+      "answer": "852",
+      "predicted_answer": "852"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 75\n\nOutput:\nones: 30 * 5 = 150\ntens: 30 * 7 = 210, shift 1 place = 2100\nsum: 150 + 2100 = 2250\nanswer: 2250\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2250",
+      "predicted_answer": "2250"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 63\n\nOutput:\nones: 42 * 3 = 126\ntens: 42 * 6 = 252, shift 1 place = 2520\nsum: 126 + 2520 = 2646\nanswer: 2646\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2646",
+      "predicted_answer": "2646"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 98 * 54\n\nOutput:\nones: 98 * 4 = 392\ntens: 98 * 5 = 490, shift 1 place = 4900\nsum: 392 + 4900 = 5292\nanswer: 5292\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "5292",
+      "predicted_answer": "5292"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 96\n\nOutput:\nones: 55 * 6 = 330\ntens: 55 * 9 = 495, shift 1 place = 4950\nsum: 330 + 4950 = 5280\nanswer: 5280\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5280",
+      "predicted_answer": "5280"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 22\n\nOutput:\nones: 27 * 2 = 54\ntens: 27 * 2 = 54, shift 1 place = 540\nsum: 54 + 540 = 594\nanswer: 594\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9285714030265808,
+      "answer": "594",
+      "predicted_answer": "594"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 27\n\nOutput:\nones: 81 * 7 = 567\ntens: 81 * 2 = 162, shift 1 place = 1620\nsum: 567 + 1620 = 2187\nanswer: 2187\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2187",
+      "predicted_answer": "2187"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 98 * 52\n\nOutput:\nones: 98 * 2 = 196\ntens: 98 * 5 = 490, shift 1 place = 4900\nsum: 196 + 4900 = 5096\nanswer: 5096\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "5096",
+      "predicted_answer": "5096"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 50\n\nOutput:\nones: 25 * 0 = 0\ntens: 25 * 5 = 125, shift 1 place = 1250\nsum: 0 + 1250 = 1250\nanswer: 1250\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "1250",
+      "predicted_answer": "1250"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 97 * 62\n\nOutput:\nones: 97 * 2 = 194\ntens: 97 * 6 = 582, shift 1 place = 5820\nsum: 194 + 5820 = 6014\nanswer: 6014\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "6014",
+      "predicted_answer": "6014"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 37\n\nOutput:\nones: 48 * 7 = 336\ntens: 48 * 3 = 144, shift 1 place = 1440\nsum: 336 + 1440 = 1776\nanswer: 1776\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1776",
+      "predicted_answer": "1776"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 77\n\nOutput:\nones: 79 * 7 = 553\ntens: 79 * 7 = 553, shift 1 place = 5530\nsum: 553 + 5530 = 6083\nanswer: 6083\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "6083",
+      "predicted_answer": "6083"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 53\n\nOutput:\nones: 71 * 3 = 213\ntens: 71 * 5 = 355, shift 1 place = 3550\nsum: 213 + 3550 = 3763\nanswer: 3763\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3763",
+      "predicted_answer": "3763"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 70\n\nOutput:\nones: 38 * 0 = 0\ntens: 38 * 7 = 266, shift 1 place = 2660\nsum: 0 + 2660 = 2660\nanswer: 2660\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "2660",
+      "predicted_answer": "2660"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 90\n\nOutput:\nones: 92 * 0 = 0\ntens: 92 * 9 = 828, shift 1 place = 8280\nsum: 0 + 8280 = 8280\nanswer: 8280\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9617834687232971,
+      "answer": "8280",
+      "predicted_answer": "8280"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 10 * 67\n\nOutput:\nones: 10 * 7 = 70\ntens: 10 * 6 = 60, shift 1 place = 600\nsum: 70 + 600 = 670\nanswer: 670\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9415584206581116,
+      "answer": "670",
+      "predicted_answer": "670"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 80 * 70\n\nOutput:\nones: 80 * 0 = 0\ntens: 80 * 7 = 560, shift 1 place = 5600\nsum: 0 + 5600 = 5600\nanswer: 5600\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "5600",
+      "predicted_answer": "5600"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 92\n\nOutput:\nones: 55 * 2 = 110\ntens: 55 * 9 = 495, shift 1 place = 4950\nsum: 110 + 4950 = 5060\nanswer: 5060\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5060",
+      "predicted_answer": "5060"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 51\n\nOutput:\nones: 44 * 1 = 44\ntens: 44 * 5 = 220, shift 1 place = 2200\nsum: 44 + 2200 = 2244\nanswer: 2244\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "2244",
+      "predicted_answer": "2244"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 23 * 51\n\nOutput:\nones: 23 * 1 = 23\ntens: 23 * 5 = 115, shift 1 place = 1150\nsum: 23 + 1150 = 1173\nanswer: 1173\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "1173",
+      "predicted_answer": "1173"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 66 * 98\n\nOutput:\nones: 66 * 8 = 528\ntens: 66 * 9 = 594, shift 1 place = 5940\nsum: 528 + 5940 = 6468\nanswer: 6468\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "6468",
+      "predicted_answer": "6468"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 88 * 79\n\nOutput:\nones: 88 * 9 = 792\ntens: 88 * 7 = 616, shift 1 place = 6160\nsum: 792 + 6160 = 6952\nanswer: 6952\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "6952",
+      "predicted_answer": "6952"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 49\n\nOutput:\nones: 12 * 9 = 108\ntens: 12 * 4 = 48, shift 1 place = 480\nsum: 108 + 480 = 588\nanswer: 588\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "588",
+      "predicted_answer": "588"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 15\n\nOutput:\nones: 85 * 5 = 425\ntens: 85 * 1 = 85, shift 1 place = 850\nsum: 425 + 850 = 1275\nanswer: 1275\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1275",
+      "predicted_answer": "1275"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 88\n\nOutput:\nones: 68 * 8 = 544\ntens: 68 * 8 = 544, shift 1 place = 5440\nsum: 544 + 5440 = 5984\nanswer: 5984\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5984",
+      "predicted_answer": "5984"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 14 * 92\n\nOutput:\nones: 14 * 2 = 28\ntens: 14 * 9 = 126, shift 1 place = 1260\nsum: 28 + 1260 = 1288\nanswer: 1288\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1288",
+      "predicted_answer": "1288"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 23 * 13\n\nOutput:\nones: 23 * 3 = 69\ntens: 23 * 1 = 23, shift 1 place = 230\nsum: 69 + 230 = 299\nanswer: 299\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "299",
+      "predicted_answer": "299"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 76\n\nOutput:\nones: 63 * 6 = 378\ntens: 63 * 7 = 441, shift 1 place = 4410\nsum: 378 + 4410 = 4788\nanswer: 4788\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4788",
+      "predicted_answer": "4788"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 80\n\nOutput:\nones: 13 * 0 = 0\ntens: 13 * 8 = 104, shift 1 place = 1040\nsum: 0 + 1040 = 1040\nanswer: 1040\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "1040",
+      "predicted_answer": "1040"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 62\n\nOutput:\nones: 11 * 2 = 22\ntens: 11 * 6 = 66, shift 1 place = 660\nsum: 22 + 660 = 682\nanswer: 682\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "682",
+      "predicted_answer": "682"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 83 * 15\n\nOutput:\nones: 83 * 5 = 415\ntens: 83 * 1 = 83, shift 1 place = 830\nsum: 415 + 830 = 1245\nanswer: 1245\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1245",
+      "predicted_answer": "1245"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 16 * 54\n\nOutput:\nones: 16 * 4 = 64\ntens: 16 * 5 = 80, shift 1 place = 800\nsum: 64 + 800 = 864\nanswer: 864\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "864",
+      "predicted_answer": "864"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 37\n\nOutput:\nones: 48 * 7 = 336\ntens: 48 * 3 = 144, shift 1 place = 1440\nsum: 336 + 1440 = 1776\nanswer: 1776\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1776",
+      "predicted_answer": "1776"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 29 * 10\n\nOutput:\nones: 29 * 0 = 0\ntens: 29 * 1 = 29, shift 1 place = 290\nsum: 0 + 290 = 290\nanswer: 290\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9539473652839661,
+      "answer": "290",
+      "predicted_answer": "290"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 14\n\nOutput:\nones: 11 * 4 = 44\ntens: 11 * 1 = 11, shift 1 place = 110\nsum: 44 + 110 = 154\nanswer: 154\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "154",
+      "predicted_answer": "154"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 56 * 93\n\nOutput:\nones: 56 * 3 = 168\ntens: 56 * 9 = 504, shift 1 place = 5040\nsum: 168 + 5040 = 5208\nanswer: 5208\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5208",
+      "predicted_answer": "5208"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 86 * 98\n\nOutput:\nones: 86 * 8 = 688\ntens: 86 * 9 = 774, shift 1 place = 7740\nsum: 688 + 7740 = 8428\nanswer: 8428\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "8428",
+      "predicted_answer": "8428"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 26\n\nOutput:\nones: 94 * 6 = 564\ntens: 94 * 2 = 188, shift 1 place = 1880\nsum: 564 + 1880 = 2444\nanswer: 2444\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2444",
+      "predicted_answer": "2444"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 21 * 32\n\nOutput:\nones: 21 * 2 = 42\ntens: 21 * 3 = 63, shift 1 place = 630\nsum: 42 + 630 = 672\nanswer: 672\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "672",
+      "predicted_answer": "672"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 96 * 70\n\nOutput:\nones: 96 * 0 = 0\ntens: 96 * 7 = 672, shift 1 place = 6720\nsum: 0 + 6720 = 6720\nanswer: 6720\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9617834687232971,
+      "answer": "6720",
+      "predicted_answer": "6720"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 10 * 57\n\nOutput:\nones: 10 * 7 = 70\ntens: 10 * 5 = 50, shift 1 place = 500\nsum: 70 + 500 = 570\nanswer: 570\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "570",
+      "predicted_answer": "570"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 84\n\nOutput:\nones: 50 * 4 = 200\ntens: 50 * 8 = 400, shift 1 place = 4000\nsum: 200 + 4000 = 4200\nanswer: 4200\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "4200",
+      "predicted_answer": "4200"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 58 * 40\n\nOutput:\nones: 58 * 0 = 0\ntens: 58 * 4 = 232, shift 1 place = 2320\nsum: 0 + 2320 = 2320\nanswer: 2320\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "2320",
+      "predicted_answer": "2320"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 66\n\nOutput:\nones: 85 * 6 = 510\ntens: 85 * 6 = 510, shift 1 place = 5100\nsum: 510 + 5100 = 5610\nanswer: 5610\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "5610",
+      "predicted_answer": "5610"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 54 * 55\n\nOutput:\nones: 54 * 5 = 270\ntens: 54 * 5 = 270, shift 1 place = 2700\nsum: 270 + 2700 = 2970\nanswer: 2970\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2970",
+      "predicted_answer": "2970"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 92\n\nOutput:\nones: 28 * 2 = 56\ntens: 28 * 9 = 252, shift 1 place = 2520\nsum: 56 + 2520 = 2576\nanswer: 2576\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "2576",
+      "predicted_answer": "2576"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 99 * 68\n\nOutput:\nones: 99 * 8 = 792\ntens: 99 * 6 = 594, shift 1 place = 5940\nsum: 792 + 5940 = 6732\nanswer: 6732\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6732",
+      "predicted_answer": "6732"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 39 * 81\n\nOutput:\nones: 39 * 1 = 39\ntens: 39 * 8 = 312, shift 1 place = 3120\nsum: 39 + 3120 = 3159\nanswer: 3159\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "3159",
+      "predicted_answer": "3159"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 24 * 30\n\nOutput:\nones: 24 * 0 = 0\ntens: 24 * 3 = 72, shift 1 place = 720\nsum: 0 + 720 = 720\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9605262875556946,
+      "answer": "720",
+      "predicted_answer": "720"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 87\n\nOutput:\nones: 11 * 7 = 77\ntens: 11 * 8 = 88, shift 1 place = 880\nsum: 77 + 880 = 957\nanswer: 957\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9285714030265808,
+      "answer": "957",
+      "predicted_answer": "957"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 39 * 96\n\nOutput:\nones: 39 * 6 = 234\ntens: 39 * 9 = 351, shift 1 place = 3510\nsum: 234 + 3510 = 3744\nanswer: 3744\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3744",
+      "predicted_answer": "3744"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 26 * 68\n\nOutput:\nones: 26 * 8 = 208\ntens: 26 * 6 = 156, shift 1 place = 1560\nsum: 208 + 1560 = 1768\nanswer: 1768\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "1768",
+      "predicted_answer": "1768"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 78 * 31\n\nOutput:\nones: 78 * 1 = 78\ntens: 78 * 3 = 234, shift 1 place = 2340\nsum: 78 + 2340 = 2418\nanswer: 2418\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "2418",
+      "predicted_answer": "2418"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 21 * 61\n\nOutput:\nones: 21 * 1 = 21\ntens: 21 * 6 = 126, shift 1 place = 1260\nsum: 21 + 1260 = 1281\nanswer: 1281\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "1281",
+      "predicted_answer": "1281"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 43\n\nOutput:\nones: 79 * 3 = 237\ntens: 79 * 4 = 316, shift 1 place = 3160\nsum: 237 + 3160 = 3397\nanswer: 3397\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3397",
+      "predicted_answer": "3397"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 79\n\nOutput:\nones: 92 * 9 = 828\ntens: 92 * 7 = 644, shift 1 place = 6440\nsum: 828 + 6440 = 7268\nanswer: 7268\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "7268",
+      "predicted_answer": "7268"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 55\n\nOutput:\nones: 64 * 5 = 320\ntens: 64 * 5 = 320, shift 1 place = 3200\nsum: 320 + 3200 = 3520\nanswer: 3520\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3520",
+      "predicted_answer": "3520"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 76 * 41\n\nOutput:\nones: 76 * 1 = 76\ntens: 76 * 4 = 304, shift 1 place = 3040\nsum: 76 + 3040 = 3116\nanswer: 3116\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9308176040649414,
+      "answer": "3116",
+      "predicted_answer": "3116"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 59\n\nOutput:\nones: 28 * 9 = 252\ntens: 28 * 5 = 140, shift 1 place = 1400\nsum: 252 + 1400 = 1652\nanswer: 1652\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1652",
+      "predicted_answer": "1652"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 39 * 52\n\nOutput:\nones: 39 * 2 = 78\ntens: 39 * 5 = 195, shift 1 place = 1950\nsum: 78 + 1950 = 2028\nanswer: 2028\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9182389974594116,
+      "answer": "2028",
+      "predicted_answer": "2028"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 28\n\nOutput:\nones: 79 * 8 = 632\ntens: 79 * 2 = 158, shift 1 place = 1580\nsum: 632 + 1580 = 2212\nanswer: 2212\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2212",
+      "predicted_answer": "2212"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 21 * 75\n\nOutput:\nones: 21 * 5 = 105\ntens: 21 * 7 = 147, shift 1 place = 1470\nsum: 105 + 1470 = 1575\nanswer: 1575\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1575",
+      "predicted_answer": "1575"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 50\n\nOutput:\nones: 32 * 0 = 0\ntens: 32 * 5 = 160, shift 1 place = 1600\nsum: 0 + 1600 = 1600\nanswer: 1600\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "1600",
+      "predicted_answer": "1600"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 77 * 22\n\nOutput:\nones: 77 * 2 = 154\ntens: 77 * 2 = 154, shift 1 place = 1540\nsum: 154 + 1540 = 1694\nanswer: 1694\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1694",
+      "predicted_answer": "1694"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 20\n\nOutput:\nones: 63 * 0 = 0\ntens: 63 * 2 = 126, shift 1 place = 1260\nsum: 0 + 1260 = 1260\nanswer: 1260\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "1260",
+      "predicted_answer": "1260"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 27 * 23\n\nOutput:\nones: 27 * 3 = 81\ntens: 27 * 2 = 54, shift 1 place = 540\nsum: 81 + 540 = 621\nanswer: 621\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9220778942108154,
+      "answer": "621",
+      "predicted_answer": "621"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 28\n\nOutput:\nones: 68 * 8 = 544\ntens: 68 * 2 = 136, shift 1 place = 1360\nsum: 544 + 1360 = 1904\nanswer: 1904\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1904",
+      "predicted_answer": "1904"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 61 * 61\n\nOutput:\nones: 61 * 1 = 61\ntens: 61 * 6 = 366, shift 1 place = 3660\nsum: 61 + 3660 = 3721\nanswer: 3721\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "3721",
+      "predicted_answer": "3721"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 29\n\nOutput:\nones: 37 * 9 = 333\ntens: 37 * 2 = 74, shift 1 place = 740\nsum: 333 + 740 = 1073\nanswer: 1073\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9177215099334717,
+      "answer": "1073",
+      "predicted_answer": "1073"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 52\n\nOutput:\nones: 92 * 2 = 184\ntens: 92 * 5 = 460, shift 1 place = 4600\nsum: 184 + 4600 = 4784\nanswer: 4784\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.95652174949646,
+      "answer": "4784",
+      "predicted_answer": "4784"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 86\n\nOutput:\nones: 38 * 6 = 228\ntens: 38 * 8 = 304, shift 1 place = 3040\nsum: 228 + 3040 = 3268\nanswer: 3268\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3268",
+      "predicted_answer": "3268"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 13\n\nOutput:\nones: 13 * 3 = 39\ntens: 13 * 1 = 13, shift 1 place = 130\nsum: 39 + 130 = 169\nanswer: 169\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "169",
+      "predicted_answer": "169"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 77 * 45\n\nOutput:\nones: 77 * 5 = 385\ntens: 77 * 4 = 308, shift 1 place = 3080\nsum: 385 + 3080 = 3465\nanswer: 3465\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9068322777748108,
+      "answer": "3465",
+      "predicted_answer": "3465"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 43 * 63\n\nOutput:\nones: 43 * 3 = 129\ntens: 43 * 6 = 258, shift 1 place = 2580\nsum: 129 + 2580 = 2709\nanswer: 2709\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2709",
+      "predicted_answer": "2709"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 94\n\nOutput:\nones: 94 * 4 = 376\ntens: 94 * 9 = 846, shift 1 place = 8460\nsum: 376 + 8460 = 8836\nanswer: 8836\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "8836",
+      "predicted_answer": "8836"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 32\n\nOutput:\nones: 81 * 2 = 162\ntens: 81 * 3 = 243, shift 1 place = 2430\nsum: 162 + 2430 = 2592\nanswer: 2592\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2592",
+      "predicted_answer": "2592"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 42\n\nOutput:\nones: 79 * 2 = 158\ntens: 79 * 4 = 316, shift 1 place = 3160\nsum: 158 + 3160 = 3318\nanswer: 3318\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3318",
+      "predicted_answer": "3318"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 55\n\nOutput:\nones: 13 * 5 = 65\ntens: 13 * 5 = 65, shift 1 place = 650\nsum: 65 + 650 = 715\nanswer: 715\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9220778942108154,
+      "answer": "715",
+      "predicted_answer": "715"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 49 * 13\n\nOutput:\nones: 49 * 3 = 147\ntens: 49 * 1 = 49, shift 1 place = 490\nsum: 147 + 490 = 637\nanswer: 637\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.942307710647583,
+      "answer": "637",
+      "predicted_answer": "637"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 62 * 29\n\nOutput:\nones: 62 * 9 = 558\ntens: 62 * 2 = 124, shift 1 place = 1240\nsum: 558 + 1240 = 1798\nanswer: 1798\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1798",
+      "predicted_answer": "1798"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 51\n\nOutput:\nones: 81 * 1 = 81\ntens: 81 * 5 = 405, shift 1 place = 4050\nsum: 81 + 4050 = 4131\nanswer: 4131\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "4131",
+      "predicted_answer": "4131"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 62 * 53\n\nOutput:\nones: 62 * 3 = 186\ntens: 62 * 5 = 310, shift 1 place = 3100\nsum: 186 + 3100 = 3286\nanswer: 3286\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3286",
+      "predicted_answer": "3286"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 62 * 59\n\nOutput:\nones: 62 * 9 = 558\ntens: 62 * 5 = 310, shift 1 place = 3100\nsum: 558 + 3100 = 3658\nanswer: 3658\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3658",
+      "predicted_answer": "3658"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 10 * 17\n\nOutput:\nones: 10 * 7 = 70\ntens: 10 * 1 = 10, shift 1 place = 100\nsum: 70 + 100 = 170\nanswer: 170\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "170",
+      "predicted_answer": "170"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 66 * 43\n\nOutput:\nones: 66 * 3 = 198\ntens: 66 * 4 = 264, shift 1 place = 2640\nsum: 198 + 2640 = 2838\nanswer: 2838\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2838",
+      "predicted_answer": "2838"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 65\n\nOutput:\nones: 92 * 5 = 460\ntens: 92 * 6 = 552, shift 1 place = 5520\nsum: 460 + 5520 = 5980\nanswer: 5980\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "5980",
+      "predicted_answer": "5980"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 46 * 56\n\nOutput:\nones: 46 * 6 = 276\ntens: 46 * 5 = 230, shift 1 place = 2300\nsum: 276 + 2300 = 2576\nanswer: 2576\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2576",
+      "predicted_answer": "2576"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 45 * 89\n\nOutput:\nones: 45 * 9 = 405\ntens: 45 * 8 = 360, shift 1 place = 3600\nsum: 405 + 3600 = 4005\nanswer: 4005\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4005",
+      "predicted_answer": "4005"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 93 * 88\n\nOutput:\nones: 93 * 8 = 744\ntens: 93 * 8 = 744, shift 1 place = 7440\nsum: 744 + 7440 = 8184\nanswer: 8184\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9130434989929199,
+      "answer": "8184",
+      "predicted_answer": "8184"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 64 * 64\n\nOutput:\nones: 64 * 4 = 256\ntens: 64 * 6 = 384, shift 1 place = 3840\nsum: 256 + 3840 = 4096\nanswer: 4096\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "4096",
+      "predicted_answer": "4096"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 61 * 32\n\nOutput:\nones: 61 * 2 = 122\ntens: 61 * 3 = 183, shift 1 place = 1830\nsum: 122 + 1830 = 1952\nanswer: 1952\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9627329111099243,
+      "answer": "1952",
+      "predicted_answer": "1952"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 13\n\nOutput:\nones: 30 * 3 = 90\ntens: 30 * 1 = 30, shift 1 place = 300\nsum: 90 + 300 = 390\nanswer: 390\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9545454382896423,
+      "answer": "390",
+      "predicted_answer": "390"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 91 * 76\n\nOutput:\nones: 91 * 6 = 546\ntens: 91 * 7 = 637, shift 1 place = 6370\nsum: 546 + 6370 = 6916\nanswer: 6916\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "6916",
+      "predicted_answer": "6916"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 43 * 98\n\nOutput:\nones: 43 * 8 = 344\ntens: 43 * 9 = 387, shift 1 place = 3870\nsum: 344 + 3870 = 4214\nanswer: 4214\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "4214",
+      "predicted_answer": "4214"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 78 * 29\n\nOutput:\nones: 78 * 9 = 702\ntens: 78 * 2 = 156, shift 1 place = 1560\nsum: 702 + 1560 = 2262\nanswer: 2262\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "2262",
+      "predicted_answer": "2262"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 31 * 49\n\nOutput:\nones: 31 * 9 = 279\ntens: 31 * 4 = 124, shift 1 place = 1240\nsum: 279 + 1240 = 1519\nanswer: 1519\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1519",
+      "predicted_answer": "1519"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 28 * 79\n\nOutput:\nones: 28 * 9 = 252\ntens: 28 * 7 = 196, shift 1 place = 1960\nsum: 252 + 1960 = 2212\nanswer: 2212\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9130434989929199,
+      "answer": "2212",
+      "predicted_answer": "2212"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 38\n\nOutput:\nones: 52 * 8 = 416\ntens: 52 * 3 = 156, shift 1 place = 1560\nsum: 416 + 1560 = 1976\nanswer: 1976\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1976",
+      "predicted_answer": "1976"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 87 * 80\n\nOutput:\nones: 87 * 0 = 0\ntens: 87 * 8 = 696, shift 1 place = 6960\nsum: 0 + 6960 = 6960\nanswer: 6960\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "6960",
+      "predicted_answer": "6960"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 91 * 19\n\nOutput:\nones: 91 * 9 = 819\ntens: 91 * 1 = 91, shift 1 place = 910\nsum: 819 + 910 = 1729\nanswer: 1729\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9430379867553711,
+      "answer": "1729",
+      "predicted_answer": "1729"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 27\n\nOutput:\nones: 32 * 7 = 224\ntens: 32 * 2 = 64, shift 1 place = 640\nsum: 224 + 640 = 864\nanswer: 864\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9230769276618958,
+      "answer": "864",
+      "predicted_answer": "864"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 18 * 77\n\nOutput:\nones: 18 * 7 = 126\ntens: 18 * 7 = 126, shift 1 place = 1260\nsum: 126 + 1260 = 1386\nanswer: 1386\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "1386",
+      "predicted_answer": "1386"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 90\n\nOutput:\nones: 25 * 0 = 0\ntens: 25 * 9 = 225, shift 1 place = 2250\nsum: 0 + 2250 = 2250\nanswer: 2250\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "2250",
+      "predicted_answer": "2250"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 55\n\nOutput:\nones: 47 * 5 = 235\ntens: 47 * 5 = 235, shift 1 place = 2350\nsum: 235 + 2350 = 2585\nanswer: 2585\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2585",
+      "predicted_answer": "2585"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 79\n\nOutput:\nones: 72 * 9 = 648\ntens: 72 * 7 = 504, shift 1 place = 5040\nsum: 648 + 5040 = 5688\nanswer: 5688\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5688",
+      "predicted_answer": "5688"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 94 * 34\n\nOutput:\nones: 94 * 4 = 376\ntens: 94 * 3 = 282, shift 1 place = 2820\nsum: 376 + 2820 = 3196\nanswer: 3196\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3196",
+      "predicted_answer": "3196"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 83\n\nOutput:\nones: 92 * 3 = 276\ntens: 92 * 8 = 736, shift 1 place = 7360\nsum: 276 + 7360 = 7636\nanswer: 7636\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "7636",
+      "predicted_answer": "7636"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 35\n\nOutput:\nones: 69 * 5 = 345\ntens: 69 * 3 = 207, shift 1 place = 2070\nsum: 345 + 2070 = 2415\nanswer: 2415\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2415",
+      "predicted_answer": "2415"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 33 * 54\n\nOutput:\nones: 33 * 4 = 132\ntens: 33 * 5 = 165, shift 1 place = 1650\nsum: 132 + 1650 = 1782\nanswer: 1782\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1782",
+      "predicted_answer": "1782"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 64\n\nOutput:\nones: 69 * 4 = 276\ntens: 69 * 6 = 414, shift 1 place = 4140\nsum: 276 + 4140 = 4416\nanswer: 4416\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4416",
+      "predicted_answer": "4416"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 23\n\nOutput:\nones: 11 * 3 = 33\ntens: 11 * 2 = 22, shift 1 place = 220\nsum: 33 + 220 = 253\nanswer: 253\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "253",
+      "predicted_answer": "253"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 26\n\nOutput:\nones: 12 * 6 = 72\ntens: 12 * 2 = 24, shift 1 place = 240\nsum: 72 + 240 = 312\nanswer: 312\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9285714030265808,
+      "answer": "312",
+      "predicted_answer": "312"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 23\n\nOutput:\nones: 92 * 3 = 276\ntens: 92 * 2 = 184, shift 1 place = 1840\nsum: 276 + 1840 = 2116\nanswer: 2116\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2116",
+      "predicted_answer": "2116"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 86\n\nOutput:\nones: 55 * 6 = 330\ntens: 55 * 8 = 440, shift 1 place = 4400\nsum: 330 + 4400 = 4730\nanswer: 4730\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4730",
+      "predicted_answer": "4730"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 63 * 94\n\nOutput:\nones: 63 * 4 = 252\ntens: 63 * 9 = 567, shift 1 place = 5670\nsum: 252 + 5670 = 5922\nanswer: 5922\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5922",
+      "predicted_answer": "5922"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 11 * 14\n\nOutput:\nones: 11 * 4 = 44\ntens: 11 * 1 = 11, shift 1 place = 110\nsum: 44 + 110 = 154\nanswer: 154\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.948051929473877,
+      "answer": "154",
+      "predicted_answer": "154"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 86 * 68\n\nOutput:\nones: 86 * 8 = 688\ntens: 86 * 6 = 516, shift 1 place = 5160\nsum: 688 + 5160 = 5848\nanswer: 5848\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5848",
+      "predicted_answer": "5848"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 13\n\nOutput:\nones: 48 * 3 = 144\ntens: 48 * 1 = 48, shift 1 place = 480\nsum: 144 + 480 = 624\nanswer: 624\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9358974099159241,
+      "answer": "624",
+      "predicted_answer": "624"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 96\n\nOutput:\nones: 38 * 6 = 228\ntens: 38 * 9 = 342, shift 1 place = 3420\nsum: 228 + 3420 = 3648\nanswer: 3648\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3648",
+      "predicted_answer": "3648"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 98\n\nOutput:\nones: 72 * 8 = 576\ntens: 72 * 9 = 648, shift 1 place = 6480\nsum: 576 + 6480 = 7056\nanswer: 7056\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "7056",
+      "predicted_answer": "7056"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 95 * 92\n\nOutput:\nones: 95 * 2 = 190\ntens: 95 * 9 = 855, shift 1 place = 8550\nsum: 190 + 8550 = 8740\nanswer: 8740\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "8740",
+      "predicted_answer": "8740"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 16 * 76\n\nOutput:\nones: 16 * 6 = 96\ntens: 16 * 7 = 112, shift 1 place = 1120\nsum: 96 + 1120 = 1216\nanswer: 1216\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1216",
+      "predicted_answer": "1216"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 84\n\nOutput:\nones: 68 * 4 = 272\ntens: 68 * 8 = 544, shift 1 place = 5440\nsum: 272 + 5440 = 5712\nanswer: 5712\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5712",
+      "predicted_answer": "5712"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 52\n\nOutput:\nones: 42 * 2 = 84\ntens: 42 * 5 = 210, shift 1 place = 2100\nsum: 84 + 2100 = 2184\nanswer: 2184\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9308176040649414,
+      "answer": "2184",
+      "predicted_answer": "2184"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 96 * 51\n\nOutput:\nones: 96 * 1 = 96\ntens: 96 * 5 = 480, shift 1 place = 4800\nsum: 96 + 4800 = 4896\nanswer: 4896\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.955974817276001,
+      "answer": "4896",
+      "predicted_answer": "4896"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 97 * 57\n\nOutput:\nones: 97 * 7 = 679\ntens: 97 * 5 = 485, shift 1 place = 4850\nsum: 679 + 4850 = 5529\nanswer: 5529\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5529",
+      "predicted_answer": "5529"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 86 * 88\n\nOutput:\nones: 86 * 8 = 688\ntens: 86 * 8 = 688, shift 1 place = 6880\nsum: 688 + 6880 = 7568\nanswer: 7568\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "7568",
+      "predicted_answer": "7568"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 65 * 81\n\nOutput:\nones: 65 * 1 = 65\ntens: 65 * 8 = 520, shift 1 place = 5200\nsum: 65 + 5200 = 5265\nanswer: 5265\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "5265",
+      "predicted_answer": "5265"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 32 * 36\n\nOutput:\nones: 32 * 6 = 192\ntens: 32 * 3 = 96, shift 1 place = 960\nsum: 192 + 960 = 1152\nanswer: 1152\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1152",
+      "predicted_answer": "1152"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 95\n\nOutput:\nones: 50 * 5 = 250\ntens: 50 * 9 = 450, shift 1 place = 4500\nsum: 250 + 4500 = 4750\nanswer: 4750\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "4750",
+      "predicted_answer": "4750"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 24\n\nOutput:\nones: 30 * 4 = 120\ntens: 30 * 2 = 60, shift 1 place = 600\nsum: 120 + 600 = 720\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9487179517745972,
+      "answer": "720",
+      "predicted_answer": "720"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 54\n\nOutput:\nones: 69 * 4 = 276\ntens: 69 * 5 = 345, shift 1 place = 3450\nsum: 276 + 3450 = 3726\nanswer: 3726\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3726",
+      "predicted_answer": "3726"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 68\n\nOutput:\nones: 50 * 8 = 400\ntens: 50 * 6 = 300, shift 1 place = 3000\nsum: 400 + 3000 = 3400\nanswer: 3400\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "3400",
+      "predicted_answer": "3400"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 50 * 27\n\nOutput:\nones: 50 * 7 = 350\ntens: 50 * 2 = 100, shift 1 place = 1000\nsum: 350 + 1000 = 1350\nanswer: 1350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1350",
+      "predicted_answer": "1350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 25 * 81\n\nOutput:\nones: 25 * 1 = 25\ntens: 25 * 8 = 200, shift 1 place = 2000\nsum: 25 + 2000 = 2025\nanswer: 2025\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "2025",
+      "predicted_answer": "2025"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 54 * 50\n\nOutput:\nones: 54 * 0 = 0\ntens: 54 * 5 = 270, shift 1 place = 2700\nsum: 0 + 2700 = 2700\nanswer: 2700\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9554139971733093,
+      "answer": "2700",
+      "predicted_answer": "2700"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 79 * 71\n\nOutput:\nones: 79 * 1 = 79\ntens: 79 * 7 = 553, shift 1 place = 5530\nsum: 79 + 5530 = 5609\nanswer: 5609\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "5609",
+      "predicted_answer": "5609"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 78 * 48\n\nOutput:\nones: 78 * 8 = 624\ntens: 78 * 4 = 312, shift 1 place = 3120\nsum: 624 + 3120 = 3744\nanswer: 3744\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3744",
+      "predicted_answer": "3744"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 69 * 73\n\nOutput:\nones: 69 * 3 = 207\ntens: 69 * 7 = 483, shift 1 place = 4830\nsum: 207 + 4830 = 5037\nanswer: 5037\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5037",
+      "predicted_answer": "5037"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 85 * 16\n\nOutput:\nones: 85 * 6 = 510\ntens: 85 * 1 = 85, shift 1 place = 850\nsum: 510 + 850 = 1360\nanswer: 1360\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "1360",
+      "predicted_answer": "1360"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 20 * 69\n\nOutput:\nones: 20 * 9 = 180\ntens: 20 * 6 = 120, shift 1 place = 1200\nsum: 180 + 1200 = 1380\nanswer: 1380\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1380",
+      "predicted_answer": "1380"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 72\n\nOutput:\nones: 55 * 2 = 110\ntens: 55 * 7 = 385, shift 1 place = 3850\nsum: 110 + 3850 = 3960\nanswer: 3960\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "3960",
+      "predicted_answer": "3960"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 30 * 55\n\nOutput:\nones: 30 * 5 = 150\ntens: 30 * 5 = 150, shift 1 place = 1500\nsum: 150 + 1500 = 1650\nanswer: 1650\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1650",
+      "predicted_answer": "1650"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 44 * 73\n\nOutput:\nones: 44 * 3 = 132\ntens: 44 * 7 = 308, shift 1 place = 3080\nsum: 132 + 3080 = 3212\nanswer: 3212\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3212",
+      "predicted_answer": "3212"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 77\n\nOutput:\nones: 42 * 7 = 294\ntens: 42 * 7 = 294, shift 1 place = 2940\nsum: 294 + 2940 = 3234\nanswer: 3234\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "3234",
+      "predicted_answer": "3234"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 45 * 53\n\nOutput:\nones: 45 * 3 = 135\ntens: 45 * 5 = 225, shift 1 place = 2250\nsum: 135 + 2250 = 2385\nanswer: 2385\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2385",
+      "predicted_answer": "2385"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 21 * 64\n\nOutput:\nones: 21 * 4 = 84\ntens: 21 * 6 = 126, shift 1 place = 1260\nsum: 84 + 1260 = 1344\nanswer: 1344\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1344",
+      "predicted_answer": "1344"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 58 * 75\n\nOutput:\nones: 58 * 5 = 290\ntens: 58 * 7 = 406, shift 1 place = 4060\nsum: 290 + 4060 = 4350\nanswer: 4350\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4350",
+      "predicted_answer": "4350"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 39 * 70\n\nOutput:\nones: 39 * 0 = 0\ntens: 39 * 7 = 273, shift 1 place = 2730\nsum: 0 + 2730 = 2730\nanswer: 2730\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9617834687232971,
+      "answer": "2730",
+      "predicted_answer": "2730"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 48 * 63\n\nOutput:\nones: 48 * 3 = 144\ntens: 48 * 6 = 288, shift 1 place = 2880\nsum: 144 + 2880 = 3024\nanswer: 3024\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3024",
+      "predicted_answer": "3024"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 31 * 29\n\nOutput:\nones: 31 * 9 = 279\ntens: 31 * 2 = 62, shift 1 place = 620\nsum: 279 + 620 = 899\nanswer: 899\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "899",
+      "predicted_answer": "899"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 78\n\nOutput:\nones: 12 * 8 = 96\ntens: 12 * 7 = 84, shift 1 place = 840\nsum: 96 + 840 = 936\nanswer: 936\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9155844449996948,
+      "answer": "936",
+      "predicted_answer": "936"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 40 * 10\n\nOutput:\nones: 40 * 0 = 0\ntens: 40 * 1 = 40, shift 1 place = 400\nsum: 0 + 400 = 400\nanswer: 400\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9605262875556946,
+      "answer": "400",
+      "predicted_answer": "400"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 46 * 55\n\nOutput:\nones: 46 * 5 = 230\ntens: 46 * 5 = 230, shift 1 place = 2300\nsum: 230 + 2300 = 2530\nanswer: 2530\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "2530",
+      "predicted_answer": "2530"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 10\n\nOutput:\nones: 72 * 0 = 0\ntens: 72 * 1 = 72, shift 1 place = 720\nsum: 0 + 720 = 720\nanswer: 720\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9605262875556946,
+      "answer": "720",
+      "predicted_answer": "720"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 25\n\nOutput:\nones: 47 * 5 = 235\ntens: 47 * 2 = 94, shift 1 place = 940\nsum: 235 + 940 = 1175\nanswer: 1175\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1175",
+      "predicted_answer": "1175"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 18 * 21\n\nOutput:\nones: 18 * 1 = 18\ntens: 18 * 2 = 36, shift 1 place = 360\nsum: 18 + 360 = 378\nanswer: 378\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9610389471054077,
+      "answer": "378",
+      "predicted_answer": "378"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 96 * 84\n\nOutput:\nones: 96 * 4 = 384\ntens: 96 * 8 = 768, shift 1 place = 7680\nsum: 384 + 7680 = 8064\nanswer: 8064\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "8064",
+      "predicted_answer": "8064"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 54 * 20\n\nOutput:\nones: 54 * 0 = 0\ntens: 54 * 2 = 108, shift 1 place = 1080\nsum: 0 + 1080 = 1080\nanswer: 1080\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "1080",
+      "predicted_answer": "1080"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 56 * 35\n\nOutput:\nones: 56 * 5 = 280\ntens: 56 * 3 = 168, shift 1 place = 1680\nsum: 280 + 1680 = 1960\nanswer: 1960\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1960",
+      "predicted_answer": "1960"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 88\n\nOutput:\nones: 71 * 8 = 568\ntens: 71 * 8 = 568, shift 1 place = 5680\nsum: 568 + 5680 = 6248\nanswer: 6248\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "6248",
+      "predicted_answer": "6248"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 49 * 74\n\nOutput:\nones: 49 * 4 = 196\ntens: 49 * 7 = 343, shift 1 place = 3430\nsum: 196 + 3430 = 3626\nanswer: 3626\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3626",
+      "predicted_answer": "3626"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 90 * 85\n\nOutput:\nones: 90 * 5 = 450\ntens: 90 * 8 = 720, shift 1 place = 7200\nsum: 450 + 7200 = 7650\nanswer: 7650\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "7650",
+      "predicted_answer": "7650"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 95 * 30\n\nOutput:\nones: 95 * 0 = 0\ntens: 95 * 3 = 285, shift 1 place = 2850\nsum: 0 + 2850 = 2850\nanswer: 2850\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9617834687232971,
+      "answer": "2850",
+      "predicted_answer": "2850"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 43 * 94\n\nOutput:\nones: 43 * 4 = 172\ntens: 43 * 9 = 387, shift 1 place = 3870\nsum: 172 + 3870 = 4042\nanswer: 4042\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "4042",
+      "predicted_answer": "4042"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 37 * 76\n\nOutput:\nones: 37 * 6 = 222\ntens: 37 * 7 = 259, shift 1 place = 2590\nsum: 222 + 2590 = 2812\nanswer: 2812\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "2812",
+      "predicted_answer": "2812"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 14 * 91\n\nOutput:\nones: 14 * 1 = 14\ntens: 14 * 9 = 126, shift 1 place = 1260\nsum: 14 + 1260 = 1274\nanswer: 1274\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "1274",
+      "predicted_answer": "1274"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 46\n\nOutput:\nones: 47 * 6 = 282\ntens: 47 * 4 = 188, shift 1 place = 1880\nsum: 282 + 1880 = 2162\nanswer: 2162\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "2162",
+      "predicted_answer": "2162"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 33 * 79\n\nOutput:\nones: 33 * 9 = 297\ntens: 33 * 7 = 231, shift 1 place = 2310\nsum: 297 + 2310 = 2607\nanswer: 2607\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2607",
+      "predicted_answer": "2607"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 22 * 43\n\nOutput:\nones: 22 * 3 = 66\ntens: 22 * 4 = 88, shift 1 place = 880\nsum: 66 + 880 = 946\nanswer: 946\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9285714030265808,
+      "answer": "946",
+      "predicted_answer": "946"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 38 * 75\n\nOutput:\nones: 38 * 5 = 190\ntens: 38 * 7 = 266, shift 1 place = 2660\nsum: 190 + 2660 = 2850\nanswer: 2850\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2850",
+      "predicted_answer": "2850"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 67 * 82\n\nOutput:\nones: 67 * 2 = 134\ntens: 67 * 8 = 536, shift 1 place = 5360\nsum: 134 + 5360 = 5494\nanswer: 5494\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "5494",
+      "predicted_answer": "5494"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 23 * 20\n\nOutput:\nones: 23 * 0 = 0\ntens: 23 * 2 = 46, shift 1 place = 460\nsum: 0 + 460 = 460\nanswer: 460\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9539473652839661,
+      "answer": "460",
+      "predicted_answer": "460"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 16 * 67\n\nOutput:\nones: 16 * 7 = 112\ntens: 16 * 6 = 96, shift 1 place = 960\nsum: 112 + 960 = 1072\nanswer: 1072\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9367088675498962,
+      "answer": "1072",
+      "predicted_answer": "1072"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 26 * 76\n\nOutput:\nones: 26 * 6 = 156\ntens: 26 * 7 = 182, shift 1 place = 1820\nsum: 156 + 1820 = 1976\nanswer: 1976\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "1976",
+      "predicted_answer": "1976"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 96\n\nOutput:\nones: 71 * 6 = 426\ntens: 71 * 9 = 639, shift 1 place = 6390\nsum: 426 + 6390 = 6816\nanswer: 6816\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "6816",
+      "predicted_answer": "6816"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 12 * 36\n\nOutput:\nones: 12 * 6 = 72\ntens: 12 * 3 = 36, shift 1 place = 360\nsum: 72 + 360 = 432\nanswer: 432\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9350649118423462,
+      "answer": "432",
+      "predicted_answer": "432"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 35 * 57\n\nOutput:\nones: 35 * 7 = 245\ntens: 35 * 5 = 175, shift 1 place = 1750\nsum: 245 + 1750 = 1995\nanswer: 1995\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "1995",
+      "predicted_answer": "1995"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 71 * 21\n\nOutput:\nones: 71 * 1 = 71\ntens: 71 * 2 = 142, shift 1 place = 1420\nsum: 71 + 1420 = 1491\nanswer: 1491\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9496855139732361,
+      "answer": "1491",
+      "predicted_answer": "1491"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 68 * 58\n\nOutput:\nones: 68 * 8 = 544\ntens: 68 * 5 = 340, shift 1 place = 3400\nsum: 544 + 3400 = 3944\nanswer: 3944\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9192546606063843,
+      "answer": "3944",
+      "predicted_answer": "3944"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 55 * 33\n\nOutput:\nones: 55 * 3 = 165\ntens: 55 * 3 = 165, shift 1 place = 1650\nsum: 165 + 1650 = 1815\nanswer: 1815\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9503105878829956,
+      "answer": "1815",
+      "predicted_answer": "1815"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 34\n\nOutput:\nones: 92 * 4 = 368\ntens: 92 * 3 = 276, shift 1 place = 2760\nsum: 368 + 2760 = 3128\nanswer: 3128\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "3128",
+      "predicted_answer": "3128"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 91 * 68\n\nOutput:\nones: 91 * 8 = 728\ntens: 91 * 6 = 546, shift 1 place = 5460\nsum: 728 + 5460 = 6188\nanswer: 6188\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "6188",
+      "predicted_answer": "6188"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 82\n\nOutput:\nones: 47 * 2 = 94\ntens: 47 * 8 = 376, shift 1 place = 3760\nsum: 94 + 3760 = 3854\nanswer: 3854\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9182389974594116,
+      "answer": "3854",
+      "predicted_answer": "3854"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 20 * 88\n\nOutput:\nones: 20 * 8 = 160\ntens: 20 * 8 = 160, shift 1 place = 1600\nsum: 160 + 1600 = 1760\nanswer: 1760\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "1760",
+      "predicted_answer": "1760"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 97 * 85\n\nOutput:\nones: 97 * 5 = 485\ntens: 97 * 8 = 776, shift 1 place = 7760\nsum: 485 + 7760 = 8245\nanswer: 8245\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "8245",
+      "predicted_answer": "8245"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 42 * 18\n\nOutput:\nones: 42 * 8 = 336\ntens: 42 * 1 = 42, shift 1 place = 420\nsum: 336 + 420 = 756\nanswer: 756\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9294871687889099,
+      "answer": "756",
+      "predicted_answer": "756"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 89 * 98\n\nOutput:\nones: 89 * 8 = 712\ntens: 89 * 9 = 801, shift 1 place = 8010\nsum: 712 + 8010 = 8722\nanswer: 8722\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "8722",
+      "predicted_answer": "8722"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 29 * 51\n\nOutput:\nones: 29 * 1 = 29\ntens: 29 * 5 = 145, shift 1 place = 1450\nsum: 29 + 1450 = 1479\nanswer: 1479\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.955974817276001,
+      "answer": "1479",
+      "predicted_answer": "1479"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 53 * 53\n\nOutput:\nones: 53 * 3 = 159\ntens: 53 * 5 = 265, shift 1 place = 2650\nsum: 159 + 2650 = 2809\nanswer: 2809\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2809",
+      "predicted_answer": "2809"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 75 * 73\n\nOutput:\nones: 75 * 3 = 225\ntens: 75 * 7 = 525, shift 1 place = 5250\nsum: 225 + 5250 = 5475\nanswer: 5475\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "5475",
+      "predicted_answer": "5475"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 43 * 49\n\nOutput:\nones: 43 * 9 = 387\ntens: 43 * 4 = 172, shift 1 place = 1720\nsum: 387 + 1720 = 2107\nanswer: 2107\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2107",
+      "predicted_answer": "2107"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 52 * 51\n\nOutput:\nones: 52 * 1 = 52\ntens: 52 * 5 = 260, shift 1 place = 2600\nsum: 52 + 2600 = 2652\nanswer: 2652\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9433962106704712,
+      "answer": "2652",
+      "predicted_answer": "2652"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 57 * 45\n\nOutput:\nones: 57 * 5 = 285\ntens: 57 * 4 = 228, shift 1 place = 2280\nsum: 285 + 2280 = 2565\nanswer: 2565\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2565",
+      "predicted_answer": "2565"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 13 * 83\n\nOutput:\nones: 13 * 3 = 39\ntens: 13 * 8 = 104, shift 1 place = 1040\nsum: 39 + 1040 = 1079\nanswer: 1079\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "1079",
+      "predicted_answer": "1079"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 56 * 42\n\nOutput:\nones: 56 * 2 = 112\ntens: 56 * 4 = 224, shift 1 place = 2240\nsum: 112 + 2240 = 2352\nanswer: 2352\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "2352",
+      "predicted_answer": "2352"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 92 * 83\n\nOutput:\nones: 92 * 3 = 276\ntens: 92 * 8 = 736, shift 1 place = 7360\nsum: 276 + 7360 = 7636\nanswer: 7636\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9378882050514221,
+      "answer": "7636",
+      "predicted_answer": "7636"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 88 * 20\n\nOutput:\nones: 88 * 0 = 0\ntens: 88 * 2 = 176, shift 1 place = 1760\nsum: 0 + 1760 = 1760\nanswer: 1760\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "1760",
+      "predicted_answer": "1760"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 59 * 44\n\nOutput:\nones: 59 * 4 = 236\ntens: 59 * 4 = 236, shift 1 place = 2360\nsum: 236 + 2360 = 2596\nanswer: 2596\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2596",
+      "predicted_answer": "2596"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 15 * 70\n\nOutput:\nones: 15 * 0 = 0\ntens: 15 * 7 = 105, shift 1 place = 1050\nsum: 0 + 1050 = 1050\nanswer: 1050\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9490445852279663,
+      "answer": "1050",
+      "predicted_answer": "1050"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 34 * 90\n\nOutput:\nones: 34 * 0 = 0\ntens: 34 * 9 = 306, shift 1 place = 3060\nsum: 0 + 3060 = 3060\nanswer: 3060\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9426751732826233,
+      "answer": "3060",
+      "predicted_answer": "3060"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 84 * 83\n\nOutput:\nones: 84 * 3 = 252\ntens: 84 * 8 = 672, shift 1 place = 6720\nsum: 252 + 6720 = 6972\nanswer: 6972\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9440993666648865,
+      "answer": "6972",
+      "predicted_answer": "6972"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 61\n\nOutput:\nones: 81 * 1 = 81\ntens: 81 * 6 = 486, shift 1 place = 4860\nsum: 81 + 4860 = 4941\nanswer: 4941\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9371069073677063,
+      "answer": "4941",
+      "predicted_answer": "4941"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 81 * 17\n\nOutput:\nones: 81 * 7 = 567\ntens: 81 * 1 = 81, shift 1 place = 810\nsum: 567 + 810 = 1377\nanswer: 1377\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9303797483444214,
+      "answer": "1377",
+      "predicted_answer": "1377"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 47 * 44\n\nOutput:\nones: 47 * 4 = 188\ntens: 47 * 4 = 188, shift 1 place = 1880\nsum: 188 + 1880 = 2068\nanswer: 2068\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9254658222198486,
+      "answer": "2068",
+      "predicted_answer": "2068"
+    },
+    {
+      "trace": "Task: multiplication_prose\nInput:\nmultiply 72 * 96\n\nOutput:\nones: 72 * 6 = 432\ntens: 72 * 9 = 648, shift 1 place = 6480\nsum: 432 + 6480 = 6912\nanswer: 6912\n<END>",
+      "full_exact": false,
+      "answer_exact": true,
+      "token_accuracy": 0.9316770434379578,
+      "answer": "6912",
+      "predicted_answer": "6912"
+    }
+  ]
+}
