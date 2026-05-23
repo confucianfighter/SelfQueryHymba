@@ -188,8 +188,8 @@ class UpSplitDynamicBasinZagMLPActivation(nn.Module):
         return y
 
 
-class UpSplitFixedWaveBasinMLPActivation(UpSplitDynamicBasinZagMLPActivation):
-    """Up-split fixed waveform activation with dynamic per-channel width modulation."""
+class UpSplitZigMLPActivation(UpSplitDynamicBasinZagMLPActivation):
+    """Up-split Zig activation: a fixed waveform with dynamic per-channel width modulation."""
 
     def __init__(
         self,
@@ -384,8 +384,8 @@ def make_mlp_activation(
             eps=basin_eps,
             zag_scale_mode="inverse_sqrt_width" if activation_type == "up_split_dynamic_basin_zag_scaled" else basin_zag_scale_mode,
         )
-    if activation_type == "up_split_fixed_wave_basin":
-        return UpSplitFixedWaveBasinMLPActivation(
+    if activation_type in {"up_split_zig", "up_split_fixed_wave_basin"}:
+        return UpSplitZigMLPActivation(
             hidden_dim,
             min_width=basin_min_width,
             max_width=basin_max_width,
@@ -409,7 +409,7 @@ def make_mlp_activation(
     raise ValueError(
         "block_mlp_activation_type must be 'gelu', 'dynamic_basin_zag', "
         "'up_split_dynamic_basin_zag', 'up_split_dynamic_basin_zag_scaled', "
-        "'up_split_fixed_wave_basin', "
+        "'up_split_zig', 'up_split_fixed_wave_basin', "
         "'dual_projection_dynamic_basin_zag', "
         "'input_split_dynamic_basin_zag', or 'half_dynamic_basin_zag_gelu'"
     )

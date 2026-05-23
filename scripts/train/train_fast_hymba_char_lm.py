@@ -198,6 +198,7 @@ def parse_args() -> argparse.Namespace:
             "dynamic_basin_zag",
             "up_split_dynamic_basin_zag",
             "up_split_dynamic_basin_zag_scaled",
+            "up_split_zig",
             "up_split_fixed_wave_basin",
             "dual_projection_dynamic_basin_zag",
             "input_split_dynamic_basin_zag",
