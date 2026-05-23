@@ -1,0 +1,1 @@
+An option for creating a zero cost hybrid between swish and zag activations is to send the raw width modulation through swish after it has been used in zag. Then we get an equivalent number of activations to baselines, and we can send that modulation signal forward without creating too much noise.
